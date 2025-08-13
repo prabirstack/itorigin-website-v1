@@ -38,13 +38,13 @@ export const ChatSupport = () => {
         initial={{ opacity: 0, scale: 0, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.3, delay: 1 }}
-        className="fixed bottom-6 right-20 z-50"
+        className="fixed bottom-30 right-6 z-50"
       >
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
           <DialogTrigger asChild>
             <Button
               size="icon"
-              className="h-14 w-14 rounded-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 dark:from-green-600 dark:to-emerald-600 dark:hover:from-green-700 dark:hover:to-emerald-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 border-0 group relative overflow-hidden cursor-pointer"
+              className="h-12 w-12 rounded-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 dark:from-green-600 dark:to-emerald-600 dark:hover:from-green-700 dark:hover:to-emerald-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 border-0 group relative cursor-pointer"
             >
               {/* Shuttle Animation Background */}
               <motion.div

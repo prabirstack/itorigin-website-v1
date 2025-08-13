@@ -108,32 +108,32 @@ const HeroCarousel = () => {
 
       {/* Content Overlay */}
       <div className="relative z-10 h-full flex items-center">
-        <Container>
+        <Container className="mt-4 lg:mt-0">
           <div className="max-w-4xl">
             {/* Animated Content */}
             <div key={currentSlide} className="animate-fade-in">
               {/* Icon and Badge */}
               <div className="flex items-center mb-6">
-                <div className="flex items-center justify-center w-16 h-16 rounded-full bg-primary/20 backdrop-blur-sm border border-primary/30 mr-4">
-                  <IconComponent className="w-8 h-8 text-primary" />
+                <div className="flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-primary/20 backdrop-blur-sm border border-primary/30 mr-4">
+                  <IconComponent className="w-6 h-6 not-only:sm:w-8 sm:h-8 text-primary" />
                 </div>
                 <div className="px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20">
-                  <span className="text-sm font-medium text-white/90">
+                  <span className="text-xs font-medium text-white/90">
                     IT Origin - Cybersecurity Excellence
                   </span>
                 </div>
               </div>
 
               {/* Main Content */}
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black font-primary tracking-tight text-white mb-4 leading-tight">
+              <h1 className="text-3xl sm:text-5xl lg:text-7xl font-black font-primary tracking-tight text-white mb-4 leading-none">
                 {currentSlideData.title}
               </h1>
 
-              <h2 className="text-xl sm:text-2xl lg:text-3xl text-primary font-semibold mb-6">
+              <h2 className="text-base sm:text-2xl lg:text-3xl text-primary font-semibold mb-6">
                 {currentSlideData.subtitle}
               </h2>
 
-              <p className="text-lg sm:text-xl text-white/80 mb-8 max-w-2xl leading-relaxed">
+              <p className="text-sm sm:text-lg lg:text-xl text-white/80 mb-8 max-w-2xl leading-relaxed">
                 {currentSlideData.description}
               </p>
 
@@ -145,7 +145,7 @@ const HeroCarousel = () => {
                     className="flex items-center p-3 rounded-lg bg-white/5 backdrop-blur-sm border border-white/10"
                   >
                     <div className="w-2 h-2 bg-primary rounded-full mr-3" />
-                    <span className="text-sm text-white/90 font-medium">{feature}</span>
+                    <span className="text-xs sm:text-sm text-white/90 font-medium">{feature}</span>
                   </div>
                 ))}
               </div>
