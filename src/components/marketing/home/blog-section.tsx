@@ -24,7 +24,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   size?: "default" | "sm" | "lg" | "icon";
   asChild?: boolean;
   children: React.ReactNode;
-  className?: string;
+  className?: string; // Add this line
 }
 
 interface CardProps {
@@ -125,6 +125,7 @@ const Button: React.FC<ButtonProps> = ({
       disabled,
     } as React.HTMLAttributes<HTMLElement>);
   }
+
   return (
     <button
       type={type}
@@ -145,11 +146,11 @@ const Card: React.FC<CardProps> = ({ children, className = "" }) => (
 );
 
 const CardContent: React.FC<CardProps> = ({ children, className = "" }) => (
-  <div className={`p-6 pt-0 ${className}`}>{children}</div>
+  <div className={`p-4 sm:p-6 ${className}`}>{children}</div>
 );
 
 // const CardHeader: React.FC<CardProps> = ({ children, className = "" }) => (
-//   <div className={`flex flex-col space-y-1.5 p-6 ${className}`}>{children}</div>
+//   <div className={`flex flex-col space-y-1.5 p-4 sm:p-6 ${className}`}>{children}</div>
 // );
 
 const Badge: React.FC<BadgeProps> = ({ children, variant = "default", className = "" }) => {
@@ -182,12 +183,10 @@ const Label: React.FC<LabelProps> = ({ children, htmlFor, className = "" }) => (
     {children}
   </label>
 );
-
 interface DialogChildProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }
-
 const Dialog: React.FC<DialogProps> = ({ children, open, onOpenChange }) => {
   return (
     <div>
