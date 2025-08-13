@@ -7,6 +7,8 @@ import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
+import { ScrollToTop } from "@/components/layout/scroll-to-top";
+import { ChatSupport } from "@/components/layout/chat-support";
 
 export const satoshi = localFont({
   src: [
@@ -52,6 +54,8 @@ export default function RootLayout({
           <div className="relative flex min-h-dvh flex-col bg-background font-sans">
             <SiteHeader />
             <main className="flex-1">{children}</main>
+            <ScrollToTop />
+            <ChatSupport />
             <SiteFooter />
           </div>
         </ThemeProvider>

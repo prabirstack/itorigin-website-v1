@@ -94,7 +94,7 @@ export const SiteHeader: React.FC = () => {
             >
               <Link
                 href="/contact"
-                className="inline-flex items-center px-6 py-2 rounded-lg bg-primary hover:bg-primary/90 text-primary-foreground font-medium transition-colors duration-200 shadow-sm hover:shadow-md"
+                className="inline-flex items-center px-6 py-2 rounded-lg bg-primary hover:bg-primary/90 text-primary-foreground font-medium transition-colors duration-200 shadow-sm hover:shadow-md flex-nowrap"
               >
                 Secure Now
               </Link>
