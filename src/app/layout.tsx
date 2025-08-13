@@ -4,6 +4,9 @@ import localFont from "next/font/local";
 import "@/styles/globals.css";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
+import { ThemeProvider } from "@/components/providers/theme-provider";
+import { SiteHeader } from "@/components/layout/site-header";
+import { SiteFooter } from "@/components/layout/site-footer";
 
 export const satoshi = localFont({
   src: [
@@ -40,9 +43,18 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={cn("antialiased", inter.variable, satoshi.variable)}>
-        <div className="relative flex min-h-dvh flex-col bg-background font-sans">
-          <main className="flex-1">{children}</main>
-        </div>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className="relative flex min-h-dvh flex-col bg-background font-sans">
+            <SiteHeader />
+            <main className="flex-1">{children}</main>
+            <SiteFooter />
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );
