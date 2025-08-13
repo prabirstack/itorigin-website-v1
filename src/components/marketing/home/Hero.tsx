@@ -108,7 +108,7 @@ const HeroCarousel = () => {
 
       {/* Content Overlay */}
       <div className="relative z-10 h-full flex items-center">
-        <Container className="mt-4 lg:mt-0">
+        <Container className="mt-2 lg:mt-0">
           <div className="max-w-4xl">
             {/* Animated Content */}
             <div key={currentSlide} className="animate-fade-in">
