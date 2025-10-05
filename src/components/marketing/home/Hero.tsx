@@ -18,10 +18,10 @@ const HeroCarousel = () => {
   const slides = [
     {
       id: 1,
-      title: "SOC as a Service",
-      subtitle: "24/7 Security Operations Center",
+      title: "Agentic AI powered SOC as a Service",
+      subtitle: "Trusted by our Global Customers",
       description:
-        "Advanced threat detection and response with our state-of-the-art SOC platform. Monitor, analyze, and respond to security incidents around the clock.",
+        "Advanced threat detection and response with our state-of-the-art AI-driven SOC platform. Monitor, analyze, and respond to security incidents around the clock",
       videoUrl: "/videos/it-origin-vid-1.mp4",
       icon: Shield,
       features: ["24/7 Monitoring", "Real-time Alerts", "Expert Analysis", "Instant Response"],
