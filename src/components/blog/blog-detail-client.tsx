@@ -118,7 +118,7 @@ export function BlogDetailClient({ post, allPosts }: BlogDetailClientProps) {
                 {/* Placeholder content - would be replaced with actual markdown/rich text */}
                 <h2 id="introduction" className="text-3xl font-black mt-8 mb-4">Introduction</h2>
                 <p>
-                  In today's rapidly evolving threat landscape, organizations face unprecedented challenges
+                  In today&apos;s rapidly evolving threat landscape, organizations face unprecedented challenges
                   in protecting their digital assets. This comprehensive guide explores the latest strategies,
                   tools, and best practices that security professionals are using to stay ahead of cyber threats.
                 </p>

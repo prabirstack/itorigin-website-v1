@@ -84,7 +84,7 @@ export function CourseCard({
       </div>
 
       <div className="mb-6">
-        <div className="text-sm font-semibold mb-3">What You'll Learn:</div>
+        <div className="text-sm font-semibold mb-3">What You&apos;ll Learn:</div>
         <ul className="space-y-2">
           {features.map((feature, idx) => (
             <li key={idx} className="flex items-start gap-2">

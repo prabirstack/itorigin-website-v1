@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import { Linkedin, Twitter, Mail } from "lucide-react";
+import Image from "next/image";
 import { fadeInUp } from "@/lib/animations";
 
 interface TeamMemberCardProps {
@@ -40,9 +41,11 @@ export function TeamMemberCard({
         <div className="relative mb-6 overflow-hidden rounded-xl">
           <div className="aspect-square bg-gradient-to-br from-primary/20 via-primary/10 to-transparent flex items-center justify-center">
             {image ? (
-              <img
+              <Image
                 src={image}
                 alt={name}
+                width={400}
+                height={400}
                 className="w-full h-full object-cover"
               />
             ) : (

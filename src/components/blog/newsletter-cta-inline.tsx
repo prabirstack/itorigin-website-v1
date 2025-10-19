@@ -12,7 +12,7 @@ export function NewsletterCTAInline() {
         </div>
 
         <div className="flex-1 text-center md:text-left">
-          <h3 className="text-2xl font-black mb-2">Don't Miss Out on Security Insights</h3>
+          <h3 className="text-2xl font-black mb-2">Don&apos;t Miss Out on Security Insights</h3>
           <p className="text-muted-foreground">
             Join 10,000+ security professionals receiving weekly updates on the latest threats,
             best practices, and industry trends.

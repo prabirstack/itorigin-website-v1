@@ -51,7 +51,7 @@ export function NewsletterForm() {
         </div>
         <h3 className="text-xl font-black mb-2">Success!</h3>
         <p className="text-muted-foreground">
-          You've been subscribed to our newsletter. Check your inbox for confirmation.
+          You&apos;ve been subscribed to our newsletter. Check your inbox for confirmation.
         </p>
       </div>
     );
