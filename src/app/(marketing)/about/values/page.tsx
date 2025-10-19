@@ -169,7 +169,7 @@ export default function ValuesPage() {
               <div className="text-4xl font-black text-primary mb-4">24/7</div>
               <h3 className="text-xl font-bold mb-3">Always Available</h3>
               <p className="text-muted-foreground leading-relaxed">
-                Cyber threats don't sleep, and neither do we. Our commitment means being there for our clients around the clock.
+                Cyber threats don&apos;t sleep, and neither do we. Our commitment means being there for our clients around the clock.
               </p>
             </div>
 

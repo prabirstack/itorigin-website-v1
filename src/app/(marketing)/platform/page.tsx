@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { Shield, Zap, BarChart, Eye, Lock, Server, ArrowRight, CheckCircle2, Users, TrendingUp, Target, Settings } from "lucide-react";
+import { Shield, Lock, Server, ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/about/page-hero";
 import { SectionHeader } from "@/components/about/section-header";
 import { StatsSection } from "@/components/about/stats-section";

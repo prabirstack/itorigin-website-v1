@@ -295,7 +295,7 @@ export function TeamPage() {
               variants={fadeInUp}
               className="text-lg text-muted-foreground mb-8"
             >
-              We're always looking for talented security professionals who are passionate
+              We&apos;re always looking for talented security professionals who are passionate
               about protecting organizations and pushing the boundaries of cybersecurity.
             </motion.p>
 

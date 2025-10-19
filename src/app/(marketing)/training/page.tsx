@@ -329,7 +329,7 @@ export default function TrainingPage() {
                 Corporate Training Solutions
               </h2>
               <p className="text-lg text-muted-foreground">
-                Upskill your team with customized training programs tailored to your organization's needs.
+                Upskill your team with customized training programs tailored to your organization&apos;s needs.
               </p>
             </div>
 

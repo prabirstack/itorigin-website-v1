@@ -421,7 +421,7 @@ export default function PartnerPage() {
                 className="p-8 rounded-2xl border border-border bg-card"
               >
                 <p className="text-lg text-muted-foreground mb-6 italic leading-relaxed">
-                  "{testimonial.quote}"
+                  &ldquo;{testimonial.quote}&rdquo;
                 </p>
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">

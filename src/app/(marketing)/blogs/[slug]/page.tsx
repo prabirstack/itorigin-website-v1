@@ -4,13 +4,14 @@ import { BLOG_POSTS } from "@/lib/blog-data";
 import { BlogDetailClient } from "@/components/blog/blog-detail-client";
 
 interface BlogDetailPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export async function generateMetadata({ params }: BlogDetailPageProps): Promise<Metadata> {
-  const post = BLOG_POSTS.find(p => p.slug === params.slug);
+  const { slug } = await params;
+  const post = BLOG_POSTS.find(p => p.slug === slug);
 
   if (!post) {
     return {
@@ -56,8 +57,9 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function BlogDetailPage({ params }: BlogDetailPageProps) {
-  const post = BLOG_POSTS.find(p => p.slug === params.slug);
+export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
+  const { slug } = await params;
+  const post = BLOG_POSTS.find(p => p.slug === slug);
 
   if (!post) {
     notFound();

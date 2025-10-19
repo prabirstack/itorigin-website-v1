@@ -33,7 +33,7 @@ export function QuoteSection({ quote, author, role }: QuoteSectionProps) {
             variants={fadeInUp}
             className="text-2xl md:text-3xl font-bold text-center mb-8 leading-relaxed"
           >
-            "{quote}"
+            &ldquo;{quote}&rdquo;
           </motion.blockquote>
 
           <motion.div
