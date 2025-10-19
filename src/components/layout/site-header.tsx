@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Phone, Mail } from "lucide-react";
 import { DesktopNav } from "./desktop-nav";
 
 import Image from "next/image";
@@ -25,7 +24,7 @@ export const SiteHeader: React.FC = () => {
 
   return (
     <motion.header
-      className={`fixed top-0 left-0 right-0 transition-all duration-300 ${
+      className={`fixed top-12 left-0 right-0 transition-all duration-300 ${
         isScrolled
           ? "bg-background/95 backdrop-blur-md border-b border-border shadow-sm z-40"
           : "bg-background/30 backdrop-blur-sm text-white z-40"
@@ -33,7 +32,7 @@ export const SiteHeader: React.FC = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      style={{ zIndex: 40 }} // Ensure header is below mobile nav
+      style={{ zIndex: 40 }}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
@@ -67,25 +66,6 @@ export const SiteHeader: React.FC = () => {
 
           {/* Right Side Actions */}
           <div className="flex items-center space-x-4">
-            {/* Contact Info - Hidden on mobile */}
-            <div className="hidden xl:flex items-center space-x-4">
-              <a
-                href="tel:+1234567890"
-                className="flex items-center space-x-2 text-sm text-foreground hover:text-primary transition-colors duration-200"
-              >
-                <Phone className="w-4 h-4" />
-                <span>+1 (234) 567-890</span>
-              </a>
-              <div className="w-px h-4 bg-border" />
-              <a
-                href="mailto:info@itorigin.com"
-                className="flex items-center space-x-2 text-sm text-foreground hover:text-primary transition-colors duration-200"
-              >
-                <Mail className="w-4 h-4" />
-                <span>info@itorigin.com</span>
-              </a>
-            </div>
-
             {/* CTA Button - Hidden on mobile */}
             <motion.div
               className="hidden md:block"
