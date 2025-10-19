@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { Search, AlertTriangle, Code, Database, Shield, Target, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/about/page-hero";
 import { SectionHeader } from "@/components/about/section-header";
 import { StatsSection } from "@/components/about/stats-section";

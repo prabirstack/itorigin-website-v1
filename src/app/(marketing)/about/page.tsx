@@ -1,14 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import {
-  Shield,
-  Target,
-  Users,
-  Award,
-  TrendingUp,
-  Globe,
-  ArrowRight
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/about/page-hero";
 import { StatsSection } from "@/components/about/stats-section";
 import { HighlightsSection } from "@/components/about/highlights-section";
@@ -17,7 +9,8 @@ import { CTASection } from "@/components/about/cta-section";
 
 export const metadata: Metadata = {
   title: "About IT Origin | Leading Cybersecurity Services Provider",
-  description: "Learn about IT Origin, a trusted cybersecurity firm with 15+ years of experience protecting organizations worldwide. Discover our mission, values, and expert team.",
+  description:
+    "Learn about IT Origin, a trusted cybersecurity firm with 15+ years of experience protecting organizations worldwide. Discover our mission, values, and expert team.",
   keywords: [
     "IT Origin",
     "cybersecurity company",
@@ -25,11 +18,12 @@ export const metadata: Metadata = {
     "about us",
     "cybersecurity experts",
     "SOC services",
-    "security solutions"
+    "security solutions",
   ],
   openGraph: {
     title: "About IT Origin | Leading Cybersecurity Services Provider",
-    description: "Learn about IT Origin, a trusted cybersecurity firm with 15+ years of experience protecting organizations worldwide.",
+    description:
+      "Learn about IT Origin, a trusted cybersecurity firm with 15+ years of experience protecting organizations worldwide.",
     type: "website",
     url: "https://itorigin.com/about",
     images: [
@@ -37,19 +31,20 @@ export const metadata: Metadata = {
         url: "/images/og-about.jpg",
         width: 1200,
         height: 630,
-        alt: "IT Origin - About Us"
-      }
-    ]
+        alt: "IT Origin - About Us",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "About IT Origin | Leading Cybersecurity Services Provider",
-    description: "Learn about IT Origin, a trusted cybersecurity firm with 15+ years of experience.",
-    images: ["/images/og-about.jpg"]
+    description:
+      "Learn about IT Origin, a trusted cybersecurity firm with 15+ years of experience.",
+    images: ["/images/og-about.jpg"],
   },
   alternates: {
-    canonical: "https://itorigin.com/about"
-  }
+    canonical: "https://itorigin.com/about",
+  },
 };
 
 export default function AboutPage() {
@@ -64,17 +59,20 @@ export default function AboutPage() {
     {
       icon: "Shield" as const,
       title: "Industry-Leading Expertise",
-      description: "Our team of certified security professionals brings decades of combined experience in protecting critical infrastructure."
+      description:
+        "Our team of certified security professionals brings decades of combined experience in protecting critical infrastructure.",
     },
     {
       icon: "Target" as const,
       title: "Proactive Security Approach",
-      description: "We don't just respond to threats—we anticipate them, using advanced threat intelligence and AI-powered analytics."
+      description:
+        "We don't just respond to threats—we anticipate them, using advanced threat intelligence and AI-powered analytics.",
     },
     {
       icon: "TrendingUp" as const,
       title: "Proven Track Record",
-      description: "With 99.9% uptime and zero major breaches across our client portfolio, we deliver results that matter."
+      description:
+        "With 99.9% uptime and zero major breaches across our client portfolio, we deliver results that matter.",
     },
   ];
 
@@ -82,23 +80,17 @@ export default function AboutPage() {
     mission: {
       badge: { icon: "Target" as const, text: "Our Mission" },
       title: "Empowering Secure Digital Transformation",
-      description: "Our mission is to empower organizations to embrace digital transformation with confidence by providing world-class cybersecurity solutions. We strive to be the trusted partner that enables businesses to innovate fearlessly while staying protected against evolving cyber threats.",
-      values: [
-        "Excellence in Execution",
-        "Client-Centric Approach",
-        "Continuous Innovation"
-      ]
+      description:
+        "Our mission is to empower organizations to embrace digital transformation with confidence by providing world-class cybersecurity solutions. We strive to be the trusted partner that enables businesses to innovate fearlessly while staying protected against evolving cyber threats.",
+      values: ["Excellence in Execution", "Client-Centric Approach", "Continuous Innovation"],
     },
     vision: {
       badge: { icon: "TrendingUp" as const, text: "Our Vision" },
       title: "A Secure Digital Future for All",
-      description: "We envision a world where every organization, regardless of size or industry, has access to enterprise-grade cybersecurity. Through innovation, education, and relentless dedication, we aim to set new standards for security excellence and make the digital world a safer place for everyone.",
-      values: [
-        "Transparency & Trust",
-        "Ethical Security Practices",
-        "24/7 Commitment"
-      ]
-    }
+      description:
+        "We envision a world where every organization, regardless of size or industry, has access to enterprise-grade cybersecurity. Through innovation, education, and relentless dedication, we aim to set new standards for security excellence and make the digital world a safer place for everyone.",
+      values: ["Transparency & Trust", "Ethical Security Practices", "24/7 Commitment"],
+    },
   };
 
   return (
@@ -143,10 +135,7 @@ export default function AboutPage() {
       />
 
       {/* Mission & Vision Section */}
-      <MissionVisionSection
-        mission={missionVision.mission}
-        vision={missionVision.vision}
-      />
+      <MissionVisionSection mission={missionVision.mission} vision={missionVision.vision} />
 
       {/* CTA Section */}
       <CTASection
@@ -154,7 +143,7 @@ export default function AboutPage() {
         description="Learn more about our story, meet our team, and discover the values that drive us forward."
         buttons={[
           { text: "Our Story", href: "/about/story" },
-          { text: "Our Values", href: "/about/values", variant: "secondary" }
+          { text: "Our Values", href: "/about/values", variant: "secondary" },
         ]}
       />
     </div>

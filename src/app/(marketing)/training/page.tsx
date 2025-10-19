@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { Award, Users, Clock, Target, Shield, Code, ArrowRight, CheckCircle2, Zap, TrendingUp } from "lucide-react";
+import { Users, Shield, ArrowRight, CheckCircle2 } from "lucide-react";
 import { PageHero } from "@/components/about/page-hero";
 import { SectionHeader } from "@/components/about/section-header";
 import { StatsSection } from "@/components/about/stats-section";
@@ -11,7 +11,8 @@ import { TrainingPathCard } from "@/components/training/training-path-card";
 
 export const metadata: Metadata = {
   title: "Cybersecurity Training & Certification Courses | IT Origin",
-  description: "Advance your cybersecurity career with IT Origin's expert-led training programs. OSCP, CEH, CISSP, security awareness training, and custom corporate programs. Hands-on labs and real-world scenarios.",
+  description:
+    "Advance your cybersecurity career with IT Origin's expert-led training programs. OSCP, CEH, CISSP, security awareness training, and custom corporate programs. Hands-on labs and real-world scenarios.",
   keywords: [
     "cybersecurity training",
     "security certification",
@@ -23,11 +24,12 @@ export const metadata: Metadata = {
     "ethical hacking course",
     "corporate security training",
     "hands-on cybersecurity",
-    "security bootcamp"
+    "security bootcamp",
   ],
   openGraph: {
     title: "Cybersecurity Training & Certification Courses | IT Origin",
-    description: "Expert-led cybersecurity training programs with hands-on labs. OSCP, CEH, CISSP, and custom corporate training.",
+    description:
+      "Expert-led cybersecurity training programs with hands-on labs. OSCP, CEH, CISSP, and custom corporate training.",
     type: "website",
     url: "https://itorigin.com/training",
     images: [
@@ -35,19 +37,20 @@ export const metadata: Metadata = {
         url: "/images/og-training.jpg",
         width: 1200,
         height: 630,
-        alt: "IT Origin Cybersecurity Training"
-      }
-    ]
+        alt: "IT Origin Cybersecurity Training",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Cybersecurity Training & Certification Courses",
-    description: "Expert-led cybersecurity training programs with hands-on labs and real-world scenarios.",
-    images: ["/images/og-training.jpg"]
+    description:
+      "Expert-led cybersecurity training programs with hands-on labs and real-world scenarios.",
+    images: ["/images/og-training.jpg"],
   },
   alternates: {
-    canonical: "https://itorigin.com/training"
-  }
+    canonical: "https://itorigin.com/training",
+  },
 };
 
 export default function TrainingPage() {
@@ -61,7 +64,8 @@ export default function TrainingPage() {
   const courses = [
     {
       title: "Offensive Security (OSCP Prep)",
-      description: "Master penetration testing and ethical hacking with our comprehensive OSCP preparation course.",
+      description:
+        "Master penetration testing and ethical hacking with our comprehensive OSCP preparation course.",
       duration: "8 weeks",
       level: "Advanced",
       format: "Live Online + Labs",
@@ -74,14 +78,15 @@ export default function TrainingPage() {
         "Active Directory attacks",
         "Web application testing",
         "Custom exploit development",
-        "24/7 lab access for 90 days"
+        "24/7 lab access for 90 days",
       ],
       icon: "Target" as const,
-      popular: true
+      popular: true,
     },
     {
       title: "Certified Ethical Hacker (CEH)",
-      description: "Learn the fundamentals of ethical hacking and prepare for the CEH certification exam.",
+      description:
+        "Learn the fundamentals of ethical hacking and prepare for the CEH certification exam.",
       duration: "5 weeks",
       level: "Intermediate",
       format: "Live Online",
@@ -94,10 +99,10 @@ export default function TrainingPage() {
         "System hacking techniques",
         "Social engineering tactics",
         "CEH exam voucher included",
-        "Study materials & practice tests"
+        "Study materials & practice tests",
       ],
       icon: "Shield" as const,
-      popular: false
+      popular: false,
     },
     {
       title: "Web Application Security",
@@ -114,14 +119,15 @@ export default function TrainingPage() {
         "Secure code review",
         "Bug bounty preparation",
         "Real vulnerable applications",
-        "Weekly mentor sessions"
+        "Weekly mentor sessions",
       ],
       icon: "Code" as const,
-      popular: false
+      popular: false,
     },
     {
       title: "Security Operations & Incident Response",
-      description: "Build expertise in SOC operations, threat hunting, and incident response procedures.",
+      description:
+        "Build expertise in SOC operations, threat hunting, and incident response procedures.",
       duration: "6 weeks",
       level: "Intermediate",
       format: "Live Online",
@@ -134,10 +140,10 @@ export default function TrainingPage() {
         "Incident response playbooks",
         "Digital forensics basics",
         "Malware analysis introduction",
-        "Hands-on IR simulations"
+        "Hands-on IR simulations",
       ],
       icon: "Eye" as const,
-      popular: false
+      popular: false,
     },
     {
       title: "Cloud Security (AWS/Azure/GCP)",
@@ -154,10 +160,10 @@ export default function TrainingPage() {
         "Cloud compliance frameworks",
         "Security automation",
         "Cloud-native tools (GuardDuty, Security Hub)",
-        "Real cloud environment labs"
+        "Real cloud environment labs",
       ],
       icon: "Shield" as const,
-      popular: false
+      popular: false,
     },
     {
       title: "Security Awareness for Teams",
@@ -174,68 +180,87 @@ export default function TrainingPage() {
         "Data protection & privacy",
         "Incident reporting procedures",
         "Interactive simulations",
-        "Quarterly refresher sessions"
+        "Quarterly refresher sessions",
       ],
       icon: "Users" as const,
-      popular: false
-    }
+      popular: false,
+    },
   ];
 
   const trainingPaths = [
     {
       title: "Penetration Tester Path",
-      description: "Complete learning path from beginner to advanced penetration testing professional",
-      courses: ["Web Application Security", "Offensive Security (OSCP Prep)", "Advanced Red Teaming"],
+      description:
+        "Complete learning path from beginner to advanced penetration testing professional",
+      courses: [
+        "Web Application Security",
+        "Offensive Security (OSCP Prep)",
+        "Advanced Red Teaming",
+      ],
       duration: "6 months",
-      icon: "Target" as const
+      icon: "Target" as const,
     },
     {
       title: "Security Analyst Path",
       description: "Build expertise in defensive security operations and threat detection",
-      courses: ["Security Fundamentals", "Security Operations & Incident Response", "Threat Intelligence"],
+      courses: [
+        "Security Fundamentals",
+        "Security Operations & Incident Response",
+        "Threat Intelligence",
+      ],
       duration: "4 months",
-      icon: "Shield" as const
+      icon: "Shield" as const,
     },
     {
       title: "Cloud Security Path",
       description: "Master cloud security across major platforms and earn cloud certifications",
-      courses: ["Cloud Security Fundamentals", "Cloud Security (AWS/Azure/GCP)", "Cloud Compliance"],
+      courses: [
+        "Cloud Security Fundamentals",
+        "Cloud Security (AWS/Azure/GCP)",
+        "Cloud Compliance",
+      ],
       duration: "5 months",
-      icon: "Zap" as const
-    }
+      icon: "Zap" as const,
+    },
   ];
 
   const benefits = [
     {
       icon: "Award" as const,
       title: "Industry Certifications",
-      description: "Prepare for top cybersecurity certifications including OSCP, CEH, CISSP, and more."
+      description:
+        "Prepare for top cybersecurity certifications including OSCP, CEH, CISSP, and more.",
     },
     {
       icon: "Users" as const,
       title: "Expert Instructors",
-      description: "Learn from certified professionals with real-world experience in offensive and defensive security."
+      description:
+        "Learn from certified professionals with real-world experience in offensive and defensive security.",
     },
     {
       icon: "Code" as const,
       title: "Hands-On Labs",
-      description: "Practice on real vulnerable systems and environments, not just theory and slides."
+      description:
+        "Practice on real vulnerable systems and environments, not just theory and slides.",
     },
     {
       icon: "Clock" as const,
       title: "Flexible Learning",
-      description: "Live online sessions, self-paced courses, and on-site training options to fit your schedule."
+      description:
+        "Live online sessions, self-paced courses, and on-site training options to fit your schedule.",
     },
     {
       icon: "CheckCircle2" as const,
       title: "Career Support",
-      description: "Resume reviews, interview preparation, and job placement assistance for graduates."
+      description:
+        "Resume reviews, interview preparation, and job placement assistance for graduates.",
     },
     {
       icon: "TrendingUp" as const,
       title: "Continuous Updates",
-      description: "Course content regularly updated to reflect the latest threats, tools, and techniques."
-    }
+      description:
+        "Course content regularly updated to reflect the latest threats, tools, and techniques.",
+    },
   ];
 
   return (
@@ -325,11 +350,10 @@ export default function TrainingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-5xl font-black mb-6">
-                Corporate Training Solutions
-              </h2>
+              <h2 className="text-3xl md:text-5xl font-black mb-6">Corporate Training Solutions</h2>
               <p className="text-lg text-muted-foreground">
-                Upskill your team with customized training programs tailored to your organization&apos;s needs.
+                Upskill your team with customized training programs tailored to your
+                organization&apos;s needs.
               </p>
             </div>
 
@@ -340,7 +364,8 @@ export default function TrainingPage() {
                 </div>
                 <h3 className="text-2xl font-black mb-4">Team Training</h3>
                 <p className="text-muted-foreground mb-6">
-                  Train your security team on the latest tools, techniques, and best practices. Custom curriculum designed for your tech stack and security challenges.
+                  Train your security team on the latest tools, techniques, and best practices.
+                  Custom curriculum designed for your tech stack and security challenges.
                 </p>
                 <ul className="space-y-3">
                   <li className="flex items-start gap-3">
@@ -368,7 +393,8 @@ export default function TrainingPage() {
                 </div>
                 <h3 className="text-2xl font-black mb-4">Security Awareness</h3>
                 <p className="text-muted-foreground mb-6">
-                  Empower all employees with security awareness training. Reduce human risk with engaging, interactive programs that stick.
+                  Empower all employees with security awareness training. Reduce human risk with
+                  engaging, interactive programs that stick.
                 </p>
                 <ul className="space-y-3">
                   <li className="flex items-start gap-3">
@@ -410,7 +436,7 @@ export default function TrainingPage() {
         description="Join thousands of cybersecurity professionals who have advanced their careers with our training programs."
         buttons={[
           { text: "Enroll Now", href: "/contact" },
-          { text: "Download Course Catalog", href: "/courses-catalog.pdf", variant: "secondary" }
+          { text: "Download Course Catalog", href: "/courses-catalog.pdf", variant: "secondary" },
         ]}
       />
     </div>
