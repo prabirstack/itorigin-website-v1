@@ -149,7 +149,15 @@ export function BlogDetailClient({ post, allPosts }: BlogDetailClientProps) {
                   Conduct periodic penetration testing and vulnerability assessments to identify
                   weaknesses before attackers can exploit them.
                 </p>
+              </div>
 
+              {/* Newsletter CTA - Strategically placed mid-content */}
+              <div className="my-12">
+                <NewsletterForm />
+              </div>
+
+              {/* Continue Article Content */}
+              <div className="prose prose-lg max-w-none mb-12">
                 <h2 id="conclusion" className="text-3xl font-black mt-8 mb-4">Conclusion</h2>
                 <p>
                   By implementing these strategies and maintaining a strong security posture,
@@ -214,25 +222,20 @@ export function BlogDetailClient({ post, allPosts }: BlogDetailClientProps) {
                 </div>
               </div>
 
-              {/* Newsletter CTA */}
-              <div className="my-12">
-                <NewsletterForm />
-              </div>
-
               {/* Comments Section */}
               <BlogComments />
-
-              {/* Related Posts */}
-              {relatedPosts.length > 0 && (
-                <RelatedPosts posts={relatedPosts} category={post.category} />
-              )}
             </div>
 
             {/* Sticky Sidebar - Right */}
             <div className="lg:col-span-3">
-              <BlogDetailSidebar post={post} allPosts={allPosts} />
+              <BlogDetailSidebar allPosts={allPosts} />
             </div>
           </div>
+
+          {/* Related Posts - Full Width */}
+          {relatedPosts.length > 0 && (
+            <RelatedPosts posts={relatedPosts} category={post.category} />
+          )}
         </div>
       </article>
     </div>

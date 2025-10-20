@@ -2,51 +2,20 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Search, TrendingUp, Share2, Twitter, Linkedin, Facebook, Link2, Check } from "lucide-react";
+import { Search, TrendingUp } from "lucide-react";
 import { type BlogPost, BLOG_CATEGORIES, getPopularBlogs } from "@/lib/blog-data";
 
 interface BlogDetailSidebarProps {
-  post: BlogPost;
   allPosts: BlogPost[];
 }
 
-export function BlogDetailSidebar({ post, allPosts }: BlogDetailSidebarProps) {
+export function BlogDetailSidebar({ allPosts }: BlogDetailSidebarProps) {
   const [searchInput, setSearchInput] = useState("");
-  const [copied, setCopied] = useState(false);
   const popularPosts = getPopularBlogs(5);
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     window.location.href = `/blogs?search=${encodeURIComponent(searchInput)}`;
-  };
-
-  const handleCopyLink = () => {
-    const url = window.location.href;
-    navigator.clipboard.writeText(url);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
-  const handleShare = (platform: string) => {
-    const url = encodeURIComponent(window.location.href);
-    const text = encodeURIComponent(post.title);
-
-    let shareUrl = "";
-    switch (platform) {
-      case "twitter":
-        shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${text}`;
-        break;
-      case "linkedin":
-        shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
-        break;
-      case "facebook":
-        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
-        break;
-    }
-
-    if (shareUrl) {
-      window.open(shareUrl, "_blank", "width=600,height=400");
-    }
   };
 
   return (
@@ -71,53 +40,6 @@ export function BlogDetailSidebar({ post, allPosts }: BlogDetailSidebarProps) {
             </button>
           </div>
         </form>
-      </div>
-
-      {/* Share Article */}
-      <div className="p-6 rounded-2xl border border-border bg-card">
-        <div className="flex items-center gap-2 mb-4">
-          <Share2 className="w-5 h-5 text-primary" />
-          <h3 className="text-lg font-black">Share Article</h3>
-        </div>
-        <div className="space-y-3">
-          <button
-            onClick={() => handleShare("twitter")}
-            className="w-full flex items-center gap-3 px-4 py-3 rounded-lg border border-border hover:bg-accent transition-colors"
-          >
-            <Twitter className="w-5 h-5 text-[#1DA1F2]" />
-            <span className="font-medium">Share on Twitter</span>
-          </button>
-          <button
-            onClick={() => handleShare("linkedin")}
-            className="w-full flex items-center gap-3 px-4 py-3 rounded-lg border border-border hover:bg-accent transition-colors"
-          >
-            <Linkedin className="w-5 h-5 text-[#0A66C2]" />
-            <span className="font-medium">Share on LinkedIn</span>
-          </button>
-          <button
-            onClick={() => handleShare("facebook")}
-            className="w-full flex items-center gap-3 px-4 py-3 rounded-lg border border-border hover:bg-accent transition-colors"
-          >
-            <Facebook className="w-5 h-5 text-[#1877F2]" />
-            <span className="font-medium">Share on Facebook</span>
-          </button>
-          <button
-            onClick={handleCopyLink}
-            className="w-full flex items-center gap-3 px-4 py-3 rounded-lg border border-border hover:bg-accent transition-colors"
-          >
-            {copied ? (
-              <>
-                <Check className="w-5 h-5 text-green-500" />
-                <span className="font-medium text-green-500">Link Copied!</span>
-              </>
-            ) : (
-              <>
-                <Link2 className="w-5 h-5" />
-                <span className="font-medium">Copy Link</span>
-              </>
-            )}
-          </button>
-        </div>
       </div>
 
       {/* Categories */}

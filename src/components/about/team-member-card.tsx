@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "motion/react";
-import { Linkedin, Twitter, Mail } from "lucide-react";
+import { Linkedin, Mail } from "lucide-react";
+import { RiTwitterXFill } from "react-icons/ri";
 import Image from "next/image";
 import { fadeInUp } from "@/lib/animations";
 
@@ -95,9 +96,9 @@ export function TeamMemberCard({
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 rounded-lg bg-primary/10 hover:bg-primary text-primary hover:text-primary-foreground flex items-center justify-center transition-all duration-200 hover:scale-110"
-                aria-label={`${name}'s Twitter`}
+                aria-label={`${name}'s X (formerly Twitter)`}
               >
-                <Twitter className="w-4 h-4" />
+                <RiTwitterXFill className="w-4 h-4" />
               </a>
             )}
             {email && (

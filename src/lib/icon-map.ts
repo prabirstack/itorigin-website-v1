@@ -19,7 +19,6 @@ import {
   Quote,
   Mail,
   Linkedin,
-  Twitter,
   Clock,
   Eye,
   Check,
@@ -33,8 +32,10 @@ import {
   Settings,
   type LucideIcon
 } from "lucide-react";
+import { RiTwitterXFill } from "react-icons/ri";
+import type { IconType } from "react-icons";
 
-export const iconMap: Record<string, LucideIcon> = {
+export const iconMap: Record<string, LucideIcon | IconType> = {
   Shield,
   Target,
   Users,
@@ -52,7 +53,7 @@ export const iconMap: Record<string, LucideIcon> = {
   Quote,
   Mail,
   Linkedin,
-  Twitter,
+  TwitterX: RiTwitterXFill, // X (formerly Twitter)
   Clock,
   Eye,
   Check,
@@ -68,6 +69,6 @@ export const iconMap: Record<string, LucideIcon> = {
 
 export type IconName = keyof typeof iconMap;
 
-export function getIcon(name: IconName): LucideIcon {
+export function getIcon(name: IconName): LucideIcon | IconType {
   return iconMap[name];
 }

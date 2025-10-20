@@ -16,13 +16,13 @@ import {
   Clock,
   Globe,
   Facebook,
-  Twitter,
   Linkedin,
   Instagram,
   Youtube,
   Github,
   CheckCircle,
 } from "lucide-react";
+import { RiTwitterXFill } from "react-icons/ri";
 import { Container } from "../common/container";
 import Image from "next/image";
 
@@ -86,10 +86,10 @@ const socialLinks = [
     color: "hover:text-blue-600",
   },
   {
-    name: "Twitter",
-    icon: Twitter,
+    name: "X (formerly Twitter)",
+    icon: RiTwitterXFill,
     href: "https://twitter.com/itorigin",
-    color: "hover:text-blue-400",
+    color: "hover:text-foreground",
   },
   {
     name: "Facebook",
