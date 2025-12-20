@@ -35,11 +35,11 @@ const footerSections: FooterSection[] = [
   {
     title: "Services",
     links: [
-      { name: "SOC as a Service", href: "/services/soc" },
+      { name: "Managed SOC Services", href: "/services/managed-soc-services" },
       { name: "Offensive Security", href: "/services/offensive-security" },
       { name: "Penetration Testing", href: "/services/penetration-testing" },
       { name: "Vulnerability Assessment", href: "/services/vulnerability-assessment" },
-      { name: "GRC Solutions", href: "/services/grc" },
+      { name: "GRC Services", href: "/services/grc-services" },
       { name: "Security Auditing", href: "/services/security-audit", isNew: true },
     ],
   },
@@ -47,10 +47,10 @@ const footerSections: FooterSection[] = [
     title: "Company",
     links: [
       { name: "About Us", href: "/about" },
-      { name: "Our Team", href: "/team" },
+      { name: "Our Team", href: "/about/team" },
       { name: "Careers", href: "/careers" },
       { name: "Case Studies", href: "/case-studies" },
-      { name: "Blog", href: "/blog" },
+      { name: "Blog", href: "/blogs" },
       { name: "News & Events", href: "/news" },
     ],
   },
@@ -58,11 +58,11 @@ const footerSections: FooterSection[] = [
     title: "Resources",
     links: [
       { name: "Documentation", href: "/docs" },
-      { name: "API Reference", href: "/api" },
       { name: "Security Center", href: "/security" },
       { name: "Best Practices", href: "/best-practices" },
       { name: "Whitepapers", href: "/whitepapers" },
       { name: "Webinars", href: "/webinars", isNew: true },
+      { name: "Contact", href: "/contact" },
     ],
   },
   {

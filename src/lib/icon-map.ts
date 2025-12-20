@@ -9,6 +9,7 @@ import {
   TrendingUp,
   Globe,
   CheckCircle2,
+  CheckCircle,
   ArrowRight,
   Calendar,
   Rocket,
@@ -30,6 +31,14 @@ import {
   FileText,
   BarChart,
   Settings,
+  BookOpen,
+  Newspaper,
+  Video,
+  FileCheck,
+  Star,
+  RefreshCcw,
+  Home,
+  Gift,
   type LucideIcon
 } from "lucide-react";
 import { RiTwitterXFill } from "react-icons/ri";
@@ -43,6 +52,7 @@ export const iconMap: Record<string, LucideIcon | IconType> = {
   TrendingUp,
   Globe,
   CheckCircle2,
+  CheckCircle,
   ArrowRight,
   Calendar,
   Rocket,
@@ -65,6 +75,14 @@ export const iconMap: Record<string, LucideIcon | IconType> = {
   FileText,
   BarChart,
   Settings,
+  BookOpen,
+  Newspaper,
+  Video,
+  FileCheck,
+  Star,
+  RefreshCcw,
+  Home,
+  Gift,
 };
 
 export type IconName = keyof typeof iconMap;
