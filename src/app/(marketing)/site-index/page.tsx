@@ -3,10 +3,10 @@ import Link from "next/link";
 import { Container } from "@/components/common/container";
 
 export const metadata: Metadata = {
-  title: "Sitemap | IT Origin",
-  description: "Navigate IT Origin's website with our comprehensive sitemap. Find all pages, services, and resources easily.",
+  title: "Site Index | IT Origin",
+  description: "Navigate IT Origin's website with our comprehensive site index. Find all pages, services, and resources easily.",
   alternates: {
-    canonical: "https://itorigin.com/sitemap"
+    canonical: "https://itorigin.com/site-index"
   }
 };
 
@@ -75,19 +75,19 @@ const sitemapSections: SitemapSection[] = [
     title: "Accessibility & Meta",
     links: [
       { name: "Accessibility Statement", href: "/accessibility" },
-      { name: "Sitemap", href: "/sitemap" }
+      { name: "Site Index", href: "/site-index" }
     ]
   }
 ];
 
-export default function SitemapPage() {
+export default function SiteIndexPage() {
   return (
     <div className="min-h-screen py-20">
       <Container>
         <div className="max-w-5xl mx-auto">
           {/* Header */}
           <div className="mb-12 text-center">
-            <h1 className="text-4xl md:text-5xl font-black mb-4">Sitemap</h1>
+            <h1 className="text-4xl md:text-5xl font-black mb-4">Site Index</h1>
             <p className="text-muted-foreground text-lg">
               Find all pages on the IT Origin website organized by category.
             </p>

@@ -412,10 +412,10 @@ export const SiteFooter: React.FC = () => {
 
               <div className="flex items-center space-x-6 text-sm">
                 <Link
-                  href="/sitemap"
+                  href="/site-index"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
-                  Sitemap
+                  Site Index
                 </Link>
                 <Link
                   href="/accessibility"
