@@ -1,23 +1,42 @@
 "use client";
 
-import acmeLogo from "../../../assets/brand/acme.png";
-import quantumLogo from "../../../assets/brand/quantum.png";
-import echoLogo from "../../../assets/brand/echo.png";
-import celestialLogo from "../../../assets/brand/celestial.png";
-import pulseLogo from "../../../assets/brand/pulse.png";
-import appexLogo from "../../../assets/brand/apex.png";
+import alrahibank from "../../../assets/brand/alrahibank.png";
+import tatacom from "../../../assets/brand/tata-com.png";
+import ajourney from "../../../assets/brand/ajourney.png";
+import hexaware from "../../../assets/brand/hexaware.png";
+import hitachi from "../../../assets/brand/hitachi.png";
+import jsw from "../../../assets/brand/jswsteel.png";
+import khalifafund from "../../../assets/brand/khalifafund.png";
+import mcx from "../../../assets/brand/mcx.png";
+import novo from "../../../assets/brand/novo.png";
+import patton from "../../../assets/brand/patton.png";
+import rakinsurance from "../../../assets/brand/rakinsurance.png";
+import redington from "../../../assets/brand/redington.png";
+import sbi from "../../../assets/brand/sbi.png";
+import sevensees from "../../../assets/brand/sevensees.png";
+import veedol from "../../../assets/brand/veedol.png";
+
 import { motion } from "motion/react";
 import { Container } from "@/components/common/container";
 import Image from "next/image";
 import React from "react";
 
 const images = [
-  { src: acmeLogo, alt: "Acme Logo" },
-  { src: quantumLogo, alt: "Quantum Logo" },
-  { src: echoLogo, alt: "Echo Logo" },
-  { src: celestialLogo, alt: "Celestial Logo" },
-  { src: pulseLogo, alt: "Pulse Logo" },
-  { src: appexLogo, alt: "Appex Logo" },
+  { src: alrahibank, alt: "Alrahi Bank" },
+  { src: tatacom, alt: "Tata Com" },
+  { src: ajourney, alt: "Ajourney" },
+  { src: hexaware, alt: "Hexaware" },
+  { src: hitachi, alt: "Hitachi" },
+  { src: jsw, alt: "JSW Steel" },
+  { src: khalifafund, alt: "Khalifa Fund" },
+  { src: mcx, alt: "MCX" },
+  { src: novo, alt: "Novo" },
+  { src: patton, alt: "Patton" },
+  { src: rakinsurance, alt: "Rak Insurance" },
+  { src: redington, alt: "Redington" },
+  { src: sbi, alt: "SBI" },
+  { src: sevensees, alt: "Seven Sees" },
+  { src: veedol, alt: "Veedol" },
 ];
 
 export const LogoTicker = () => {
@@ -31,7 +50,7 @@ export const LogoTicker = () => {
         <div className="flex overflow-hidden mt-12 [mask-image:linear-gradient(to_left,transparent,white_10%,black_90%,transparent)] dark:[mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
           <motion.div
             animate={{ x: "-50%" }}
-            transition={{ repeat: Infinity, duration: 10, ease: "linear" }}
+            transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
             className="flex flex-none gap-24 pr-24"
           >
             {Array.from({ length: 2 }).map((_, i) => (
