@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
+import Link from "next/link";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import {
   Shield,
@@ -42,7 +43,7 @@ const services: ServiceItem[] = [
       "Threat hunting and intelligence",
     ],
     ctaText: "Explore SOCaaS",
-    ctaLink: "/services/socaas",
+    ctaLink: "/services/managed-soc-services",
     primaryColor: "text-blue-500",
     secondaryColor: "bg-blue-500/10",
     bgPattern: "from-blue-500/5 to-cyan-500/5",
@@ -61,7 +62,7 @@ const services: ServiceItem[] = [
       "Threat advisory services",
     ],
     ctaText: "Discover MDR",
-    ctaLink: "/services/mdr",
+    ctaLink: "/services/managed-soc-services",
     primaryColor: "text-purple-500",
     secondaryColor: "bg-purple-500/10",
     bgPattern: "from-purple-500/5 to-pink-500/5",
@@ -101,7 +102,7 @@ const services: ServiceItem[] = [
       "Regulatory Advisory",
     ],
     ctaText: "Explore GRC Services",
-    ctaLink: "/services/grc",
+    ctaLink: "/services/grc-services",
     primaryColor: "text-green-500",
     secondaryColor: "bg-green-500/10",
     bgPattern: "from-green-500/5 to-emerald-500/5",
@@ -120,7 +121,7 @@ const services: ServiceItem[] = [
       "Security infrastructure monitoring",
     ],
     ctaText: "Learn More",
-    ctaLink: "/services/device-management",
+    ctaLink: "/services/managed-soc-services",
     primaryColor: "text-indigo-500",
     secondaryColor: "bg-indigo-500/10",
     bgPattern: "from-indigo-500/5 to-blue-500/5",
@@ -139,7 +140,7 @@ const services: ServiceItem[] = [
       "Recovery assistance & hardening",
     ],
     ctaText: "Explore IR Services",
-    ctaLink: "/services/digital-forensics",
+    ctaLink: "/services/offensive-security",
     primaryColor: "text-orange-500",
     secondaryColor: "bg-orange-500/10",
     bgPattern: "from-orange-500/5 to-yellow-500/5",
@@ -305,7 +306,8 @@ export const ServiceSection = () => {
 
                   {/* CTA Button */}
                   <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                    <button
+                    <Link
+                      href={service.ctaLink}
                       className={`w-full flex items-center justify-center gap-3 px-6 py-4 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground rounded-xl font-semibold text-sm transition-all duration-300 shadow-lg hover:shadow-xl group/cta relative overflow-hidden`}
                     >
                       <span className="relative z-10">{service.ctaText}</span>
@@ -319,7 +321,7 @@ export const ServiceSection = () => {
 
                       {/* Button shine effect */}
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/cta:translate-x-full transition-transform duration-700" />
-                    </button>
+                    </Link>
                   </motion.div>
                 </CardContent>
               </Card>

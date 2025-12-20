@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import {
   ChevronLeft,
   ChevronRight,
@@ -26,6 +27,7 @@ const HeroCarousel = () => {
       icon: Shield,
       features: ["24/7 Monitoring", "Real-time Alerts", "Expert Analysis", "Instant Response"],
       buttonText: "Explore SOC Services",
+      buttonHref: "/services/managed-soc-services",
     },
     {
       id: 2,
@@ -42,6 +44,7 @@ const HeroCarousel = () => {
         "Security Auditing",
       ],
       buttonText: "Start Security Testing",
+      buttonHref: "/services/offensive-security",
     },
     {
       id: 3,
@@ -53,6 +56,7 @@ const HeroCarousel = () => {
       icon: FileCheck,
       features: ["Compliance Management", "Risk Assessment", "Policy Development", "Audit Support"],
       buttonText: "View GRC Solutions",
+      buttonHref: "/services/grc-services",
     },
   ];
 
@@ -152,15 +156,21 @@ const HeroCarousel = () => {
 
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4">
-                <button className="group flex items-center justify-center px-8 py-4 bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-primary/25">
+                <Link
+                  href={currentSlideData.buttonHref}
+                  className="group flex items-center justify-center px-8 py-4 bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-primary/25"
+                >
                   <span>{currentSlideData.buttonText}</span>
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </button>
+                </Link>
 
-                <button className="group flex items-center justify-center px-8 py-4 bg-white/10 hover:bg-white/20 text-white rounded-lg font-semibold backdrop-blur-sm border border-white/20 hover:border-white/40 transition-all duration-300">
+                <Link
+                  href="/contact"
+                  className="group flex items-center justify-center px-8 py-4 bg-white/10 hover:bg-white/20 text-white rounded-lg font-semibold backdrop-blur-sm border border-white/20 hover:border-white/40 transition-all duration-300"
+                >
                   <Play className="mr-2 w-5 h-5" />
                   <span>Watch Demo</span>
-                </button>
+                </Link>
               </div>
             </div>
           </div>

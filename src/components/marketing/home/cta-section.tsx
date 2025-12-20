@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import { motion, Variants } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -32,6 +33,7 @@ interface EngagementOption {
   gradient: string;
   iconBg: string;
   ctaText: string;
+  ctaLink: string;
   popular?: boolean;
 }
 
@@ -61,6 +63,7 @@ const engagementOptions: EngagementOption[] = [
     gradient: "from-blue-500/20 via-blue-500/10 to-blue-600/5",
     iconBg: "bg-gradient-to-br from-blue-500 to-blue-600",
     ctaText: "Start Assessment",
+    ctaLink: "/contact?service=assessment",
     popular: true,
   },
   {
@@ -71,6 +74,7 @@ const engagementOptions: EngagementOption[] = [
     gradient: "from-green-500/20 via-green-500/10 to-emerald-600/5",
     iconBg: "bg-gradient-to-br from-green-500 to-emerald-600",
     ctaText: "Book Call",
+    ctaLink: "/contact?service=consultation",
   },
   {
     id: "resources",
@@ -80,6 +84,7 @@ const engagementOptions: EngagementOption[] = [
     gradient: "from-purple-500/20 via-purple-500/10 to-pink-600/5",
     iconBg: "bg-gradient-to-br from-purple-500 to-pink-600",
     ctaText: "Download Now",
+    ctaLink: "/whitepapers",
   },
   {
     id: "training",
@@ -89,6 +94,7 @@ const engagementOptions: EngagementOption[] = [
     gradient: "from-orange-500/20 via-orange-500/10 to-red-600/5",
     iconBg: "bg-gradient-to-br from-orange-500 to-red-600",
     ctaText: "Learn More",
+    ctaLink: "/training",
   },
 ];
 
@@ -335,13 +341,13 @@ const CTASection: React.FC = () => {
                     </div>
 
                     <div className="mt-4 sm:mt-6">
-                      <Button
-                        className="w-full bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground border-0 shadow-lg hover:shadow-xl hover:shadow-primary/25 transition-all duration-300 group/btn text-sm"
-                        size="sm"
+                      <Link
+                        href={option.ctaLink}
+                        className="w-full flex items-center justify-center bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground border-0 shadow-lg hover:shadow-xl hover:shadow-primary/25 transition-all duration-300 group/btn text-sm h-9 px-3 rounded-md font-medium"
                       >
                         {option.ctaText}
                         <ArrowRight className="ml-2 w-3 h-3 sm:w-4 sm:h-4 group-hover/btn:translate-x-1 transition-transform" />
-                      </Button>
+                      </Link>
                     </div>
 
                     {/* Card shine effect */}
@@ -558,13 +564,13 @@ const CTASection: React.FC = () => {
         {/* Final CTA */}
         <motion.div variants={itemVariants} className="text-center">
           <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-            <Button
-              size="lg"
-              className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground border-0 shadow-lg hover:shadow-2xl hover:shadow-primary/30 transition-all duration-300 group px-8 py-4 text-lg"
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground border-0 shadow-lg hover:shadow-2xl hover:shadow-primary/30 transition-all duration-300 group px-8 py-4 text-lg rounded-md font-medium"
             >
               Start Your Security Journey
               <ArrowRight className="ml-3 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
+            </Link>
           </motion.div>
           <p className="text-muted-foreground text-sm mt-4 max-w-md mx-auto">
             Join 500+ organizations that trust IT Origin for their cybersecurity needs
