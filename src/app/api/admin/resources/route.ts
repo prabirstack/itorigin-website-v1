@@ -7,10 +7,8 @@ import { requireAdmin } from "@/lib/auth-utils";
 
 // GET - List all resources (admin)
 export async function GET(req: NextRequest) {
-  const authError = await requireAdmin();
-  if (authError) return authError;
-
   try {
+    await requireAdmin();
     const { searchParams } = new URL(req.url);
     const queryResult = resourceQuerySchema.safeParse({
       page: searchParams.get("page") || 1,
@@ -95,6 +93,9 @@ export async function GET(req: NextRequest) {
       },
     });
   } catch (error) {
+    if (error instanceof Error && (error.message === "Unauthorized" || error.message === "Forbidden")) {
+      return NextResponse.json({ error: error.message }, { status: error.message === "Unauthorized" ? 401 : 403 });
+    }
     console.error("Error fetching resources:", error);
     return NextResponse.json(
       { error: "Failed to fetch resources" },
@@ -105,10 +106,8 @@ export async function GET(req: NextRequest) {
 
 // POST - Create a new resource
 export async function POST(req: NextRequest) {
-  const authError = await requireAdmin();
-  if (authError) return authError;
-
   try {
+    await requireAdmin();
     const body = await req.json();
     const result = createResourceSchema.safeParse(body);
 
@@ -161,6 +160,9 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ resource: newResource }, { status: 201 });
   } catch (error) {
+    if (error instanceof Error && (error.message === "Unauthorized" || error.message === "Forbidden")) {
+      return NextResponse.json({ error: error.message }, { status: error.message === "Unauthorized" ? 401 : 403 });
+    }
     console.error("Error creating resource:", error);
     return NextResponse.json(
       { error: "Failed to create resource" },

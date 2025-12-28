@@ -1,12 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { Metadata } from "next";
 import Link from "next/link";
 import { motion } from "motion/react";
 import { Mail, Phone, MapPin, Clock, Send, CheckCircle, MessageSquare, Calendar, Building2 } from "lucide-react";
 import { Container } from "@/components/common/container";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
+import { useSettings, getPhoneLink, getEmailLink } from "@/components/providers/settings-provider";
 
 interface FormData {
   firstName: string;
@@ -38,38 +38,52 @@ const services = [
   "Other"
 ];
 
-const contactInfo = [
-  {
-    icon: Mail,
-    title: "Email Us",
-    details: "info@itorigin.com",
-    subtext: "We respond within 24 hours",
-    href: "mailto:info@itorigin.com"
-  },
-  {
-    icon: Phone,
-    title: "Call Us",
-    details: "+1 (234) 567-890",
-    subtext: "Mon-Fri 9am-6pm IST",
-    href: "tel:+1234567890"
-  },
-  {
-    icon: MapPin,
-    title: "Visit Us",
-    details: "123 Cybersecurity Avenue",
-    subtext: "Mumbai 400001, India",
-    href: "https://maps.google.com"
-  },
-  {
-    icon: Clock,
-    title: "Business Hours",
-    details: "Monday - Friday",
-    subtext: "9:00 AM - 6:00 PM IST",
-    href: null
-  }
-];
-
 export default function ContactPage() {
+  const { settings } = useSettings();
+
+  // Dynamic contact info from settings
+  const email = settings?.email || "info@itorigin.com";
+  const phone = settings?.phone || "+1 (234) 567-890";
+  const addressLine1 = settings?.addressLine1 || "123 Cybersecurity Avenue";
+  const city = settings?.city || "Mumbai";
+  const postalCode = settings?.postalCode || "400001";
+  const country = settings?.country || "India";
+  const businessHours = settings?.businessHours || "Mon-Fri 9:00 AM - 6:00 PM";
+  const timezone = settings?.timezone || "IST";
+  const calendlyUrl = settings?.calendlyUrl || "https://calendly.com/itorigin";
+  const salesEmail = settings?.salesEmail || settings?.email || "enterprise@itorigin.com";
+  const mapLink = settings?.mapLink || "https://maps.google.com";
+
+  const contactInfo = [
+    {
+      icon: Mail,
+      title: "Email Us",
+      details: email,
+      subtext: "We respond within 24 hours",
+      href: getEmailLink(email)
+    },
+    {
+      icon: Phone,
+      title: "Call Us",
+      details: phone,
+      subtext: `${businessHours} ${timezone}`,
+      href: getPhoneLink(phone)
+    },
+    {
+      icon: MapPin,
+      title: "Visit Us",
+      details: addressLine1,
+      subtext: `${city} ${postalCode}, ${country}`,
+      href: mapLink
+    },
+    {
+      icon: Clock,
+      title: "Business Hours",
+      details: "Monday - Friday",
+      subtext: `${businessHours} ${timezone}`,
+      href: null
+    }
+  ];
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -326,7 +340,7 @@ export default function ContactPage() {
             className="space-y-6"
           >
             {/* Contact Cards */}
-            {contactInfo.map((info, index) => {
+            {contactInfo.map((info) => {
               const Icon = info.icon;
               return (
                 <motion.div
@@ -335,7 +349,7 @@ export default function ContactPage() {
                   className="p-6 rounded-xl border border-border bg-card"
                 >
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
                       <Icon className="w-6 h-6 text-primary" />
                     </div>
                     <div>
@@ -360,30 +374,32 @@ export default function ContactPage() {
             })}
 
             {/* Schedule Meeting Card */}
-            <motion.div
-              variants={fadeInUp}
-              className="p-6 rounded-xl border border-primary bg-primary/5"
-            >
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <Calendar className="w-6 h-6 text-primary" />
+            {calendlyUrl && (
+              <motion.div
+                variants={fadeInUp}
+                className="p-6 rounded-xl border border-primary bg-primary/5"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                    <Calendar className="w-6 h-6 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold mb-1">Schedule a Meeting</h3>
+                    <p className="text-sm text-muted-foreground mb-3">
+                      Book a call with our security experts to discuss your needs.
+                    </p>
+                    <Link
+                      href={calendlyUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary hover:underline font-medium text-sm"
+                    >
+                      Book a Call →
+                    </Link>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-semibold mb-1">Schedule a Meeting</h3>
-                  <p className="text-sm text-muted-foreground mb-3">
-                    Book a call with our security experts to discuss your needs.
-                  </p>
-                  <Link
-                    href="https://calendly.com/itorigin"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-primary hover:underline font-medium text-sm"
-                  >
-                    Book a Call →
-                  </Link>
-                </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            )}
 
             {/* Enterprise Card */}
             <motion.div
@@ -391,7 +407,7 @@ export default function ContactPage() {
               className="p-6 rounded-xl border border-border bg-card"
             >
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
                   <Building2 className="w-6 h-6 text-primary" />
                 </div>
                 <div>
@@ -400,7 +416,7 @@ export default function ContactPage() {
                     Looking for a custom security solution for your organization?
                   </p>
                   <Link
-                    href="mailto:enterprise@itorigin.com"
+                    href={getEmailLink(salesEmail)}
                     className="text-primary hover:underline font-medium text-sm"
                   >
                     Contact Enterprise Team →

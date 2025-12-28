@@ -4,6 +4,7 @@ import { resources, resourceDownloads } from "@/db/schema";
 import { eq, desc, and, like, sql } from "drizzle-orm";
 import { downloadResourceSchema } from "@/lib/validations/resources";
 import { leads } from "@/db/schema";
+import { nanoid } from "nanoid";
 
 // GET - List published resources
 export async function GET(req: NextRequest) {
@@ -117,6 +118,7 @@ export async function POST(req: NextRequest) {
 
     if (existingLead.length === 0) {
       const [newLead] = await db.insert(leads).values({
+        id: nanoid(),
         name,
         email,
         company,

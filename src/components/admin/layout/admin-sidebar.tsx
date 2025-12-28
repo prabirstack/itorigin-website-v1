@@ -25,7 +25,7 @@ import {
   Send,
   Tag,
   ChevronLeft,
-  ChevronRight,
+  FolderDown,
 } from "lucide-react";
 
 const sidebarItems = [
@@ -75,9 +75,9 @@ const sidebarItems = [
     icon: Mail,
   },
   {
-    title: "Users",
-    href: "/admin/users",
-    icon: Users,
+    title: "Resources",
+    href: "/admin/resources",
+    icon: FolderDown,
   },
   {
     title: "Settings",
@@ -124,7 +124,7 @@ export function AdminSidebar() {
               animate={{ scale: isCollapsed ? 1.1 : 1 }}
               transition={{ duration: 0.2 }}
             >
-              <Shield className="w-6 h-6 text-primary flex-shrink-0" />
+              <Shield className="w-6 h-6 text-primary shrink-0" />
             </motion.div>
             <AnimatePresence mode="wait">
               {!isCollapsed && (
@@ -180,7 +180,7 @@ export function AdminSidebar() {
                   whileTap={{ scale: 0.95 }}
                   transition={{ duration: 0.1 }}
                 >
-                  <item.icon className="w-4 h-4 flex-shrink-0" />
+                  <item.icon className="w-4 h-4 shrink-0" />
                 </motion.div>
                 <AnimatePresence mode="wait">
                   {!isCollapsed && (

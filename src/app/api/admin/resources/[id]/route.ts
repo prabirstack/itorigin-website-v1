@@ -9,10 +9,8 @@ type RouteContext = { params: Promise<{ id: string }> };
 
 // GET - Get single resource with downloads
 export async function GET(req: NextRequest, context: RouteContext) {
-  const authError = await requireAdmin();
-  if (authError) return authError;
-
   try {
+    await requireAdmin();
     const { id } = await context.params;
 
     const [resource] = await db
@@ -53,6 +51,9 @@ export async function GET(req: NextRequest, context: RouteContext) {
       },
     });
   } catch (error) {
+    if (error instanceof Error && (error.message === "Unauthorized" || error.message === "Forbidden")) {
+      return NextResponse.json({ error: error.message }, { status: error.message === "Unauthorized" ? 401 : 403 });
+    }
     console.error("Error fetching resource:", error);
     return NextResponse.json(
       { error: "Failed to fetch resource" },
@@ -63,10 +64,8 @@ export async function GET(req: NextRequest, context: RouteContext) {
 
 // PATCH - Update resource
 export async function PATCH(req: NextRequest, context: RouteContext) {
-  const authError = await requireAdmin();
-  if (authError) return authError;
-
   try {
+    await requireAdmin();
     const { id } = await context.params;
     const body = await req.json();
 
@@ -142,6 +141,9 @@ export async function PATCH(req: NextRequest, context: RouteContext) {
 
     return NextResponse.json({ resource: updatedResource });
   } catch (error) {
+    if (error instanceof Error && (error.message === "Unauthorized" || error.message === "Forbidden")) {
+      return NextResponse.json({ error: error.message }, { status: error.message === "Unauthorized" ? 401 : 403 });
+    }
     console.error("Error updating resource:", error);
     return NextResponse.json(
       { error: "Failed to update resource" },
@@ -152,10 +154,8 @@ export async function PATCH(req: NextRequest, context: RouteContext) {
 
 // DELETE - Delete resource
 export async function DELETE(req: NextRequest, context: RouteContext) {
-  const authError = await requireAdmin();
-  if (authError) return authError;
-
   try {
+    await requireAdmin();
     const { id } = await context.params;
 
     const [existingResource] = await db
@@ -176,6 +176,9 @@ export async function DELETE(req: NextRequest, context: RouteContext) {
 
     return NextResponse.json({ success: true });
   } catch (error) {
+    if (error instanceof Error && (error.message === "Unauthorized" || error.message === "Forbidden")) {
+      return NextResponse.json({ error: error.message }, { status: error.message === "Unauthorized" ? 401 : 403 });
+    }
     console.error("Error deleting resource:", error);
     return NextResponse.json(
       { error: "Failed to delete resource" },

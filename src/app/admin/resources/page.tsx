@@ -48,7 +48,6 @@ import {
   Plus,
   Pencil,
   Download,
-  Eye,
   ExternalLink,
 } from "lucide-react";
 import { format } from "date-fns";
@@ -193,7 +192,7 @@ export default function ResourcesPage() {
       shortDescription: resource.shortDescription || "",
       type: resource.type as typeof defaultForm.type,
       category: resource.category,
-      status: resource.status,
+      status: resource.status as typeof defaultForm.status,
       fileUrl: resource.fileUrl || "",
       fileName: resource.fileName || "",
       fileSize: resource.fileSize || 0,
@@ -298,7 +297,7 @@ export default function ResourcesPage() {
           </Button>
         </form>
         <Select value={statusFilter} onValueChange={setStatusFilter}>
-          <SelectTrigger className="w-[140px]">
+          <SelectTrigger className="w-35">
             <SelectValue placeholder="Status" />
           </SelectTrigger>
           <SelectContent>
@@ -309,7 +308,7 @@ export default function ResourcesPage() {
           </SelectContent>
         </Select>
         <Select value={typeFilter} onValueChange={setTypeFilter}>
-          <SelectTrigger className="w-[140px]">
+          <SelectTrigger className="w-35">
             <SelectValue placeholder="Type" />
           </SelectTrigger>
           <SelectContent>
@@ -356,7 +355,7 @@ export default function ResourcesPage() {
                 <TableHead>Downloads</TableHead>
                 <TableHead>Featured</TableHead>
                 <TableHead>Updated</TableHead>
-                <TableHead className="w-[120px]">Actions</TableHead>
+                <TableHead className="w-30">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
