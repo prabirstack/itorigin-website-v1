@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
 import { subscribers } from "@/db/schema";
 import { eq } from "drizzle-orm";
+import { sendNewsletterWelcomeEmail } from "@/lib/email";
+
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://itorigin.in";
 
 export async function GET(
   request: NextRequest,
@@ -39,6 +42,16 @@ export async function GET(
         updatedAt: new Date(),
       })
       .where(eq(subscribers.id, subscriber.id));
+
+    // Send welcome email
+    if (subscriber.unsubscribeToken) {
+      const unsubscribeUrl = `${BASE_URL}/api/newsletter/unsubscribe/${subscriber.unsubscribeToken}`;
+      await sendNewsletterWelcomeEmail(
+        subscriber.email,
+        unsubscribeUrl,
+        subscriber.name || undefined
+      );
+    }
 
     // Redirect to success page
     return NextResponse.redirect(

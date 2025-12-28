@@ -1,0 +1,13 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /sign-in
+Disallow: /sign-up
+
+# Host
+Host: https://itorigin.in
+
+# Sitemaps
+Sitemap: https://itorigin.in/sitemap.xml

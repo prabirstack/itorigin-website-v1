@@ -3,6 +3,7 @@ import { db } from "@/db";
 import { leads } from "@/db/schema";
 import { nanoid } from "nanoid";
 import { contactFormSchema } from "@/lib/validations/lead";
+import { sendContactNotificationEmail } from "@/lib/email";
 
 export async function POST(request: NextRequest) {
   try {
@@ -26,6 +27,20 @@ export async function POST(request: NextRequest) {
           : null,
       })
       .returning();
+
+    // Send notification email to admin
+    const emailResult = await sendContactNotificationEmail({
+      name: validatedData.name,
+      email: validatedData.email,
+      phone: validatedData.phone,
+      company: validatedData.company,
+      message: validatedData.message,
+    });
+
+    if (!emailResult.success) {
+      console.error("Failed to send contact notification:", emailResult.error);
+      // Still return success as the lead was created
+    }
 
     return NextResponse.json({
       success: true,

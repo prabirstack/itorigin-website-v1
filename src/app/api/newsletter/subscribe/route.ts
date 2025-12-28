@@ -4,6 +4,9 @@ import { subscribers, leads } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { nanoid } from "nanoid";
 import { subscribeSchema } from "@/lib/validations/lead";
+import { sendNewsletterConfirmEmail } from "@/lib/email";
+
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://itorigin.in";
 
 export async function POST(request: NextRequest) {
   try {
@@ -24,10 +27,19 @@ export async function POST(request: NextRequest) {
         });
       }
 
-      // Resend confirmation (in a real app, you'd send an email here)
+      // Resend confirmation email
+      if (existingSubscriber.confirmToken) {
+        const confirmUrl = `${BASE_URL}/api/newsletter/confirm/${existingSubscriber.confirmToken}`;
+        await sendNewsletterConfirmEmail(
+          validatedData.email,
+          confirmUrl,
+          existingSubscriber.name || undefined
+        );
+      }
+
       return NextResponse.json({
         success: true,
-        message: "Please check your email to confirm your subscription.",
+        message: "We've resent the confirmation email. Please check your inbox.",
         pendingConfirmation: true,
       });
     }
@@ -55,15 +67,22 @@ export async function POST(request: NextRequest) {
       message: "Subscribed to newsletter",
     });
 
-    // In a real app, you would send a confirmation email here
-    // For now, we'll auto-confirm for development
-    // TODO: Implement email sending with Resend in Phase 6
+    // Send confirmation email
+    const confirmUrl = `${BASE_URL}/api/newsletter/confirm/${confirmToken}`;
+    const emailResult = await sendNewsletterConfirmEmail(
+      validatedData.email,
+      confirmUrl,
+      validatedData.name || undefined
+    );
+
+    if (!emailResult.success) {
+      console.error("Failed to send confirmation email:", emailResult.error);
+      // Still return success as the subscription was created
+    }
 
     return NextResponse.json({
       success: true,
       message: "Thank you for subscribing! Please check your email to confirm.",
-      // For development, include the confirm token
-      ...(process.env.NODE_ENV === "development" && { confirmToken }),
     });
   } catch (error) {
     console.error("Newsletter subscription failed:", error);

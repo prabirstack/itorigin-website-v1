@@ -7,6 +7,7 @@ import { DesktopNav } from "./desktop-nav";
 import Image from "next/image";
 import { ThemeToggle } from "./theme-toggle";
 import { MobileNav } from "./mobile-nav";
+import { Logo } from "../common/logo";
 
 export const SiteHeader: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
@@ -43,37 +44,7 @@ export const SiteHeader: React.FC = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
           {/* Logo with scale animation */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
-            <Link href={"/"} className="block">
-              <motion.div
-                className="relative w-32 sm:w-36 h-10 sm:h-12"
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
-              >
-                {/* Light mode logo */}
-                <Image
-                  src="/images/logo/logo-dark.webp"
-                  alt="IT Origin Logo"
-                  fill
-                  className="block dark:hidden object-contain"
-                  priority
-                />
-
-                {/* Dark mode logo */}
-                <Image
-                  src="/images/logo/logo-liight.webp"
-                  alt="IT Origin Logo"
-                  fill
-                  className="hidden dark:block object-contain"
-                  priority
-                />
-              </motion.div>
-            </Link>
-          </motion.div>
+<Logo />
 
           {/* Desktop Navigation with stagger animation */}
           <motion.div
