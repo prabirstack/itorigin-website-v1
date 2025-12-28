@@ -1,6 +1,6 @@
 import { BenifitGrid } from "@/components/marketing/home/benifit-grid";
-import BlogSection from "@/components/marketing/home/blog-section";
-import CTASection from "@/components/marketing/home/cta-section";
+import { BlogSection } from "@/components/marketing/home/blog";
+import { CTASection } from "@/components/marketing/home/cta";
 
 import { CyberFusion } from "@/components/marketing/home/cyber-fusion";
 import HeroCarousel from "@/components/marketing/home/Hero";

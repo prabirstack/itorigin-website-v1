@@ -1,0 +1,60 @@
+"use client";
+
+import React from "react";
+import { motion } from "motion/react";
+import { Phone } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { ctaContactInfo } from "@/lib/data/cta-data";
+import { iconMap } from "@/lib/icon-map";
+
+export function ContactInfo() {
+  return (
+    <div className="space-y-6">
+      <div className="mb-8">
+        <h3 className="text-2xl font-bold text-foreground mb-2 flex items-center gap-3">
+          <div className="w-8 h-8 bg-gradient-to-br from-primary to-primary/80 rounded-lg flex items-center justify-center">
+            <Phone className="w-4 h-4 text-primary-foreground" />
+          </div>
+          Contact Information
+        </h3>
+        <p className="text-muted-foreground text-sm sm:text-base">
+          Connect with us through your preferred channel
+        </p>
+      </div>
+
+      <div className="space-y-4">
+        {ctaContactInfo.map((info) => {
+          const Icon = iconMap[info.iconName];
+          return (
+            <motion.div key={info.id} whileHover={{ scale: 1.02 }} className="group">
+              <Card className="bg-card/60 backdrop-blur-sm border-2 border-border/40 hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10">
+                <CardContent className="p-4 sm:p-6">
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary/20 transition-colors">
+                      {Icon && <Icon className="w-5 h-5" />}
+                    </div>
+                    <div className="flex-1">
+                      <div className="text-sm font-medium text-muted-foreground mb-1">
+                        {info.type}
+                      </div>
+                      {info.link ? (
+                        <a
+                          href={info.link}
+                          className="text-foreground hover:text-primary transition-colors font-medium"
+                        >
+                          {info.value}
+                        </a>
+                      ) : (
+                        <div className="text-foreground font-medium">{info.value}</div>
+                      )}
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
