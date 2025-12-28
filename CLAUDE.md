@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-IT Origin Website v1 - A cybersecurity services marketing website with admin CMS, built with Next.js 15, React 19, TypeScript, and Bun. Features blog management, lead capture, newsletter system, and authentication.
+IT Origin Website v1 - A cybersecurity services marketing website with admin CMS, built with Next.js 15, React 19, TypeScript, and Bun. Features blog management, lead capture, newsletter system, AI chat support, and authentication.
 
 ## Development Commands
 
@@ -26,6 +26,15 @@ bun run db:seed:blog  # Seed blog data
 bunx shadcn@latest add [component]  # Add shadcn/ui component
 ```
 
+## Environment Variables
+
+Copy `.env.example` to `.env.local` and configure:
+- `DATABASE_URL` - PostgreSQL connection string
+- `BETTER_AUTH_SECRET` - Auth secret (min 32 chars)
+- `BETTER_AUTH_URL` - App URL for auth redirects
+- `RESEND_API_KEY` - Email service API key
+- `NEXT_PUBLIC_APP_URL` - Public app URL
+
 ## Architecture
 
 ### Route Groups
@@ -38,11 +47,17 @@ bunx shadcn@latest add [component]  # Add shadcn/ui component
 ```
 /api/auth/[...all]           # Better Auth handler
 /api/admin/posts             # Blog CRUD (protected)
-/api/admin/categories        # Category management
+/api/admin/categories        # Category management (with pagination)
 /api/admin/tags              # Tag management
 /api/admin/comments          # Comment moderation
 /api/admin/leads             # Lead management + export
 /api/admin/subscribers       # Newsletter subscribers + export
+/api/admin/campaigns         # Email campaign management
+/api/admin/services          # Services CRUD (populates navigation)
+/api/admin/settings          # Site settings
+/api/admin/resources         # Downloadable resources (whitepapers, etc.)
+/api/admin/chat              # Chat conversation management
+/api/admin/upload            # File uploads (Vercel Blob)
 /api/public/posts            # Public blog listing
 /api/public/posts/[slug]     # Single post by slug
 /api/public/categories       # Public categories
@@ -50,14 +65,21 @@ bunx shadcn@latest add [component]  # Add shadcn/ui component
 /api/newsletter/confirm      # Email confirmation
 /api/newsletter/unsubscribe  # Unsubscribe
 /api/contact                 # Contact form
+/api/chat                    # AI chat endpoint (Google AI SDK)
+/api/services                # Public services list
+/api/settings                # Public site settings
+/api/resources               # Public resources list
+/api/leads                   # Lead capture
 ```
 
 ### Database (Drizzle + PostgreSQL)
-- Schema: `src/db/schema/` (auth, blog, leads, services, chat, email)
+- Schema: `src/db/schema/` - Exports from index.ts (auth, blog, leads, services, chat, email, settings, resources)
 - Client: `src/db/index.ts` - Drizzle client singleton
 - Config: `drizzle.config.ts`
 - Migrations: `src/db/migrations/`
 - Seeds: `src/db/seed/`
+
+Schema workflow: Edit schema files → `bun run db:generate` → `bun run db:migrate`
 
 ### Authentication (Better Auth)
 - Config: `src/lib/auth.ts` - Server-side auth setup
@@ -72,7 +94,10 @@ bunx shadcn@latest add [component]  # Add shadcn/ui component
 - `components/admin/` - Admin dashboard components (sidebar, forms, tables)
 - `components/blog/` - Blog listing, detail, sidebar components
 - `components/common/` - Container wrapper for consistent max-width
-- `components/providers/` - ThemeProvider context
+- `components/providers/` - ThemeProvider, SettingsProvider contexts
+
+### Dynamic Navigation
+Services in the navigation are populated from the database via `src/lib/constant.ts`. The `getServicesNavigation()` function fetches active services and maps them to nav items with icons from `src/lib/icon-map.ts`.
 
 ## Key Patterns
 
@@ -122,14 +147,23 @@ if (!session?.user || session.user.role !== "admin") {
 ```
 
 ### Rich Text Editor
-Uses Tiptap for blog content editing in admin panel with extensions for images, links, code blocks.
+Uses Tiptap for blog content editing in admin panel with extensions for images, links, code blocks, text alignment.
+
+### Email Templates
+React Email components in `src/emails/` for transactional emails (newsletter confirmation, contact form, campaigns). Sent via Resend.
+
+### File Uploads
+Uses Vercel Blob storage via `/api/admin/upload`. Returns public URLs for images in blog posts and resources.
+
+### AI Chat
+Uses Google AI SDK (`@ai-sdk/google`) for chat support. Conversations stored in `chat` schema tables.
 
 ## Key Configuration Files
-- `src/lib/constant.ts` - Navigation items (NavItem/SubMenuItem interfaces)
+- `src/lib/constant.ts` - Navigation items (NavItem/SubMenuItem interfaces), dynamic service navigation
 - `src/lib/animations.ts` - Motion.js variants (fadeInUp, staggerContainer, etc.)
-- `src/lib/icon-map.ts` - Dynamic Lucide icon mapping
+- `src/lib/icon-map.ts` - Dynamic Lucide icon mapping for services
 - `src/config/site.ts` - Site metadata and social links
-- `src/lib/validations/` - Zod schemas for forms
+- `src/lib/validations/` - Zod schemas (post, category, lead, chat, campaign, service, settings, resources)
 
 ## Path Aliases
 
