@@ -5,6 +5,7 @@ import "@/styles/globals.css";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import { ServicesProvider } from "@/components/providers/services-provider";
 
 export const satoshi = localFont({
   src: [
@@ -83,7 +84,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <ServicesProvider>
+            {children}
+          </ServicesProvider>
         </ThemeProvider>
       </body>
     </html>

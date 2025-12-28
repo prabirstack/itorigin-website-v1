@@ -4,17 +4,15 @@ import React, { useState } from "react";
 import Link from "next/link";
 import {
   ChevronDown,
-  Shield,
-  Target,
-  FileCheck,
+  ExternalLink,
   BookOpen,
   Users,
   Heart,
-  ExternalLink,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { NavItem, navItems, SubMenuItem } from "@/lib/constant";
-
+import { NavItem, SubMenuItem, staticNavItems, aboutSubItems } from "@/lib/constant";
+import { useServices, NavService } from "@/components/providers/services-provider";
+import { iconMap } from "@/lib/icon-map";
 
 interface DropdownMenuProps {
   items: SubMenuItem[];
@@ -22,10 +20,15 @@ interface DropdownMenuProps {
   onClose: () => void;
 }
 
-const getServiceIcon = (name: string) => {
-  if (name.includes("SOC")) return Shield;
-  if (name.includes("Offensive")) return Target;
-  if (name.includes("GRC")) return FileCheck;
+const getServiceIcon = (iconName: string | null, name: string) => {
+  // First try to use iconName from database
+  if (iconName && iconMap[iconName]) {
+    return iconMap[iconName];
+  }
+  // Fallback to name-based detection
+  if (name.includes("SOC")) return iconMap["Shield"];
+  if (name.includes("Offensive")) return iconMap["Target"];
+  if (name.includes("GRC")) return iconMap["FileCheck"];
   if (name.includes("Story")) return BookOpen;
   if (name.includes("Team")) return Users;
   if (name.includes("Values")) return Heart;
@@ -45,7 +48,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({ items, isOpen, onClose }) =
       >
         <div className="p-2">
           {items.map((item) => {
-            const IconComponent = getServiceIcon(item.name);
+            const IconComponent = getServiceIcon(item.iconName || null, item.name);
             return (
               <Link
                 key={item.id}
@@ -78,6 +81,56 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({ items, isOpen, onClose }) =
 
 export const DesktopNav: React.FC = () => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const { services } = useServices();
+
+  // Build nav items with dynamic services
+  const navItems: NavItem[] = [
+    {
+      id: "menuorigin01",
+      name: "Services",
+      href: "/services",
+      isSubMenu: true,
+      subItems: services.length > 0
+        ? services.map((service: NavService) => ({
+            id: service.id,
+            name: service.name,
+            href: service.href,
+            description: service.description,
+            iconName: service.iconName,
+          }))
+        : [
+            {
+              id: "default-1",
+              name: "Managed SOC Services",
+              href: "/services/managed-soc-services",
+              description: "24/7 security operations center with advanced threat detection",
+              iconName: "Shield",
+            },
+            {
+              id: "default-2",
+              name: "Offensive Security",
+              href: "/services/offensive-security",
+              description: "Penetration testing and vulnerability assessments",
+              iconName: "Target",
+            },
+            {
+              id: "default-3",
+              name: "GRC Services",
+              href: "/services/grc-services",
+              description: "Governance, risk management, and compliance solutions",
+              iconName: "FileCheck",
+            },
+          ],
+    },
+    ...staticNavItems,
+    {
+      id: "menuorigin06",
+      name: "About",
+      href: "/about",
+      isSubMenu: true,
+      subItems: aboutSubItems,
+    },
+  ];
 
   const handleMouseEnter = (itemId: string): void => {
     setActiveDropdown(itemId);
