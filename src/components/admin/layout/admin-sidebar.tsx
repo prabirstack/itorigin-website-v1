@@ -26,6 +26,7 @@ import {
   Tag,
   ChevronLeft,
   FolderDown,
+  Award,
 } from "lucide-react";
 
 const sidebarItems = [
@@ -53,6 +54,11 @@ const sidebarItems = [
     title: "Services",
     href: "/admin/services",
     icon: Briefcase,
+  },
+  {
+    title: "Case Studies",
+    href: "/admin/case-studies",
+    icon: Award,
   },
   {
     title: "Leads",

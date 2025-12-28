@@ -21,3 +21,6 @@ export * from "./settings";
 
 // Resources
 export * from "./resources";
+
+// Case Studies
+export * from "./case-studies";

@@ -6,7 +6,7 @@ import { ChevronRight, Home } from "lucide-react";
 
 interface BreadcrumbItem {
   label: string;
-  href: string;
+  href?: string;
 }
 
 interface BreadcrumbProps {
@@ -24,9 +24,10 @@ const pathLabels: Record<string, string> = {
   leads: "Leads",
   subscribers: "Subscribers",
   services: "Services",
+  "case-studies": "Case Studies",
   campaigns: "Campaigns",
   chat: "Chat",
-  users: "Users",
+  resources: "Resources",
   settings: "Settings",
 };
 
@@ -61,14 +62,14 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
     <nav aria-label="Breadcrumb" className="mb-4">
       <ol className="flex items-center gap-1 text-sm text-muted-foreground">
         {breadcrumbItems.map((item, index) => (
-          <li key={item.href} className="flex items-center gap-1">
+          <li key={item.href || `breadcrumb-${index}`} className="flex items-center gap-1">
             {index > 0 && (
               <ChevronRight className="w-4 h-4 text-muted-foreground/50" />
             )}
             {index === 0 && (
               <Home className="w-4 h-4 mr-1" />
             )}
-            {index === breadcrumbItems.length - 1 ? (
+            {index === breadcrumbItems.length - 1 || !item.href ? (
               <span className="font-medium text-foreground">
                 {item.label}
               </span>

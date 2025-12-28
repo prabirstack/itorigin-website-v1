@@ -143,7 +143,7 @@ export default function ResourcesPage() {
     try {
       const params = new URLSearchParams({
         page: page.toString(),
-        limit: "20",
+        limit: "10",
       });
       if (search) params.set("search", search);
       if (statusFilter !== "all") params.set("status", statusFilter);

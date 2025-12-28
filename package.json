@@ -14,7 +14,8 @@
     "db:studio": "drizzle-kit studio",
     "db:seed": "bun run src/db/seed/admin.ts",
     "db:seed:blog": "bun run src/db/seed/blog-data.ts",
-    "db:seed:resources": "bun run src/db/seed/resources-data.ts"
+    "db:seed:resources": "bun run src/db/seed/resources-data.ts",
+    "db:seed:case-studies": "bun run src/db/seed/case-studies-data.ts"
   },
   "dependencies": {
     "@ai-sdk/google": "^3.0.1",
