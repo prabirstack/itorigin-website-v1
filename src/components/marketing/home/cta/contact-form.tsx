@@ -42,9 +42,23 @@ export function ContactForm() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          company: formData.company,
+          service: formData.service,
+          message: formData.message || "Inquiry from homepage contact form",
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to submit form");
+      }
+
       setIsSubmitted(true);
       setFormData({
         name: "",
@@ -56,8 +70,13 @@ export function ContactForm() {
 
       setTimeout(() => {
         setIsSubmitted(false);
-      }, 3000);
-    }, 2000);
+      }, 5000);
+    } catch (error) {
+      console.error("Form submission error:", error);
+      alert("Failed to submit form. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (

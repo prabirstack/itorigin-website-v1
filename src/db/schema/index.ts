@@ -15,3 +15,9 @@ export * from "./chat";
 
 // Email Campaigns
 export * from "./email";
+
+// Site Settings
+export * from "./settings";
+
+// Resources
+export * from "./resources";

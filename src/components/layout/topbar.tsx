@@ -4,8 +4,19 @@ import React from "react";
 import { Phone, Mail, Linkedin, Github, MapPin } from "lucide-react";
 import { RiTwitterXFill } from "react-icons/ri";
 import { motion } from "motion/react";
+import { useSettings, getPhoneLink, getEmailLink } from "@/components/providers/settings-provider";
 
 export const Topbar: React.FC = () => {
+  const { settings } = useSettings();
+
+  const phone = settings?.phone || "+1 (234) 567-890";
+  const email = settings?.email || "info@itorigin.com";
+  const city = settings?.city || "San Francisco";
+  const state = settings?.state || "CA";
+  const location = `${city}, ${state}`;
+
+  const socialLinks = settings?.socialLinks || {};
+
   return (
     <motion.div
       className="relative bg-gradient-to-r from-primary/95 via-primary to-primary/95 text-primary-foreground border-b border-primary-foreground/10 overflow-hidden"
@@ -28,30 +39,30 @@ export const Topbar: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
           >
             <a
-              href="tel:+1234567890"
+              href={getPhoneLink(phone)}
               className="group flex items-center gap-2 text-xs sm:text-sm font-medium hover:text-primary-foreground/80 transition-all duration-300"
             >
               <span className="p-1 rounded-md bg-primary-foreground/10 group-hover:bg-primary-foreground/20 transition-colors duration-300">
                 <Phone className="w-3.5 h-3.5" />
               </span>
-              <span className="hidden sm:inline">+1 (234) 567-890</span>
+              <span className="hidden sm:inline">{phone}</span>
             </a>
             <div className="hidden md:block w-px h-4 bg-primary-foreground/20" />
             <a
-              href="mailto:info@itorigin.com"
+              href={getEmailLink(email)}
               className="group flex items-center gap-2 text-xs sm:text-sm font-medium hover:text-primary-foreground/80 transition-all duration-300"
             >
               <span className="p-1 rounded-md bg-primary-foreground/10 group-hover:bg-primary-foreground/20 transition-colors duration-300">
                 <Mail className="w-3.5 h-3.5" />
               </span>
-              <span className="hidden sm:inline">info@itorigin.com</span>
+              <span className="hidden sm:inline">{email}</span>
             </a>
             <div className="hidden lg:block w-px h-4 bg-primary-foreground/20" />
             <div className="hidden lg:flex items-center gap-2 text-xs font-medium">
               <span className="p-1 rounded-md bg-primary-foreground/10">
                 <MapPin className="w-3.5 h-3.5" />
               </span>
-              <span className="opacity-90">San Francisco, CA</span>
+              <span className="opacity-90">{location}</span>
             </div>
           </motion.div>
 
@@ -66,39 +77,45 @@ export const Topbar: React.FC = () => {
               Connect:
             </span>
             <div className="flex items-center gap-2">
-              <motion.a
-                href="https://twitter.com/itorigin"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-1.5 rounded-md bg-primary-foreground/10 hover:bg-primary-foreground/20 hover:scale-110 transition-all duration-300"
-                aria-label="Follow us on X (formerly Twitter)"
-                whileHover={{ y: -2 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <RiTwitterXFill className="w-3.5 h-3.5" />
-              </motion.a>
-              <motion.a
-                href="https://linkedin.com/company/itorigin"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-1.5 rounded-md bg-primary-foreground/10 hover:bg-primary-foreground/20 hover:scale-110 transition-all duration-300"
-                aria-label="Follow us on LinkedIn"
-                whileHover={{ y: -2 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Linkedin className="w-3.5 h-3.5" />
-              </motion.a>
-              <motion.a
-                href="https://github.com/itorigin"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-1.5 rounded-md bg-primary-foreground/10 hover:bg-primary-foreground/20 hover:scale-110 transition-all duration-300"
-                aria-label="Follow us on GitHub"
-                whileHover={{ y: -2 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Github className="w-3.5 h-3.5" />
-              </motion.a>
+              {socialLinks.twitter && (
+                <motion.a
+                  href={socialLinks.twitter}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-1.5 rounded-md bg-primary-foreground/10 hover:bg-primary-foreground/20 hover:scale-110 transition-all duration-300"
+                  aria-label="Follow us on X (formerly Twitter)"
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <RiTwitterXFill className="w-3.5 h-3.5" />
+                </motion.a>
+              )}
+              {socialLinks.linkedin && (
+                <motion.a
+                  href={socialLinks.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-1.5 rounded-md bg-primary-foreground/10 hover:bg-primary-foreground/20 hover:scale-110 transition-all duration-300"
+                  aria-label="Follow us on LinkedIn"
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Linkedin className="w-3.5 h-3.5" />
+                </motion.a>
+              )}
+              {socialLinks.github && (
+                <motion.a
+                  href={socialLinks.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-1.5 rounded-md bg-primary-foreground/10 hover:bg-primary-foreground/20 hover:scale-110 transition-all duration-300"
+                  aria-label="Follow us on GitHub"
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Github className="w-3.5 h-3.5" />
+                </motion.a>
+              )}
             </div>
           </motion.div>
         </div>
