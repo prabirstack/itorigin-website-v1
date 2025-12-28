@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-IT Origin Website v1 - A cybersecurity services marketing website built with Next.js 15, React 19, and TypeScript. Uses Bun as the package manager.
+IT Origin Website v1 - A cybersecurity services marketing website with admin CMS, built with Next.js 15, React 19, TypeScript, and Bun. Features blog management, lead capture, newsletter system, and authentication.
 
 ## Development Commands
 
@@ -13,32 +13,66 @@ bun dev          # Development server with Turbopack (localhost:3000)
 bun run build    # Production build
 bun start        # Start production server
 bun run lint     # Linting (fix with: bun run lint -- --fix)
+
+# Database (Drizzle ORM + PostgreSQL)
+bun run db:generate   # Generate migrations from schema changes
+bun run db:migrate    # Run migrations
+bun run db:push       # Push schema directly (dev only)
+bun run db:studio     # Open Drizzle Studio GUI
+bun run db:seed       # Seed admin user
+bun run db:seed:blog  # Seed blog data
+
+# UI Components
 bunx shadcn@latest add [component]  # Add shadcn/ui component
 ```
 
 ## Architecture
 
-### Route Structure
-- `src/app/(marketing)/` - Public pages (route group, no URL prefix)
-- `src/app/layout.tsx` - Root layout: Topbar → Header → Content → ScrollToTop → ChatSupport → Footer
+### Route Groups
+- `src/app/(marketing)/` - Public pages (no URL prefix)
+- `src/app/(auth)/` - Sign-in/sign-up pages
+- `src/app/admin/` - Protected admin dashboard (requires authentication)
+- `src/app/api/` - API routes (auth, admin CRUD, public endpoints, newsletter)
+
+### API Route Structure
+```
+/api/auth/[...all]           # Better Auth handler
+/api/admin/posts             # Blog CRUD (protected)
+/api/admin/categories        # Category management
+/api/admin/tags              # Tag management
+/api/admin/comments          # Comment moderation
+/api/admin/leads             # Lead management + export
+/api/admin/subscribers       # Newsletter subscribers + export
+/api/public/posts            # Public blog listing
+/api/public/posts/[slug]     # Single post by slug
+/api/public/categories       # Public categories
+/api/newsletter/subscribe    # Newsletter signup
+/api/newsletter/confirm      # Email confirmation
+/api/newsletter/unsubscribe  # Unsubscribe
+/api/contact                 # Contact form
+```
+
+### Database (Drizzle + PostgreSQL)
+- Schema: `src/db/schema/` (auth, blog, leads, services, chat, email)
+- Client: `src/db/index.ts` - Drizzle client singleton
+- Config: `drizzle.config.ts`
+- Migrations: `src/db/migrations/`
+- Seeds: `src/db/seed/`
+
+### Authentication (Better Auth)
+- Config: `src/lib/auth.ts` - Server-side auth setup
+- Client: `src/lib/auth-client.ts` - React hooks (`useSession`, `signIn`, `signOut`)
+- Middleware: `src/middleware.ts` - Protects `/admin/*` routes
+- Session cookie: `better-auth.session_token`
 
 ### Component Organization
-- `components/layout/` - Header, footer, navigation (desktop/mobile), theme toggle, topbar, chat support, scroll-to-top
 - `components/ui/` - shadcn/ui primitives (new-york style)
-- `components/marketing/home/` - Homepage sections (Hero, service-section, cta-section, etc.)
-- `components/about/` - About page sections
-- `components/blog/` - Blog listing, detail, sidebar, comments, newsletter components
-- `components/services/` - Service page cards and sections
-- `components/partner/`, `components/platform/`, `components/training/` - Feature-specific components
+- `components/layout/` - Header, footer, navigation, topbar
+- `components/marketing/home/` - Homepage sections
+- `components/admin/` - Admin dashboard components (sidebar, forms, tables)
+- `components/blog/` - Blog listing, detail, sidebar components
 - `components/common/` - Container wrapper for consistent max-width
-- `components/providers/` - Context providers (ThemeProvider)
-
-### Key Configuration Files
-- `src/lib/constant.ts` - Navigation items with typed NavItem/SubMenuItem interfaces
-- `src/lib/animations.ts` - Centralized Motion.js variants (fadeInUp, staggerContainer, etc.)
-- `src/lib/icon-map.ts` - Dynamic icon mapping for Lucide icons
-- `src/config/site.ts` - Site metadata and social links
-- `src/lib/blog-data.ts` - Temporary static blog data (will be replaced by CMS)
+- `components/providers/` - ThemeProvider context
 
 ## Key Patterns
 
@@ -60,53 +94,43 @@ import { motion } from 'motion/react';
 
 ### Styling
 - Tailwind CSS v4 with OKLCH color system
-- Use `cn()` from `@/lib/utils` for conditional classes (clsx + tailwind-merge)
-- Theme: dark/light/system via next-themes with `attribute="class"`
-- CSS variables in `src/styles/globals.css`
-
-### Typography
-- `font-satoshi` - Display font (Bold 700, Black 900) for headings
-- `font-sans` (Inter) - Body text
+- Use `cn()` from `@/lib/utils` for conditional classes
+- Theme: dark/light/system via next-themes
+- Typography: `font-satoshi` for headings, `font-sans` (Inter) for body
 
 ### Server vs Client Components
-Default to Server Components. Only add `'use client'` for interactivity, hooks, or browser APIs.
+Default to Server Components. Add `'use client'` only for interactivity, hooks, or browser APIs.
 
 ### Form Handling
-Uses react-hook-form with zod for validation:
+Uses react-hook-form with zod validation:
 ```tsx
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-
-const schema = z.object({ email: z.string().email() });
-const form = useForm({ resolver: zodResolver(schema) });
 ```
 
-## Navigation
-
-Navigation is defined in `src/lib/constant.ts`:
-- Main items with optional `isSubMenu` boolean for dropdowns
-- SubMenu items include descriptions for UX
-- Used by both desktop and mobile navigation
-
-## Dynamic Icon Usage
-
-Use `src/lib/icon-map.ts` for Server → Client icon passing:
+### Admin API Pattern
+Protected routes check session via Better Auth. Example:
 ```tsx
-import { getIcon, IconName } from '@/lib/icon-map';
-const Icon = getIcon("Shield"); // Returns Lucide component
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
+
+const session = await auth.api.getSession({ headers: await headers() });
+if (!session?.user || session.user.role !== "admin") {
+  return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+}
 ```
 
-## Current Technical Debt
+### Rich Text Editor
+Uses Tiptap for blog content editing in admin panel with extensions for images, links, code blocks.
 
-- Blog data is static in `src/lib/blog-data.ts` - planned CMS integration
-- No backend/API routes yet
-- No database integration
-- No authentication
-- Forms are client-side only
-
-See `DEVELOPMENT_PLAN.md` for the full backend development roadmap including Prisma, PostgreSQL, Better Auth, AI chat, and email marketing.
+## Key Configuration Files
+- `src/lib/constant.ts` - Navigation items (NavItem/SubMenuItem interfaces)
+- `src/lib/animations.ts` - Motion.js variants (fadeInUp, staggerContainer, etc.)
+- `src/lib/icon-map.ts` - Dynamic Lucide icon mapping
+- `src/config/site.ts` - Site metadata and social links
+- `src/lib/validations/` - Zod schemas for forms
 
 ## Path Aliases
 
-`@/*` maps to `./src/*` (e.g., `@/components/ui/button`, `@/lib/utils`)
+`@/*` maps to `./src/*` (e.g., `@/components/ui/button`, `@/lib/utils`, `@/db`)
