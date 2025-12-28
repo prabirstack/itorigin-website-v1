@@ -20,13 +20,18 @@ bunx shadcn@latest add [component]  # Add shadcn/ui component
 
 ### Route Structure
 - `src/app/(marketing)/` - Public pages (route group, no URL prefix)
-- `src/app/layout.tsx` - Root layout: Topbar → Header → Content → Footer → Chat/ScrollToTop
+- `src/app/layout.tsx` - Root layout: Topbar → Header → Content → ScrollToTop → ChatSupport → Footer
 
 ### Component Organization
-- `components/layout/` - Header, footer, navigation, theme toggle
+- `components/layout/` - Header, footer, navigation (desktop/mobile), theme toggle, topbar, chat support, scroll-to-top
 - `components/ui/` - shadcn/ui primitives (new-york style)
-- `components/marketing/[page]/` - Page-specific sections (home/, about/, services/)
+- `components/marketing/home/` - Homepage sections (Hero, service-section, cta-section, etc.)
+- `components/about/` - About page sections
+- `components/blog/` - Blog listing, detail, sidebar, comments, newsletter components
+- `components/services/` - Service page cards and sections
+- `components/partner/`, `components/platform/`, `components/training/` - Feature-specific components
 - `components/common/` - Container wrapper for consistent max-width
+- `components/providers/` - Context providers (ThemeProvider)
 
 ### Key Configuration Files
 - `src/lib/constant.ts` - Navigation items with typed NavItem/SubMenuItem interfaces
@@ -66,12 +71,31 @@ import { motion } from 'motion/react';
 ### Server vs Client Components
 Default to Server Components. Only add `'use client'` for interactivity, hooks, or browser APIs.
 
+### Form Handling
+Uses react-hook-form with zod for validation:
+```tsx
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+
+const schema = z.object({ email: z.string().email() });
+const form = useForm({ resolver: zodResolver(schema) });
+```
+
 ## Navigation
 
 Navigation is defined in `src/lib/constant.ts`:
 - Main items with optional `isSubMenu` boolean for dropdowns
 - SubMenu items include descriptions for UX
 - Used by both desktop and mobile navigation
+
+## Dynamic Icon Usage
+
+Use `src/lib/icon-map.ts` for Server → Client icon passing:
+```tsx
+import { getIcon, IconName } from '@/lib/icon-map';
+const Icon = getIcon("Shield"); // Returns Lucide component
+```
 
 ## Current Technical Debt
 
