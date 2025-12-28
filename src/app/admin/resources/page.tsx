@@ -49,6 +49,7 @@ import {
   Pencil,
   Download,
   ExternalLink,
+  RefreshCw,
 } from "lucide-react";
 import { format } from "date-fns";
 import { Breadcrumb } from "@/components/admin/shared/breadcrumb";
@@ -275,10 +276,21 @@ export default function ResourcesPage() {
             Manage downloadable resources (whitepapers, guides, etc.)
           </p>
         </div>
-        <Button onClick={openCreateDialog}>
-          <Plus className="w-4 h-4 mr-2" />
-          Add Resource
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={() => fetchResources(pagination?.page || 1)}
+            disabled={isLoading}
+            title="Refresh"
+          >
+            <RefreshCw className={`w-4 h-4 ${isLoading ? "animate-spin" : ""}`} />
+          </Button>
+          <Button onClick={openCreateDialog}>
+            <Plus className="w-4 h-4 mr-2" />
+            Add Resource
+          </Button>
+        </div>
       </div>
 
       <div className="flex flex-col sm:flex-row gap-4">
