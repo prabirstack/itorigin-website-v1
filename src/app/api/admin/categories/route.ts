@@ -1,22 +1,60 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
-import { categories } from "@/db/schema";
-import { eq, desc, sql } from "drizzle-orm";
+import { categories, posts } from "@/db/schema";
+import { eq, desc, sql, ilike } from "drizzle-orm";
 import { nanoid } from "nanoid";
 import slugify from "slugify";
 import { requireAuthorOrAdmin } from "@/lib/auth-utils";
 import { createCategorySchema } from "@/lib/validations/category";
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
     await requireAuthorOrAdmin();
 
-    const categoriesList = await db
-      .select()
-      .from(categories)
-      .orderBy(desc(categories.createdAt));
+    const searchParams = request.nextUrl.searchParams;
+    const page = parseInt(searchParams.get("page") || "1");
+    const limit = parseInt(searchParams.get("limit") || "20");
+    const search = searchParams.get("search");
+    const offset = (page - 1) * limit;
 
-    return NextResponse.json({ categories: categoriesList });
+    // Build where conditions
+    const whereClause = search ? ilike(categories.name, `%${search}%`) : undefined;
+
+    // Get categories with post count
+    const categoriesList = await db
+      .select({
+        id: categories.id,
+        name: categories.name,
+        slug: categories.slug,
+        description: categories.description,
+        createdAt: categories.createdAt,
+        updatedAt: categories.updatedAt,
+        postCount: sql<number>`count(${posts.id})::int`,
+      })
+      .from(categories)
+      .leftJoin(posts, eq(posts.categoryId, categories.id))
+      .where(whereClause)
+      .groupBy(categories.id)
+      .orderBy(desc(categories.createdAt))
+      .limit(limit)
+      .offset(offset);
+
+    // Get total count
+    const countResult = await db
+      .select({ count: sql<number>`count(*)` })
+      .from(categories)
+      .where(whereClause);
+    const total = Number(countResult[0]?.count || 0);
+
+    return NextResponse.json({
+      categories: categoriesList,
+      pagination: {
+        page,
+        limit,
+        total,
+        totalPages: Math.ceil(total / limit),
+      },
+    });
   } catch (error) {
     if (error instanceof Error && error.message === "Unauthorized") {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

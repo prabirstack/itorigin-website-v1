@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { Badge } from "@/components/ui/badge";
 import {
   Table,
   TableBody,
@@ -34,9 +35,10 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { Plus, Loader2, Tag, Trash2, Pencil } from "lucide-react";
+import { Plus, Loader2, Tag, Trash2, Pencil, Search, FileText } from "lucide-react";
 import { format } from "date-fns";
 import { Breadcrumb } from "@/components/admin/shared/breadcrumb";
+import { Pagination } from "@/components/admin/shared/pagination";
 
 const categorySchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -52,11 +54,21 @@ interface Category {
   slug: string;
   description: string | null;
   createdAt: string;
+  postCount: number;
+}
+
+interface PaginationData {
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
 }
 
 export default function CategoriesPage() {
   const [categories, setCategories] = useState<Category[]>([]);
+  const [pagination, setPagination] = useState<PaginationData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [search, setSearch] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [editCategory, setEditCategory] = useState<Category | null>(null);
@@ -85,13 +97,22 @@ export default function CategoriesPage() {
     }
   }, [name, setValue, editCategory]);
 
-  const fetchCategories = async () => {
+  const fetchCategories = async (page = 1) => {
+    setIsLoading(true);
     try {
-      const res = await fetch("/api/admin/categories");
+      const params = new URLSearchParams({
+        page: page.toString(),
+        limit: "20",
+      });
+      if (search) params.set("search", search);
+
+      const res = await fetch(`/api/admin/categories?${params}`);
       const data = await res.json();
       setCategories(data.categories || []);
+      setPagination(data.pagination || null);
     } catch (error) {
       console.error("Failed to fetch categories:", error);
+      setCategories([]);
     } finally {
       setIsLoading(false);
     }
@@ -100,6 +121,11 @@ export default function CategoriesPage() {
   useEffect(() => {
     fetchCategories();
   }, []);
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    fetchCategories(1);
+  };
 
   const openEditDialog = (category: Category) => {
     setEditCategory(category);
@@ -135,7 +161,7 @@ export default function CategoriesPage() {
       }
 
       handleClose();
-      fetchCategories();
+      fetchCategories(pagination?.page || 1);
     } catch (error) {
       console.error(`Failed to ${editCategory ? "update" : "create"} category:`, error);
       alert(error instanceof Error ? error.message : `Failed to ${editCategory ? "update" : "create"} category`);
@@ -156,7 +182,7 @@ export default function CategoriesPage() {
         const data = await res.json();
         throw new Error(data.error || "Failed to delete category");
       }
-      fetchCategories();
+      fetchCategories(pagination?.page || 1);
       setDeleteId(null);
     } catch (error) {
       console.error("Failed to delete category:", error);
@@ -249,12 +275,29 @@ export default function CategoriesPage() {
         </Dialog>
       </div>
 
+      <div className="flex gap-2">
+        <form onSubmit={handleSearch} className="flex-1 flex gap-2">
+          <div className="relative flex-1">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+            <Input
+              placeholder="Search categories..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="pl-10"
+            />
+          </div>
+          <Button type="submit" variant="secondary">
+            Search
+          </Button>
+        </form>
+      </div>
+
       <div className="bg-card border rounded-lg">
         {isLoading ? (
           <div className="flex items-center justify-center py-12">
             <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
           </div>
-        ) : categories.length === 0 ? (
+        ) : !categories || categories.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-12 text-center">
             <Tag className="w-12 h-12 text-muted-foreground mb-4" />
             <h3 className="font-semibold mb-1">No categories found</h3>
@@ -273,6 +316,7 @@ export default function CategoriesPage() {
                 <TableHead>Name</TableHead>
                 <TableHead>Slug</TableHead>
                 <TableHead>Description</TableHead>
+                <TableHead>Posts</TableHead>
                 <TableHead>Created</TableHead>
                 <TableHead className="w-[100px]">Actions</TableHead>
               </TableRow>
@@ -281,11 +325,19 @@ export default function CategoriesPage() {
               {categories.map((category) => (
                 <TableRow key={category.id}>
                   <TableCell className="font-medium">{category.name}</TableCell>
-                  <TableCell className="text-muted-foreground">
-                    /{category.slug}
+                  <TableCell>
+                    <code className="text-xs bg-muted px-2 py-1 rounded">
+                      /{category.slug}
+                    </code>
                   </TableCell>
                   <TableCell className="max-w-[200px] truncate">
                     {category.description || "—"}
+                  </TableCell>
+                  <TableCell>
+                    <Badge variant="secondary" className="flex items-center gap-1 w-fit">
+                      <FileText className="w-3 h-3" />
+                      {category.postCount || 0}
+                    </Badge>
                   </TableCell>
                   <TableCell>
                     {format(new Date(category.createdAt), "MMM d, yyyy")}
@@ -315,6 +367,16 @@ export default function CategoriesPage() {
               ))}
             </TableBody>
           </Table>
+        )}
+
+        {pagination && (
+          <Pagination
+            page={pagination.page}
+            totalPages={pagination.totalPages}
+            total={pagination.total}
+            limit={pagination.limit}
+            onPageChange={fetchCategories}
+          />
         )}
       </div>
 
