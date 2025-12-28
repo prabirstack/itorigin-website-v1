@@ -8,6 +8,13 @@
       "when": 1766949176850,
       "tag": "0000_violet_multiple_man",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1766957152537,
+      "tag": "0001_normal_toxin",
+      "breakpoints": true
     }
   ]
 }

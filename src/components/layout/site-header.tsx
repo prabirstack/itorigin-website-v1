@@ -38,13 +38,13 @@ export const SiteHeader: React.FC = () => {
       transition={{
         duration: 0.8,
         ease: [0.22, 0.61, 0.36, 1],
-        delay: 0.3
+        delay: 0.3,
       }}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
           {/* Logo with scale animation */}
-<Logo />
+          <Logo />
 
           {/* Desktop Navigation with stagger animation */}
           <motion.div
@@ -92,17 +92,15 @@ export const SiteHeader: React.FC = () => {
           </motion.div>
         </div>
       </div>
-
       {/* Animated scroll progress indicator */}
       <motion.div
         className="absolute bottom-0 left-0 right-0 h-0.5 bg-linear-to-r from-primary via-primary/80 to-primary origin-left"
         style={{
           scaleX: scrollProgress,
-          opacity: isScrolled ? 1 : 0
+          opacity: isScrolled ? 1 : 0,
         }}
         transition={{ duration: 0.3 }}
-      />3
-
+      />
       {/* Subtle bottom glow when scrolled */}
       {isScrolled && (
         <motion.div

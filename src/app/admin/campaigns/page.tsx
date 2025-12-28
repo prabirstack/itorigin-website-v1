@@ -68,6 +68,11 @@ import {
 import { format } from "date-fns";
 import { Breadcrumb } from "@/components/admin/shared/breadcrumb";
 import { Pagination } from "@/components/admin/shared/pagination";
+import {
+  emailTemplates,
+  templateCategories,
+  type EmailTemplate,
+} from "@/lib/email-templates";
 
 interface Attachment {
   id: string;
@@ -169,12 +174,16 @@ export default function CampaignsPage() {
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [typeFilter, setTypeFilter] = useState<string>("all");
 
+  const [isTemplateOpen, setIsTemplateOpen] = useState(false);
   const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
+  const [isTemplatePreviewOpen, setIsTemplatePreviewOpen] = useState(false);
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [sendId, setSendId] = useState<string | null>(null);
   const [selectedCampaign, setSelectedCampaign] = useState<Campaign | null>(null);
+  const [selectedTemplate, setSelectedTemplate] = useState<EmailTemplate | null>(null);
+  const [templateCategory, setTemplateCategory] = useState<string>("all");
 
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [isSaving, setIsSaving] = useState(false);
@@ -375,6 +384,43 @@ export default function CampaignsPage() {
     setSelectedCampaign(campaign);
     setIsPreviewOpen(true);
   };
+
+  const openTemplateSelector = () => {
+    setTemplateCategory("all");
+    setSelectedTemplate(null);
+    setIsTemplateOpen(true);
+  };
+
+  const selectTemplate = (template: EmailTemplate) => {
+    setSelectedTemplate(template);
+    setFormData({
+      ...initialFormData,
+      name: template.name,
+      subject: template.subject,
+      previewText: template.previewText,
+      htmlContent: template.htmlContent,
+      campaignType: template.category === "welcome" ? "welcome" :
+                    template.category === "newsletter" && template.id.includes("monthly") ? "monthly" : "one-time",
+    });
+    setIsTemplateOpen(false);
+    setIsCreateOpen(true);
+  };
+
+  const startFromScratch = () => {
+    setFormData(initialFormData);
+    setSelectedTemplate(null);
+    setIsTemplateOpen(false);
+    setIsCreateOpen(true);
+  };
+
+  const previewTemplate = (template: EmailTemplate) => {
+    setSelectedTemplate(template);
+    setIsTemplatePreviewOpen(true);
+  };
+
+  const filteredTemplates = templateCategory === "all"
+    ? emailTemplates
+    : emailTemplates.filter(t => t.category === templateCategory);
 
   const formatFileSize = (bytes: number) => {
     if (bytes < 1024) return bytes + " B";
@@ -678,7 +724,7 @@ export default function CampaignsPage() {
           <h1 className="text-2xl font-bold">Email Campaigns</h1>
           <p className="text-muted-foreground">Create and manage email campaigns</p>
         </div>
-        <Button onClick={() => setIsCreateOpen(true)}>
+        <Button onClick={openTemplateSelector}>
           <Plus className="w-4 h-4 mr-2" />
           New Campaign
         </Button>
@@ -859,13 +905,154 @@ export default function CampaignsPage() {
         )}
       </div>
 
+      {/* Template Selector Dialog */}
+      <Dialog open={isTemplateOpen} onOpenChange={setIsTemplateOpen}>
+        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>Choose a Template</DialogTitle>
+            <DialogDescription>
+              Start with a professional template or create from scratch
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="flex flex-wrap gap-2 mb-4">
+            <Button
+              variant={templateCategory === "all" ? "default" : "outline"}
+              size="sm"
+              onClick={() => setTemplateCategory("all")}
+            >
+              All
+            </Button>
+            {templateCategories.map((cat) => (
+              <Button
+                key={cat.id}
+                variant={templateCategory === cat.id ? "default" : "outline"}
+                size="sm"
+                onClick={() => setTemplateCategory(cat.id)}
+              >
+                {cat.icon} {cat.name}
+              </Button>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            {/* Start from Scratch Card */}
+            <div
+              className="border-2 border-dashed rounded-lg p-6 cursor-pointer hover:border-primary hover:bg-accent/50 transition-colors flex flex-col items-center justify-center text-center min-h-[200px]"
+              onClick={startFromScratch}
+            >
+              <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center mb-3">
+                <Plus className="w-6 h-6" />
+              </div>
+              <h3 className="font-semibold mb-1">Start from Scratch</h3>
+              <p className="text-sm text-muted-foreground">
+                Create a custom email with your own design
+              </p>
+            </div>
+
+            {/* Template Cards */}
+            {filteredTemplates.map((template) => (
+              <div
+                key={template.id}
+                className="border rounded-lg p-4 cursor-pointer hover:border-primary hover:shadow-md transition-all group"
+              >
+                <div className="flex items-start justify-between mb-3">
+                  <div>
+                    <Badge variant="secondary" className="mb-2">
+                      {templateCategories.find(c => c.id === template.category)?.icon}{" "}
+                      {templateCategories.find(c => c.id === template.category)?.name}
+                    </Badge>
+                    <h3 className="font-semibold">{template.name}</h3>
+                  </div>
+                </div>
+                <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
+                  {template.description}
+                </p>
+                <div className="flex gap-2">
+                  <Button
+                    size="sm"
+                    className="flex-1"
+                    onClick={() => selectTemplate(template)}
+                  >
+                    Use Template
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      previewTemplate(template);
+                    }}
+                  >
+                    <Eye className="w-4 h-4" />
+                  </Button>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setIsTemplateOpen(false)}>
+              Cancel
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Template Preview Dialog */}
+      <Dialog open={isTemplatePreviewOpen} onOpenChange={setIsTemplatePreviewOpen}>
+        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>{selectedTemplate?.name}</DialogTitle>
+            <DialogDescription>
+              Subject: {selectedTemplate?.subject}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="border rounded-lg p-4 bg-white max-h-[60vh] overflow-y-auto">
+            <div
+              dangerouslySetInnerHTML={{ __html: selectedTemplate?.htmlContent || "" }}
+            />
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setIsTemplatePreviewOpen(false)}>
+              Close
+            </Button>
+            <Button
+              onClick={() => {
+                setIsTemplatePreviewOpen(false);
+                if (selectedTemplate) selectTemplate(selectedTemplate);
+              }}
+            >
+              Use This Template
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
       {/* Create Dialog */}
       <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
         <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>Create Campaign</DialogTitle>
             <DialogDescription>
-              Create a new email campaign to send to your subscribers.
+              {selectedTemplate ? (
+                <span className="flex items-center gap-2">
+                  Using template: <Badge variant="secondary">{selectedTemplate.name}</Badge>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="h-6 px-2 text-xs"
+                    onClick={() => {
+                      setIsCreateOpen(false);
+                      setIsTemplateOpen(true);
+                    }}
+                  >
+                    Change
+                  </Button>
+                </span>
+              ) : (
+                "Create a new email campaign from scratch"
+              )}
             </DialogDescription>
           </DialogHeader>
           <CampaignForm />
