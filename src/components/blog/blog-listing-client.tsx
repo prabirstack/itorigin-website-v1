@@ -6,15 +6,28 @@ import { BlogCard } from "@/components/blog/blog-card";
 import { BlogSidebar } from "@/components/blog/blog-sidebar";
 import { BlogPagination } from "@/components/blog/blog-pagination";
 import { BlogCategoryFilter } from "@/components/blog/blog-category-filter";
-import { type BlogPost, BLOG_CATEGORIES } from "@/lib/blog-data";
+import { type BlogPost } from "@/lib/blog-data";
 
 interface BlogListingClientProps {
   posts: BlogPost[];
+  categories?: string[];
 }
 
 const POSTS_PER_PAGE = 10;
 
-export function BlogListingClient({ posts }: BlogListingClientProps) {
+const DEFAULT_CATEGORIES = [
+  "All Posts",
+  "Threat Intelligence",
+  "Penetration Testing",
+  "Compliance & GRC",
+  "Cloud Security",
+  "Security Operations",
+  "Incident Response",
+  "Security Awareness",
+  "Best Practices"
+];
+
+export function BlogListingClient({ posts, categories = DEFAULT_CATEGORIES }: BlogListingClientProps) {
   const [selectedCategory, setSelectedCategory] = useState<string>("All Posts");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -74,7 +87,7 @@ export function BlogListingClient({ posts }: BlogListingClientProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Category Filter */}
           <BlogCategoryFilter
-            categories={BLOG_CATEGORIES}
+            categories={categories}
             selectedCategory={selectedCategory}
             onCategoryChange={handleCategoryChange}
           />

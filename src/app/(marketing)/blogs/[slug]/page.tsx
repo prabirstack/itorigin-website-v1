@@ -1,6 +1,8 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { BLOG_POSTS } from "@/lib/blog-data";
+import { db } from "@/db";
+import { posts } from "@/db/schema";
+import { eq, and, desc } from "drizzle-orm";
 import { BlogDetailClient } from "@/components/blog/blog-detail-client";
 
 interface BlogDetailPageProps {
@@ -9,9 +11,87 @@ interface BlogDetailPageProps {
   }>;
 }
 
+async function getPost(slug: string) {
+  const post = await db.query.posts.findFirst({
+    where: and(eq(posts.slug, slug), eq(posts.status, "published")),
+    with: {
+      author: true,
+      category: true,
+      postTags: {
+        with: {
+          tag: true,
+        },
+      },
+    },
+  });
+
+  if (!post) return null;
+
+  // Increment view count
+  await db
+    .update(posts)
+    .set({ viewCount: (post.viewCount || 0) + 1 })
+    .where(eq(posts.id, post.id));
+
+  return {
+    id: post.id,
+    slug: post.slug,
+    title: post.title,
+    excerpt: post.excerpt || "",
+    content: post.content,
+    category: post.category?.name || "Uncategorized",
+    categoryId: post.categoryId,
+    author: {
+      name: post.author?.name || "IT Origin Team",
+      avatar: post.author?.image || "/images/authors/default-avatar.jpg",
+      role: post.author?.role === "admin" ? "Security Expert" : "Contributor",
+    },
+    publishedAt: post.publishedAt?.toISOString().split("T")[0] || "",
+    readTime: `${post.readingTime || 5} min read`,
+    image: post.coverImage || "/images/blog/default-cover.jpg",
+    tags: post.postTags.map((pt) => pt.tag.name),
+    featured: post.viewCount ? post.viewCount > 500 : false,
+  };
+}
+
+async function getAllPosts() {
+  const postsData = await db.query.posts.findMany({
+    where: eq(posts.status, "published"),
+    with: {
+      author: true,
+      category: true,
+      postTags: {
+        with: {
+          tag: true,
+        },
+      },
+    },
+    orderBy: [desc(posts.publishedAt)],
+  });
+
+  return postsData.map((post) => ({
+    id: post.id,
+    slug: post.slug,
+    title: post.title,
+    excerpt: post.excerpt || "",
+    content: post.content,
+    category: post.category?.name || "Uncategorized",
+    author: {
+      name: post.author?.name || "IT Origin Team",
+      avatar: post.author?.image || "/images/authors/default-avatar.jpg",
+      role: post.author?.role === "admin" ? "Security Expert" : "Contributor",
+    },
+    publishedAt: post.publishedAt?.toISOString().split("T")[0] || "",
+    readTime: `${post.readingTime || 5} min read`,
+    image: post.coverImage || "/images/blog/default-cover.jpg",
+    tags: post.postTags.map((pt) => pt.tag.name),
+    featured: post.viewCount ? post.viewCount > 500 : false,
+  }));
+}
+
 export async function generateMetadata({ params }: BlogDetailPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const post = BLOG_POSTS.find(p => p.slug === slug);
+  const post = await getPost(slug);
 
   if (!post) {
     return {
@@ -52,18 +132,26 @@ export async function generateMetadata({ params }: BlogDetailPageProps): Promise
 }
 
 export async function generateStaticParams() {
-  return BLOG_POSTS.map((post) => ({
+  const postsData = await db.query.posts.findMany({
+    where: eq(posts.status, "published"),
+    columns: { slug: true },
+  });
+
+  return postsData.map((post) => ({
     slug: post.slug,
   }));
 }
 
 export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
   const { slug } = await params;
-  const post = BLOG_POSTS.find(p => p.slug === slug);
+  const [post, allPosts] = await Promise.all([
+    getPost(slug),
+    getAllPosts(),
+  ]);
 
   if (!post) {
     notFound();
   }
 
-  return <BlogDetailClient post={post} allPosts={BLOG_POSTS} />;
+  return <BlogDetailClient post={post} allPosts={allPosts} />;
 }

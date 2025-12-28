@@ -1,6 +1,8 @@
 import { Metadata } from "next";
 import { BlogListingClient } from "@/components/blog/blog-listing-client";
-import { BLOG_POSTS } from "@/lib/blog-data";
+import { db } from "@/db";
+import { posts, categories } from "@/db/schema";
+import { eq, desc, asc } from "drizzle-orm";
 
 export const metadata: Metadata = {
   title: "Cybersecurity Blog | Latest Security Insights & Best Practices | IT Origin",
@@ -41,6 +43,53 @@ export const metadata: Metadata = {
   }
 };
 
-export default function BlogsPage() {
-  return <BlogListingClient posts={BLOG_POSTS} />;
+async function getBlogPosts() {
+  const postsData = await db.query.posts.findMany({
+    where: eq(posts.status, "published"),
+    with: {
+      author: true,
+      category: true,
+      postTags: {
+        with: {
+          tag: true,
+        },
+      },
+    },
+    orderBy: [desc(posts.publishedAt)],
+  });
+
+  return postsData.map((post) => ({
+    id: post.id,
+    slug: post.slug,
+    title: post.title,
+    excerpt: post.excerpt || "",
+    content: post.content,
+    category: post.category?.name || "Uncategorized",
+    author: {
+      name: post.author?.name || "IT Origin Team",
+      avatar: post.author?.image || "/images/authors/default-avatar.jpg",
+      role: post.author?.role === "admin" ? "Security Expert" : "Contributor",
+    },
+    publishedAt: post.publishedAt?.toISOString().split("T")[0] || "",
+    readTime: `${post.readingTime || 5} min read`,
+    image: post.coverImage || "/images/blog/default-cover.jpg",
+    tags: post.postTags.map((pt) => pt.tag.name),
+    featured: post.viewCount ? post.viewCount > 500 : false,
+  }));
+}
+
+async function getCategories() {
+  const categoriesData = await db.query.categories.findMany({
+    orderBy: [asc(categories.name)],
+  });
+  return ["All Posts", ...categoriesData.map((c) => c.name)];
+}
+
+export default async function BlogsPage() {
+  const [blogPosts, blogCategories] = await Promise.all([
+    getBlogPosts(),
+    getCategories(),
+  ]);
+
+  return <BlogListingClient posts={blogPosts} categories={blogCategories} />;
 }

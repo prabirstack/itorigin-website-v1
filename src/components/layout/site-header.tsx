@@ -105,7 +105,7 @@ export const SiteHeader: React.FC = () => {
                 <span className="relative z-10">Secure Now</span>
                 {/* Shine effect */}
                 <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                  className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent"
                   initial={{ x: "-100%" }}
                   whileHover={{ x: "100%" }}
                   transition={{ duration: 0.6 }}
@@ -124,18 +124,18 @@ export const SiteHeader: React.FC = () => {
 
       {/* Animated scroll progress indicator */}
       <motion.div
-        className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary via-primary/80 to-primary origin-left"
+        className="absolute bottom-0 left-0 right-0 h-0.5 bg-linear-to-r from-primary via-primary/80 to-primary origin-left"
         style={{
           scaleX: scrollProgress,
           opacity: isScrolled ? 1 : 0
         }}
         transition={{ duration: 0.3 }}
-      />
+      />3
 
       {/* Subtle bottom glow when scrolled */}
       {isScrolled && (
         <motion.div
-          className="absolute -bottom-px left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"
+          className="absolute -bottom-px left-0 right-0 h-px bg-linear-to-r from-transparent via-primary/30 to-transparent"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
