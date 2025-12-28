@@ -121,7 +121,7 @@ export function AdminSidebar() {
           duration: 0.2,
           ease: [0.4, 0, 0.2, 1],
         }}
-        className="hidden lg:flex flex-col min-h-screen border-r bg-card relative"
+        className="hidden lg:flex flex-col h-screen border-r bg-card sticky top-0"
       >
         {/* Header */}
         <div className="flex items-center h-16 px-4 border-b">
@@ -164,7 +164,7 @@ export function AdminSidebar() {
         </Button>
 
         {/* Navigation */}
-        <nav className="flex-1 p-3 space-y-1 overflow-hidden">
+        <nav className="flex-1 p-3 space-y-1 overflow-y-auto">
           {sidebarItems.map((item) => {
             const isActive =
               pathname === item.href ||
