@@ -32,8 +32,8 @@ export const BLOG_CATEGORIES = [
 export const BLOG_POSTS: BlogPost[] = [
   {
     id: "1",
-    slug: "advanced-threat-hunting-techniques-2024",
-    title: "Advanced Threat Hunting Techniques for 2024",
+    slug: "advanced-threat-hunting-techniques-2025",
+    title: "Advanced Threat Hunting Techniques for 2025",
     excerpt: "Explore cutting-edge threat hunting methodologies and tools that security teams are using to proactively identify sophisticated attacks before they cause damage.",
     content: "Full blog content here...",
     category: "Threat Intelligence",
@@ -42,7 +42,7 @@ export const BLOG_POSTS: BlogPost[] = [
       avatar: "/images/authors/sarah-chen.jpg",
       role: "Threat Intelligence Lead"
     },
-    publishedAt: "2024-03-15",
+    publishedAt: "2025-01-15",
     readTime: "8 min read",
     image: "/images/blog/threat-hunting.jpg",
     tags: ["Threat Hunting", "SOC", "Cyber Defense"],
@@ -60,7 +60,7 @@ export const BLOG_POSTS: BlogPost[] = [
       avatar: "/images/authors/michael-torres.jpg",
       role: "Security Architect"
     },
-    publishedAt: "2024-03-12",
+    publishedAt: "2025-01-12",
     readTime: "12 min read",
     image: "/images/blog/zero-trust.jpg",
     tags: ["Zero Trust", "Architecture", "Security Strategy"],
@@ -68,8 +68,8 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     id: "3",
-    slug: "owasp-top-10-2024-comprehensive-analysis",
-    title: "OWASP Top 10 2024: Comprehensive Analysis and Mitigation",
+    slug: "owasp-top-10-2025-comprehensive-analysis",
+    title: "OWASP Top 10 2025: Comprehensive Analysis and Mitigation",
     excerpt: "Deep dive into the latest OWASP Top 10 vulnerabilities with practical examples, exploitation techniques, and effective mitigation strategies for developers.",
     content: "Full blog content here...",
     category: "Penetration Testing",
@@ -78,7 +78,7 @@ export const BLOG_POSTS: BlogPost[] = [
       avatar: "/images/authors/alex-kumar.jpg",
       role: "Senior Penetration Tester"
     },
-    publishedAt: "2024-03-10",
+    publishedAt: "2025-01-10",
     readTime: "15 min read",
     image: "/images/blog/owasp-top-10.jpg",
     tags: ["OWASP", "Web Security", "AppSec"],
@@ -96,7 +96,7 @@ export const BLOG_POSTS: BlogPost[] = [
       avatar: "/images/authors/jennifer-wu.jpg",
       role: "Cloud Security Specialist"
     },
-    publishedAt: "2024-03-08",
+    publishedAt: "2025-01-08",
     readTime: "10 min read",
     image: "/images/blog/cloud-security.jpg",
     tags: ["Cloud Security", "CSPM", "AWS", "Azure"],
@@ -114,7 +114,7 @@ export const BLOG_POSTS: BlogPost[] = [
       avatar: "/images/authors/david-martinez.jpg",
       role: "Incident Response Manager"
     },
-    publishedAt: "2024-03-05",
+    publishedAt: "2025-01-05",
     readTime: "11 min read",
     image: "/images/blog/ransomware-response.jpg",
     tags: ["Ransomware", "Incident Response", "Crisis Management"],
@@ -122,8 +122,8 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     id: "6",
-    slug: "gdpr-compliance-checklist-2024",
-    title: "GDPR Compliance Checklist for 2024",
+    slug: "gdpr-compliance-checklist-2025",
+    title: "GDPR Compliance Checklist for 2025",
     excerpt: "Stay compliant with the latest GDPR requirements using our comprehensive checklist covering data protection, privacy by design, and breach notification.",
     content: "Full blog content here...",
     category: "Compliance & GRC",
@@ -132,7 +132,7 @@ export const BLOG_POSTS: BlogPost[] = [
       avatar: "/images/authors/emma-thompson.jpg",
       role: "GRC Consultant"
     },
-    publishedAt: "2024-03-01",
+    publishedAt: "2025-01-01",
     readTime: "9 min read",
     image: "/images/blog/gdpr-compliance.jpg",
     tags: ["GDPR", "Compliance", "Privacy"],
@@ -150,7 +150,7 @@ export const BLOG_POSTS: BlogPost[] = [
       avatar: "/images/authors/ryan-patel.jpg",
       role: "DevSecOps Engineer"
     },
-    publishedAt: "2024-02-28",
+    publishedAt: "2024-12-28",
     readTime: "14 min read",
     image: "/images/blog/kubernetes-security.jpg",
     tags: ["Kubernetes", "Container Security", "DevSecOps"],
@@ -158,8 +158,8 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     id: "8",
-    slug: "social-engineering-attacks-2024-trends",
-    title: "Social Engineering Attacks: 2024 Trends and Defense",
+    slug: "social-engineering-attacks-2025-trends",
+    title: "Social Engineering Attacks: 2025 Trends and Defense",
     excerpt: "Understand the latest social engineering tactics used by attackers and learn how to build a human firewall through effective security awareness training.",
     content: "Full blog content here...",
     category: "Security Awareness",
@@ -168,7 +168,7 @@ export const BLOG_POSTS: BlogPost[] = [
       avatar: "/images/authors/lisa-anderson.jpg",
       role: "Security Awareness Manager"
     },
-    publishedAt: "2024-02-25",
+    publishedAt: "2024-12-25",
     readTime: "7 min read",
     image: "/images/blog/social-engineering.jpg",
     tags: ["Social Engineering", "Phishing", "Security Awareness"],
@@ -186,7 +186,7 @@ export const BLOG_POSTS: BlogPost[] = [
       avatar: "/images/authors/james-wilson.jpg",
       role: "SOC Manager"
     },
-    publishedAt: "2024-02-22",
+    publishedAt: "2024-12-22",
     readTime: "10 min read",
     image: "/images/blog/siem-optimization.jpg",
     tags: ["SIEM", "SOC", "Alert Management"],
@@ -204,7 +204,7 @@ export const BLOG_POSTS: BlogPost[] = [
       avatar: "/images/authors/sofia-rodriguez.jpg",
       role: "API Security Researcher"
     },
-    publishedAt: "2024-02-20",
+    publishedAt: "2024-12-20",
     readTime: "13 min read",
     image: "/images/blog/api-security.jpg",
     tags: ["API Security", "Pentesting", "Web Security"],
@@ -212,8 +212,8 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     id: "11",
-    slug: "supply-chain-security-best-practices",
-    title: "Supply Chain Security: Best Practices for 2024",
+    slug: "supply-chain-security-best-practices-2025",
+    title: "Supply Chain Security: Best Practices for 2025",
     excerpt: "Protect your software supply chain from attacks with modern security practices including SBOM, dependency scanning, and secure CI/CD pipelines.",
     content: "Full blog content here...",
     category: "Best Practices",
@@ -222,7 +222,7 @@ export const BLOG_POSTS: BlogPost[] = [
       avatar: "/images/authors/thomas-lee.jpg",
       role: "Security Engineer"
     },
-    publishedAt: "2024-02-18",
+    publishedAt: "2024-12-18",
     readTime: "11 min read",
     image: "/images/blog/supply-chain.jpg",
     tags: ["Supply Chain", "DevSecOps", "SBOM"],
@@ -230,8 +230,8 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     id: "12",
-    slug: "ai-powered-security-tools-review",
-    title: "AI-Powered Security Tools: 2024 Review",
+    slug: "ai-powered-security-tools-review-2025",
+    title: "AI-Powered Security Tools: 2025 Review",
     excerpt: "Explore the latest AI and machine learning tools revolutionizing cybersecurity, from threat detection to automated response and vulnerability analysis.",
     content: "Full blog content here...",
     category: "Threat Intelligence",
@@ -240,7 +240,7 @@ export const BLOG_POSTS: BlogPost[] = [
       avatar: "/images/authors/anna-schmidt.jpg",
       role: "AI Security Researcher"
     },
-    publishedAt: "2024-02-15",
+    publishedAt: "2024-12-15",
     readTime: "9 min read",
     image: "/images/blog/ai-security.jpg",
     tags: ["AI", "Machine Learning", "Security Tools"],
@@ -258,7 +258,7 @@ export const BLOG_POSTS: BlogPost[] = [
       avatar: "/images/authors/marcus-brown.jpg",
       role: "Lead Penetration Tester"
     },
-    publishedAt: "2024-02-12",
+    publishedAt: "2024-12-12",
     readTime: "8 min read",
     image: "/images/blog/pentest-reports.jpg",
     tags: ["Penetration Testing", "Reporting", "Communication"],
@@ -276,7 +276,7 @@ export const BLOG_POSTS: BlogPost[] = [
       avatar: "/images/authors/kevin-zhang.jpg",
       role: "Application Security Lead"
     },
-    publishedAt: "2024-02-10",
+    publishedAt: "2024-12-10",
     readTime: "12 min read",
     image: "/images/blog/secure-coding.jpg",
     tags: ["Secure Coding", "AppSec", "Development"],
@@ -294,7 +294,7 @@ export const BLOG_POSTS: BlogPost[] = [
       avatar: "/images/authors/patricia-green.jpg",
       role: "SOC Director"
     },
-    publishedAt: "2024-02-08",
+    publishedAt: "2024-12-08",
     readTime: "10 min read",
     image: "/images/blog/security-metrics.jpg",
     tags: ["Metrics", "SOC", "Performance"],
