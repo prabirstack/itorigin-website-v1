@@ -123,9 +123,12 @@ export async function PATCH(request: NextRequest, { params }: { params: Params }
     if (error instanceof Error && error.message === "Unauthorized") {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
+    if (error instanceof Error && error.message === "Forbidden") {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    }
     console.error("Error updating post:", error);
     return NextResponse.json(
-      { error: "Failed to update post" },
+      { error: error instanceof Error ? error.message : "Failed to update post" },
       { status: 500 }
     );
   }
