@@ -6,7 +6,7 @@ import { eq } from "drizzle-orm";
 async function seedAdmin() {
   const adminEmail = "admin@itorigin.com";
   const adminPassword = "Gratitude@2026";
-  const adminName = "Admin";
+  const adminName = "IT Origin Team";
 
   console.log("Checking for existing admin user...");
 
