@@ -3,7 +3,10 @@ import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { db } from "@/db";
 import * as schema from "@/db/schema";
 
+const isProduction = process.env.NODE_ENV === "production";
+
 export const auth = betterAuth({
+  baseURL: process.env.BETTER_AUTH_URL || "http://localhost:3000",
   database: drizzleAdapter(db, {
     provider: "pg",
     schema: {
@@ -24,6 +27,10 @@ export const auth = betterAuth({
       enabled: true,
       maxAge: 60 * 5, // 5 minutes
     },
+  },
+  advanced: {
+    cookiePrefix: "better-auth",
+    useSecureCookies: isProduction,
   },
   user: {
     additionalFields: {
