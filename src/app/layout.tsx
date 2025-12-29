@@ -9,7 +9,7 @@ import { ServicesProvider } from "@/components/providers/services-provider";
 import { SettingsProvider } from "@/components/providers/settings-provider";
 import { CookieConsent } from "@/components/common/cookie-consent";
 
-export const satoshi = localFont({
+const satoshi = localFont({
   src: [
     {
       path: "../../public/fonts/Satoshi-Bold.woff2",
