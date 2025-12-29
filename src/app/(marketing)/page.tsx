@@ -7,6 +7,7 @@ import HeroCarousel from "@/components/marketing/home/Hero";
 import { IndustryExperience } from "@/components/marketing/home/industry-experience";
 import { LogoTicker } from "@/components/marketing/home/logo-ticker";
 import { ServiceSection } from "@/components/marketing/home/service-section";
+import { TestimonialsSection } from "@/components/marketing/testimonials";
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
       <ServiceSection />
       <CyberFusion />
       <IndustryExperience />
+      <TestimonialsSection />
       <BlogSection />
       <CTASection />
     </>
