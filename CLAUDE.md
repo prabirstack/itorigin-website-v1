@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-IT Origin Website v1 - A cybersecurity services marketing website with admin CMS, built with Next.js 15, React 19, TypeScript, and Bun. Features blog management, case studies, lead capture, newsletter campaigns, downloadable resources, AI chat support, and authentication.
+IT Origin Website v1 - A cybersecurity services marketing website with admin CMS, built with Next.js 15, React 19, TypeScript, and Bun. Features blog management, case studies, testimonials, events/webinars, appointments, lead capture, newsletter campaigns, downloadable resources, AI chat support, and authentication.
 
 ## Development Commands
 
@@ -23,6 +23,7 @@ bun run db:seed              # Seed admin user
 bun run db:seed:blog         # Seed blog data
 bun run db:seed:resources    # Seed resources data
 bun run db:seed:case-studies # Seed case studies data
+bun run db:seed:testimonials # Seed testimonials data
 
 # UI Components
 bunx shadcn@latest add [component]  # Add shadcn/ui component
@@ -60,6 +61,9 @@ Copy `.env.example` to `.env.local` and configure:
 /api/admin/campaigns         # Email campaign management
 /api/admin/services          # Services CRUD (populates navigation)
 /api/admin/case-studies      # Case studies CRUD
+/api/admin/testimonials      # Testimonials CRUD with bulk actions
+/api/admin/events            # Events/webinars CRUD
+/api/admin/appointments      # Appointments scheduling CRUD
 /api/admin/settings          # Site settings
 /api/admin/resources         # Downloadable resources (whitepapers, etc.)
 /api/admin/readers           # Users who have commented (with comment history)
@@ -82,11 +86,11 @@ Copy `.env.example` to `.env.local` and configure:
 ```
 
 ### Database (Drizzle + PostgreSQL)
-- Schema: `src/db/schema/` - Exports from index.ts (auth, blog, leads, services, chat, email, settings, resources, case-studies)
+- Schema: `src/db/schema/` - Exports from index.ts (auth, blog, leads, services, chat, email, settings, resources, case-studies, testimonials, events, appointments)
 - Client: `src/db/index.ts` - Drizzle client singleton
 - Config: `drizzle.config.ts`
 - Migrations: `src/db/migrations/`
-- Seeds: `src/db/seed/` - admin.ts, blog-data.ts, resources-data.ts, case-studies-data.ts, campaigns-data.ts
+- Seeds: `src/db/seed/` - admin.ts, blog-data.ts, resources-data.ts, case-studies-data.ts, campaigns-data.ts, testimonials-data.ts
 
 Schema workflow: Edit schema files → `bun run db:generate` → `bun run db:migrate`
 
@@ -172,7 +176,7 @@ Uses Google AI SDK (`@ai-sdk/google`) for chat support. Conversations stored in 
 - `src/lib/animations.ts` - Motion.js variants (fadeInUp, staggerContainer, etc.)
 - `src/lib/icon-map.ts` - Dynamic Lucide icon mapping for services
 - `src/config/site.ts` - Site metadata and social links
-- `src/lib/validations/` - Zod schemas (post, category, lead, chat, campaign, service, settings, resources, case-study)
+- `src/lib/validations/` - Zod schemas (post, category, lead, chat, campaign, service, settings, resources, case-study, testimonial, event, appointment)
 
 ## Path Aliases
 
@@ -182,8 +186,9 @@ Uses Google AI SDK (`@ai-sdk/google`) for chat support. Conversations stored in 
 
 The admin dashboard (`/admin`) provides:
 - **Overview stats** - Posts, leads, subscribers, comments, resources, campaigns
-- **Content management** - Posts, categories, services, case studies, resources
+- **Content management** - Posts, categories, services, case studies, resources, testimonials
 - **User engagement** - Comments moderation, readers (users who commented), chat conversations
+- **Events & Scheduling** - Events/webinars management, appointments scheduling
 - **Marketing** - Leads, subscribers, email campaigns
 - **Settings** - Site configuration
 - **Profile** - Admin profile with image upload and password change (`/admin/profile`)
@@ -215,3 +220,43 @@ Comments require user authentication. The `BlogComments` component:
 - Shows sign-in prompt for unauthenticated users
 - Displays user name from session for authenticated commenters
 - Reply functionality only visible to signed-in users
+
+## Marketing Components
+
+### TestimonialsSection
+Located at `src/components/marketing/testimonials/testimonials-section.tsx`. Displays client testimonials with:
+- Responsive grid: 3 columns (desktop), 2 columns (tablet), carousel (mobile)
+- Auto-advancing carousel on mobile with manual navigation
+- Star ratings, verified badges, service tags
+- Trust indicators bar (client count, average rating, certifications)
+- Props: `title`, `subtitle`, `featured`, `limit`, `industry`, `className`
+
+```tsx
+import { TestimonialsSection } from "@/components/marketing/testimonials";
+
+<TestimonialsSection featured={true} limit={6} />
+```
+
+## Testimonials Management
+
+The testimonials system includes:
+- **Database schema** (`src/db/schema/testimonials.ts`): Status (pending/approved/rejected), ratings, featured flag, verification
+- **Admin panel** (`/admin/testimonials`): CRUD with bulk actions (approve, reject, feature, verify)
+- **Public API** (`/api/testimonials`): Filtered by featured, industry, status
+- **Seed data** (`src/db/seed/testimonials-data.ts`): 6 sample testimonials
+
+## Events/Webinars Management
+
+The events system includes:
+- **Database schema** (`src/db/schema/events.ts`): Events table and event_registrations for attendees
+- **Event types**: webinar, workshop, conference, meetup
+- **Admin panel** (`/admin/events`): Full CRUD with registration management
+- **Features**: Capacity limits, registration tracking, virtual/in-person support
+
+## Appointments Management
+
+The appointments system includes:
+- **Database schema** (`src/db/schema/appointments.ts`): Scheduling with time slots
+- **Appointment types**: consultation, demo, support, meeting
+- **Admin panel** (`/admin/appointments`): Schedule management with status tracking
+- **Statuses**: pending, confirmed, completed, cancelled, no_show
