@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-IT Origin Website v1 - A cybersecurity services marketing website with admin CMS, built with Next.js 15, React 19, TypeScript, and Bun. Features blog management, lead capture, newsletter system, AI chat support, and authentication.
+IT Origin Website v1 - A cybersecurity services marketing website with admin CMS, built with Next.js 15, React 19, TypeScript, and Bun. Features blog management, case studies, lead capture, newsletter campaigns, downloadable resources, AI chat support, and authentication.
 
 ## Development Commands
 
@@ -51,12 +51,16 @@ Copy `.env.example` to `.env.local` and configure:
 /api/admin/tags              # Tag management
 /api/admin/comments          # Comment moderation
 /api/admin/leads             # Lead management + export
+/api/admin/leads/[id]        # Individual lead details
 /api/admin/subscribers       # Newsletter subscribers + export
 /api/admin/campaigns         # Email campaign management
 /api/admin/services          # Services CRUD (populates navigation)
+/api/admin/case-studies      # Case studies CRUD
 /api/admin/settings          # Site settings
 /api/admin/resources         # Downloadable resources (whitepapers, etc.)
+/api/admin/readers           # Users who have commented (with comment history)
 /api/admin/chat              # Chat conversation management
+/api/admin/stats             # Dashboard statistics
 /api/admin/upload            # File uploads (Vercel Blob)
 /api/public/posts            # Public blog listing
 /api/public/posts/[slug]     # Single post by slug
@@ -73,11 +77,11 @@ Copy `.env.example` to `.env.local` and configure:
 ```
 
 ### Database (Drizzle + PostgreSQL)
-- Schema: `src/db/schema/` - Exports from index.ts (auth, blog, leads, services, chat, email, settings, resources)
+- Schema: `src/db/schema/` - Exports from index.ts (auth, blog, leads, services, chat, email, settings, resources, case-studies)
 - Client: `src/db/index.ts` - Drizzle client singleton
 - Config: `drizzle.config.ts`
 - Migrations: `src/db/migrations/`
-- Seeds: `src/db/seed/`
+- Seeds: `src/db/seed/` - admin.ts, blog-data.ts, resources-data.ts, case-studies-data.ts, campaigns-data.ts
 
 Schema workflow: Edit schema files → `bun run db:generate` → `bun run db:migrate`
 
@@ -89,12 +93,12 @@ Schema workflow: Edit schema files → `bun run db:generate` → `bun run db:mig
 
 ### Component Organization
 - `components/ui/` - shadcn/ui primitives (new-york style)
-- `components/layout/` - Header, footer, navigation, topbar
+- `components/layout/` - Header, footer, navigation, topbar, chat-support
 - `components/marketing/home/` - Homepage sections
-- `components/admin/` - Admin dashboard components (sidebar, forms, tables)
-- `components/blog/` - Blog listing, detail, sidebar components
-- `components/common/` - Container wrapper for consistent max-width
-- `components/providers/` - ThemeProvider, SettingsProvider contexts
+- `components/admin/` - Admin dashboard components (sidebar, header, forms, tables)
+- `components/blog/` - Blog listing, detail, sidebar, comments (requires sign-in)
+- `components/common/` - Container, Logo (with dark/light mode support)
+- `components/providers/` - ThemeProvider, SettingsProvider, ServicesProvider contexts
 
 ### Dynamic Navigation
 Services in the navigation are populated from the database via `src/lib/constant.ts`. The `getServicesNavigation()` function fetches active services and maps them to nav items with icons from `src/lib/icon-map.ts`.
@@ -168,3 +172,40 @@ Uses Google AI SDK (`@ai-sdk/google`) for chat support. Conversations stored in 
 ## Path Aliases
 
 `@/*` maps to `./src/*` (e.g., `@/components/ui/button`, `@/lib/utils`, `@/db`)
+
+## Admin Dashboard
+
+The admin dashboard (`/admin`) provides:
+- **Overview stats** - Posts, leads, subscribers, comments, resources, campaigns
+- **Content management** - Posts, categories, services, case studies, resources
+- **User engagement** - Comments moderation, readers (users who commented), chat conversations
+- **Marketing** - Leads, subscribers, email campaigns
+- **Settings** - Site configuration
+
+### Admin UI Features
+- Sticky sidebar with collapsible navigation
+- Dark/light theme toggle
+- Notification dropdown
+- Animated counters and microanimations (Framer Motion)
+- Pagination for all list views
+
+## Logo Component
+
+Use the Logo component from `@/components/common/logo` for consistent branding:
+```tsx
+import { Logo } from "@/components/common/logo";
+
+// Full animated logo (default)
+<Logo />
+
+// With custom props
+<Logo href="/admin" size="sm" animated={false} className="w-28 h-8" />
+```
+Props: `href`, `size` (sm/md/lg), `animated`, `className`
+
+## Blog Comments
+
+Comments require user authentication. The `BlogComments` component:
+- Shows sign-in prompt for unauthenticated users
+- Displays user name from session for authenticated commenters
+- Reply functionality only visible to signed-in users
