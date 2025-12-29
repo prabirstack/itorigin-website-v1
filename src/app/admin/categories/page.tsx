@@ -315,7 +315,7 @@ export default function CategoriesPage() {
                 <TableHead>Description</TableHead>
                 <TableHead>Posts</TableHead>
                 <TableHead>Created</TableHead>
-                <TableHead className="w-[100px]">Actions</TableHead>
+                <TableHead className="w-25">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -327,7 +327,7 @@ export default function CategoriesPage() {
                       /{category.slug}
                     </code>
                   </TableCell>
-                  <TableCell className="max-w-[200px] truncate">
+                  <TableCell className="max-w-50 truncate">
                     {category.description || "—"}
                   </TableCell>
                   <TableCell>

@@ -101,7 +101,7 @@ export function BlogDetailClient({ post, allPosts }: BlogDetailClientProps) {
 
               {/* Featured Image */}
               <div className="relative w-full h-96 rounded-2xl overflow-hidden bg-accent mb-8">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-primary/5" />
+                <div className="absolute inset-0 bg-linear-to-br from-primary/20 to-primary/5" />
                 {post.featured && (
                   <div className="absolute top-6 left-6 px-4 py-2 bg-primary text-primary-foreground text-sm font-semibold rounded-full">
                     Featured Article
@@ -110,60 +110,18 @@ export function BlogDetailClient({ post, allPosts }: BlogDetailClientProps) {
               </div>
 
               {/* Article Content */}
-              <div className="prose prose-lg max-w-none mb-12">
+              <div className="prose prose-lg dark:prose-invert max-w-none mb-12">
                 <p className="text-xl text-muted-foreground leading-relaxed mb-6">
                   {post.excerpt}
                 </p>
 
-                {/* Placeholder content - would be replaced with actual markdown/rich text */}
-                <h2 id="introduction" className="text-3xl font-black mt-8 mb-4">Introduction</h2>
-                <p>
-                  In today&apos;s rapidly evolving threat landscape, organizations face unprecedented challenges
-                  in protecting their digital assets. This comprehensive guide explores the latest strategies,
-                  tools, and best practices that security professionals are using to stay ahead of cyber threats.
-                </p>
-
-                <h2 id="key-takeaways" className="text-3xl font-black mt-8 mb-4">Key Takeaways</h2>
-                <ul className="space-y-2">
-                  <li>Understanding modern threat vectors and attack patterns</li>
-                  <li>Implementing defense-in-depth security strategies</li>
-                  <li>Leveraging automation and AI for threat detection</li>
-                  <li>Building a security-aware organizational culture</li>
-                </ul>
-
-                <h2 id="best-practices" className="text-3xl font-black mt-8 mb-4">Best Practices</h2>
-                <p>
-                  Security teams must adopt a proactive approach that combines technical controls,
-                  process improvements, and continuous monitoring. Here are the essential practices
-                  that every organization should implement.
-                </p>
-
-                <h3 id="continuous-monitoring" className="text-2xl font-bold mt-6 mb-3">1. Continuous Monitoring</h3>
-                <p>
-                  Implement 24/7 security monitoring with advanced SIEM platforms and threat intelligence
-                  feeds to detect and respond to threats in real-time.
-                </p>
-
-                <h3 id="security-assessments" className="text-2xl font-bold mt-6 mb-3">2. Regular Security Assessments</h3>
-                <p>
-                  Conduct periodic penetration testing and vulnerability assessments to identify
-                  weaknesses before attackers can exploit them.
-                </p>
+                {/* Render actual blog content from database */}
+                <div dangerouslySetInnerHTML={{ __html: post.content }} />
               </div>
 
-              {/* Newsletter CTA - Strategically placed mid-content */}
+              {/* Newsletter CTA */}
               <div className="my-12">
                 <NewsletterForm />
-              </div>
-
-              {/* Continue Article Content */}
-              <div className="prose prose-lg max-w-none mb-12">
-                <h2 id="conclusion" className="text-3xl font-black mt-8 mb-4">Conclusion</h2>
-                <p>
-                  By implementing these strategies and maintaining a strong security posture,
-                  organizations can significantly reduce their risk exposure and protect their
-                  critical assets from evolving cyber threats.
-                </p>
               </div>
 
               {/* Tags */}
@@ -200,7 +158,7 @@ export function BlogDetailClient({ post, allPosts }: BlogDetailClientProps) {
               {/* Author Bio */}
               <div className="p-8 rounded-2xl border border-border bg-card mb-12">
                 <div className="flex items-start gap-6">
-                  <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
                     <User className="w-10 h-10 text-primary" />
                   </div>
                   <div>
