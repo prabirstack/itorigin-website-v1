@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
-import { testimonials } from "@/db/schema";
+import { testimonials, testimonialStatusEnum } from "@/db/schema";
 import { eq, desc, and, sql } from "drizzle-orm";
 
 // GET - Public endpoint for approved testimonials
@@ -12,7 +12,8 @@ export async function GET(req: NextRequest) {
     const limit = Math.min(parseInt(searchParams.get("limit") || "10"), 50);
 
     // Build conditions - only approved testimonials
-    const conditions = [eq(testimonials.status, "approved")];
+    // Use sql template for enum comparison to ensure proper casting with Neon pooler
+    const conditions = [sql`${testimonials.status} = 'approved'`];
 
     if (featured === "true") {
       conditions.push(eq(testimonials.featured, true));
@@ -54,7 +55,7 @@ export async function GET(req: NextRequest) {
       .from(testimonials)
       .where(
         and(
-          eq(testimonials.status, "approved"),
+          sql`${testimonials.status} = 'approved'`,
           sql`${testimonials.industry} IS NOT NULL`
         )
       );
