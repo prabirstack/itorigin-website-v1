@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Placeholder from "@tiptap/extension-placeholder";
@@ -41,6 +42,8 @@ export function PostEditor({
   onChange,
   placeholder = "Write your post content here...",
 }: PostEditorProps) {
+  const isInitialMount = useRef(true);
+
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
@@ -79,6 +82,18 @@ export function PostEditor({
       },
     },
   });
+
+  // Update editor content when content prop changes (for loading existing posts)
+  useEffect(() => {
+    if (editor && content && isInitialMount.current) {
+      // Only set content on initial load, not on every change
+      const currentContent = editor.getHTML();
+      if (currentContent !== content && content !== "<p></p>") {
+        editor.commands.setContent(content);
+        isInitialMount.current = false;
+      }
+    }
+  }, [editor, content]);
 
   if (!editor) {
     return null;
