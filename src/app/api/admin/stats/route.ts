@@ -14,7 +14,7 @@ import {
   emailCampaigns,
 } from "@/db/schema";
 import { eq, sql, desc, gte } from "drizzle-orm";
-import { requireAdmin } from "@/lib/auth-utils";
+import { requireAdmin, handleAuthError } from "@/lib/auth-utils";
 
 export async function GET() {
   try {

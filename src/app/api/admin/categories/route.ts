@@ -4,7 +4,7 @@ import { categories, posts } from "@/db/schema";
 import { eq, desc, sql, ilike } from "drizzle-orm";
 import { nanoid } from "nanoid";
 import slugify from "slugify";
-import { requireAuthorOrAdmin } from "@/lib/auth-utils";
+import { requireAuthorOrAdmin, handleAuthError } from "@/lib/auth-utils";
 import { createCategorySchema } from "@/lib/validations/category";
 
 export async function GET(request: NextRequest) {
@@ -56,12 +56,11 @@ export async function GET(request: NextRequest) {
       },
     });
   } catch (error) {
-    if (error instanceof Error && error.message === "Unauthorized") {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
+    const authError = handleAuthError(error);
+    if (authError) return authError;
     console.error("Error fetching categories:", error);
     return NextResponse.json(
-      { error: "Failed to fetch categories" },
+      { error: error instanceof Error ? error.message : "Failed to fetch categories" },
       { status: 500 }
     );
   }
@@ -101,12 +100,11 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ category: newCategory }, { status: 201 });
   } catch (error) {
-    if (error instanceof Error && error.message === "Unauthorized") {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
+    const authError = handleAuthError(error);
+    if (authError) return authError;
     console.error("Error creating category:", error);
     return NextResponse.json(
-      { error: "Failed to create category" },
+      { error: error instanceof Error ? error.message : "Failed to create category" },
       { status: 500 }
     );
   }

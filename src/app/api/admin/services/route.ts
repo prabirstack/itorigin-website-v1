@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
 import { services } from "@/db/schema";
 import { desc, sql, eq, ilike, and, asc } from "drizzle-orm";
-import { requireAdmin } from "@/lib/auth-utils";
+import { requireAdmin, handleAuthError } from "@/lib/auth-utils";
 import { createServiceSchema } from "@/lib/validations/service";
 import { nanoid } from "nanoid";
 
@@ -57,15 +57,11 @@ export async function GET(request: NextRequest) {
       },
     });
   } catch (error) {
-    if (error instanceof Error && error.message === "Unauthorized") {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-    if (error instanceof Error && error.message === "Forbidden") {
-      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-    }
+    const authError = handleAuthError(error);
+    if (authError) return authError;
     console.error("Failed to fetch services:", error);
     return NextResponse.json(
-      { error: "Failed to fetch services" },
+      { error: error instanceof Error ? error.message : "Failed to fetch services" },
       { status: 500 }
     );
   }
@@ -112,15 +108,11 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ service }, { status: 201 });
   } catch (error) {
-    if (error instanceof Error && error.message === "Unauthorized") {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-    if (error instanceof Error && error.message === "Forbidden") {
-      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-    }
+    const authError = handleAuthError(error);
+    if (authError) return authError;
     console.error("Failed to create service:", error);
     return NextResponse.json(
-      { error: "Failed to create service" },
+      { error: error instanceof Error ? error.message : "Failed to create service" },
       { status: 500 }
     );
   }

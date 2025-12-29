@@ -3,7 +3,7 @@ import { db } from "@/db";
 import { resources, resourceDownloads } from "@/db/schema";
 import { eq, sql, desc } from "drizzle-orm";
 import { updateResourceSchema } from "@/lib/validations/resources";
-import { requireAdmin } from "@/lib/auth-utils";
+import { requireAdmin, handleAuthError } from "@/lib/auth-utils";
 
 type RouteContext = { params: Promise<{ id: string }> };
 

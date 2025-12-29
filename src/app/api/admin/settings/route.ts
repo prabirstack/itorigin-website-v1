@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
 import { siteSettings } from "@/db/schema";
 import { eq } from "drizzle-orm";
-import { requireAdmin } from "@/lib/auth-utils";
+import { requireAdmin, handleAuthError } from "@/lib/auth-utils";
 import { updateSettingsSchema } from "@/lib/validations/settings";
 
 // Default settings

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { put, del } from "@vercel/blob";
-import { requireAdmin } from "@/lib/auth-utils";
+import { requireAdmin, handleAuthError } from "@/lib/auth-utils";
 import { nanoid } from "nanoid";
 
 // Maximum file size: 10MB

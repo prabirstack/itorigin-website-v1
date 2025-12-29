@@ -3,7 +3,7 @@ import { db } from "@/db";
 import { caseStudies } from "@/db/schema";
 import { eq, desc, and, like, sql, or } from "drizzle-orm";
 import { createCaseStudySchema, caseStudyQuerySchema } from "@/lib/validations/case-study";
-import { requireAdmin } from "@/lib/auth-utils";
+import { requireAdmin, handleAuthError } from "@/lib/auth-utils";
 
 // GET - List all case studies (admin)
 export async function GET(req: NextRequest) {

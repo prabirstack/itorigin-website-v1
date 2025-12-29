@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
 import { emailCampaigns } from "@/db/schema";
 import { desc, sql, eq, ilike, and } from "drizzle-orm";
-import { requireAdmin } from "@/lib/auth-utils";
+import { requireAdmin, handleAuthError } from "@/lib/auth-utils";
 import { createCampaignSchema } from "@/lib/validations/campaign";
 import { nanoid } from "nanoid";
 

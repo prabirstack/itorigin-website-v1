@@ -4,7 +4,7 @@ import { posts, postTags, categories, tags, users } from "@/db/schema";
 import { eq, desc, and, like, sql } from "drizzle-orm";
 import { nanoid } from "nanoid";
 import slugify from "slugify";
-import { requireAuthorOrAdmin } from "@/lib/auth-utils";
+import { requireAuthorOrAdmin, handleAuthError } from "@/lib/auth-utils";
 import { createPostSchema } from "@/lib/validations/post";
 
 export async function GET(request: NextRequest) {
@@ -82,12 +82,11 @@ export async function GET(request: NextRequest) {
       },
     });
   } catch (error) {
-    if (error instanceof Error && error.message === "Unauthorized") {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
+    const authError = handleAuthError(error);
+    if (authError) return authError;
     console.error("Error fetching posts:", error);
     return NextResponse.json(
-      { error: "Failed to fetch posts" },
+      { error: error instanceof Error ? error.message : "Failed to fetch posts" },
       { status: 500 }
     );
   }
@@ -146,12 +145,11 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ post: newPost }, { status: 201 });
   } catch (error) {
-    if (error instanceof Error && error.message === "Unauthorized") {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
+    const authError = handleAuthError(error);
+    if (authError) return authError;
     console.error("Error creating post:", error);
     return NextResponse.json(
-      { error: "Failed to create post" },
+      { error: error instanceof Error ? error.message : "Failed to create post" },
       { status: 500 }
     );
   }

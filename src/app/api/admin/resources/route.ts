@@ -3,7 +3,7 @@ import { db } from "@/db";
 import { resources, resourceDownloads } from "@/db/schema";
 import { eq, desc, and, like, sql, or } from "drizzle-orm";
 import { createResourceSchema, resourceQuerySchema } from "@/lib/validations/resources";
-import { requireAdmin } from "@/lib/auth-utils";
+import { requireAdmin, handleAuthError } from "@/lib/auth-utils";
 
 // GET - List all resources (admin)
 export async function GET(req: NextRequest) {

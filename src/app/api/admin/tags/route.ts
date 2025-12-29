@@ -4,7 +4,7 @@ import { tags } from "@/db/schema";
 import { eq, desc } from "drizzle-orm";
 import { nanoid } from "nanoid";
 import slugify from "slugify";
-import { requireAuthorOrAdmin } from "@/lib/auth-utils";
+import { requireAuthorOrAdmin, handleAuthError } from "@/lib/auth-utils";
 import { z } from "zod";
 
 const createTagSchema = z.object({

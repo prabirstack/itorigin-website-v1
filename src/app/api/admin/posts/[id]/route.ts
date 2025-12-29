@@ -3,7 +3,7 @@ import { db } from "@/db";
 import { posts, postTags, categories, tags, users } from "@/db/schema";
 import { eq, and } from "drizzle-orm";
 import slugify from "slugify";
-import { requireAuthorOrAdmin } from "@/lib/auth-utils";
+import { requireAuthorOrAdmin, handleAuthError } from "@/lib/auth-utils";
 import { updatePostSchema } from "@/lib/validations/post";
 
 type Params = Promise<{ id: string }>;
@@ -38,12 +38,11 @@ export async function GET(request: NextRequest, { params }: { params: Params }) 
 
     return NextResponse.json({ post });
   } catch (error) {
-    if (error instanceof Error && error.message === "Unauthorized") {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
+    const authError = handleAuthError(error);
+    if (authError) return authError;
     console.error("Error fetching post:", error);
     return NextResponse.json(
-      { error: "Failed to fetch post" },
+      { error: error instanceof Error ? error.message : "Failed to fetch post" },
       { status: 500 }
     );
   }
@@ -120,12 +119,8 @@ export async function PATCH(request: NextRequest, { params }: { params: Params }
 
     return NextResponse.json({ post: updatedPost });
   } catch (error) {
-    if (error instanceof Error && error.message === "Unauthorized") {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-    if (error instanceof Error && error.message === "Forbidden") {
-      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-    }
+    const authError = handleAuthError(error);
+    if (authError) return authError;
     console.error("Error updating post:", error);
     return NextResponse.json(
       { error: error instanceof Error ? error.message : "Failed to update post" },
@@ -156,12 +151,11 @@ export async function DELETE(request: NextRequest, { params }: { params: Params 
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    if (error instanceof Error && error.message === "Unauthorized") {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
+    const authError = handleAuthError(error);
+    if (authError) return authError;
     console.error("Error deleting post:", error);
     return NextResponse.json(
-      { error: "Failed to delete post" },
+      { error: error instanceof Error ? error.message : "Failed to delete post" },
       { status: 500 }
     );
   }

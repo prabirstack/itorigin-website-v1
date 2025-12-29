@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
 import { chatConversations, chatMessages } from "@/db/schema";
 import { eq, asc } from "drizzle-orm";
-import { requireAdmin } from "@/lib/auth-utils";
+import { requireAdmin, handleAuthError } from "@/lib/auth-utils";
 import { updateConversationSchema } from "@/lib/validations/chat";
 
 type Params = Promise<{ id: string }>;

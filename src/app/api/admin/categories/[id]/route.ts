@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
 import { categories, posts } from "@/db/schema";
 import { eq } from "drizzle-orm";
-import { requireAuthorOrAdmin } from "@/lib/auth-utils";
+import { requireAuthorOrAdmin, handleAuthError } from "@/lib/auth-utils";
 import { updateCategorySchema } from "@/lib/validations/category";
 
 type Params = Promise<{ id: string }>;

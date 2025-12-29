@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { db } from "@/db";
 import { leads } from "@/db/schema";
 import { desc } from "drizzle-orm";
-import { requireAdmin } from "@/lib/auth-utils";
+import { requireAdmin, handleAuthError } from "@/lib/auth-utils";
 
 export async function GET() {
   try {
