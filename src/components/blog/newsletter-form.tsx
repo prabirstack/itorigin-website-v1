@@ -26,13 +26,13 @@ export function NewsletterForm() {
     resolver: zodResolver(newsletterSchema),
   });
 
-  const onSubmit = async (data: NewsletterFormData) => {
+  const onSubmit = async (_data: NewsletterFormData) => {
     setIsSubmitting(true);
 
     // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 1500));
 
-    console.log("Newsletter signup:", data);
+    // TODO: Integrate with actual newsletter API
     setIsSubmitting(false);
     setIsSubmitted(true);
     reset();

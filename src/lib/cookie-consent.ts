@@ -135,7 +135,7 @@ function enableAnalytics(): void {
   // Example: Enable other analytics
   // initializeAnalytics();
 
-  console.log("[Cookie Consent] Analytics enabled");
+  // Analytics tracking enabled
 }
 
 /**
@@ -153,7 +153,7 @@ function disableAnalytics(): void {
   //   }
   // });
 
-  console.log("[Cookie Consent] Analytics disabled");
+  // Analytics tracking disabled
 }
 
 /**
@@ -166,7 +166,7 @@ function enableMarketing(): void {
   // Example: Enable Facebook Pixel
   // window.fbq?.('consent', 'grant');
 
-  console.log("[Cookie Consent] Marketing enabled");
+  // Marketing tracking enabled
 }
 
 /**
@@ -179,7 +179,7 @@ function disableMarketing(): void {
   // Example: Disable Facebook Pixel
   // window.fbq?.('consent', 'revoke');
 
-  console.log("[Cookie Consent] Marketing disabled");
+  // Marketing tracking disabled
 }
 
 /**

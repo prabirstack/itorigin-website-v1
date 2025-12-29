@@ -39,7 +39,7 @@ export const Logo = ({
 
       {/* Dark mode logo */}
       <Image
-        src="/images/logo/logo-liight.webp"
+        src="/images/logo/logo-light.webp"
         alt="IT Origin Logo"
         fill
         className="hidden dark:block object-contain"
