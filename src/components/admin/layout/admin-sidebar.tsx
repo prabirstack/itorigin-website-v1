@@ -27,6 +27,9 @@ import {
   FolderDown,
   Award,
   BookOpen,
+  Quote,
+  Calendar,
+  CalendarClock,
 } from "lucide-react";
 import { Logo } from "@/components/common/logo";
 
@@ -65,6 +68,21 @@ const sidebarItems = [
     title: "Case Studies",
     href: "/admin/case-studies",
     icon: Award,
+  },
+  {
+    title: "Testimonials",
+    href: "/admin/testimonials",
+    icon: Quote,
+  },
+  {
+    title: "Events",
+    href: "/admin/events",
+    icon: Calendar,
+  },
+  {
+    title: "Appointments",
+    href: "/admin/appointments",
+    icon: CalendarClock,
   },
   {
     title: "Leads",

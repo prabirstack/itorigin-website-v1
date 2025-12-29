@@ -24,3 +24,12 @@ export * from "./resources";
 
 // Case Studies
 export * from "./case-studies";
+
+// Testimonials
+export * from "./testimonials";
+
+// Events & Webinars
+export * from "./events";
+
+// Appointments
+export * from "./appointments";
