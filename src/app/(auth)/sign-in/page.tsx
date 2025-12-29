@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -20,7 +19,6 @@ const signInSchema = z.object({
 type SignInFormData = z.infer<typeof signInSchema>;
 
 export default function SignInPage() {
-  const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -46,8 +44,8 @@ export default function SignInPage() {
       if (result.error) {
         setError(result.error.message || "Failed to sign in");
       } else {
-        router.push("/admin");
-        router.refresh();
+        // Use hard redirect to ensure cookies are properly recognized
+        window.location.href = "/admin";
       }
     } catch (err) {
       console.error("Sign in error:", err);
