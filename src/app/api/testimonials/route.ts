@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
-import { testimonials, testimonialStatusEnum } from "@/db/schema";
-import { eq, desc, and, sql } from "drizzle-orm";
+import { sql } from "drizzle-orm";
 
 // GET - Public endpoint for approved testimonials
 export async function GET(req: NextRequest) {
@@ -9,60 +8,52 @@ export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
     const featured = searchParams.get("featured");
     const industry = searchParams.get("industry");
-    const limit = Math.min(parseInt(searchParams.get("limit") || "10"), 50);
+    const limitParam = Math.min(parseInt(searchParams.get("limit") || "10"), 50);
 
-    // Build conditions - only approved testimonials
-    // Use sql template for enum comparison to ensure proper casting with Neon pooler
-    const conditions = [sql`${testimonials.status} = 'approved'`];
+    // Use raw SQL query for better compatibility with Neon pooler
+    let query = `
+      SELECT
+        id,
+        author_name as "authorName",
+        author_role as "authorRole",
+        author_company as "authorCompany",
+        author_image as "authorImage",
+        quote,
+        rating,
+        industry,
+        service_used as "serviceUsed",
+        featured,
+        verified
+      FROM testimonials
+      WHERE status = 'approved'
+    `;
 
     if (featured === "true") {
-      conditions.push(eq(testimonials.featured, true));
+      query += ` AND featured = true`;
     }
 
     if (industry) {
-      conditions.push(eq(testimonials.industry, industry));
+      query += ` AND industry = '${industry.replace(/'/g, "''")}'`;
     }
 
-    const whereClause = and(...conditions);
+    query += `
+      ORDER BY featured DESC, display_order, published_at DESC
+      LIMIT ${limitParam}
+    `;
 
-    // Get approved testimonials
-    const testimonialsList = await db
-      .select({
-        id: testimonials.id,
-        authorName: testimonials.authorName,
-        authorRole: testimonials.authorRole,
-        authorCompany: testimonials.authorCompany,
-        authorImage: testimonials.authorImage,
-        quote: testimonials.quote,
-        rating: testimonials.rating,
-        industry: testimonials.industry,
-        serviceUsed: testimonials.serviceUsed,
-        featured: testimonials.featured,
-        verified: testimonials.verified,
-      })
-      .from(testimonials)
-      .where(whereClause)
-      .orderBy(
-        desc(testimonials.featured),
-        testimonials.displayOrder,
-        desc(testimonials.publishedAt)
-      )
-      .limit(limit);
+    const testimonialsList = await db.execute(sql.raw(query));
 
-    // Get unique industries for filtering
-    const industriesResult = await db
-      .selectDistinct({ industry: testimonials.industry })
-      .from(testimonials)
-      .where(
-        and(
-          sql`${testimonials.status} = 'approved'`,
-          sql`${testimonials.industry} IS NOT NULL`
-        )
-      );
+    // Get unique industries
+    const industriesQuery = `
+      SELECT DISTINCT industry
+      FROM testimonials
+      WHERE status = 'approved' AND industry IS NOT NULL
+    `;
+    const industriesResult = await db.execute(sql.raw(industriesQuery));
 
     return NextResponse.json({
       testimonials: testimonialsList,
-      industries: industriesResult.map((i) => i.industry).filter(Boolean),
+      industries: (industriesResult as unknown as { industry: string }[]).map((i) => i.industry).filter(Boolean),
     });
   } catch (error) {
     console.error("Error fetching testimonials:", error);
