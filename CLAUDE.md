@@ -36,6 +36,7 @@ Copy `.env.example` to `.env.local` and configure:
 - `BETTER_AUTH_URL` - App URL for auth redirects
 - `REDIS_URL` - Redis for rate limiting (Upstash)
 - `RESEND_API_KEY` - Email service API key
+- `GOOGLE_GENERATIVE_AI_API_KEY` - Google AI (Gemini) for chat
 - `NEXT_PUBLIC_APP_URL` - Public app URL
 
 ## Architecture
