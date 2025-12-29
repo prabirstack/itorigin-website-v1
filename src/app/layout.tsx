@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { ServicesProvider } from "@/components/providers/services-provider";
 import { SettingsProvider } from "@/components/providers/settings-provider";
+import { CookieConsent } from "@/components/common/cookie-consent";
 
 export const satoshi = localFont({
   src: [
@@ -88,6 +89,7 @@ export default function RootLayout({
           <SettingsProvider>
             <ServicesProvider>
               {children}
+              <CookieConsent />
             </ServicesProvider>
           </SettingsProvider>
         </ThemeProvider>
