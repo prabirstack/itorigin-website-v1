@@ -19,8 +19,10 @@ bun run db:generate   # Generate migrations from schema changes
 bun run db:migrate    # Run migrations
 bun run db:push       # Push schema directly (dev only)
 bun run db:studio     # Open Drizzle Studio GUI
-bun run db:seed       # Seed admin user
-bun run db:seed:blog  # Seed blog data
+bun run db:seed              # Seed admin user
+bun run db:seed:blog         # Seed blog data
+bun run db:seed:resources    # Seed resources data
+bun run db:seed:case-studies # Seed case studies data
 
 # UI Components
 bunx shadcn@latest add [component]  # Add shadcn/ui component
@@ -32,6 +34,7 @@ Copy `.env.example` to `.env.local` and configure:
 - `DATABASE_URL` - PostgreSQL connection string
 - `BETTER_AUTH_SECRET` - Auth secret (min 32 chars)
 - `BETTER_AUTH_URL` - App URL for auth redirects
+- `REDIS_URL` - Redis for rate limiting (Upstash)
 - `RESEND_API_KEY` - Email service API key
 - `NEXT_PUBLIC_APP_URL` - Public app URL
 
@@ -62,6 +65,7 @@ Copy `.env.example` to `.env.local` and configure:
 /api/admin/chat              # Chat conversation management
 /api/admin/stats             # Dashboard statistics
 /api/admin/upload            # File uploads (Vercel Blob)
+/api/admin/profile           # Admin profile (image upload, password change)
 /api/public/posts            # Public blog listing
 /api/public/posts/[slug]     # Single post by slug
 /api/public/categories       # Public categories
@@ -167,7 +171,7 @@ Uses Google AI SDK (`@ai-sdk/google`) for chat support. Conversations stored in 
 - `src/lib/animations.ts` - Motion.js variants (fadeInUp, staggerContainer, etc.)
 - `src/lib/icon-map.ts` - Dynamic Lucide icon mapping for services
 - `src/config/site.ts` - Site metadata and social links
-- `src/lib/validations/` - Zod schemas (post, category, lead, chat, campaign, service, settings, resources)
+- `src/lib/validations/` - Zod schemas (post, category, lead, chat, campaign, service, settings, resources, case-study)
 
 ## Path Aliases
 
@@ -181,6 +185,7 @@ The admin dashboard (`/admin`) provides:
 - **User engagement** - Comments moderation, readers (users who commented), chat conversations
 - **Marketing** - Leads, subscribers, email campaigns
 - **Settings** - Site configuration
+- **Profile** - Admin profile with image upload and password change (`/admin/profile`)
 
 ### Admin UI Features
 - Sticky sidebar with collapsible navigation

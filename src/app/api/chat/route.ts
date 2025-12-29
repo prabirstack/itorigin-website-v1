@@ -6,8 +6,13 @@ import { chatConversations, chatMessages } from "@/db/schema";
 import { nanoid } from "nanoid";
 import { eq } from "drizzle-orm";
 import { IT_ORIGIN_SYSTEM_PROMPT } from "@/lib/chat-prompt";
+import { withRateLimit } from "@/lib/rate-limit";
 
 export async function POST(request: NextRequest) {
+  // Apply rate limiting (30 messages per minute)
+  const rateLimitResponse = await withRateLimit(request, "chat");
+  if (rateLimitResponse) return rateLimitResponse;
+
   try {
     const body = await request.json();
     const { messages, conversationId, visitorName, visitorEmail } = body;

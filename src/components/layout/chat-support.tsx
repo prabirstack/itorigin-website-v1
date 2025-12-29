@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
 import { motion, AnimatePresence } from "motion/react";
@@ -26,6 +26,21 @@ export const ChatSupport = () => {
   const [input, setInput] = useState("");
   const [conversationId, setConversationId] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const conversationIdRef = useRef<string | null>(null);
+
+  // Custom fetch to capture conversation ID from response headers
+  const customFetch = useCallback(async (url: RequestInfo | URL, init?: RequestInit) => {
+    const response = await fetch(url, init);
+
+    // Extract conversation ID from response headers
+    const newConversationId = response.headers.get("X-Conversation-Id");
+    if (newConversationId && !conversationIdRef.current) {
+      conversationIdRef.current = newConversationId;
+      setConversationId(newConversationId);
+    }
+
+    return response;
+  }, []);
 
   const {
     messages,
@@ -40,6 +55,7 @@ export const ChatSupport = () => {
         visitorName: name,
         visitorEmail: email,
       },
+      fetch: customFetch,
     }),
   });
 
@@ -63,10 +79,11 @@ export const ChatSupport = () => {
     setEmail("");
     setInput("");
     setConversationId(null);
+    conversationIdRef.current = null;
     setMessages([]);
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleChatSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
     sendMessage({ text: input });
@@ -103,7 +120,7 @@ export const ChatSupport = () => {
           <DialogTrigger asChild>
             <Button
               size="icon"
-              className="h-12 w-12 rounded-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 dark:from-green-600 dark:to-emerald-600 dark:hover:from-green-700 dark:hover:to-emerald-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 border-0 group relative cursor-pointer"
+              className="h-12 w-12 rounded-full bg-linear-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 dark:from-green-600 dark:to-emerald-600 dark:hover:from-green-700 dark:hover:to-emerald-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 border-0 group relative cursor-pointer"
             >
               {/* Pulse Animation */}
               <motion.div
@@ -129,7 +146,7 @@ export const ChatSupport = () => {
             </Button>
           </DialogTrigger>
 
-          <DialogContent className="sm:max-w-md h-[600px] flex flex-col bg-background/95 backdrop-blur-sm border border-border/50 shadow-xl p-0 gap-0">
+          <DialogContent className="sm:max-w-md h-150 flex flex-col bg-background/95 backdrop-blur-sm border border-border/50 shadow-xl p-0 gap-0">
             <DialogHeader className="p-4 pb-2 border-b shrink-0">
               <DialogTitle className="flex items-center gap-2 text-lg font-semibold">
                 <motion.div
@@ -206,7 +223,7 @@ export const ChatSupport = () => {
                     </div>
                     <Button
                       type="submit"
-                      className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white"
+                      className="w-full bg-linear-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white"
                     >
                       <Send className="h-4 w-4 mr-2" />
                       Start Chat
@@ -251,7 +268,7 @@ export const ChatSupport = () => {
                           animate={{ opacity: 1, y: 0 }}
                           className="flex gap-3"
                         >
-                          <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                          <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
                             <Bot className="h-4 w-4 text-primary" />
                           </div>
                           <div className="bg-muted rounded-lg rounded-tl-none p-3 max-w-[85%]">
@@ -275,7 +292,7 @@ export const ChatSupport = () => {
                         >
                           <div
                             className={cn(
-                              "w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0",
+                              "w-8 h-8 rounded-full flex items-center justify-center shrink-0",
                               message.role === "user"
                                 ? "bg-primary text-primary-foreground"
                                 : "bg-primary/10"
@@ -306,7 +323,7 @@ export const ChatSupport = () => {
                           animate={{ opacity: 1 }}
                           className="flex gap-3"
                         >
-                          <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                          <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
                             <Bot className="h-4 w-4 text-primary" />
                           </div>
                           <div className="bg-muted rounded-lg rounded-tl-none p-3">
@@ -321,7 +338,7 @@ export const ChatSupport = () => {
 
                   {/* Input Area */}
                   <form
-                    onSubmit={handleFormSubmit}
+                    onSubmit={handleChatSubmit}
                     className="p-4 border-t flex gap-2 shrink-0"
                   >
                     <input
@@ -336,7 +353,7 @@ export const ChatSupport = () => {
                       type="submit"
                       size="icon"
                       disabled={isLoading || !input.trim()}
-                      className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600"
+                      className="bg-linear-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600"
                     >
                       <Send className="h-4 w-4" />
                     </Button>
