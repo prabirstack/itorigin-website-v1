@@ -23,7 +23,6 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import {
   AlertDialog,
@@ -200,13 +199,11 @@ export default function CategoriesPage() {
           <h1 className="text-2xl font-bold">Categories</h1>
           <p className="text-muted-foreground">Manage blog categories</p>
         </div>
+        <Button onClick={() => { setEditCategory(null); reset(); setIsOpen(true); }}>
+          <Plus className="w-4 h-4 mr-2" />
+          New Category
+        </Button>
         <Dialog open={isOpen} onOpenChange={(open) => !open && handleClose()}>
-          <DialogTrigger asChild>
-            <Button onClick={() => { setEditCategory(null); reset(); }}>
-              <Plus className="w-4 h-4 mr-2" />
-              New Category
-            </Button>
-          </DialogTrigger>
           <DialogContent>
             <DialogHeader>
               <DialogTitle>
