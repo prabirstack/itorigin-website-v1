@@ -77,9 +77,27 @@ export const comments = pgTable("comments", {
   guestEmail: text("guest_email"),
   approved: boolean("approved").notNull().default(false),
   parentId: text("parent_id"),
+  likeCount: integer("like_count").notNull().default(0),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
+
+// Track which users liked which comments
+export const commentLikes = pgTable(
+  "comment_likes",
+  {
+    commentId: text("comment_id")
+      .notNull()
+      .references(() => comments.id, { onDelete: "cascade" }),
+    userId: text("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+  },
+  (table) => ({
+    pk: primaryKey({ columns: [table.commentId, table.userId] }),
+  })
+);
 
 // Relations
 export const categoriesRelations = relations(categories, ({ many }) => ({
@@ -114,13 +132,33 @@ export const postTagsRelations = relations(postTags, ({ one }) => ({
   }),
 }));
 
-export const commentsRelations = relations(comments, ({ one }) => ({
+export const commentsRelations = relations(comments, ({ one, many }) => ({
   post: one(posts, {
     fields: [comments.postId],
     references: [posts.id],
   }),
   author: one(users, {
     fields: [comments.authorId],
+    references: [users.id],
+  }),
+  parent: one(comments, {
+    fields: [comments.parentId],
+    references: [comments.id],
+    relationName: "replies",
+  }),
+  replies: many(comments, {
+    relationName: "replies",
+  }),
+  likes: many(commentLikes),
+}));
+
+export const commentLikesRelations = relations(commentLikes, ({ one }) => ({
+  comment: one(comments, {
+    fields: [commentLikes.commentId],
+    references: [comments.id],
+  }),
+  user: one(users, {
+    fields: [commentLikes.userId],
     references: [users.id],
   }),
 }));
@@ -133,3 +171,5 @@ export type Post = typeof posts.$inferSelect;
 export type NewPost = typeof posts.$inferInsert;
 export type Comment = typeof comments.$inferSelect;
 export type NewComment = typeof comments.$inferInsert;
+export type CommentLike = typeof commentLikes.$inferSelect;
+export type NewCommentLike = typeof commentLikes.$inferInsert;

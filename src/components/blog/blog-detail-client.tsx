@@ -181,7 +181,7 @@ export function BlogDetailClient({ post, allPosts }: BlogDetailClientProps) {
               </div>
 
               {/* Comments Section */}
-              <BlogComments />
+              <BlogComments postId={post.id} />
             </div>
 
             {/* Sticky Sidebar - Right */}
