@@ -49,8 +49,10 @@ export default function SignInPage() {
         router.push("/admin");
         router.refresh();
       }
-    } catch {
-      setError("An unexpected error occurred");
+    } catch (err) {
+      console.error("Sign in error:", err);
+      const errorMessage = err instanceof Error ? err.message : "An unexpected error occurred";
+      setError(errorMessage);
     } finally {
       setIsLoading(false);
     }
