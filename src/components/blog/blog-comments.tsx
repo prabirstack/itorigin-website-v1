@@ -1,7 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { User, ThumbsUp, Reply } from "lucide-react";
+import Link from "next/link";
+import { User, ThumbsUp, Reply, LogIn } from "lucide-react";
+import { useSession } from "@/lib/auth-client";
+import { Button } from "@/components/ui/button";
 
 interface Comment {
   id: string;
@@ -47,18 +50,22 @@ const DUMMY_COMMENTS: Comment[] = [
 ];
 
 export function BlogComments() {
+  const { data: session } = useSession();
   const [comments, setComments] = useState<Comment[]>(DUMMY_COMMENTS);
   const [newComment, setNewComment] = useState("");
   const [replyTo, setReplyTo] = useState<string | null>(null);
   const [replyContent, setReplyContent] = useState("");
 
+  const isAuthenticated = !!session?.user;
+  const userName = session?.user?.name || "Anonymous";
+
   const handleSubmitComment = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newComment.trim()) return;
+    if (!newComment.trim() || !isAuthenticated) return;
 
     const comment: Comment = {
       id: Date.now().toString(),
-      author: "You",
+      author: userName,
       content: newComment,
       timestamp: "Just now",
       likes: 0
@@ -69,11 +76,11 @@ export function BlogComments() {
   };
 
   const handleSubmitReply = (commentId: string) => {
-    if (!replyContent.trim()) return;
+    if (!replyContent.trim() || !isAuthenticated) return;
 
     const reply: Comment = {
       id: `${commentId}-${Date.now()}`,
-      author: "You",
+      author: userName,
       content: replyContent,
       timestamp: "Just now",
       likes: 0
@@ -96,7 +103,7 @@ export function BlogComments() {
   const CommentItem = ({ comment, isReply = false }: { comment: Comment; isReply?: boolean }) => (
     <div className={`${isReply ? "ml-12" : ""}`}>
       <div className="flex items-start gap-4">
-        <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+        <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
           <User className="w-5 h-5 text-primary" />
         </div>
         <div className="flex-1">
@@ -110,7 +117,7 @@ export function BlogComments() {
               <ThumbsUp className="w-4 h-4" />
               <span>{comment.likes}</span>
             </button>
-            {!isReply && (
+            {!isReply && isAuthenticated && (
               <button
                 onClick={() => setReplyTo(replyTo === comment.id ? null : comment.id)}
                 className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
@@ -168,22 +175,46 @@ export function BlogComments() {
     <div className="mb-12">
       <h2 className="text-3xl font-black mb-8">Comments ({comments.length})</h2>
 
-      {/* Comment Form */}
-      <form onSubmit={handleSubmitComment} className="mb-12">
-        <textarea
-          value={newComment}
-          onChange={(e) => setNewComment(e.target.value)}
-          placeholder="Share your thoughts..."
-          className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary/50 resize-none"
-          rows={4}
-        />
-        <button
-          type="submit"
-          className="mt-3 px-6 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors"
-        >
-          Post Comment
-        </button>
-      </form>
+      {/* Comment Form or Sign In Prompt */}
+      {isAuthenticated ? (
+        <form onSubmit={handleSubmitComment} className="mb-12">
+          <div className="flex items-center gap-3 mb-3">
+            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+              <User className="w-5 h-5 text-primary" />
+            </div>
+            <span className="font-medium">{userName}</span>
+          </div>
+          <textarea
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+            placeholder="Share your thoughts..."
+            className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary/50 resize-none"
+            rows={4}
+          />
+          <button
+            type="submit"
+            className="mt-3 px-6 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors"
+          >
+            Post Comment
+          </button>
+        </form>
+      ) : (
+        <div className="mb-12 p-6 rounded-lg border border-border bg-muted/30 text-center">
+          <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+            <LogIn className="w-6 h-6 text-primary" />
+          </div>
+          <h3 className="text-lg font-semibold mb-2">Sign in to comment</h3>
+          <p className="text-muted-foreground mb-4">
+            Join the conversation by signing in to your account.
+          </p>
+          <Button asChild>
+            <Link href="/sign-in">
+              <LogIn className="w-4 h-4 mr-2" />
+              Sign In
+            </Link>
+          </Button>
+        </div>
+      )}
 
       {/* Comments List */}
       <div className="space-y-8">

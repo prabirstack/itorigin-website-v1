@@ -22,7 +22,6 @@ import {
   LogOut,
   User,
   Settings,
-  Shield,
   LayoutDashboard,
   FileText,
   MessageSquare,
@@ -40,7 +39,11 @@ import {
   CheckCheck,
   AlertCircle,
   ExternalLink,
+  BookOpen,
+  FolderDown,
+  Award,
 } from "lucide-react";
+import { Logo } from "@/components/common/logo";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
@@ -50,12 +53,14 @@ const sidebarItems = [
   { title: "Posts", href: "/admin/posts", icon: FileText },
   { title: "Categories", href: "/admin/categories", icon: Tag },
   { title: "Comments", href: "/admin/comments", icon: MessageSquare },
+  { title: "Readers", href: "/admin/readers", icon: BookOpen },
   { title: "Services", href: "/admin/services", icon: Briefcase },
+  { title: "Case Studies", href: "/admin/case-studies", icon: Award },
   { title: "Leads", href: "/admin/leads", icon: UserCircle },
   { title: "Subscribers", href: "/admin/subscribers", icon: Users },
   { title: "Campaigns", href: "/admin/campaigns", icon: Send },
   { title: "Chat", href: "/admin/chat", icon: Mail },
-  { title: "Users", href: "/admin/users", icon: Users },
+  { title: "Resources", href: "/admin/resources", icon: FolderDown },
   { title: "Settings", href: "/admin/settings", icon: Settings },
 ];
 
@@ -159,9 +164,8 @@ export function AdminHeader() {
               </Button>
             </SheetTrigger>
             <SheetContent side="left" className="w-64 p-0">
-              <div className="flex items-center gap-2 h-16 px-6 border-b">
-                <Shield className="w-6 h-6 text-primary" />
-                <span className="text-lg font-bold">IT Origin</span>
+              <div className="flex items-center h-16 px-4 border-b">
+                <Logo href="/admin" size="sm" animated={false} className="w-28 h-8" />
               </div>
               <nav className="p-4 space-y-1">
                 {sidebarItems.map((item) => {
@@ -190,9 +194,8 @@ export function AdminHeader() {
             </SheetContent>
           </Sheet>
 
-          <div className="lg:hidden flex items-center gap-2">
-            <Shield className="w-5 h-5 text-primary" />
-            <span className="font-bold">Admin</span>
+          <div className="lg:hidden">
+            <Logo href="/admin" size="sm" animated={false} />
           </div>
         </div>
 

@@ -1,12 +1,11 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
-import Image from "next/image";
 import { motion } from "motion/react";
 import { Phone, Mail, MapPin, Linkedin, Github } from "lucide-react";
 import { RiTwitterXFill, RiFacebookFill, RiInstagramLine, RiYoutubeLine } from "react-icons/ri";
 import { useSettings, getPhoneLink, getEmailLink } from "@/components/providers/settings-provider";
+import { Logo } from "@/components/common/logo";
 
 export function FooterBrand() {
   const { settings } = useSettings();
@@ -35,26 +34,7 @@ export function FooterBrand() {
     <div className="lg:col-span-4 space-y-8">
       {/* Logo and Description */}
       <div className="space-y-4">
-        <Link href="/">
-          <div className="relative w-32 h-10">
-            {/* Light mode logo */}
-            <Image
-              src="/images/logo/logo-dark.webp"
-              alt="Logo Light"
-              fill
-              className="block dark:hidden object-contain"
-              priority
-            />
-            {/* Dark mode logo */}
-            <Image
-              src="/images/logo/logo-liight.webp"
-              alt="Logo Dark"
-              fill
-              className="hidden dark:block object-contain"
-              priority
-            />
-          </div>
-        </Link>
+        <Logo size="sm" animated={false} className="w-32 h-10" />
 
         <p className="text-muted-foreground leading-relaxed max-w-md">
           {description}

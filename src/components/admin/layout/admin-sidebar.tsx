@@ -19,7 +19,6 @@ import {
   Users,
   Mail,
   Settings,
-  Shield,
   Briefcase,
   UserCircle,
   Send,
@@ -27,7 +26,9 @@ import {
   ChevronLeft,
   FolderDown,
   Award,
+  BookOpen,
 } from "lucide-react";
+import { Logo } from "@/components/common/logo";
 
 const sidebarItems = [
   {
@@ -49,6 +50,11 @@ const sidebarItems = [
     title: "Comments",
     href: "/admin/comments",
     icon: MessageSquare,
+  },
+  {
+    title: "Readers",
+    href: "/admin/readers",
+    icon: BookOpen,
   },
   {
     title: "Services",
@@ -124,28 +130,30 @@ export function AdminSidebar() {
         className="hidden lg:flex flex-col h-screen border-r bg-card sticky top-0"
       >
         {/* Header */}
-        <div className="flex items-center h-16 px-4 border-b">
-          <Link href="/admin" className="flex items-center gap-3">
-            <motion.div
-              animate={{ scale: isCollapsed ? 1.1 : 1 }}
-              transition={{ duration: 0.2 }}
-            >
-              <Shield className="w-6 h-6 text-primary shrink-0" />
-            </motion.div>
-            <AnimatePresence mode="wait">
-              {!isCollapsed && (
-                <motion.span
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -10 }}
-                  transition={{ duration: 0.15 }}
-                  className="text-lg font-bold whitespace-nowrap"
-                >
-                  IT Origin
-                </motion.span>
-              )}
-            </AnimatePresence>
-          </Link>
+        <div className="flex items-center h-16 px-4 border-b overflow-hidden">
+          <AnimatePresence mode="wait">
+            {isCollapsed ? (
+              <motion.div
+                key="collapsed"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                transition={{ duration: 0.15 }}
+              >
+                <Logo href="/admin" size="sm" animated={false} />
+              </motion.div>
+            ) : (
+              <motion.div
+                key="expanded"
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -10 }}
+                transition={{ duration: 0.15 }}
+              >
+                <Logo href="/admin" size="sm" animated={false} className="w-28 h-8" />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
         {/* Toggle Button */}
