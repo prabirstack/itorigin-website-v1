@@ -3,8 +3,6 @@ import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { db } from "@/db";
 import * as schema from "@/db/schema";
 
-const isProduction = process.env.NODE_ENV === "production";
-
 export const auth = betterAuth({
   baseURL: process.env.BETTER_AUTH_URL || "http://localhost:3000",
   database: drizzleAdapter(db, {
@@ -28,10 +26,6 @@ export const auth = betterAuth({
       maxAge: 60 * 5, // 5 minutes
     },
   },
-  advanced: {
-    cookiePrefix: "better-auth",
-    useSecureCookies: isProduction,
-  },
   user: {
     additionalFields: {
       role: {
@@ -42,7 +36,10 @@ export const auth = betterAuth({
       },
     },
   },
-  trustedOrigins: [process.env.BETTER_AUTH_URL || "http://localhost:3000"],
+  trustedOrigins: [
+    process.env.BETTER_AUTH_URL || "http://localhost:3000",
+    "https://itorigin-website-v1-kx3n.vercel.app",
+  ],
 });
 
 export type Session = typeof auth.$Infer.Session;

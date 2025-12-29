@@ -14,10 +14,8 @@ export async function proxy(request: NextRequest) {
   // Check if the route is an auth route
   const isAuthRoute = authRoutes.some((route) => pathname.startsWith(route));
 
-  // Get session token from cookies (check both possible names)
-  const sessionToken =
-    request.cookies.get("better-auth.session_token")?.value ||
-    request.cookies.get("better-auth_session_token")?.value;
+  // Get session token from cookies
+  const sessionToken = request.cookies.get("better-auth.session_token")?.value;
 
   // If protected route and no session, redirect to sign-in
   if (isProtectedRoute && !sessionToken) {
