@@ -25,7 +25,7 @@ export const ChatSupport = () => {
   const [email, setEmail] = useState("");
   const [input, setInput] = useState("");
   const [conversationId, setConversationId] = useState<string | null>(null);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const scrollAreaRef = useRef<HTMLDivElement>(null);
   const conversationIdRef = useRef<string | null>(null);
 
   // Custom fetch to capture conversation ID from response headers
@@ -63,7 +63,12 @@ export const ChatSupport = () => {
 
   // Auto-scroll to bottom when new messages arrive
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (scrollAreaRef.current) {
+      const viewport = scrollAreaRef.current.querySelector("[data-radix-scroll-area-viewport]");
+      if (viewport) {
+        viewport.scrollTop = viewport.scrollHeight;
+      }
+    }
   }, [messages]);
 
   const handleStartChat = (e: React.FormEvent) => {
@@ -92,11 +97,18 @@ export const ChatSupport = () => {
 
   // Helper to extract text from message parts
   const getMessageText = (message: typeof messages[0]) => {
-    if (!message.parts) return "";
-    return message.parts
-      .filter((part): part is { type: "text"; text: string } => part.type === "text")
-      .map((part) => part.text)
-      .join("");
+    // Handle direct content string (older format)
+    if ("content" in message && typeof message.content === "string") {
+      return message.content;
+    }
+    // Handle parts array (newer format)
+    if (message.parts) {
+      return message.parts
+        .filter((part): part is { type: "text"; text: string } => part.type === "text")
+        .map((part) => part.text)
+        .join("");
+    }
+    return "";
   };
 
   const quickTopics = ["SOC Services", "Penetration Testing", "Compliance", "Get a Quote"];
@@ -256,10 +268,10 @@ export const ChatSupport = () => {
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -20 }}
-                  className="flex-1 flex flex-col min-h-0"
+                  className="flex-1 flex flex-col min-h-0 overflow-hidden"
                 >
                   {/* Messages Area */}
-                  <ScrollArea className="flex-1 px-4">
+                  <ScrollArea ref={scrollAreaRef} className="flex-1 px-4 h-0">
                     <div className="space-y-4 py-4">
                       {/* Welcome message */}
                       {messages.length === 0 && (
@@ -332,7 +344,6 @@ export const ChatSupport = () => {
                         </motion.div>
                       )}
 
-                      <div ref={messagesEndRef} />
                     </div>
                   </ScrollArea>
 

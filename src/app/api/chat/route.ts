@@ -109,8 +109,11 @@ export async function POST(request: NextRequest) {
     });
 
     // Return streaming response with conversation ID in headers
-    const response = result.toTextStreamResponse();
-    response.headers.set("X-Conversation-Id", activeConversationId || "");
+    const response = result.toUIMessageStreamResponse({
+      headers: {
+        "X-Conversation-Id": activeConversationId || "",
+      },
+    });
     return response;
   } catch (error) {
     console.error("Chat API error:", error);
