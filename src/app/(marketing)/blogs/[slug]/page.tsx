@@ -5,6 +5,9 @@ import { posts } from "@/db/schema";
 import { eq, and, desc } from "drizzle-orm";
 import { BlogDetailClient } from "@/components/blog/blog-detail-client";
 
+// Force dynamic rendering to ensure fresh data from CMS
+export const dynamic = "force-dynamic";
+
 interface BlogDetailPageProps {
   params: Promise<{
     slug: string;

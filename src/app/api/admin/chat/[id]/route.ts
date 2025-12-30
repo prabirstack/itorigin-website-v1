@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { db } from "@/db";
 import { chatConversations, chatMessages } from "@/db/schema";
 import { eq, asc } from "drizzle-orm";
@@ -86,6 +87,9 @@ export async function PATCH(
       .where(eq(chatConversations.id, id))
       .returning();
 
+    // Revalidate admin chat page
+    revalidatePath("/admin/chat");
+
     return NextResponse.json({ conversation: updated });
   } catch (error) {
     if (error instanceof Error && error.message === "Unauthorized") {
@@ -126,6 +130,9 @@ export async function DELETE(
     await db
       .delete(chatConversations)
       .where(eq(chatConversations.id, id));
+
+    // Revalidate admin chat page
+    revalidatePath("/admin/chat");
 
     return NextResponse.json({ success: true });
   } catch (error) {

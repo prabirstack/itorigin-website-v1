@@ -1,6 +1,7 @@
 import { streamText } from "ai";
 import { google } from "@ai-sdk/google";
 import { NextRequest } from "next/server";
+import { revalidatePath } from "next/cache";
 import { db } from "@/db";
 import { chatConversations, chatMessages } from "@/db/schema";
 import { nanoid } from "nanoid";
@@ -34,6 +35,9 @@ export async function POST(request: NextRequest) {
         .returning();
 
       activeConversationId = newConversation.id;
+
+      // Revalidate admin chat page
+      revalidatePath("/admin/chat");
     }
 
     // Get the last user message to save

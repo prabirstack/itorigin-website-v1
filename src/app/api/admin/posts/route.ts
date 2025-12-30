@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { db } from "@/db";
 import { posts, postTags, categories, tags, users } from "@/db/schema";
 import { eq, desc, and, like, sql } from "drizzle-orm";
@@ -142,6 +143,11 @@ export async function POST(request: NextRequest) {
         }))
       );
     }
+
+    // Revalidate blog pages to show new post
+    revalidatePath("/blogs");
+    revalidatePath(`/blogs/${slug}`);
+    revalidatePath("/sitemap.xml");
 
     return NextResponse.json({ post: newPost }, { status: 201 });
   } catch (error) {

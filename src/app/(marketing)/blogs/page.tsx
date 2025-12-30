@@ -4,6 +4,9 @@ import { db } from "@/db";
 import { posts, categories } from "@/db/schema";
 import { eq, desc, asc } from "drizzle-orm";
 
+// Force dynamic rendering to ensure fresh data from CMS
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Cybersecurity Blog | Latest Security Insights & Best Practices | IT Origin",
   description: "Stay informed with IT Origin's cybersecurity blog. Expert insights on threat intelligence, penetration testing, compliance, cloud security, and security operations.",

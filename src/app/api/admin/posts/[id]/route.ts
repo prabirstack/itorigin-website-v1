@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { db } from "@/db";
 import { posts, postTags, categories, tags, users } from "@/db/schema";
 import { eq, and } from "drizzle-orm";
@@ -117,6 +118,14 @@ export async function PATCH(request: NextRequest, { params }: { params: Params }
       }
     }
 
+    // Revalidate blog pages to reflect changes
+    revalidatePath("/blogs");
+    revalidatePath(`/blogs/${existingPost.slug}`);
+    revalidatePath("/sitemap.xml");
+    if (validated.slug && validated.slug !== existingPost.slug) {
+      revalidatePath(`/blogs/${validated.slug}`);
+    }
+
     return NextResponse.json({ post: updatedPost });
   } catch (error) {
     const authError = handleAuthError(error);
@@ -148,6 +157,11 @@ export async function DELETE(request: NextRequest, { params }: { params: Params 
     }
 
     await db.delete(posts).where(eq(posts.id, id));
+
+    // Revalidate blog pages after deletion
+    revalidatePath("/blogs");
+    revalidatePath(`/blogs/${existingPost.slug}`);
+    revalidatePath("/sitemap.xml");
 
     return NextResponse.json({ success: true });
   } catch (error) {

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { db } from "@/db";
 import { subscribers } from "@/db/schema";
 import { eq } from "drizzle-orm";
@@ -27,6 +28,9 @@ export async function DELETE(
     }
 
     await db.delete(subscribers).where(eq(subscribers.id, id));
+
+    // Revalidate admin pages
+    revalidatePath("/admin/subscribers");
 
     return NextResponse.json({ success: true });
   } catch (error) {

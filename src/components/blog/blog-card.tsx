@@ -30,9 +30,9 @@ export function BlogCard({ post, index = 0 }: BlogCardProps) {
       <Link href={`/blogs/${post.slug}`}>
         <div className="flex flex-col md:flex-row gap-6 p-6 rounded-2xl border border-border bg-card hover:border-primary/50 transition-all duration-300">
           {/* Image */}
-          <div className="md:w-64 flex-shrink-0">
+          <div className="md:w-64 shrink-0">
             <div className="relative w-full h-48 md:h-full rounded-xl overflow-hidden bg-accent">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-primary/5" />
+              <div className="absolute inset-0 bg-linear-to-br from-primary/20 to-primary/5" />
               {post.featured && (
                 <div className="absolute top-4 left-4 px-3 py-1 bg-primary text-primary-foreground text-xs font-semibold rounded-full">
                   Featured

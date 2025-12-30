@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { db } from "@/db";
 import { categories, posts } from "@/db/schema";
 import { eq, desc, sql, ilike } from "drizzle-orm";
@@ -97,6 +98,10 @@ export async function POST(request: NextRequest) {
         description: validated.description || null,
       })
       .returning();
+
+    // Revalidate pages that use categories
+    revalidatePath("/admin/categories");
+    revalidatePath("/blogs");
 
     return NextResponse.json({ category: newCategory }, { status: 201 });
   } catch (error) {

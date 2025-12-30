@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { db } from "@/db";
 import { subscribers, leads } from "@/db/schema";
 import { eq } from "drizzle-orm";
@@ -66,6 +67,10 @@ export async function POST(request: NextRequest) {
       status: "new",
       message: "Subscribed to newsletter",
     });
+
+    // Revalidate admin pages
+    revalidatePath("/admin/subscribers");
+    revalidatePath("/admin/leads");
 
     // Send confirmation email
     const confirmUrl = `${BASE_URL}/api/newsletter/confirm/${confirmToken}`;
