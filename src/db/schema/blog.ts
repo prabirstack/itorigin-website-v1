@@ -45,8 +45,20 @@ export const posts = pgTable("posts", {
   }),
   readingTime: integer("reading_time"),
   viewCount: integer("view_count").notNull().default(0),
+  // When true, slug won't auto-update when title changes (user customized it)
+  slugLocked: boolean("slug_locked").notNull().default(false),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
+
+// Store old slugs for SEO 301 redirects when slug changes
+export const postRedirects = pgTable("post_redirects", {
+  id: text("id").primaryKey(),
+  oldSlug: text("old_slug").notNull().unique(),
+  postId: text("post_id")
+    .notNull()
+    .references(() => posts.id, { onDelete: "cascade" }),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
 export const postTags = pgTable(
@@ -119,6 +131,14 @@ export const postsRelations = relations(posts, ({ one, many }) => ({
   }),
   postTags: many(postTags),
   comments: many(comments),
+  redirects: many(postRedirects),
+}));
+
+export const postRedirectsRelations = relations(postRedirects, ({ one }) => ({
+  post: one(posts, {
+    fields: [postRedirects.postId],
+    references: [posts.id],
+  }),
 }));
 
 export const postTagsRelations = relations(postTags, ({ one }) => ({
@@ -169,6 +189,8 @@ export type Tag = typeof tags.$inferSelect;
 export type NewTag = typeof tags.$inferInsert;
 export type Post = typeof posts.$inferSelect;
 export type NewPost = typeof posts.$inferInsert;
+export type PostRedirect = typeof postRedirects.$inferSelect;
+export type NewPostRedirect = typeof postRedirects.$inferInsert;
 export type Comment = typeof comments.$inferSelect;
 export type NewComment = typeof comments.$inferInsert;
 export type CommentLike = typeof commentLikes.$inferSelect;

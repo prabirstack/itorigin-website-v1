@@ -1,12 +1,34 @@
 import { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { db } from "@/db";
-import { posts } from "@/db/schema";
+import { posts, postRedirects } from "@/db/schema";
 import { eq, and, desc } from "drizzle-orm";
 import { BlogDetailClient } from "@/components/blog/blog-detail-client";
 
 // Force dynamic rendering to ensure fresh data from CMS
 export const dynamic = "force-dynamic";
+
+/**
+ * Check if a slug has been redirected (for SEO preservation)
+ * Returns the new slug if redirect exists, null otherwise
+ */
+async function checkSlugRedirect(oldSlug: string): Promise<string | null> {
+  const redirectEntry = await db.query.postRedirects.findFirst({
+    where: eq(postRedirects.oldSlug, oldSlug),
+    with: {
+      post: {
+        columns: { slug: true, status: true },
+      },
+    },
+  });
+
+  // Only redirect if the post is published
+  if (redirectEntry?.post?.status === "published") {
+    return redirectEntry.post.slug;
+  }
+
+  return null;
+}
 
 interface BlogDetailPageProps {
   params: Promise<{
@@ -153,6 +175,12 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
   ]);
 
   if (!post) {
+    // Check if this is an old slug that should redirect
+    const newSlug = await checkSlugRedirect(slug);
+    if (newSlug) {
+      // 308 Permanent Redirect (preserves SEO link equity)
+      redirect(`/blogs/${newSlug}`);
+    }
     notFound();
   }
 

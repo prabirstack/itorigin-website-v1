@@ -18,7 +18,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { PostEditor } from "@/components/admin/posts/post-editor";
-import { ArrowLeft, Loader2, Save, Eye, Trash2 } from "lucide-react";
+import { ArrowLeft, Loader2, Save, Eye, Trash2, Lock, Unlock, RefreshCw } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
+import slugify from "slugify";
 import { Breadcrumb } from "@/components/admin/shared/breadcrumb";
 import {
   AlertDialog,
@@ -39,6 +41,7 @@ const postSchema = z.object({
   coverImage: z.string().optional(),
   categoryId: z.string().optional(),
   status: z.enum(["draft", "published"]),
+  slugLocked: z.boolean().optional(),
 });
 
 type PostFormData = z.infer<typeof postSchema>;
@@ -58,6 +61,7 @@ interface Post {
   coverImage: string | null;
   status: "draft" | "published";
   categoryId: string | null;
+  slugLocked: boolean;
 }
 
 export default function EditPostPage({
@@ -73,16 +77,30 @@ export default function EditPostPage({
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [slugLocked, setSlugLocked] = useState(false);
+  const [originalTitle, setOriginalTitle] = useState("");
 
   const {
     register,
     handleSubmit,
     setValue,
+    watch,
     reset,
     formState: { errors },
   } = useForm<PostFormData>({
     resolver: zodResolver(postSchema),
   });
+
+  const currentTitle = watch("title");
+  const currentSlug = watch("slug");
+
+  // Auto-generate slug when title changes (if not locked)
+  useEffect(() => {
+    if (!slugLocked && currentTitle && currentTitle !== originalTitle && post) {
+      const newSlug = slugify(currentTitle, { lower: true, strict: true });
+      setValue("slug", newSlug);
+    }
+  }, [currentTitle, slugLocked, originalTitle, setValue, post]);
 
   // Fetch post and categories
   useEffect(() => {
@@ -103,6 +121,8 @@ export default function EditPostPage({
         setPost(postData.post);
         setContent(postData.post.content);
         setCategories(categoriesData.categories || []);
+        setSlugLocked(postData.post.slugLocked || false);
+        setOriginalTitle(postData.post.title);
 
         reset({
           title: postData.post.title,
@@ -111,6 +131,7 @@ export default function EditPostPage({
           coverImage: postData.post.coverImage || "",
           categoryId: postData.post.categoryId || "",
           status: postData.post.status,
+          slugLocked: postData.post.slugLocked || false,
         });
       } catch (error) {
         console.error("Failed to fetch data:", error);
@@ -137,6 +158,7 @@ export default function EditPostPage({
         body: JSON.stringify({
           ...data,
           content,
+          slugLocked,
         }),
       });
 
@@ -145,12 +167,38 @@ export default function EditPostPage({
         throw new Error(error.error || "Failed to update post");
       }
 
+      const result = await res.json();
+
+      // Show notification if slug changed
+      if (result.slugChanged) {
+        console.log(`Slug updated: ${result.previousSlug} → ${result.post.slug}`);
+      }
+
       router.push("/admin/posts");
     } catch (error) {
       console.error("Failed to update post:", error);
       alert(error instanceof Error ? error.message : "Failed to update post");
     } finally {
       setIsSaving(false);
+    }
+  };
+
+  // Handle manual slug edit - lock the slug when user types
+  const handleSlugChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newSlug = e.target.value;
+    setValue("slug", newSlug);
+    // If user manually edits slug, lock it
+    if (newSlug !== slugify(currentTitle || "", { lower: true, strict: true })) {
+      setSlugLocked(true);
+    }
+  };
+
+  // Reset slug from title
+  const regenerateSlug = () => {
+    if (currentTitle) {
+      const newSlug = slugify(currentTitle, { lower: true, strict: true });
+      setValue("slug", newSlug);
+      setSlugLocked(false);
     }
   };
 
@@ -279,12 +327,61 @@ export default function EditPostPage({
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="slug">Slug</Label>
+              <div className="flex items-center justify-between">
+                <Label htmlFor="slug">Slug</Label>
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={regenerateSlug}
+                    className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1"
+                    title="Regenerate from title"
+                  >
+                    <RefreshCw className="w-3 h-3" />
+                    Sync
+                  </button>
+                  <div className="flex items-center gap-1.5">
+                    <Switch
+                      id="slugLocked"
+                      checked={slugLocked}
+                      onCheckedChange={setSlugLocked}
+                      className="scale-75"
+                    />
+                    <Label
+                      htmlFor="slugLocked"
+                      className="text-xs text-muted-foreground cursor-pointer flex items-center gap-1"
+                    >
+                      {slugLocked ? (
+                        <>
+                          <Lock className="w-3 h-3" />
+                          Locked
+                        </>
+                      ) : (
+                        <>
+                          <Unlock className="w-3 h-3" />
+                          Auto-sync
+                        </>
+                      )}
+                    </Label>
+                  </div>
+                </div>
+              </div>
               <Input
                 id="slug"
                 placeholder="post-url-slug"
-                {...register("slug")}
+                value={currentSlug || ""}
+                onChange={handleSlugChange}
+                className={slugLocked ? "border-amber-500/50" : ""}
               />
+              {!slugLocked && (
+                <p className="text-xs text-muted-foreground">
+                  Slug will auto-update when you change the title
+                </p>
+              )}
+              {slugLocked && post?.status === "published" && currentSlug !== post.slug && (
+                <p className="text-xs text-amber-600 dark:text-amber-400">
+                  Changing slug of a published post will create a redirect from the old URL
+                </p>
+              )}
               {errors.slug && (
                 <p className="text-sm text-destructive">
                   {errors.slug.message}

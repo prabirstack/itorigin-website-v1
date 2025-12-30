@@ -9,6 +9,8 @@ export const createPostSchema = z.object({
   categoryId: z.string().optional().nullable(),
   tagIds: z.array(z.string()).optional(),
   status: z.enum(["draft", "published"]).default("draft"),
+  // When true, slug won't auto-update when title changes
+  slugLocked: z.boolean().optional(),
 });
 
 export const updatePostSchema = createPostSchema.partial();
