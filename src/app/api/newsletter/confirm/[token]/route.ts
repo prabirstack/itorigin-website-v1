@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
 import { subscribers } from "@/db/schema";
-import { eq, sql } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import { sendNewsletterWelcomeEmail } from "@/lib/email";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://itorigin.in";
@@ -13,11 +13,11 @@ export async function GET(
   try {
     const { token } = await params;
 
-    // Find subscriber by confirm token using standard SQL for Neon pooler compatibility
+    // Find subscriber by confirm token using standard query for Neon pooler compatibility
     const subscriberResult = await db
       .select()
       .from(subscribers)
-      .where(eq(subscribers.confirmToken, sql`${token}`))
+      .where(eq(subscribers.confirmToken, token))
       .limit(1);
     const subscriber = subscriberResult[0];
 

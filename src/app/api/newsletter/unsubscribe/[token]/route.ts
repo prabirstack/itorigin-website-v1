@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
 import { subscribers } from "@/db/schema";
-import { eq, sql } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 
 export async function GET(
   request: NextRequest,
@@ -10,11 +10,11 @@ export async function GET(
   try {
     const { token } = await params;
 
-    // Find subscriber by unsubscribe token using standard SQL for Neon pooler compatibility
+    // Find subscriber by unsubscribe token using standard query for Neon pooler compatibility
     const subscriberResult = await db
       .select()
       .from(subscribers)
-      .where(eq(subscribers.unsubscribeToken, sql`${token}`))
+      .where(eq(subscribers.unsubscribeToken, token))
       .limit(1);
     const subscriber = subscriberResult[0];
 

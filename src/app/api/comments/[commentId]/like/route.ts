@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
 import { comments, commentLikes } from "@/db/schema";
-import { eq, and, sql } from "drizzle-orm";
+import { eq, and } from "drizzle-orm";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 
@@ -23,11 +23,11 @@ export async function POST(_request: NextRequest, { params }: RouteParams) {
 
     const userId = session.user.id;
 
-    // Check if comment exists and is approved using standard SQL for Neon pooler compatibility
+    // Check if comment exists and is approved using standard query for Neon pooler compatibility
     const commentResult = await db
       .select()
       .from(comments)
-      .where(and(eq(comments.id, sql`${commentId}`), eq(comments.approved, true)))
+      .where(and(eq(comments.id, commentId), eq(comments.approved, true)))
       .limit(1);
     const comment = commentResult[0];
 
@@ -35,13 +35,13 @@ export async function POST(_request: NextRequest, { params }: RouteParams) {
       return NextResponse.json({ error: "Comment not found" }, { status: 404 });
     }
 
-    // Check if user already liked this comment using standard SQL
+    // Check if user already liked this comment using standard query
     const existingLikeResult = await db
       .select()
       .from(commentLikes)
       .where(and(
-        eq(commentLikes.commentId, sql`${commentId}`),
-        eq(commentLikes.userId, sql`${userId}`)
+        eq(commentLikes.commentId, commentId),
+        eq(commentLikes.userId, userId)
       ))
       .limit(1);
     const existingLike = existingLikeResult[0];
