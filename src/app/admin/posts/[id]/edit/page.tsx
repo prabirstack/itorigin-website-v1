@@ -79,6 +79,7 @@ export default function EditPostPage({
   const [isDeleting, setIsDeleting] = useState(false);
   const [slugLocked, setSlugLocked] = useState(false);
   const [originalTitle, setOriginalTitle] = useState("");
+  const [error, setError] = useState<string | null>(null);
 
   const {
     register,
@@ -133,9 +134,9 @@ export default function EditPostPage({
           status: postData.post.status,
           slugLocked: postData.post.slugLocked || false,
         });
-      } catch (error) {
-        console.error("Failed to fetch data:", error);
-        router.push("/admin/posts");
+      } catch (err) {
+        console.error("Failed to fetch data:", err);
+        setError(err instanceof Error ? err.message : "Failed to load post");
       } finally {
         setIsLoading(false);
       }
@@ -218,6 +219,17 @@ export default function EditPostPage({
     return (
       <div className="flex items-center justify-center min-h-100">
         <Loader2 className="w-8 h-8 animate-spin text-muted-foreground" />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-100 gap-4">
+        <p className="text-destructive">{error}</p>
+        <Button variant="outline" asChild>
+          <Link href="/admin/posts">Back to Posts</Link>
+        </Button>
       </div>
     );
   }
