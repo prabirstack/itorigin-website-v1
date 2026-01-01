@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
 import { chatMessages, chatConversations } from "@/db/schema";
-import { eq, asc } from "drizzle-orm";
+import { eq, asc, sql } from "drizzle-orm";
 
 type Params = Promise<{ conversationId: string }>;
 
@@ -12,10 +12,13 @@ export async function GET(
   try {
     const { conversationId } = await params;
 
-    // Get conversation
-    const conversation = await db.query.chatConversations.findFirst({
-      where: eq(chatConversations.id, conversationId),
-    });
+    // Get conversation using standard SQL for Neon pooler compatibility
+    const conversationResult = await db
+      .select()
+      .from(chatConversations)
+      .where(eq(chatConversations.id, sql`${conversationId}`))
+      .limit(1);
+    const conversation = conversationResult[0];
 
     if (!conversation) {
       return NextResponse.json(

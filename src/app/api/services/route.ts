@@ -9,10 +9,12 @@ export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
     const forNav = searchParams.get("nav") === "true";
 
-    const servicesList = await db.query.services.findMany({
-      where: eq(services.active, true),
-      orderBy: [asc(services.displayOrder)],
-    });
+    // Use standard SQL query for Neon pooler compatibility
+    const servicesList = await db
+      .select()
+      .from(services)
+      .where(eq(services.active, true))
+      .orderBy(asc(services.displayOrder));
 
     // If for navigation, return simplified data
     if (forNav) {

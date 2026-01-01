@@ -4,7 +4,7 @@ import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { Mail, CheckCircle2, Loader2 } from "lucide-react";
+import { Mail, CheckCircle2, Loader2, AlertCircle } from "lucide-react";
 
 const newsletterSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
@@ -16,6 +16,8 @@ type NewsletterFormData = z.infer<typeof newsletterSchema>;
 export function NewsletterForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [message, setMessage] = useState("");
+  const [isError, setIsError] = useState(false);
 
   const {
     register,
@@ -26,21 +28,48 @@ export function NewsletterForm() {
     resolver: zodResolver(newsletterSchema),
   });
 
-  const onSubmit = async (_data: NewsletterFormData) => {
+  const onSubmit = async (data: NewsletterFormData) => {
     setIsSubmitting(true);
+    setMessage("");
+    setIsError(false);
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      const response = await fetch("/api/newsletter/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
 
-    // TODO: Integrate with actual newsletter API
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    reset();
+      const result = await response.json();
 
-    // Reset success message after 5 seconds
-    setTimeout(() => {
-      setIsSubmitted(false);
-    }, 5000);
+      if (response.ok) {
+        setIsSubmitted(true);
+        setMessage(result.message || "Successfully subscribed!");
+        reset();
+
+        // Reset success message after 5 seconds
+        setTimeout(() => {
+          setIsSubmitted(false);
+          setMessage("");
+        }, 5000);
+      } else {
+        setIsError(true);
+        setMessage(result.error || "Failed to subscribe. Please try again.");
+        setTimeout(() => {
+          setIsError(false);
+          setMessage("");
+        }, 5000);
+      }
+    } catch {
+      setIsError(true);
+      setMessage("Failed to subscribe. Please try again.");
+      setTimeout(() => {
+        setIsError(false);
+        setMessage("");
+      }, 5000);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (isSubmitted) {
@@ -111,6 +140,17 @@ export function NewsletterForm() {
             </>
           )}
         </button>
+
+        {message && !isSubmitted && (
+          <div className={`flex items-center gap-2 text-sm ${isError ? "text-red-500" : "text-green-500"}`}>
+            {isError ? (
+              <AlertCircle className="w-4 h-4" />
+            ) : (
+              <CheckCircle2 className="w-4 h-4" />
+            )}
+            {message}
+          </div>
+        )}
 
         <p className="text-xs text-muted-foreground text-center">
           By subscribing, you agree to receive our weekly newsletter. Unsubscribe anytime.

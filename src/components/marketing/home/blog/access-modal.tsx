@@ -94,7 +94,7 @@ export function AccessModal({
             <Button
               onClick={onSubmit}
               disabled={isSubmitting}
-              className="flex-1 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70"
+              className="flex-1 bg-linear-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70"
             >
               {isSubmitting ? "Sending..." : "Get Access"}
             </Button>

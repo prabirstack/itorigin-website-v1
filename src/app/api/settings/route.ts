@@ -35,9 +35,13 @@ const defaultSettings = {
 // Public API to get site settings
 export async function GET() {
   try {
-    let settings = await db.query.siteSettings.findFirst({
-      where: eq(siteSettings.id, "site_settings"),
-    });
+    // Use standard SQL query for Neon pooler compatibility
+    const settingsResult = await db
+      .select()
+      .from(siteSettings)
+      .where(eq(siteSettings.id, "site_settings"))
+      .limit(1);
+    let settings = settingsResult[0];
 
     // If no settings exist, create default ones
     if (!settings) {

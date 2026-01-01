@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import { db } from "@/db";
 import { subscribers, leads } from "@/db/schema";
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 import { nanoid } from "nanoid";
 import { subscribeSchema } from "@/lib/validations/lead";
 import { sendNewsletterConfirmEmail } from "@/lib/email";
@@ -14,10 +14,13 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const validatedData = subscribeSchema.parse(body);
 
-    // Check if already subscribed
-    const existingSubscriber = await db.query.subscribers.findFirst({
-      where: eq(subscribers.email, validatedData.email),
-    });
+    // Check if already subscribed using raw SQL for Neon pooler compatibility
+    const existingSubscriberResult = await db
+      .select()
+      .from(subscribers)
+      .where(eq(subscribers.email, sql`${validatedData.email}`))
+      .limit(1);
+    const existingSubscriber = existingSubscriberResult[0];
 
     if (existingSubscriber) {
       if (existingSubscriber.confirmed) {

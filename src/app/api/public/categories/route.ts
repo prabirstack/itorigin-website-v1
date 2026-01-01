@@ -5,9 +5,11 @@ import { asc } from "drizzle-orm";
 
 export async function GET() {
   try {
-    const categoriesData = await db.query.categories.findMany({
-      orderBy: [asc(categories.name)],
-    });
+    // Use standard SQL query for Neon pooler compatibility
+    const categoriesData = await db
+      .select()
+      .from(categories)
+      .orderBy(asc(categories.name));
 
     // Return category names with "All Posts" at the beginning
     const categoryNames = ["All Posts", ...categoriesData.map((c) => c.name)];

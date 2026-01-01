@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
 import { comments, commentLikes } from "@/db/schema";
-import { eq, and } from "drizzle-orm";
+import { eq, and, sql } from "drizzle-orm";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 
@@ -12,7 +12,7 @@ interface RouteParams {
 }
 
 // POST - Like or unlike a comment
-export async function POST(request: NextRequest, { params }: RouteParams) {
+export async function POST(_request: NextRequest, { params }: RouteParams) {
   try {
     const { commentId } = await params;
     const session = await auth.api.getSession({ headers: await headers() });
@@ -23,22 +23,28 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
 
     const userId = session.user.id;
 
-    // Check if comment exists and is approved
-    const comment = await db.query.comments.findFirst({
-      where: and(eq(comments.id, commentId), eq(comments.approved, true)),
-    });
+    // Check if comment exists and is approved using standard SQL for Neon pooler compatibility
+    const commentResult = await db
+      .select()
+      .from(comments)
+      .where(and(eq(comments.id, sql`${commentId}`), eq(comments.approved, true)))
+      .limit(1);
+    const comment = commentResult[0];
 
     if (!comment) {
       return NextResponse.json({ error: "Comment not found" }, { status: 404 });
     }
 
-    // Check if user already liked this comment
-    const existingLike = await db.query.commentLikes.findFirst({
-      where: and(
-        eq(commentLikes.commentId, commentId),
-        eq(commentLikes.userId, userId)
-      ),
-    });
+    // Check if user already liked this comment using standard SQL
+    const existingLikeResult = await db
+      .select()
+      .from(commentLikes)
+      .where(and(
+        eq(commentLikes.commentId, sql`${commentId}`),
+        eq(commentLikes.userId, sql`${userId}`)
+      ))
+      .limit(1);
+    const existingLike = existingLikeResult[0];
 
     if (existingLike) {
       // Unlike - remove the like

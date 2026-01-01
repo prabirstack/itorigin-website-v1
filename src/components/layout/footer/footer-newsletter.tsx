@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { motion } from "motion/react";
-import { Send, CheckCircle } from "lucide-react";
+import { Send, CheckCircle, AlertCircle } from "lucide-react";
 import { securityBadges } from "@/lib/data/footer-data";
 import { iconMap } from "@/lib/icon-map";
 
@@ -11,20 +11,53 @@ export function FooterNewsletter() {
   const [email, setEmail] = useState("");
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState("");
+  const [isError, setIsError] = useState(false);
 
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
 
     setIsLoading(true);
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubscribed(true);
+    setMessage("");
+    setIsError(false);
+
+    try {
+      const response = await fetch("/api/newsletter/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setIsSubscribed(true);
+        setMessage(data.message || "Successfully subscribed!");
+        setEmail("");
+        // Reset success state after 5 seconds
+        setTimeout(() => {
+          setIsSubscribed(false);
+          setMessage("");
+        }, 5000);
+      } else {
+        setIsError(true);
+        setMessage(data.error || "Failed to subscribe. Please try again.");
+        setTimeout(() => {
+          setIsError(false);
+          setMessage("");
+        }, 5000);
+      }
+    } catch {
+      setIsError(true);
+      setMessage("Failed to subscribe. Please try again.");
+      setTimeout(() => {
+        setIsError(false);
+        setMessage("");
+      }, 5000);
+    } finally {
       setIsLoading(false);
-      setEmail("");
-      // Reset after 3 seconds
-      setTimeout(() => setIsSubscribed(false), 3000);
-    }, 1000);
+    }
   };
 
   return (
@@ -70,13 +103,22 @@ export function FooterNewsletter() {
           </motion.button>
         </div>
 
-        {isSubscribed && (
+        {message && (
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-sm text-green-600 dark:text-green-400"
+            className={`text-sm flex items-center gap-2 ${
+              isError
+                ? "text-red-600 dark:text-red-400"
+                : "text-green-600 dark:text-green-400"
+            }`}
           >
-            ✅ Successfully subscribed!
+            {isError ? (
+              <AlertCircle className="w-4 h-4" />
+            ) : (
+              <CheckCircle className="w-4 h-4" />
+            )}
+            {message}
           </motion.p>
         )}
 

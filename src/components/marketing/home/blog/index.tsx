@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion } from "motion/react";
 import { BookOpen, Download, TrendingUp, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -17,27 +17,44 @@ export function BlogSection() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const handleSubmit = async (): Promise<void> => {
+    if (!email || !name) return;
+
     setIsSubmitting(true);
-    // Simulate API call
-    setTimeout(() => {
+    try {
+      const response = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          source: "download",
+          message: "Resource access request from homepage",
+        }),
+      });
+
+      if (response.ok) {
+        setIsModalOpen(false);
+        setEmail("");
+        setName("");
+      }
+    } catch (error) {
+      console.error("Failed to submit:", error);
+    } finally {
       setIsSubmitting(false);
-      setIsModalOpen(false);
-      setEmail("");
-      setName("");
-    }, 2000);
+    }
   };
 
   return (
     <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 w-full max-w-7xl mx-auto relative min-h-screen">
       {/* Background Elements */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden -z-10">
-        <div className="absolute top-1/4 -left-32 sm:-left-64 w-48 sm:w-96 h-48 sm:h-96 bg-gradient-to-r from-primary/8 to-primary/4 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute top-1/4 -left-32 sm:-left-64 w-48 sm:w-96 h-48 sm:h-96 bg-linear-to-r from-primary/8 to-primary/4 rounded-full blur-3xl animate-pulse" />
         <div
-          className="absolute bottom-1/4 -right-32 sm:-right-64 w-48 sm:w-96 h-48 sm:h-96 bg-gradient-to-l from-primary/8 to-primary/4 rounded-full blur-3xl animate-pulse"
+          className="absolute bottom-1/4 -right-32 sm:-right-64 w-48 sm:w-96 h-48 sm:h-96 bg-linear-to-l from-primary/8 to-primary/4 rounded-full blur-3xl animate-pulse"
           style={{ animationDelay: "2s" }}
         />
         <div
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] bg-gradient-to-br from-primary/3 via-transparent to-primary/3 rounded-full blur-3xl animate-pulse"
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-75 sm:w-150 h-75 sm:h-150 bg-linear-to-br from-primary/3 via-transparent to-primary/3 rounded-full blur-3xl animate-pulse"
           style={{ animationDelay: "4s" }}
         />
 
@@ -78,7 +95,7 @@ export function BlogSection() {
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground mb-4 sm:mb-6 leading-tight px-2">
             Security Intelligence{" "}
-            <span className="bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
               Resources
             </span>
           </h2>
@@ -92,7 +109,7 @@ export function BlogSection() {
         <motion.div variants={fadeInUp} className="mb-16 sm:mb-20">
           <div className="mb-8 sm:mb-12">
             <h3 className="text-xl sm:text-2xl font-semibold text-foreground mb-2 sm:mb-3 flex items-center gap-2 sm:gap-3">
-              <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-br from-primary to-primary/80 rounded-lg flex items-center justify-center">
+              <div className="w-6 h-6 sm:w-8 sm:h-8 bg-linear-to-br from-primary to-primary/80 rounded-lg flex items-center justify-center">
                 <Download className="w-3 h-3 sm:w-4 sm:h-4 text-primary-foreground" />
               </div>
               Download Resources
@@ -118,7 +135,7 @@ export function BlogSection() {
         <motion.div variants={fadeInUp} className="mb-12 sm:mb-16">
           <div className="mb-8 sm:mb-12">
             <h3 className="text-xl sm:text-2xl font-semibold text-foreground mb-2 sm:mb-3 flex items-center gap-2 sm:gap-3">
-              <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-br from-primary to-primary/80 rounded-lg flex items-center justify-center">
+              <div className="w-6 h-6 sm:w-8 sm:h-8 bg-linear-to-br from-primary to-primary/80 rounded-lg flex items-center justify-center">
                 <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4 text-primary-foreground" />
               </div>
               Blog Highlights
@@ -141,7 +158,7 @@ export function BlogSection() {
             <Button
               size="lg"
               onClick={() => setIsModalOpen(true)}
-              className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground border-0 shadow-lg hover:shadow-xl hover:shadow-primary/25 transition-all duration-300 group px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg"
+              className="bg-linear-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground border-0 shadow-lg hover:shadow-xl hover:shadow-primary/25 transition-all duration-300 group px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg"
             >
               Access Resources
               <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />

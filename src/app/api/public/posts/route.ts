@@ -15,11 +15,14 @@ export async function GET(request: NextRequest) {
     // Build where conditions
     const conditions = [eq(posts.status, "published")];
 
-    // Category filter - match by category name
+    // Category filter - match by category name using standard SQL for Neon pooler compatibility
     if (category && category !== "All Posts") {
-      const categoryRecord = await db.query.categories.findFirst({
-        where: eq(categories.name, category),
-      });
+      const categoryResult = await db
+        .select()
+        .from(categories)
+        .where(eq(categories.name, sql`${category}`))
+        .limit(1);
+      const categoryRecord = categoryResult[0];
       if (categoryRecord) {
         conditions.push(eq(posts.categoryId, categoryRecord.id));
       }
