@@ -20,23 +20,25 @@ export async function GET() {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const user = await db.query.users.findFirst({
-      where: eq(users.id, session.user.id),
-      columns: {
-        id: true,
-        name: true,
-        email: true,
-        image: true,
-        role: true,
-        createdAt: true,
-      },
-    });
+    // Use standard query for Neon pooler compatibility
+    const userResult = await db
+      .select({
+        id: users.id,
+        name: users.name,
+        email: users.email,
+        image: users.image,
+        role: users.role,
+        createdAt: users.createdAt,
+      })
+      .from(users)
+      .where(eq(users.id, session.user.id))
+      .limit(1);
 
-    if (!user) {
+    if (userResult.length === 0) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
-    return NextResponse.json({ user });
+    return NextResponse.json({ user: userResult[0] });
   } catch (error) {
     console.error("Failed to fetch profile:", error);
     return NextResponse.json(
@@ -124,11 +126,14 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Get current user to check for existing image
-    const currentUser = await db.query.users.findFirst({
-      where: eq(users.id, session.user.id),
-      columns: { image: true },
-    });
+    // Get current user to check for existing image (use standard query for Neon pooler compatibility)
+    const currentUserResult = await db
+      .select({ image: users.image })
+      .from(users)
+      .where(eq(users.id, session.user.id))
+      .limit(1);
+
+    const currentUser = currentUserResult[0];
 
     // Delete old image if exists
     if (currentUser?.image && currentUser.image.includes("blob.vercel-storage.com")) {
@@ -182,11 +187,14 @@ export async function DELETE() {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    // Get current user image
-    const currentUser = await db.query.users.findFirst({
-      where: eq(users.id, session.user.id),
-      columns: { image: true },
-    });
+    // Get current user image (use standard query for Neon pooler compatibility)
+    const currentUserResult = await db
+      .select({ image: users.image })
+      .from(users)
+      .where(eq(users.id, session.user.id))
+      .limit(1);
+
+    const currentUser = currentUserResult[0];
 
     // Delete from blob storage if it's a Vercel Blob URL
     if (currentUser?.image && currentUser.image.includes("blob.vercel-storage.com")) {

@@ -16,12 +16,14 @@ export async function GET(
     await requireAdmin();
     const { id } = await params;
 
-    // Get conversation with messages
-    const conversation = await db.query.chatConversations.findFirst({
-      where: eq(chatConversations.id, id),
-    });
+    // Get conversation (use standard query for Neon pooler compatibility)
+    const conversationResult = await db
+      .select()
+      .from(chatConversations)
+      .where(eq(chatConversations.id, id))
+      .limit(1);
 
-    if (!conversation) {
+    if (conversationResult.length === 0) {
       return NextResponse.json(
         { error: "Conversation not found" },
         { status: 404 }
@@ -36,7 +38,7 @@ export async function GET(
       .orderBy(asc(chatMessages.createdAt));
 
     return NextResponse.json({
-      conversation,
+      conversation: conversationResult[0],
       messages,
     });
   } catch (error) {
@@ -65,12 +67,14 @@ export async function PATCH(
 
     const validatedData = updateConversationSchema.parse(body);
 
-    // Check if conversation exists
-    const existing = await db.query.chatConversations.findFirst({
-      where: eq(chatConversations.id, id),
-    });
+    // Check if conversation exists (use standard query for Neon pooler compatibility)
+    const existingResult = await db
+      .select({ id: chatConversations.id })
+      .from(chatConversations)
+      .where(eq(chatConversations.id, id))
+      .limit(1);
 
-    if (!existing) {
+    if (existingResult.length === 0) {
       return NextResponse.json(
         { error: "Conversation not found" },
         { status: 404 }
@@ -114,12 +118,14 @@ export async function DELETE(
     await requireAdmin();
     const { id } = await params;
 
-    // Check if conversation exists
-    const existing = await db.query.chatConversations.findFirst({
-      where: eq(chatConversations.id, id),
-    });
+    // Check if conversation exists (use standard query for Neon pooler compatibility)
+    const existingResult = await db
+      .select({ id: chatConversations.id })
+      .from(chatConversations)
+      .where(eq(chatConversations.id, id))
+      .limit(1);
 
-    if (!existing) {
+    if (existingResult.length === 0) {
       return NextResponse.json(
         { error: "Conversation not found" },
         { status: 404 }

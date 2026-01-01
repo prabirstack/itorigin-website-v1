@@ -15,18 +15,21 @@ export async function GET(
     await requireAdmin();
     const { id } = await params;
 
-    const campaign = await db.query.emailCampaigns.findFirst({
-      where: eq(emailCampaigns.id, id),
-    });
+    // Use standard query for Neon pooler compatibility
+    const campaignResult = await db
+      .select()
+      .from(emailCampaigns)
+      .where(eq(emailCampaigns.id, id))
+      .limit(1);
 
-    if (!campaign) {
+    if (campaignResult.length === 0) {
       return NextResponse.json(
         { error: "Campaign not found" },
         { status: 404 }
       );
     }
 
-    return NextResponse.json({ campaign });
+    return NextResponse.json({ campaign: campaignResult[0] });
   } catch (error) {
     if (error instanceof Error && error.message === "Unauthorized") {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -53,17 +56,21 @@ export async function PATCH(
     const body = await request.json();
     const validatedData = updateCampaignSchema.parse(body);
 
-    // Check if campaign exists
-    const existing = await db.query.emailCampaigns.findFirst({
-      where: eq(emailCampaigns.id, id),
-    });
+    // Check if campaign exists (use standard query for Neon pooler compatibility)
+    const existingResult = await db
+      .select()
+      .from(emailCampaigns)
+      .where(eq(emailCampaigns.id, id))
+      .limit(1);
 
-    if (!existing) {
+    if (existingResult.length === 0) {
       return NextResponse.json(
         { error: "Campaign not found" },
         { status: 404 }
       );
     }
+
+    const existing = existingResult[0];
 
     // Cannot update a sent campaign
     if (existing.status === "sent" || existing.status === "sending") {
@@ -109,16 +116,21 @@ export async function DELETE(
     await requireAdmin();
     const { id } = await params;
 
-    const existing = await db.query.emailCampaigns.findFirst({
-      where: eq(emailCampaigns.id, id),
-    });
+    // Use standard query for Neon pooler compatibility
+    const existingResult = await db
+      .select()
+      .from(emailCampaigns)
+      .where(eq(emailCampaigns.id, id))
+      .limit(1);
 
-    if (!existing) {
+    if (existingResult.length === 0) {
       return NextResponse.json(
         { error: "Campaign not found" },
         { status: 404 }
       );
     }
+
+    const existing = existingResult[0];
 
     // Cannot delete a campaign that is being sent
     if (existing.status === "sending") {

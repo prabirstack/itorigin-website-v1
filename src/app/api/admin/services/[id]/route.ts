@@ -15,18 +15,21 @@ export async function GET(
     await requireAdmin();
     const { id } = await params;
 
-    const service = await db.query.services.findFirst({
-      where: eq(services.id, id),
-    });
+    // Use standard query for Neon pooler compatibility
+    const serviceResult = await db
+      .select()
+      .from(services)
+      .where(eq(services.id, id))
+      .limit(1);
 
-    if (!service) {
+    if (serviceResult.length === 0) {
       return NextResponse.json(
         { error: "Service not found" },
         { status: 404 }
       );
     }
 
-    return NextResponse.json({ service });
+    return NextResponse.json({ service: serviceResult[0] });
   } catch (error) {
     if (error instanceof Error && error.message === "Unauthorized") {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -53,28 +56,34 @@ export async function PATCH(
     const body = await request.json();
     const validatedData = updateServiceSchema.parse(body);
 
-    // Check if service exists
-    const existing = await db.query.services.findFirst({
-      where: eq(services.id, id),
-    });
+    // Check if service exists (use standard query for Neon pooler compatibility)
+    const existingResult = await db
+      .select()
+      .from(services)
+      .where(eq(services.id, id))
+      .limit(1);
 
-    if (!existing) {
+    if (existingResult.length === 0) {
       return NextResponse.json(
         { error: "Service not found" },
         { status: 404 }
       );
     }
 
+    const existing = existingResult[0];
+
     // If slug is being updated, check for duplicates
     if (validatedData.slug && validatedData.slug !== existing.slug) {
-      const slugExists = await db.query.services.findFirst({
-        where: and(
+      const slugExistsResult = await db
+        .select({ id: services.id })
+        .from(services)
+        .where(and(
           eq(services.slug, validatedData.slug),
           ne(services.id, id)
-        ),
-      });
+        ))
+        .limit(1);
 
-      if (slugExists) {
+      if (slugExistsResult.length > 0) {
         return NextResponse.json(
           { error: "A service with this slug already exists" },
           { status: 400 }
@@ -115,11 +124,14 @@ export async function DELETE(
     await requireAdmin();
     const { id } = await params;
 
-    const existing = await db.query.services.findFirst({
-      where: eq(services.id, id),
-    });
+    // Use standard query for Neon pooler compatibility
+    const existingResult = await db
+      .select({ id: services.id })
+      .from(services)
+      .where(eq(services.id, id))
+      .limit(1);
 
-    if (!existing) {
+    if (existingResult.length === 0) {
       return NextResponse.json(
         { error: "Service not found" },
         { status: 404 }

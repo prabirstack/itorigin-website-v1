@@ -53,17 +53,21 @@ export async function POST(
     await requireAdmin();
     const { id } = await params;
 
-    // Get campaign
-    const campaign = await db.query.emailCampaigns.findFirst({
-      where: eq(emailCampaigns.id, id),
-    });
+    // Get campaign (use standard query for Neon pooler compatibility)
+    const campaignResult = await db
+      .select()
+      .from(emailCampaigns)
+      .where(eq(emailCampaigns.id, id))
+      .limit(1);
 
-    if (!campaign) {
+    if (campaignResult.length === 0) {
       return NextResponse.json(
         { error: "Campaign not found" },
         { status: 404 }
       );
     }
+
+    const campaign = campaignResult[0];
 
     if (campaign.status === "sent" || campaign.status === "sending") {
       return NextResponse.json(
@@ -72,10 +76,11 @@ export async function POST(
       );
     }
 
-    // Get all confirmed subscribers
-    const confirmedSubscribers = await db.query.subscribers.findMany({
-      where: eq(subscribers.confirmed, true),
-    });
+    // Get all confirmed subscribers (use standard query for Neon pooler compatibility)
+    const confirmedSubscribers = await db
+      .select()
+      .from(subscribers)
+      .where(eq(subscribers.confirmed, true));
 
     if (confirmedSubscribers.length === 0) {
       return NextResponse.json(

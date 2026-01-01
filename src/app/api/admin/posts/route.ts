@@ -102,12 +102,14 @@ export async function POST(request: NextRequest) {
 
     const slug = validated.slug || slugify(validated.title, { lower: true, strict: true });
 
-    // Check if slug already exists
-    const existingPost = await db.query.posts.findFirst({
-      where: eq(posts.slug, slug),
-    });
+    // Check if slug already exists (use standard query for Neon pooler compatibility)
+    const existingPosts = await db
+      .select({ id: posts.id })
+      .from(posts)
+      .where(eq(posts.slug, slug))
+      .limit(1);
 
-    if (existingPost) {
+    if (existingPosts.length > 0) {
       return NextResponse.json(
         { error: "A post with this slug already exists" },
         { status: 400 }

@@ -38,9 +38,14 @@ export async function GET() {
   try {
     await requireAdmin();
 
-    let settings = await db.query.siteSettings.findFirst({
-      where: eq(siteSettings.id, "site_settings"),
-    });
+    // Use standard query for Neon pooler compatibility
+    const settingsResult = await db
+      .select()
+      .from(siteSettings)
+      .where(eq(siteSettings.id, "site_settings"))
+      .limit(1);
+
+    let settings = settingsResult[0];
 
     // If no settings exist, create default ones
     if (!settings) {
@@ -74,12 +79,14 @@ export async function PATCH(request: NextRequest) {
     const body = await request.json();
     const validatedData = updateSettingsSchema.parse(body);
 
-    // Check if settings exist
-    let existing = await db.query.siteSettings.findFirst({
-      where: eq(siteSettings.id, "site_settings"),
-    });
+    // Check if settings exist (use standard query for Neon pooler compatibility)
+    const existingResult = await db
+      .select()
+      .from(siteSettings)
+      .where(eq(siteSettings.id, "site_settings"))
+      .limit(1);
 
-    if (!existing) {
+    if (existingResult.length === 0) {
       // Create with defaults and overrides
       const [newSettings] = await db
         .insert(siteSettings)

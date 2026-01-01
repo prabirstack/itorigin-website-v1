@@ -15,15 +15,18 @@ export async function GET(
     await requireAuthorOrAdmin();
     const { id } = await params;
 
-    const lead = await db.query.leads.findFirst({
-      where: eq(leads.id, id),
-    });
+    // Use standard query for Neon pooler compatibility
+    const leadsResult = await db
+      .select()
+      .from(leads)
+      .where(eq(leads.id, id))
+      .limit(1);
 
-    if (!lead) {
+    if (leadsResult.length === 0) {
       return NextResponse.json({ error: "Lead not found" }, { status: 404 });
     }
 
-    return NextResponse.json({ lead });
+    return NextResponse.json({ lead: leadsResult[0] });
   } catch (error) {
     if (error instanceof Error && error.message === "Unauthorized") {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -49,12 +52,14 @@ export async function PATCH(
     const body = await request.json();
     const validatedData = updateLeadSchema.parse(body);
 
-    // Check if lead exists
-    const existingLead = await db.query.leads.findFirst({
-      where: eq(leads.id, id),
-    });
+    // Check if lead exists (use standard query for Neon pooler compatibility)
+    const existingLeads = await db
+      .select({ id: leads.id })
+      .from(leads)
+      .where(eq(leads.id, id))
+      .limit(1);
 
-    if (!existingLead) {
+    if (existingLeads.length === 0) {
       return NextResponse.json({ error: "Lead not found" }, { status: 404 });
     }
 

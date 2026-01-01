@@ -32,13 +32,14 @@ export async function GET(request: NextRequest) {
 
     const whereClause = conditions.length > 0 ? and(...conditions) : undefined;
 
-    // Get services
-    const servicesList = await db.query.services.findMany({
-      where: whereClause,
-      orderBy: [asc(services.displayOrder), desc(services.createdAt)],
-      limit,
-      offset,
-    });
+    // Get services (use standard query for Neon pooler compatibility)
+    const servicesList = await db
+      .select()
+      .from(services)
+      .where(whereClause)
+      .orderBy(asc(services.displayOrder), desc(services.createdAt))
+      .limit(limit)
+      .offset(offset);
 
     // Get total count
     const countResult = await db
@@ -74,12 +75,14 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const validatedData = createServiceSchema.parse(body);
 
-    // Check if slug already exists
-    const existing = await db.query.services.findFirst({
-      where: eq(services.slug, validatedData.slug),
-    });
+    // Check if slug already exists (use standard query for Neon pooler compatibility)
+    const existingResult = await db
+      .select({ id: services.id })
+      .from(services)
+      .where(eq(services.slug, validatedData.slug))
+      .limit(1);
 
-    if (existing) {
+    if (existingResult.length > 0) {
       return NextResponse.json(
         { error: "A service with this slug already exists" },
         { status: 400 }

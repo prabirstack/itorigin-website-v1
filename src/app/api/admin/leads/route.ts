@@ -38,13 +38,14 @@ export async function GET(request: NextRequest) {
 
     const whereClause = conditions.length > 0 ? and(...conditions) : undefined;
 
-    // Get leads
-    const leadsData = await db.query.leads.findMany({
-      where: whereClause,
-      orderBy: [desc(leads.createdAt)],
-      limit,
-      offset,
-    });
+    // Get leads (use standard query for Neon pooler compatibility)
+    const leadsData = await db
+      .select()
+      .from(leads)
+      .where(whereClause)
+      .orderBy(desc(leads.createdAt))
+      .limit(limit)
+      .offset(offset);
 
     // Get total count
     const countResult = await db

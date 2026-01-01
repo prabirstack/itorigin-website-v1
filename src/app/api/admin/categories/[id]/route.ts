@@ -16,18 +16,21 @@ export async function GET(
     await requireAuthorOrAdmin();
     const { id } = await params;
 
-    const category = await db.query.categories.findFirst({
-      where: eq(categories.id, id),
-    });
+    // Use standard query for Neon pooler compatibility
+    const result = await db
+      .select()
+      .from(categories)
+      .where(eq(categories.id, id))
+      .limit(1);
 
-    if (!category) {
+    if (result.length === 0) {
       return NextResponse.json(
         { error: "Category not found" },
         { status: 404 }
       );
     }
 
-    return NextResponse.json({ category });
+    return NextResponse.json({ category: result[0] });
   } catch (error) {
     if (error instanceof Error && error.message === "Unauthorized") {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -51,24 +54,30 @@ export async function PATCH(
 
     const validated = updateCategorySchema.parse(body);
 
-    // Check if category exists
-    const existing = await db.query.categories.findFirst({
-      where: eq(categories.id, id),
-    });
+    // Check if category exists (use standard query for Neon pooler compatibility)
+    const existingResult = await db
+      .select()
+      .from(categories)
+      .where(eq(categories.id, id))
+      .limit(1);
 
-    if (!existing) {
+    if (existingResult.length === 0) {
       return NextResponse.json(
         { error: "Category not found" },
         { status: 404 }
       );
     }
 
+    const existing = existingResult[0];
+
     // Check slug uniqueness if updating slug
     if (validated.slug && validated.slug !== existing.slug) {
-      const slugExists = await db.query.categories.findFirst({
-        where: eq(categories.slug, validated.slug),
-      });
-      if (slugExists) {
+      const slugExistsResult = await db
+        .select({ id: categories.id })
+        .from(categories)
+        .where(eq(categories.slug, validated.slug))
+        .limit(1);
+      if (slugExistsResult.length > 0) {
         return NextResponse.json(
           { error: "A category with this slug already exists" },
           { status: 400 }
@@ -110,12 +119,14 @@ export async function DELETE(
     await requireAuthorOrAdmin();
     const { id } = await params;
 
-    // Check if category exists
-    const existing = await db.query.categories.findFirst({
-      where: eq(categories.id, id),
-    });
+    // Check if category exists (use standard query for Neon pooler compatibility)
+    const existingResult = await db
+      .select({ id: categories.id })
+      .from(categories)
+      .where(eq(categories.id, id))
+      .limit(1);
 
-    if (!existing) {
+    if (existingResult.length === 0) {
       return NextResponse.json(
         { error: "Category not found" },
         { status: 404 }
@@ -123,11 +134,13 @@ export async function DELETE(
     }
 
     // Check if category is used by any posts
-    const postsUsingCategory = await db.query.posts.findFirst({
-      where: eq(posts.categoryId, id),
-    });
+    const postsUsingCategory = await db
+      .select({ id: posts.id })
+      .from(posts)
+      .where(eq(posts.categoryId, id))
+      .limit(1);
 
-    if (postsUsingCategory) {
+    if (postsUsingCategory.length > 0) {
       return NextResponse.json(
         { error: "Cannot delete category: it is used by one or more posts" },
         { status: 400 }

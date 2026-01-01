@@ -7,10 +7,11 @@ import { requireAdmin, handleAuthError } from "@/lib/auth-utils";
 export async function GET() {
   try {
     await requireAdmin();
-    // Get all leads
-    const leadsData = await db.query.leads.findMany({
-      orderBy: [desc(leads.createdAt)],
-    });
+    // Get all leads (use standard query for Neon pooler compatibility)
+    const leadsData = await db
+      .select()
+      .from(leads)
+      .orderBy(desc(leads.createdAt));
 
     // Create CSV content
     const headers = [

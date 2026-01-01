@@ -15,12 +15,14 @@ export async function DELETE(
     await requireAdmin();
     const { id } = await params;
 
-    // Check if subscriber exists
-    const existing = await db.query.subscribers.findFirst({
-      where: eq(subscribers.id, id),
-    });
+    // Check if subscriber exists (use standard query for Neon pooler compatibility)
+    const existingResult = await db
+      .select({ id: subscribers.id })
+      .from(subscribers)
+      .where(eq(subscribers.id, id))
+      .limit(1);
 
-    if (!existing) {
+    if (existingResult.length === 0) {
       return NextResponse.json(
         { error: "Subscriber not found" },
         { status: 404 }

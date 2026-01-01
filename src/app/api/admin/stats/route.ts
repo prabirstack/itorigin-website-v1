@@ -113,65 +113,56 @@ export async function GET() {
       // Sent campaigns
       db.select({ count: sql<number>`count(*)` }).from(emailCampaigns).where(eq(emailCampaigns.status, "sent")),
 
-      // Recent posts (top 5 by views)
-      db.query.posts.findMany({
-        where: eq(posts.status, "published"),
-        orderBy: [desc(posts.viewCount)],
-        limit: 5,
-        columns: {
-          id: true,
-          title: true,
-          slug: true,
-          viewCount: true,
-          publishedAt: true,
-        },
-      }),
+      // Recent posts (top 5 by views) - use standard query for Neon pooler compatibility
+      db.select({
+        id: posts.id,
+        title: posts.title,
+        slug: posts.slug,
+        viewCount: posts.viewCount,
+        publishedAt: posts.publishedAt,
+      })
+        .from(posts)
+        .where(eq(posts.status, "published"))
+        .orderBy(desc(posts.viewCount))
+        .limit(5),
 
       // Recent leads (last 5)
-      db.query.leads.findMany({
-        orderBy: [desc(leads.createdAt)],
-        limit: 5,
-        columns: {
-          id: true,
-          name: true,
-          email: true,
-          source: true,
-          createdAt: true,
-        },
-      }),
+      db.select({
+        id: leads.id,
+        name: leads.name,
+        email: leads.email,
+        source: leads.source,
+        createdAt: leads.createdAt,
+      })
+        .from(leads)
+        .orderBy(desc(leads.createdAt))
+        .limit(5),
 
-      // Recent downloads (last 5)
-      db.query.resourceDownloads.findMany({
-        orderBy: [desc(resourceDownloads.downloadedAt)],
-        limit: 5,
-        columns: {
-          id: true,
-          name: true,
-          email: true,
-          downloadedAt: true,
-        },
-        with: {
-          resource: {
-            columns: {
-              title: true,
-            },
-          },
-        },
-      }),
+      // Recent downloads (last 5) - using leftJoin for resource title
+      db.select({
+        id: resourceDownloads.id,
+        name: resourceDownloads.name,
+        email: resourceDownloads.email,
+        downloadedAt: resourceDownloads.downloadedAt,
+        resourceTitle: resources.title,
+      })
+        .from(resourceDownloads)
+        .leftJoin(resources, eq(resourceDownloads.resourceId, resources.id))
+        .orderBy(desc(resourceDownloads.downloadedAt))
+        .limit(5),
 
       // Top resources by downloads
-      db.query.resources.findMany({
-        where: eq(resources.status, "published"),
-        orderBy: [desc(resources.downloadCount)],
-        limit: 5,
-        columns: {
-          id: true,
-          title: true,
-          slug: true,
-          downloadCount: true,
-          type: true,
-        },
-      }),
+      db.select({
+        id: resources.id,
+        title: resources.title,
+        slug: resources.slug,
+        downloadCount: resources.downloadCount,
+        type: resources.type,
+      })
+        .from(resources)
+        .where(eq(resources.status, "published"))
+        .orderBy(desc(resources.downloadCount))
+        .limit(5),
     ]);
 
     return NextResponse.json({

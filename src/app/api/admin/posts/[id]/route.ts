@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import { db } from "@/db";
-import { posts, postTags, postRedirects } from "@/db/schema";
+import { posts, postTags, postRedirects, categories, users } from "@/db/schema";
 import { eq, and, ne } from "drizzle-orm";
 import slugify from "slugify";
 import { nanoid } from "nanoid";
@@ -20,20 +20,23 @@ async function generateUniqueSlug(
   let counter = 1;
 
   while (true) {
-    const existing = await db.query.posts.findFirst({
-      where: excludePostId
-        ? and(eq(posts.slug, slug), ne(posts.id, excludePostId))
-        : eq(posts.slug, slug),
-    });
+    // Use standard query for Neon pooler compatibility
+    const existingQuery = excludePostId
+      ? db.select({ id: posts.id }).from(posts).where(and(eq(posts.slug, slug), ne(posts.id, excludePostId))).limit(1)
+      : db.select({ id: posts.id }).from(posts).where(eq(posts.slug, slug)).limit(1);
 
-    if (!existing) return slug;
+    const existing = await existingQuery;
+
+    if (existing.length === 0) return slug;
 
     // Also check redirects table to avoid conflicts
-    const existingRedirect = await db.query.postRedirects.findFirst({
-      where: eq(postRedirects.oldSlug, slug),
-    });
+    const existingRedirect = await db
+      .select({ id: postRedirects.id })
+      .from(postRedirects)
+      .where(eq(postRedirects.oldSlug, slug))
+      .limit(1);
 
-    if (!existingRedirect) return slug;
+    if (existingRedirect.length === 0) return slug;
 
     slug = `${baseSlug}-${counter}`;
     counter++;
@@ -56,12 +59,14 @@ async function createSlugRedirect(
   oldSlug: string,
   postId: string
 ): Promise<void> {
-  // Check if this redirect already exists
-  const existing = await db.query.postRedirects.findFirst({
-    where: eq(postRedirects.oldSlug, oldSlug),
-  });
+  // Check if this redirect already exists using standard query for Neon pooler compatibility
+  const existing = await db
+    .select({ id: postRedirects.id })
+    .from(postRedirects)
+    .where(eq(postRedirects.oldSlug, oldSlug))
+    .limit(1);
 
-  if (existing) {
+  if (existing.length > 0) {
     // Update the redirect to point to the current post
     await db
       .update(postRedirects)
@@ -84,28 +89,46 @@ export async function GET(request: NextRequest, { params }: { params: Params }) 
     await requireAuthorOrAdmin();
     const { id } = await params;
 
-    const post = await db.query.posts.findFirst({
-      where: eq(posts.id, id),
-      with: {
+    // Use standard query with leftJoin for Neon pooler compatibility
+    const result = await db
+      .select({
+        id: posts.id,
+        slug: posts.slug,
+        title: posts.title,
+        excerpt: posts.excerpt,
+        content: posts.content,
+        coverImage: posts.coverImage,
+        status: posts.status,
+        publishedAt: posts.publishedAt,
+        authorId: posts.authorId,
+        categoryId: posts.categoryId,
+        readingTime: posts.readingTime,
+        viewCount: posts.viewCount,
+        slugLocked: posts.slugLocked,
+        createdAt: posts.createdAt,
+        updatedAt: posts.updatedAt,
         author: {
-          columns: {
-            id: true,
-            name: true,
-            email: true,
-          },
+          id: users.id,
+          name: users.name,
+          email: users.email,
         },
-        category: true,
-        postTags: {
-          with: {
-            tag: true,
-          },
+        category: {
+          id: categories.id,
+          name: categories.name,
+          slug: categories.slug,
         },
-      },
-    });
+      })
+      .from(posts)
+      .leftJoin(users, eq(posts.authorId, users.id))
+      .leftJoin(categories, eq(posts.categoryId, categories.id))
+      .where(eq(posts.id, id))
+      .limit(1);
 
-    if (!post) {
+    if (result.length === 0) {
       return NextResponse.json({ error: "Post not found" }, { status: 404 });
     }
+
+    const post = result[0];
 
     return NextResponse.json({ post });
   } catch (error) {
@@ -127,13 +150,18 @@ export async function PATCH(request: NextRequest, { params }: { params: Params }
 
     const validated = updatePostSchema.parse(body);
 
-    const existingPost = await db.query.posts.findFirst({
-      where: eq(posts.id, id),
-    });
+    // Use standard query for Neon pooler compatibility
+    const existingPosts = await db
+      .select()
+      .from(posts)
+      .where(eq(posts.id, id))
+      .limit(1);
 
-    if (!existingPost) {
+    if (existingPosts.length === 0) {
       return NextResponse.json({ error: "Post not found" }, { status: 404 });
     }
+
+    const existingPost = existingPosts[0];
 
     // Check if user can edit this post (admin can edit all, author can only edit their own)
     if (session.user.role !== "admin" && existingPost.authorId !== session.user.id) {
@@ -250,13 +278,18 @@ export async function DELETE(request: NextRequest, { params }: { params: Params 
     const session = await requireAuthorOrAdmin();
     const { id } = await params;
 
-    const existingPost = await db.query.posts.findFirst({
-      where: eq(posts.id, id),
-    });
+    // Use standard query for Neon pooler compatibility
+    const existingPosts = await db
+      .select()
+      .from(posts)
+      .where(eq(posts.id, id))
+      .limit(1);
 
-    if (!existingPost) {
+    if (existingPosts.length === 0) {
       return NextResponse.json({ error: "Post not found" }, { status: 404 });
     }
+
+    const existingPost = existingPosts[0];
 
     // Check if user can delete this post
     if (session.user.role !== "admin" && existingPost.authorId !== session.user.id) {

@@ -35,13 +35,14 @@ export async function GET(request: NextRequest) {
 
     const whereClause = conditions.length > 0 ? and(...conditions) : undefined;
 
-    // Get campaigns
-    const campaigns = await db.query.emailCampaigns.findMany({
-      where: whereClause,
-      orderBy: [desc(emailCampaigns.createdAt)],
-      limit,
-      offset,
-    });
+    // Get campaigns (use standard query for Neon pooler compatibility)
+    const campaigns = await db
+      .select()
+      .from(emailCampaigns)
+      .where(whereClause)
+      .orderBy(desc(emailCampaigns.createdAt))
+      .limit(limit)
+      .offset(offset);
 
     // Get total count
     const countResult = await db

@@ -13,11 +13,14 @@ export async function POST(request: NextRequest, { params }: { params: Params })
     const body = await request.json();
     const { approved } = body;
 
-    const existingComment = await db.query.comments.findFirst({
-      where: eq(comments.id, id),
-    });
+    // Use standard query for Neon pooler compatibility
+    const existingComments = await db
+      .select({ id: comments.id })
+      .from(comments)
+      .where(eq(comments.id, id))
+      .limit(1);
 
-    if (!existingComment) {
+    if (existingComments.length === 0) {
       return NextResponse.json({ error: "Comment not found" }, { status: 404 });
     }
 
@@ -48,11 +51,14 @@ export async function DELETE(request: NextRequest, { params }: { params: Params 
     await requireAuthorOrAdmin();
     const { id } = await params;
 
-    const existingComment = await db.query.comments.findFirst({
-      where: eq(comments.id, id),
-    });
+    // Use standard query for Neon pooler compatibility
+    const existingComments = await db
+      .select({ id: comments.id })
+      .from(comments)
+      .where(eq(comments.id, id))
+      .limit(1);
 
-    if (!existingComment) {
+    if (existingComments.length === 0) {
       return NextResponse.json({ error: "Comment not found" }, { status: 404 });
     }
 

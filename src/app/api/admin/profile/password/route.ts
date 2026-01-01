@@ -26,13 +26,17 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const validatedData = changePasswordSchema.parse(body);
 
-    // Get user's credential account
-    const account = await db.query.accounts.findFirst({
-      where: and(
+    // Get user's credential account (use standard query for Neon pooler compatibility)
+    const accountResult = await db
+      .select()
+      .from(accounts)
+      .where(and(
         eq(accounts.userId, session.user.id),
         eq(accounts.providerId, "credential")
-      ),
-    });
+      ))
+      .limit(1);
+
+    const account = accountResult[0];
 
     if (!account || !account.password) {
       return NextResponse.json(

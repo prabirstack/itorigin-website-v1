@@ -12,43 +12,53 @@ export async function GET(
     await requireAdmin();
     const { id } = await params;
 
-    // Get user info
-    const user = await db.query.users.findFirst({
-      where: eq(users.id, id),
-      columns: {
-        id: true,
-        name: true,
-        email: true,
-        image: true,
-        createdAt: true,
-      },
-    });
+    // Get user info (use standard query for Neon pooler compatibility)
+    const userResult = await db
+      .select({
+        id: users.id,
+        name: users.name,
+        email: users.email,
+        image: users.image,
+        createdAt: users.createdAt,
+      })
+      .from(users)
+      .where(eq(users.id, id))
+      .limit(1);
 
-    if (!user) {
+    if (userResult.length === 0) {
       return NextResponse.json({ error: "Reader not found" }, { status: 404 });
     }
+
+    const user = userResult[0];
 
     const { searchParams } = new URL(request.url);
     const page = parseInt(searchParams.get("page") || "1");
     const limit = parseInt(searchParams.get("limit") || "20");
     const offset = (page - 1) * limit;
 
-    // Get user's comments with post info
-    const userComments = await db.query.comments.findMany({
-      where: eq(comments.authorId, id),
-      orderBy: [desc(comments.createdAt)],
-      limit,
-      offset,
-      with: {
+    // Get user's comments with post info (use standard query with leftJoin for Neon pooler compatibility)
+    const userCommentsResult = await db
+      .select({
+        id: comments.id,
+        content: comments.content,
+        approved: comments.approved,
+        likeCount: comments.likeCount,
+        createdAt: comments.createdAt,
+        updatedAt: comments.updatedAt,
         post: {
-          columns: {
-            id: true,
-            title: true,
-            slug: true,
-          },
+          id: posts.id,
+          title: posts.title,
+          slug: posts.slug,
         },
-      },
-    });
+      })
+      .from(comments)
+      .leftJoin(posts, eq(comments.postId, posts.id))
+      .where(eq(comments.authorId, id))
+      .orderBy(desc(comments.createdAt))
+      .limit(limit)
+      .offset(offset);
+
+    const userComments = userCommentsResult;
 
     // Get total comment count
     const totalResult = await db
