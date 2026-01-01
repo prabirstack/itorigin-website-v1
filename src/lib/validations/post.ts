@@ -5,7 +5,7 @@ export const createPostSchema = z.object({
   slug: z.string().min(1, "Slug is required").max(200, "Slug is too long"),
   excerpt: z.string().max(500, "Excerpt is too long").optional(),
   content: z.string().min(1, "Content is required"),
-  coverImage: z.string().url("Invalid image URL").optional().or(z.literal("")),
+  coverImage: z.string().optional().nullable().transform(val => val || null),
   categoryId: z.string().optional().nullable(),
   tagIds: z.array(z.string()).optional(),
   status: z.enum(["draft", "published"]).default("draft"),
