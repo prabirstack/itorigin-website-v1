@@ -47,7 +47,6 @@ import {
   Loader2,
   Briefcase,
   Edit,
-  Eye,
   GripVertical,
   ExternalLink,
   X,
@@ -55,6 +54,7 @@ import {
 import { format } from "date-fns";
 import { Breadcrumb } from "@/components/admin/shared/breadcrumb";
 import { Pagination } from "@/components/admin/shared/pagination";
+import { toast } from "sonner";
 
 interface Service {
   id: string;
@@ -237,15 +237,16 @@ export default function ServicesPage() {
       });
 
       if (res.ok) {
+        toast.success("Service created successfully");
         setIsCreateOpen(false);
         setFormData(initialFormData);
         fetchServices(pagination?.page || 1);
       } else {
         const error = await res.json();
-        alert(error.error || "Failed to create service");
+        toast.error(error.error || "Failed to create service");
       }
     } catch (error) {
-      console.error("Failed to create service:", error);
+      toast.error("Failed to create service");
     } finally {
       setIsSaving(false);
     }
@@ -262,15 +263,16 @@ export default function ServicesPage() {
       });
 
       if (res.ok) {
+        toast.success("Service updated successfully");
         setIsEditOpen(false);
         setSelectedService(null);
         fetchServices(pagination?.page || 1);
       } else {
         const error = await res.json();
-        alert(error.error || "Failed to update service");
+        toast.error(error.error || "Failed to update service");
       }
     } catch (error) {
-      console.error("Failed to update service:", error);
+      toast.error("Failed to update service");
     } finally {
       setIsSaving(false);
     }
@@ -279,10 +281,12 @@ export default function ServicesPage() {
   const handleDelete = async () => {
     if (!deleteId) return;
     try {
-      await fetch(`/api/admin/services/${deleteId}`, { method: "DELETE" });
+      const res = await fetch(`/api/admin/services/${deleteId}`, { method: "DELETE" });
+      if (!res.ok) throw new Error("Failed to delete service");
+      toast.success("Service deleted successfully");
       fetchServices(pagination?.page || 1);
     } catch (error) {
-      console.error("Failed to delete service:", error);
+      toast.error(error instanceof Error ? error.message : "Failed to delete service");
     } finally {
       setDeleteId(null);
     }
@@ -290,14 +294,16 @@ export default function ServicesPage() {
 
   const handleToggleActive = async (service: Service) => {
     try {
-      await fetch(`/api/admin/services/${service.id}`, {
+      const res = await fetch(`/api/admin/services/${service.id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ active: !service.active }),
       });
+      if (!res.ok) throw new Error("Failed to update service status");
+      toast.success(`Service ${!service.active ? "activated" : "deactivated"}`);
       fetchServices(pagination?.page || 1);
     } catch (error) {
-      console.error("Failed to toggle service status:", error);
+      toast.error(error instanceof Error ? error.message : "Failed to toggle service status");
     }
   };
 
@@ -360,7 +366,7 @@ export default function ServicesPage() {
           value={formData.description}
           onChange={(e) => setFormData({ ...formData, description: e.target.value })}
           placeholder="Detailed service description..."
-          className="mt-1 min-h-[100px]"
+          className="mt-1 min-h-25"
         />
       </div>
 
@@ -525,7 +531,7 @@ export default function ServicesPage() {
           </Button>
         </form>
         <Select value={statusFilter} onValueChange={setStatusFilter}>
-          <SelectTrigger className="w-[140px]">
+          <SelectTrigger className="w-35">
             <SelectValue placeholder="Status" />
           </SelectTrigger>
           <SelectContent>
@@ -553,13 +559,13 @@ export default function ServicesPage() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="w-[50px]">Order</TableHead>
+                <TableHead className="w-12.5">Order</TableHead>
                 <TableHead>Service</TableHead>
                 <TableHead>Slug</TableHead>
                 <TableHead>Features</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead>Updated</TableHead>
-                <TableHead className="w-[140px]">Actions</TableHead>
+                <TableHead className="w-35">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -575,7 +581,7 @@ export default function ServicesPage() {
                     <div className="min-w-0">
                       <p className="font-medium">{service.title}</p>
                       {service.shortDescription && (
-                        <p className="text-sm text-muted-foreground truncate max-w-[300px]">
+                        <p className="text-sm text-muted-foreground truncate max-w-75">
                           {service.shortDescription}
                         </p>
                       )}

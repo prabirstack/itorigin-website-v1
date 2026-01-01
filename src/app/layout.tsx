@@ -8,6 +8,7 @@ import { ThemeProvider } from "@/components/providers/theme-provider";
 import { ServicesProvider } from "@/components/providers/services-provider";
 import { SettingsProvider } from "@/components/providers/settings-provider";
 import { CookieConsent } from "@/components/common/cookie-consent";
+import { Toaster } from "@/components/ui/sonner";
 
 const satoshi = localFont({
   src: [
@@ -90,6 +91,7 @@ export default function RootLayout({
             <ServicesProvider>
               {children}
               <CookieConsent />
+              <Toaster richColors position="top-right" />
             </ServicesProvider>
           </SettingsProvider>
         </ThemeProvider>

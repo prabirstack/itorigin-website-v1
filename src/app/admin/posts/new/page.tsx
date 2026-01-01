@@ -21,6 +21,7 @@ import {
 import { PostEditor } from "@/components/admin/posts/post-editor";
 import { ArrowLeft, Loader2, Save, Eye } from "lucide-react";
 import { Breadcrumb } from "@/components/admin/shared/breadcrumb";
+import { toast } from "sonner";
 
 const postSchema = z.object({
   title: z.string().min(1, "Title is required"),
@@ -85,7 +86,7 @@ export default function NewPostPage() {
 
   const onSubmit = async (data: PostFormData) => {
     if (!content.trim()) {
-      alert("Content is required");
+      toast.error("Content is required");
       return;
     }
 
@@ -105,10 +106,10 @@ export default function NewPostPage() {
         throw new Error(error.error || "Failed to create post");
       }
 
+      toast.success(data.status === "published" ? "Post published successfully" : "Draft saved successfully");
       router.push("/admin/posts");
     } catch (error) {
-      console.error("Failed to create post:", error);
-      alert(error instanceof Error ? error.message : "Failed to create post");
+      toast.error(error instanceof Error ? error.message : "Failed to create post");
     } finally {
       setIsSaving(false);
     }

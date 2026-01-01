@@ -52,6 +52,7 @@ import {
 import { format } from "date-fns";
 import { Breadcrumb } from "@/components/admin/shared/breadcrumb";
 import { Pagination } from "@/components/admin/shared/pagination";
+import { toast } from "sonner";
 
 interface Metric {
   label: string;
@@ -270,16 +271,16 @@ export default function CaseStudiesPage() {
 
       if (!res.ok) {
         const error = await res.json();
-        alert(error.error || "Failed to create case study");
+        toast.error(error.error || "Failed to create case study");
         return;
       }
 
+      toast.success("Case study created successfully");
       setIsCreateOpen(false);
       setFormData(initialFormData);
       fetchCaseStudies();
     } catch (error) {
-      console.error("Failed to create case study:", error);
-      alert("Failed to create case study");
+      toast.error("Failed to create case study");
     } finally {
       setIsSaving(false);
     }
@@ -320,17 +321,17 @@ export default function CaseStudiesPage() {
 
       if (!res.ok) {
         const error = await res.json();
-        alert(error.error || "Failed to update case study");
+        toast.error(error.error || "Failed to update case study");
         return;
       }
 
+      toast.success("Case study updated successfully");
       setIsEditOpen(false);
       setSelectedCaseStudy(null);
       setFormData(initialFormData);
       fetchCaseStudies();
     } catch (error) {
-      console.error("Failed to update case study:", error);
-      alert("Failed to update case study");
+      toast.error("Failed to update case study");
     } finally {
       setIsSaving(false);
     }
@@ -344,15 +345,15 @@ export default function CaseStudiesPage() {
       });
 
       if (!res.ok) {
-        alert("Failed to delete case study");
+        toast.error("Failed to delete case study");
         return;
       }
 
+      toast.success("Case study deleted successfully");
       setDeleteId(null);
       fetchCaseStudies();
     } catch (error) {
-      console.error("Failed to delete case study:", error);
-      alert("Failed to delete case study");
+      toast.error("Failed to delete case study");
     }
   };
 
@@ -610,7 +611,7 @@ export default function CaseStudiesPage() {
                   value={newResult}
                   onChange={(e) => setNewResult(e.target.value)}
                   placeholder="Add a result..."
-                  onKeyPress={(e) => e.key === "Enter" && (e.preventDefault(), addResult())}
+                  onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), addResult())}
                 />
                 <Button type="button" onClick={addResult} variant="secondary">Add</Button>
               </div>
@@ -664,7 +665,7 @@ export default function CaseStudiesPage() {
                   value={newService}
                   onChange={(e) => setNewService(e.target.value)}
                   placeholder="Add a service..."
-                  onKeyPress={(e) => e.key === "Enter" && (e.preventDefault(), addService())}
+                  onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), addService())}
                 />
                 <Button type="button" onClick={addService} variant="secondary">Add</Button>
               </div>

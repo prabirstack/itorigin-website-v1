@@ -65,6 +65,7 @@ import {
 import { format } from "date-fns";
 import { Breadcrumb } from "@/components/admin/shared/breadcrumb";
 import { Pagination } from "@/components/admin/shared/pagination";
+import { toast } from "sonner";
 
 interface Testimonial {
   id: string;
@@ -245,16 +246,16 @@ export default function TestimonialsPage() {
 
       if (!res.ok) {
         const error = await res.json();
-        alert(error.error || "Failed to create testimonial");
+        toast.error(error.error || "Failed to create testimonial");
         return;
       }
 
+      toast.success("Testimonial created successfully");
       setIsCreateOpen(false);
       setFormData(initialFormData);
       fetchTestimonials();
     } catch (error) {
-      console.error("Failed to create testimonial:", error);
-      alert("Failed to create testimonial");
+      toast.error("Failed to create testimonial");
     } finally {
       setIsSaving(false);
     }
@@ -304,17 +305,17 @@ export default function TestimonialsPage() {
 
       if (!res.ok) {
         const error = await res.json();
-        alert(error.error || "Failed to update testimonial");
+        toast.error(error.error || "Failed to update testimonial");
         return;
       }
 
+      toast.success("Testimonial updated successfully");
       setIsEditOpen(false);
       setSelectedTestimonial(null);
       setFormData(initialFormData);
       fetchTestimonials();
     } catch (error) {
-      console.error("Failed to update testimonial:", error);
-      alert("Failed to update testimonial");
+      toast.error("Failed to update testimonial");
     } finally {
       setIsSaving(false);
     }
@@ -328,15 +329,15 @@ export default function TestimonialsPage() {
       });
 
       if (!res.ok) {
-        alert("Failed to delete testimonial");
+        toast.error("Failed to delete testimonial");
         return;
       }
 
+      toast.success("Testimonial deleted successfully");
       setDeleteId(null);
       fetchTestimonials();
     } catch (error) {
-      console.error("Failed to delete testimonial:", error);
-      alert("Failed to delete testimonial");
+      toast.error("Failed to delete testimonial");
     }
   };
 
@@ -351,15 +352,15 @@ export default function TestimonialsPage() {
 
       if (!res.ok) {
         const error = await res.json();
-        alert(error.error || `Failed to ${action} testimonials`);
+        toast.error(error.error || `Failed to ${action} testimonials`);
         return;
       }
 
+      toast.success(`Successfully ${action}ed ${selectedIds.length} testimonial(s)`);
       setSelectedIds([]);
       fetchTestimonials();
     } catch (error) {
-      console.error(`Failed to ${action} testimonials:`, error);
-      alert(`Failed to ${action} testimonials`);
+      toast.error(`Failed to ${action} testimonials`);
     }
   };
 
@@ -373,14 +374,14 @@ export default function TestimonialsPage() {
 
       if (!res.ok) {
         const error = await res.json();
-        alert(error.error || `Failed to ${action} testimonial`);
+        toast.error(error.error || `Failed to ${action} testimonial`);
         return;
       }
 
+      toast.success(`Testimonial ${action}ed successfully`);
       fetchTestimonials();
     } catch (error) {
-      console.error(`Failed to ${action} testimonial:`, error);
-      alert(`Failed to ${action} testimonial`);
+      toast.error(`Failed to ${action} testimonial`);
     }
   };
 

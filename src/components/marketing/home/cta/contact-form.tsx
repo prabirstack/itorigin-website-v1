@@ -84,7 +84,7 @@ export function ContactForm() {
       <CardContent className="p-6 sm:p-8 relative z-10">
         <div className="mb-6">
           <h3 className="text-2xl font-bold text-foreground mb-2 flex items-center gap-3">
-            <div className="w-8 h-8 bg-gradient-to-br from-primary to-primary/80 rounded-lg flex items-center justify-center">
+            <div className="w-8 h-8 bg-linear-to-br from-primary to-primary/80 rounded-lg flex items-center justify-center">
               <Send className="w-4 h-4 text-primary-foreground" />
             </div>
             Get In Touch
@@ -196,7 +196,7 @@ export function ContactForm() {
                 placeholder="Tell us about your security requirements..."
                 value={formData.message}
                 onChange={handleInputChange}
-                className="w-full min-h-[120px] px-3 py-2 bg-card/50 border border-border/60 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 resize-vertical"
+                className="w-full min-h-30 px-3 py-2 bg-card/50 border border-border/60 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 resize-vertical"
                 rows={4}
               />
             </div>
@@ -204,7 +204,7 @@ export function ContactForm() {
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground border-0 shadow-lg hover:shadow-xl hover:shadow-primary/25 transition-all duration-300 group py-3"
+              className="w-full bg-linear-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground border-0 shadow-lg hover:shadow-xl hover:shadow-primary/25 transition-all duration-300 group py-3"
             >
               {isSubmitting ? (
                 <>
@@ -222,7 +222,7 @@ export function ContactForm() {
         )}
 
         {/* Card shine effect */}
-        <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] via-transparent to-black/[0.03] opacity-0 hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+        <div className="absolute inset-0 bg-linear-to-br from-white/3 via-transparent to-black/3 opacity-0 hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
       </CardContent>
     </Card>
   );

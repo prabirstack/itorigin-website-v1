@@ -42,6 +42,7 @@ import {
 import { format } from "date-fns";
 import { Breadcrumb } from "@/components/admin/shared/breadcrumb";
 import { Pagination } from "@/components/admin/shared/pagination";
+import { toast } from "sonner";
 
 interface Post {
   id: string;
@@ -116,10 +117,14 @@ export default function PostsPage() {
     if (!deleteId) return;
     setIsDeleting(true);
     try {
-      await fetch(`/api/admin/posts/${deleteId}`, { method: "DELETE" });
+      const res = await fetch(`/api/admin/posts/${deleteId}`, { method: "DELETE" });
+      if (!res.ok) {
+        throw new Error("Failed to delete post");
+      }
+      toast.success("Post deleted successfully");
       fetchPosts(pagination?.page || 1);
     } catch (error) {
-      console.error("Failed to delete post:", error);
+      toast.error(error instanceof Error ? error.message : "Failed to delete post");
     } finally {
       setIsDeleting(false);
       setDeleteId(null);

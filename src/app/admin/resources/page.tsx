@@ -54,6 +54,7 @@ import {
 import { format } from "date-fns";
 import { Breadcrumb } from "@/components/admin/shared/breadcrumb";
 import { Pagination } from "@/components/admin/shared/pagination";
+import { toast } from "sonner";
 
 interface Resource {
   id: string;
@@ -242,11 +243,11 @@ export default function ResourcesPage() {
         throw new Error(error.error || "Failed to save resource");
       }
 
+      toast.success(editingId ? "Resource updated successfully" : "Resource created successfully");
       setIsDialogOpen(false);
       fetchResources(pagination?.page || 1);
     } catch (error) {
-      console.error("Failed to save resource:", error);
-      alert(error instanceof Error ? error.message : "Failed to save resource");
+      toast.error(error instanceof Error ? error.message : "Failed to save resource");
     } finally {
       setIsSubmitting(false);
     }
@@ -256,10 +257,12 @@ export default function ResourcesPage() {
     if (!deleteId) return;
     setIsDeleting(true);
     try {
-      await fetch(`/api/admin/resources/${deleteId}`, { method: "DELETE" });
+      const res = await fetch(`/api/admin/resources/${deleteId}`, { method: "DELETE" });
+      if (!res.ok) throw new Error("Failed to delete resource");
+      toast.success("Resource deleted successfully");
       fetchResources(pagination?.page || 1);
     } catch (error) {
-      console.error("Failed to delete resource:", error);
+      toast.error(error instanceof Error ? error.message : "Failed to delete resource");
     } finally {
       setIsDeleting(false);
       setDeleteId(null);

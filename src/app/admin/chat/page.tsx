@@ -201,7 +201,7 @@ export default function ChatPage() {
           </Button>
         </form>
         <Select value={statusFilter} onValueChange={setStatusFilter}>
-          <SelectTrigger className="w-[140px]">
+          <SelectTrigger className="w-35">
             <SelectValue placeholder="Status" />
           </SelectTrigger>
           <SelectContent>
@@ -236,7 +236,7 @@ export default function ChatPage() {
                 <TableHead>Status</TableHead>
                 <TableHead>Last Message</TableHead>
                 <TableHead>Started</TableHead>
-                <TableHead className="w-[100px]">Actions</TableHead>
+                <TableHead className="w-25">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -342,7 +342,7 @@ export default function ChatPage() {
                   viewConversation && handleUpdateStatus(viewConversation.conversation.id, value)
                 }
               >
-                <SelectTrigger className="w-[120px]">
+                <SelectTrigger className="w-30">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>

@@ -155,6 +155,25 @@ import { motion } from 'motion/react';
 - Theme: dark/light/system via next-themes
 - Typography: `font-satoshi` for headings, `font-sans` (Inter) for body
 
+**IMPORTANT - Tailwind CSS v4 Canonical Classes:**
+Always use modern Tailwind v4 canonical class names instead of arbitrary values. Examples:
+| Avoid (arbitrary)          | Use (canonical)      |
+|---------------------------|---------------------|
+| `min-h-[100px]`           | `min-h-25`          |
+| `min-h-[200px]`           | `min-h-50`          |
+| `min-h-[400px]`           | `min-h-100`         |
+| `w-[140px]`               | `w-35`              |
+| `w-[160px]`               | `w-40`              |
+| `w-[50px]`                | `w-12.5`            |
+| `max-w-[300px]`           | `max-w-75`          |
+| `gap-[20px]`              | `gap-5`             |
+| `p-[16px]`                | `p-4`               |
+
+Tailwind v4 uses a spacing scale where 1 unit = 4px. Common conversions:
+- 25 = 100px, 35 = 140px, 40 = 160px, 50 = 200px, 75 = 300px, 100 = 400px
+
+Never use arbitrary bracket values when a canonical class exists.
+
 ### Server vs Client Components
 Default to Server Components. Add `'use client'` only for interactivity, hooks, or browser APIs.
 

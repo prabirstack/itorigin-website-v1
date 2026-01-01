@@ -68,6 +68,7 @@ import {
 import { format } from "date-fns";
 import { Breadcrumb } from "@/components/admin/shared/breadcrumb";
 import { Pagination } from "@/components/admin/shared/pagination";
+import { toast } from "sonner";
 import {
   emailTemplates,
   templateCategories,
@@ -235,12 +236,15 @@ export default function CampaignsPage() {
       });
 
       if (res.ok) {
+        toast.success("Campaign created successfully");
         setIsCreateOpen(false);
         setFormData(initialFormData);
         fetchCampaigns(pagination?.page || 1);
+      } else {
+        toast.error("Failed to create campaign");
       }
     } catch (error) {
-      console.error("Failed to create campaign:", error);
+      toast.error("Failed to create campaign");
     } finally {
       setIsSaving(false);
     }
@@ -262,12 +266,15 @@ export default function CampaignsPage() {
       });
 
       if (res.ok) {
+        toast.success("Campaign updated successfully");
         setIsEditOpen(false);
         setSelectedCampaign(null);
         fetchCampaigns(pagination?.page || 1);
+      } else {
+        toast.error("Failed to update campaign");
       }
     } catch (error) {
-      console.error("Failed to update campaign:", error);
+      toast.error("Failed to update campaign");
     } finally {
       setIsSaving(false);
     }
@@ -276,10 +283,15 @@ export default function CampaignsPage() {
   const handleDelete = async () => {
     if (!deleteId) return;
     try {
-      await fetch(`/api/admin/campaigns/${deleteId}`, { method: "DELETE" });
+      const res = await fetch(`/api/admin/campaigns/${deleteId}`, { method: "DELETE" });
+      if (res.ok) {
+        toast.success("Campaign deleted successfully");
+      } else {
+        toast.error("Failed to delete campaign");
+      }
       fetchCampaigns(pagination?.page || 1);
     } catch (error) {
-      console.error("Failed to delete campaign:", error);
+      toast.error("Failed to delete campaign");
     } finally {
       setDeleteId(null);
     }
@@ -294,13 +306,13 @@ export default function CampaignsPage() {
       });
       const data = await res.json();
       if (res.ok) {
-        alert(`Campaign sent to ${data.sentCount} subscribers!`);
+        toast.success(`Campaign sent to ${data.sentCount} subscribers!`);
         fetchCampaigns(pagination?.page || 1);
       } else {
-        alert(data.error || "Failed to send campaign");
+        toast.error(data.error || "Failed to send campaign");
       }
     } catch (error) {
-      console.error("Failed to send campaign:", error);
+      toast.error("Failed to send campaign");
     } finally {
       setIsSending(false);
       setSendId(null);
@@ -327,12 +339,13 @@ export default function CampaignsPage() {
           ...prev,
           attachments: [...prev.attachments, data.attachment],
         }));
+        toast.success("File uploaded successfully");
       } else {
         const error = await res.json();
-        alert(error.error || "Failed to upload file");
+        toast.error(error.error || "Failed to upload file");
       }
     } catch (error) {
-      console.error("Failed to upload file:", error);
+      toast.error("Failed to upload file");
     } finally {
       setIsUploading(false);
       if (fileInputRef.current) {
@@ -474,7 +487,7 @@ export default function CampaignsPage() {
             value={formData.htmlContent}
             onChange={(e) => setFormData({ ...formData, htmlContent: e.target.value })}
             placeholder="<html>...</html>"
-            className="mt-1 min-h-[200px] font-mono text-sm"
+            className="mt-1 min-h-50 font-mono text-sm"
           />
           <p className="text-xs text-muted-foreground mt-1">
             Placeholders: {"{{name}}"}, {"{{email}}"}, {"{{unsubscribe_url}}"}, {"{{social_links}}"}, {"{{month}}"}, {"{{year}}"}
@@ -746,7 +759,7 @@ export default function CampaignsPage() {
           </Button>
         </form>
         <Select value={statusFilter} onValueChange={setStatusFilter}>
-          <SelectTrigger className="w-[140px]">
+          <SelectTrigger className="w-35">
             <SelectValue placeholder="Status" />
           </SelectTrigger>
           <SelectContent>
@@ -758,7 +771,7 @@ export default function CampaignsPage() {
           </SelectContent>
         </Select>
         <Select value={typeFilter} onValueChange={setTypeFilter}>
-          <SelectTrigger className="w-[140px]">
+          <SelectTrigger className="w-35">
             <SelectValue placeholder="Type" />
           </SelectTrigger>
           <SelectContent>
@@ -793,7 +806,7 @@ export default function CampaignsPage() {
                 <TableHead>Recipients</TableHead>
                 <TableHead>Opens</TableHead>
                 <TableHead>Created</TableHead>
-                <TableHead className="w-[160px]">Actions</TableHead>
+                <TableHead className="w-40">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -938,7 +951,7 @@ export default function CampaignsPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             {/* Start from Scratch Card */}
             <div
-              className="border-2 border-dashed rounded-lg p-6 cursor-pointer hover:border-primary hover:bg-accent/50 transition-colors flex flex-col items-center justify-center text-center min-h-[200px]"
+              className="border-2 border-dashed rounded-lg p-6 cursor-pointer hover:border-primary hover:bg-accent/50 transition-colors flex flex-col items-center justify-center text-center min-h-50"
               onClick={startFromScratch}
             >
               <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center mb-3">

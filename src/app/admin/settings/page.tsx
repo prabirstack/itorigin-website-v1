@@ -26,6 +26,7 @@ import {
   Link as LinkIcon,
 } from "lucide-react";
 import { Breadcrumb } from "@/components/admin/shared/breadcrumb";
+import { toast } from "sonner";
 
 interface SocialLinks {
   twitter?: string;
@@ -64,7 +65,6 @@ export default function SettingsPage() {
   const [settings, setSettings] = useState<Settings | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
-  const [saveMessage, setSaveMessage] = useState("");
 
   useEffect(() => {
     fetchSettings();
@@ -86,7 +86,6 @@ export default function SettingsPage() {
   const handleSave = async () => {
     if (!settings) return;
     setIsSaving(true);
-    setSaveMessage("");
 
     try {
       const res = await fetch("/api/admin/settings", {
@@ -98,14 +97,12 @@ export default function SettingsPage() {
       if (res.ok) {
         const data = await res.json();
         setSettings(data.settings);
-        setSaveMessage("Settings saved successfully!");
-        setTimeout(() => setSaveMessage(""), 3000);
+        toast.success("Settings saved successfully");
       } else {
-        setSaveMessage("Failed to save settings");
+        toast.error("Failed to save settings");
       }
     } catch (error) {
-      console.error("Failed to save settings:", error);
-      setSaveMessage("Failed to save settings");
+      toast.error("Failed to save settings");
     } finally {
       setIsSaving(false);
     }
@@ -129,7 +126,7 @@ export default function SettingsPage() {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-[400px]">
+      <div className="flex items-center justify-center min-h-100">
         <Loader2 className="w-8 h-8 animate-spin text-muted-foreground" />
       </div>
     );
@@ -155,17 +152,6 @@ export default function SettingsPage() {
           </p>
         </div>
         <div className="flex items-center gap-4">
-          {saveMessage && (
-            <span
-              className={`text-sm ${
-                saveMessage.includes("success")
-                  ? "text-green-600"
-                  : "text-destructive"
-              }`}
-            >
-              {saveMessage}
-            </span>
-          )}
           <Button onClick={handleSave} disabled={isSaving}>
             {isSaving ? (
               <Loader2 className="w-4 h-4 mr-2 animate-spin" />

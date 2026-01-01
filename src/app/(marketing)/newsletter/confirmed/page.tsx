@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 export default function NewsletterConfirmedPage() {
   return (
-    <div className="min-h-[60vh] flex items-center justify-center">
+    <div className="min-h-screen flex items-center justify-center">
       <div className="text-center max-w-md mx-auto px-4">
         <div className="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
           <CheckCircle className="w-8 h-8 text-green-600 dark:text-green-400" />

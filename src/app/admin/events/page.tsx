@@ -63,6 +63,7 @@ import {
 import { format } from "date-fns";
 import { Breadcrumb } from "@/components/admin/shared/breadcrumb";
 import { Pagination } from "@/components/admin/shared/pagination";
+import { toast } from "sonner";
 
 interface Event {
   id: string;
@@ -229,16 +230,16 @@ export default function EventsPage() {
 
       if (!res.ok) {
         const error = await res.json();
-        alert(error.error || "Failed to create event");
+        toast.error(error.error || "Failed to create event");
         return;
       }
 
+      toast.success("Event created successfully");
       setIsCreateOpen(false);
       setFormData(initialFormData);
       fetchEvents();
     } catch (error) {
-      console.error("Failed to create event:", error);
-      alert("Failed to create event");
+      toast.error("Failed to create event");
     } finally {
       setIsSaving(false);
     }
@@ -288,17 +289,17 @@ export default function EventsPage() {
 
       if (!res.ok) {
         const error = await res.json();
-        alert(error.error || "Failed to update event");
+        toast.error(error.error || "Failed to update event");
         return;
       }
 
+      toast.success("Event updated successfully");
       setIsEditOpen(false);
       setSelectedEvent(null);
       setFormData(initialFormData);
       fetchEvents();
     } catch (error) {
-      console.error("Failed to update event:", error);
-      alert("Failed to update event");
+      toast.error("Failed to update event");
     } finally {
       setIsSaving(false);
     }
@@ -312,15 +313,15 @@ export default function EventsPage() {
       });
 
       if (!res.ok) {
-        alert("Failed to delete event");
+        toast.error("Failed to delete event");
         return;
       }
 
+      toast.success("Event deleted successfully");
       setDeleteId(null);
       fetchEvents();
     } catch (error) {
-      console.error("Failed to delete event:", error);
-      alert("Failed to delete event");
+      toast.error("Failed to delete event");
     }
   };
 

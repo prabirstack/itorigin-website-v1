@@ -38,6 +38,7 @@ import { Plus, Loader2, Tag, Trash2, Pencil, Search, FileText } from "lucide-rea
 import { format } from "date-fns";
 import { Breadcrumb } from "@/components/admin/shared/breadcrumb";
 import { Pagination } from "@/components/admin/shared/pagination";
+import { toast } from "sonner";
 
 const categorySchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -159,11 +160,11 @@ export default function CategoriesPage() {
         throw new Error(error.error || `Failed to ${editCategory ? "update" : "create"} category`);
       }
 
+      toast.success(editCategory ? "Category updated successfully" : "Category created successfully");
       handleClose();
       fetchCategories(pagination?.page || 1);
     } catch (error) {
-      console.error(`Failed to ${editCategory ? "update" : "create"} category:`, error);
-      alert(error instanceof Error ? error.message : `Failed to ${editCategory ? "update" : "create"} category`);
+      toast.error(error instanceof Error ? error.message : `Failed to ${editCategory ? "update" : "create"} category`);
     } finally {
       setIsSaving(false);
     }
@@ -181,11 +182,13 @@ export default function CategoriesPage() {
         const data = await res.json();
         throw new Error(data.error || "Failed to delete category");
       }
+      toast.success("Category deleted successfully");
       fetchCategories(pagination?.page || 1);
       setDeleteId(null);
     } catch (error) {
-      console.error("Failed to delete category:", error);
-      setDeleteError(error instanceof Error ? error.message : "Failed to delete category");
+      const errorMessage = error instanceof Error ? error.message : "Failed to delete category";
+      toast.error(errorMessage);
+      setDeleteError(errorMessage);
     } finally {
       setIsDeleting(false);
     }

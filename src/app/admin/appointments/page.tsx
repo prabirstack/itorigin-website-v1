@@ -67,6 +67,7 @@ import {
 import { format } from "date-fns";
 import { Breadcrumb } from "@/components/admin/shared/breadcrumb";
 import { Pagination } from "@/components/admin/shared/pagination";
+import { toast } from "sonner";
 
 interface Appointment {
   id: string;
@@ -234,16 +235,16 @@ export default function AppointmentsPage() {
 
       if (!res.ok) {
         const error = await res.json();
-        alert(error.error || "Failed to create appointment");
+        toast.error(error.error || "Failed to create appointment");
         return;
       }
 
+      toast.success("Appointment created successfully");
       setIsCreateOpen(false);
       setFormData(initialFormData);
       fetchAppointments();
     } catch (error) {
-      console.error("Failed to create appointment:", error);
-      alert("Failed to create appointment");
+      toast.error("Failed to create appointment");
     } finally {
       setIsSaving(false);
     }
@@ -299,17 +300,17 @@ export default function AppointmentsPage() {
 
       if (!res.ok) {
         const error = await res.json();
-        alert(error.error || "Failed to update appointment");
+        toast.error(error.error || "Failed to update appointment");
         return;
       }
 
+      toast.success("Appointment updated successfully");
       setIsEditOpen(false);
       setSelectedAppointment(null);
       setFormData(initialFormData);
       fetchAppointments();
     } catch (error) {
-      console.error("Failed to update appointment:", error);
-      alert("Failed to update appointment");
+      toast.error("Failed to update appointment");
     } finally {
       setIsSaving(false);
     }
@@ -323,15 +324,15 @@ export default function AppointmentsPage() {
       });
 
       if (!res.ok) {
-        alert("Failed to delete appointment");
+        toast.error("Failed to delete appointment");
         return;
       }
 
+      toast.success("Appointment deleted successfully");
       setDeleteId(null);
       fetchAppointments();
     } catch (error) {
-      console.error("Failed to delete appointment:", error);
-      alert("Failed to delete appointment");
+      toast.error("Failed to delete appointment");
     }
   };
 
@@ -344,13 +345,14 @@ export default function AppointmentsPage() {
       });
 
       if (!res.ok) {
-        alert("Failed to update status");
+        toast.error("Failed to update status");
         return;
       }
 
+      toast.success(`Status updated to ${status.replace("_", " ")}`);
       fetchAppointments();
     } catch (error) {
-      console.error("Failed to update status:", error);
+      toast.error("Failed to update status");
     }
   };
 

@@ -22,6 +22,7 @@ import { ArrowLeft, Loader2, Save, Eye, Trash2, Lock, Unlock, RefreshCw } from "
 import { Switch } from "@/components/ui/switch";
 import slugify from "slugify";
 import { Breadcrumb } from "@/components/admin/shared/breadcrumb";
+import { toast } from "sonner";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -147,7 +148,7 @@ export default function EditPostPage({
 
   const onSubmit = async (data: PostFormData) => {
     if (!content.trim()) {
-      alert("Content is required");
+      toast.error("Content is required");
       return;
     }
 
@@ -172,13 +173,14 @@ export default function EditPostPage({
 
       // Show notification if slug changed
       if (result.slugChanged) {
-        console.log(`Slug updated: ${result.previousSlug} → ${result.post.slug}`);
+        toast.success(`Post updated! Slug changed: ${result.previousSlug} → ${result.post.slug}`);
+      } else {
+        toast.success(data.status === "published" ? "Post published successfully" : "Draft saved successfully");
       }
 
       router.push("/admin/posts");
     } catch (error) {
-      console.error("Failed to update post:", error);
-      alert(error instanceof Error ? error.message : "Failed to update post");
+      toast.error(error instanceof Error ? error.message : "Failed to update post");
     } finally {
       setIsSaving(false);
     }
@@ -206,10 +208,14 @@ export default function EditPostPage({
   const handleDelete = async () => {
     setIsDeleting(true);
     try {
-      await fetch(`/api/admin/posts/${id}`, { method: "DELETE" });
+      const res = await fetch(`/api/admin/posts/${id}`, { method: "DELETE" });
+      if (!res.ok) {
+        throw new Error("Failed to delete post");
+      }
+      toast.success("Post deleted successfully");
       router.push("/admin/posts");
     } catch (error) {
-      console.error("Failed to delete post:", error);
+      toast.error(error instanceof Error ? error.message : "Failed to delete post");
     } finally {
       setIsDeleting(false);
     }

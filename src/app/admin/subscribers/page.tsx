@@ -145,7 +145,7 @@ export default function SubscribersPage() {
           </Button>
         </form>
         <Select value={confirmedFilter} onValueChange={setConfirmedFilter}>
-          <SelectTrigger className="w-[160px]">
+          <SelectTrigger className="w-40">
             <SelectValue placeholder="Status" />
           </SelectTrigger>
           <SelectContent>
@@ -178,7 +178,7 @@ export default function SubscribersPage() {
                 <TableHead>Status</TableHead>
                 <TableHead>Subscribed</TableHead>
                 <TableHead>Created</TableHead>
-                <TableHead className="w-[80px]">Actions</TableHead>
+                <TableHead className="w-20">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>

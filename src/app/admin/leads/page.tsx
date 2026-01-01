@@ -167,7 +167,7 @@ export default function LeadsPage() {
           </Button>
         </form>
         <Select value={statusFilter} onValueChange={setStatusFilter}>
-          <SelectTrigger className="w-[140px]">
+          <SelectTrigger className="w-35">
             <SelectValue placeholder="Status" />
           </SelectTrigger>
           <SelectContent>
@@ -180,7 +180,7 @@ export default function LeadsPage() {
           </SelectContent>
         </Select>
         <Select value={sourceFilter} onValueChange={setSourceFilter}>
-          <SelectTrigger className="w-[140px]">
+          <SelectTrigger className="w-35">
             <SelectValue placeholder="Source" />
           </SelectTrigger>
           <SelectContent>
@@ -218,7 +218,7 @@ export default function LeadsPage() {
                 <TableHead>Status</TableHead>
                 <TableHead>Source</TableHead>
                 <TableHead>Date</TableHead>
-                <TableHead className="w-[100px]">Actions</TableHead>
+                <TableHead className="w-25">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>

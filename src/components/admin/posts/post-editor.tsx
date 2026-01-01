@@ -78,7 +78,7 @@ export function PostEditor({
     editorProps: {
       attributes: {
         class:
-          "prose prose-sm sm:prose dark:prose-invert max-w-none min-h-[400px] p-4 focus:outline-none",
+          "prose prose-sm sm:prose dark:prose-invert max-w-none min-h-100 p-4 focus:outline-none",
       },
     },
   });
