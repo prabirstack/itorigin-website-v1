@@ -16,7 +16,8 @@
     "db:seed:blog": "bun run src/db/seed/blog-data.ts",
     "db:seed:resources": "bun run src/db/seed/resources-data.ts",
     "db:seed:case-studies": "bun run src/db/seed/case-studies-data.ts",
-    "db:seed:testimonials": "bun run src/db/seed/testimonials-data.ts"
+    "db:seed:testimonials": "bun run src/db/seed/testimonials-data.ts",
+    "db:seed:campaigns": "bun run src/db/seed/campaigns-data.ts"
   },
   "dependencies": {
     "@ai-sdk/google": "^3.0.1",

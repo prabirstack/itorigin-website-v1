@@ -24,6 +24,7 @@ bun run db:seed:blog         # Seed blog data
 bun run db:seed:resources    # Seed resources data
 bun run db:seed:case-studies # Seed case studies data
 bun run db:seed:testimonials # Seed testimonials data
+bun run db:seed:campaigns    # Seed campaigns data
 
 # UI Components
 bunx shadcn@latest add [component]  # Add shadcn/ui component
@@ -52,25 +53,42 @@ Copy `.env.example` to `.env.local` and configure:
 ```
 /api/auth/[...all]           # Better Auth handler
 /api/admin/posts             # Blog CRUD (protected)
+/api/admin/posts/[id]        # Individual post management
 /api/admin/categories        # Category management (with pagination)
+/api/admin/categories/[id]   # Individual category management
 /api/admin/tags              # Tag management
 /api/admin/comments          # Comment moderation
+/api/admin/comments/[id]/approve  # Approve individual comment
 /api/admin/leads             # Lead management + export
 /api/admin/leads/[id]        # Individual lead details
+/api/admin/leads/export      # Export leads to CSV
 /api/admin/subscribers       # Newsletter subscribers + export
+/api/admin/subscribers/[id]  # Individual subscriber management
+/api/admin/subscribers/export # Export subscribers to CSV
 /api/admin/campaigns         # Email campaign management
+/api/admin/campaigns/[id]    # Individual campaign management
+/api/admin/campaigns/[id]/send  # Send campaign to subscribers
 /api/admin/services          # Services CRUD (populates navigation)
+/api/admin/services/[id]     # Individual service management
 /api/admin/case-studies      # Case studies CRUD
+/api/admin/case-studies/[id] # Individual case study management
 /api/admin/testimonials      # Testimonials CRUD with bulk actions
+/api/admin/testimonials/[id] # Individual testimonial management
 /api/admin/events            # Events/webinars CRUD
+/api/admin/events/[id]       # Individual event management
 /api/admin/appointments      # Appointments scheduling CRUD
+/api/admin/appointments/[id] # Individual appointment management
 /api/admin/settings          # Site settings
 /api/admin/resources         # Downloadable resources (whitepapers, etc.)
+/api/admin/resources/[id]    # Individual resource management
 /api/admin/readers           # Users who have commented (with comment history)
+/api/admin/readers/[id]      # Individual reader with comment history
 /api/admin/chat              # Chat conversation management
+/api/admin/chat/[id]         # Individual chat conversation
 /api/admin/stats             # Dashboard statistics
 /api/admin/upload            # File uploads (Vercel Blob)
-/api/admin/profile           # Admin profile (image upload, password change)
+/api/admin/profile           # Admin profile (image upload)
+/api/admin/profile/password  # Admin password change
 /api/public/posts            # Public blog listing
 /api/public/posts/[slug]     # Single post by slug
 /api/public/categories       # Public categories
@@ -99,6 +117,7 @@ Schema workflow: Edit schema files → `bun run db:generate` → `bun run db:mig
 - Client: `src/lib/auth-client.ts` - React hooks (`useSession`, `signIn`, `signOut`)
 - Middleware: `src/middleware.ts` - Protects `/admin/*` routes
 - Session cookie: `better-auth.session_token`
+- Type exports: `import type { Session, User } from "@/lib/auth";`
 
 ### Component Organization
 - `components/ui/` - shadcn/ui primitives (new-york style)
@@ -157,6 +176,16 @@ const session = await auth.api.getSession({ headers: await headers() });
 if (!session?.user || session.user.role !== "admin") {
   return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 }
+```
+
+### Cache Revalidation
+Use Next.js cache revalidation after mutations in API routes:
+```tsx
+import { revalidatePath, revalidateTag } from 'next/cache';
+
+// After creating/updating/deleting data
+revalidatePath('/blog');           // Revalidate specific path
+revalidateTag('posts');            // Revalidate by tag
 ```
 
 ### Rich Text Editor
