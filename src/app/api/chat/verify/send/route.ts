@@ -103,10 +103,12 @@ export async function POST(request: NextRequest) {
         .delete(chatEmailVerifications)
         .where(eq(chatEmailVerifications.id, verification.id));
 
+      console.error("Chat verification email failed:", emailResult.error);
+
       return NextResponse.json(
         {
           error: "Failed to send email",
-          message: "Could not send verification email. Please try again.",
+          message: "Could not send verification email. Please try again later.",
         },
         { status: 500 }
       );
