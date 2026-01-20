@@ -63,6 +63,9 @@ export const SiteHeader: React.FC = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
           >
+            {/* Theme Toggle */}
+            <ThemeToggle />
+
             {/* CTA Button - Hidden on mobile */}
             <motion.div
               className="hidden md:block"
@@ -83,9 +86,6 @@ export const SiteHeader: React.FC = () => {
                 />
               </Link>
             </motion.div>
-
-            {/* Theme Toggle */}
-            <ThemeToggle />
 
             {/* Mobile Navigation */}
             <MobileNav />
