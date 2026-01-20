@@ -112,12 +112,14 @@ Copy `.env.example` to `.env.local` and configure:
 
 Schema workflow: Edit schema files → `bun run db:generate` → `bun run db:migrate`
 
+**Neon Pooler Compatibility:** When writing raw SQL in API routes, use parameterized queries (`$1`, `$2`) instead of SQL template literals. The Neon connection pooler requires standard parameterized queries.
+
 ### Authentication (Better Auth)
 - Config: `src/lib/auth.ts` - Server-side auth setup
 - Client: `src/lib/auth-client.ts` - React hooks (`useSession`, `signIn`, `signOut`)
-- Middleware: `src/middleware.ts` - Protects `/admin/*` routes
 - Session cookie: `better-auth.session_token`
 - Type exports: `import type { Session, User } from "@/lib/auth";`
+- Admin routes are protected via session check in each API route (no middleware file)
 
 ### Component Organization
 - `components/ui/` - shadcn/ui primitives (new-york style)
@@ -269,42 +271,12 @@ Comments require user authentication. The `BlogComments` component:
 - Displays user name from session for authenticated commenters
 - Reply functionality only visible to signed-in users
 
-## Marketing Components
+## Content Types Reference
 
-### TestimonialsSection
-Located at `src/components/marketing/testimonials/testimonials-section.tsx`. Displays client testimonials with:
-- Responsive grid: 3 columns (desktop), 2 columns (tablet), carousel (mobile)
-- Auto-advancing carousel on mobile with manual navigation
-- Star ratings, verified badges, service tags
-- Trust indicators bar (client count, average rating, certifications)
-- Props: `title`, `subtitle`, `featured`, `limit`, `industry`, `className`
+| Type | Schema | Statuses/Types | Admin Path |
+|------|--------|----------------|------------|
+| Testimonials | `testimonials.ts` | pending/approved/rejected | `/admin/testimonials` |
+| Events | `events.ts` | webinar/workshop/conference/meetup | `/admin/events` |
+| Appointments | `appointments.ts` | pending/confirmed/completed/cancelled/no_show | `/admin/appointments` |
 
-```tsx
-import { TestimonialsSection } from "@/components/marketing/testimonials";
-
-<TestimonialsSection featured={true} limit={6} />
-```
-
-## Testimonials Management
-
-The testimonials system includes:
-- **Database schema** (`src/db/schema/testimonials.ts`): Status (pending/approved/rejected), ratings, featured flag, verification
-- **Admin panel** (`/admin/testimonials`): CRUD with bulk actions (approve, reject, feature, verify)
-- **Public API** (`/api/testimonials`): Filtered by featured, industry, status
-- **Seed data** (`src/db/seed/testimonials-data.ts`): 6 sample testimonials
-
-## Events/Webinars Management
-
-The events system includes:
-- **Database schema** (`src/db/schema/events.ts`): Events table and event_registrations for attendees
-- **Event types**: webinar, workshop, conference, meetup
-- **Admin panel** (`/admin/events`): Full CRUD with registration management
-- **Features**: Capacity limits, registration tracking, virtual/in-person support
-
-## Appointments Management
-
-The appointments system includes:
-- **Database schema** (`src/db/schema/appointments.ts`): Scheduling with time slots
-- **Appointment types**: consultation, demo, support, meeting
-- **Admin panel** (`/admin/appointments`): Schedule management with status tracking
-- **Statuses**: pending, confirmed, completed, cancelled, no_show
+Marketing components for these types are in `src/components/marketing/`.
