@@ -24,23 +24,37 @@ export const ChatSupport = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [input, setInput] = useState("");
-  const [conversationId, setConversationId] = useState<string | null>(null);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
   const conversationIdRef = useRef<string | null>(null);
 
-  // Custom fetch to capture conversation ID from response headers
+  // Custom fetch to capture conversation ID and inject dynamic body
   const customFetch = useCallback(async (url: RequestInfo | URL, init?: RequestInit) => {
+    // Inject current conversationId into the request body
+    if (init?.body) {
+      try {
+        const bodyData = JSON.parse(init.body as string);
+        bodyData.conversationId = conversationIdRef.current;
+        bodyData.visitorName = name;
+        bodyData.visitorEmail = email;
+        init = {
+          ...init,
+          body: JSON.stringify(bodyData),
+        };
+      } catch {
+        // If body parsing fails, continue with original
+      }
+    }
+
     const response = await fetch(url, init);
 
     // Extract conversation ID from response headers
     const newConversationId = response.headers.get("X-Conversation-Id");
     if (newConversationId && !conversationIdRef.current) {
       conversationIdRef.current = newConversationId;
-      setConversationId(newConversationId);
     }
 
     return response;
-  }, []);
+  }, [name, email]);
 
   const {
     messages,
@@ -51,7 +65,7 @@ export const ChatSupport = () => {
     transport: new DefaultChatTransport({
       api: "/api/chat",
       body: {
-        conversationId,
+        conversationId: conversationIdRef.current,
         visitorName: name,
         visitorEmail: email,
       },
@@ -83,7 +97,6 @@ export const ChatSupport = () => {
     setName("");
     setEmail("");
     setInput("");
-    setConversationId(null);
     conversationIdRef.current = null;
     setMessages([]);
   };

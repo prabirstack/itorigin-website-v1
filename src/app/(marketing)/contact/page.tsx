@@ -3,10 +3,10 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion } from "motion/react";
-import { Mail, Phone, MapPin, Clock, Send, CheckCircle, MessageSquare, Calendar, Building2 } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, Send, CheckCircle, MessageSquare, Calendar, Building2, ExternalLink } from "lucide-react";
 import { Container } from "@/components/common/container";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
-import { useSettings, getPhoneLink, getEmailLink } from "@/components/providers/settings-provider";
+import { useSettings, getPhoneLink, getEmailLink, getActiveOffices, getOfficeAddress, type OfficeLocation } from "@/components/providers/settings-provider";
 
 interface FormData {
   firstName: string;
@@ -54,6 +54,11 @@ export default function ContactPage() {
   const salesEmail = settings?.salesEmail || settings?.email || "enterprise@itorigin.com";
   const mapLink = settings?.mapLink || "https://maps.google.com";
 
+  // Get active office locations
+  const activeOffices = getActiveOffices(settings);
+  const hasMultipleOffices = activeOffices.length > 0;
+
+  // Legacy contact info (used when no offices configured)
   const contactInfo = [
     {
       icon: Mail,
@@ -69,13 +74,13 @@ export default function ContactPage() {
       subtext: `${businessHours} ${timezone}`,
       href: getPhoneLink(phone)
     },
-    {
+    ...(!hasMultipleOffices ? [{
       icon: MapPin,
       title: "Visit Us",
       details: addressLine1,
       subtext: `${city} ${postalCode}, ${country}`,
       href: mapLink
-    },
+    }] : []),
     {
       icon: Clock,
       title: "Business Hours",
@@ -84,6 +89,13 @@ export default function ContactPage() {
       href: null
     }
   ];
+
+  const officeTypeLabels: Record<OfficeLocation["type"], string> = {
+    headquarters: "HQ",
+    regional: "Regional",
+    offshore: "VC Office",
+    branch: "Branch",
+  };
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -339,7 +351,79 @@ export default function ContactPage() {
             variants={staggerContainer}
             className="space-y-6"
           >
-            {/* Contact Cards */}
+            {/* Office Locations - Show when multiple offices exist */}
+            {hasMultipleOffices && (
+              <motion.div variants={fadeInUp}>
+                <h3 className="text-sm font-medium text-muted-foreground mb-3 flex items-center gap-2">
+                  <Building2 className="w-4 h-4" />
+                  Our Offices
+                </h3>
+                <div className="space-y-4">
+                  {activeOffices.map((office) => {
+                    const address = getOfficeAddress(office);
+                    return (
+                      <div
+                        key={office.id}
+                        className="p-5 rounded-xl border border-border bg-card hover:border-primary/30 transition-colors"
+                      >
+                        <div className="flex items-start gap-3 mb-3">
+                          <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                            <span className="text-xs font-bold text-primary">
+                              {officeTypeLabels[office.type]}
+                            </span>
+                          </div>
+                          <div>
+                            <h4 className="font-semibold text-sm">{office.label}</h4>
+                            <span className="text-xs text-muted-foreground capitalize">
+                              {office.type === "offshore" ? "Offshore / VC" : office.type}
+                            </span>
+                          </div>
+                        </div>
+                        <div className="space-y-2 text-sm">
+                          {office.mapLink ? (
+                            <a
+                              href={office.mapLink}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-start gap-2 text-foreground hover:text-primary transition-colors"
+                            >
+                              <MapPin className="w-4 h-4 text-primary mt-0.5 shrink-0" />
+                              <span>{address}</span>
+                              <ExternalLink className="w-3 h-3 shrink-0 mt-0.5" />
+                            </a>
+                          ) : (
+                            <div className="flex items-start gap-2 text-foreground">
+                              <MapPin className="w-4 h-4 text-primary mt-0.5 shrink-0" />
+                              <span>{address}</span>
+                            </div>
+                          )}
+                          {office.phone && (
+                            <a
+                              href={getPhoneLink(office.phone)}
+                              className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
+                            >
+                              <Phone className="w-4 h-4" />
+                              <span>{office.phone}</span>
+                            </a>
+                          )}
+                          {office.email && (
+                            <a
+                              href={getEmailLink(office.email)}
+                              className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
+                            >
+                              <Mail className="w-4 h-4" />
+                              <span>{office.email}</span>
+                            </a>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </motion.div>
+            )}
+
+            {/* General Contact Cards */}
             {contactInfo.map((info) => {
               const Icon = info.icon;
               return (

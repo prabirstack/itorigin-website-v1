@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
-import { siteSettings } from "@/db/schema";
+import { siteSettings, type NewSiteSettings } from "@/db/schema";
 import { eq } from "drizzle-orm";
-import { requireAdmin, handleAuthError } from "@/lib/auth-utils";
+import { requireAdmin } from "@/lib/auth-utils";
 import { updateSettingsSchema } from "@/lib/validations/settings";
 
 // Default settings
@@ -72,12 +72,22 @@ export async function GET() {
   }
 }
 
+// Helper to filter out undefined values but keep null (for database compatibility)
+function filterUndefined<T extends Record<string, unknown>>(obj: T): Partial<T> {
+  return Object.fromEntries(
+    Object.entries(obj).filter(([, value]) => value !== undefined)
+  ) as Partial<T>;
+}
+
 export async function PATCH(request: NextRequest) {
   try {
     await requireAdmin();
 
     const body = await request.json();
     const validatedData = updateSettingsSchema.parse(body);
+
+    // Filter out undefined values (keep null values as they represent intentional clearing)
+    const dataToSave = filterUndefined(validatedData);
 
     // Check if settings exist (use standard query for Neon pooler compatibility)
     const existingResult = await db
@@ -92,8 +102,8 @@ export async function PATCH(request: NextRequest) {
         .insert(siteSettings)
         .values({
           ...defaultSettings,
-          ...validatedData,
-        })
+          ...dataToSave,
+        } as typeof defaultSettings)
         .returning();
       return NextResponse.json({ settings: newSettings });
     }
@@ -102,9 +112,9 @@ export async function PATCH(request: NextRequest) {
     const [updatedSettings] = await db
       .update(siteSettings)
       .set({
-        ...validatedData,
+        ...dataToSave,
         updatedAt: new Date(),
-      })
+      } as Partial<NewSiteSettings>)
       .where(eq(siteSettings.id, "site_settings"))
       .returning();
 

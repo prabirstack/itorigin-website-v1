@@ -96,18 +96,25 @@ export async function POST(request: NextRequest) {
       onFinish: async ({ text }) => {
         // Save AI response to database
         if (activeConversationId && text) {
-          await db.insert(chatMessages).values({
-            id: nanoid(),
-            conversationId: activeConversationId,
-            role: "agent",
-            content: text,
-            createdAt: new Date(),
-          });
+          try {
+            await db.insert(chatMessages).values({
+              id: nanoid(),
+              conversationId: activeConversationId,
+              role: "agent",
+              content: text,
+              createdAt: new Date(),
+            });
 
-          await db
-            .update(chatConversations)
-            .set({ lastMessageAt: new Date(), updatedAt: new Date() })
-            .where(eq(chatConversations.id, activeConversationId));
+            await db
+              .update(chatConversations)
+              .set({ lastMessageAt: new Date(), updatedAt: new Date() })
+              .where(eq(chatConversations.id, activeConversationId));
+
+            // Revalidate admin chat page when message is saved
+            revalidatePath("/admin/chat");
+          } catch (error) {
+            console.error("Failed to save AI response to database:", error);
+          }
         }
       },
     });

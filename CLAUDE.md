@@ -6,6 +6,42 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 IT Origin Website v1 - A cybersecurity services marketing website with admin CMS, built with Next.js 15, React 19, TypeScript, and Bun. Features blog management, case studies, testimonials, events/webinars, appointments, lead capture, newsletter campaigns, downloadable resources, AI chat support, and authentication.
 
+## Strict Rules
+
+### TypeScript - No `any` Type
+**NEVER use `any` type.** Always use proper, explicit types:
+- Use schema-inferred types from Drizzle: `type User = typeof users.$inferSelect`
+- Use Zod-inferred types: `type FormData = z.infer<typeof formSchema>`
+- Use `unknown` with type guards when type is truly unknown
+- Use `Partial<T>`, `Pick<T>`, `Omit<T>` for derived types
+- Import and use existing types from schema files (e.g., `NewSiteSettings`, `SiteSettings`)
+
+```tsx
+// ❌ WRONG
+const data = response as any;
+function process(input: any) {}
+
+// ✅ CORRECT
+import { type SiteSettings, type NewSiteSettings } from "@/db/schema";
+const data = response as SiteSettings;
+function process(input: Partial<NewSiteSettings>) {}
+```
+
+### Tailwind CSS v4 - Modern Syntax Only
+**Always use Tailwind v4 canonical class names.** This project uses Tailwind CSS v4 with modern syntax:
+
+| Deprecated (v3)           | Use Instead (v4)          |
+|--------------------------|---------------------------|
+| `bg-gradient-to-r`       | `bg-linear-to-r`          |
+| `bg-gradient-to-br`      | `bg-linear-to-br`         |
+| `bg-gradient-to-b`       | `bg-linear-to-b`          |
+| `min-h-[100px]`          | `min-h-25`                |
+| `w-[200px]`              | `w-50`                    |
+| `gap-[20px]`             | `gap-5`                   |
+| `rounded-[8px]`          | `rounded-lg` or `rounded-2`|
+
+Spacing scale: 1 unit = 4px (e.g., `w-50` = 200px, `p-4` = 16px)
+
 ## Development Commands
 
 ```bash
@@ -158,7 +194,21 @@ import { motion } from 'motion/react';
 - Typography: `font-satoshi` for headings, `font-sans` (Inter) for body
 
 **IMPORTANT - Tailwind CSS v4 Canonical Classes:**
-Always use modern Tailwind v4 canonical class names instead of arbitrary values. Examples:
+Always use modern Tailwind v4 canonical class names. Never use arbitrary bracket values or deprecated v3 syntax.
+
+**Gradient Classes (v4 uses `bg-linear-*` instead of `bg-gradient-*`):**
+| Deprecated (v3)           | Use Instead (v4)          |
+|--------------------------|---------------------------|
+| `bg-gradient-to-r`       | `bg-linear-to-r`          |
+| `bg-gradient-to-l`       | `bg-linear-to-l`          |
+| `bg-gradient-to-t`       | `bg-linear-to-t`          |
+| `bg-gradient-to-b`       | `bg-linear-to-b`          |
+| `bg-gradient-to-tr`      | `bg-linear-to-tr`         |
+| `bg-gradient-to-tl`      | `bg-linear-to-tl`         |
+| `bg-gradient-to-br`      | `bg-linear-to-br`         |
+| `bg-gradient-to-bl`      | `bg-linear-to-bl`         |
+
+**Spacing (use canonical values, not arbitrary):**
 | Avoid (arbitrary)          | Use (canonical)      |
 |---------------------------|---------------------|
 | `min-h-[100px]`           | `min-h-25`          |
@@ -171,10 +221,8 @@ Always use modern Tailwind v4 canonical class names instead of arbitrary values.
 | `gap-[20px]`              | `gap-5`             |
 | `p-[16px]`                | `p-4`               |
 
-Tailwind v4 uses a spacing scale where 1 unit = 4px. Common conversions:
+Tailwind v4 spacing scale: 1 unit = 4px. Common conversions:
 - 25 = 100px, 35 = 140px, 40 = 160px, 50 = 200px, 75 = 300px, 100 = 400px
-
-Never use arbitrary bracket values when a canonical class exists.
 
 ### Server vs Client Components
 Default to Server Components. Add `'use client'` only for interactivity, hooks, or browser APIs.

@@ -16,10 +16,9 @@ import sbi from "../../../assets/brand/sbi.png";
 import sevensees from "../../../assets/brand/sevensees.png";
 import veedol from "../../../assets/brand/veedol.png";
 
-import { motion } from "motion/react";
 import { Container } from "@/components/common/container";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 
 const images = [
   { src: alrahibank, alt: "Alrahi Bank" },
@@ -40,6 +39,8 @@ const images = [
 ];
 
 export const LogoTicker = () => {
+  const [isPaused, setIsPaused] = useState(false);
+
   return (
     <section className="py-24 overflow-x-clip relative">
       <div className="absolute inset-0 bg-grid-pattern opacity-5 dark:opacity-10" />
@@ -47,28 +48,52 @@ export const LogoTicker = () => {
         <h2 className=" text-2xlmd:text-3xl lg:text-4xl font-primary text-center text-foreground font-medium">
           Trusted by the world&apos;s most Leading Companies
         </h2>
-        <div className="flex overflow-hidden mt-12 [mask-image:linear-gradient(to_left,transparent,white_10%,black_90%,transparent)] dark:[mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-          <motion.div
-            animate={{ x: "-50%" }}
-            transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
-            className="flex flex-none gap-24 pr-24"
+        <div
+          className="flex overflow-hidden mt-12 mask-[linear-gradient(to_left,transparent,white_10%,black_90%,transparent)] dark:mask-[linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
+          <div
+            className={`flex flex-none gap-24 pr-24 animate-scroll ${isPaused ? "paused" : "running"}`}
           >
             {Array.from({ length: 2 }).map((_, i) => (
               <React.Fragment key={i}>
                 {images.map(({ src, alt }) => (
-                  <Image src={src} alt={alt} key={alt} className="flex-none h-8 object-cover" />
+                  <Image
+                    src={src}
+                    alt={alt}
+                    key={alt}
+                    className="flex-none h-8 object-cover cursor-pointer hover:scale-110 transition-transform duration-200"
+                  />
                 ))}
               </React.Fragment>
             ))}
-          </motion.div>
+          </div>
         </div>
       </Container>
 
-      {/* Custom CSS for grid pattern */}
+      {/* Custom CSS for grid pattern and scroll animation */}
       <style jsx>{`
         .bg-grid-pattern {
           background-image: radial-gradient(circle, currentColor 1px, transparent 1px);
           background-size: 20px 20px;
+        }
+        .animate-scroll {
+          animation: scroll 20s linear infinite;
+        }
+        .animate-scroll.paused {
+          animation-play-state: paused;
+        }
+        .animate-scroll.running {
+          animation-play-state: running;
+        }
+        @keyframes scroll {
+          0% {
+            transform: translateX(0%);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
         }
       `}</style>
     </section>

@@ -11,6 +11,23 @@ interface SocialLinks {
   youtube?: string;
 }
 
+export interface OfficeLocation {
+  id: string;
+  type: "headquarters" | "regional" | "offshore" | "branch";
+  label: string;
+  addressLine1: string;
+  addressLine2?: string | null;
+  city: string;
+  state?: string | null;
+  postalCode?: string | null;
+  country: string;
+  phone?: string | null;
+  email?: string | null;
+  mapLink?: string | null;
+  mapEmbedUrl?: string | null;
+  isActive: boolean;
+}
+
 export interface SiteSettings {
   companyName: string;
   tagline: string | null;
@@ -24,6 +41,7 @@ export interface SiteSettings {
   state: string | null;
   postalCode: string | null;
   country: string | null;
+  officeLocations: OfficeLocation[] | null;
   businessHours: string | null;
   timezone: string | null;
   socialLinks: SocialLinks | null;
@@ -52,6 +70,7 @@ const defaultSettings: SiteSettings = {
   state: "Maharashtra",
   postalCode: "400001",
   country: "India",
+  officeLocations: null,
   businessHours: "Mon-Fri 9:00 AM - 6:00 PM",
   timezone: "IST",
   socialLinks: {
@@ -126,4 +145,23 @@ export function getPhoneLink(phone: string | null): string {
 export function getEmailLink(email: string | null): string {
   if (!email) return "";
   return `mailto:${email}`;
+}
+
+// Helper function to get office address string
+export function getOfficeAddress(office: OfficeLocation): string {
+  const parts = [
+    office.addressLine1,
+    office.addressLine2,
+    office.city,
+    office.state,
+    office.postalCode,
+    office.country,
+  ].filter(Boolean);
+  return parts.join(", ");
+}
+
+// Helper function to get active office locations
+export function getActiveOffices(settings: SiteSettings | null): OfficeLocation[] {
+  if (!settings?.officeLocations) return [];
+  return settings.officeLocations.filter((office) => office.isActive);
 }

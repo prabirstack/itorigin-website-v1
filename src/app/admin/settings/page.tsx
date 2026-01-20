@@ -24,7 +24,18 @@ import {
   Clock,
   Share2,
   Link as LinkIcon,
+  Plus,
+  Trash2,
+  GripVertical,
 } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
 import { Breadcrumb } from "@/components/admin/shared/breadcrumb";
 import { toast } from "sonner";
 
@@ -35,6 +46,23 @@ interface SocialLinks {
   facebook?: string;
   instagram?: string;
   youtube?: string;
+}
+
+interface OfficeLocation {
+  id: string;
+  type: "headquarters" | "regional" | "offshore" | "branch";
+  label: string;
+  addressLine1: string;
+  addressLine2?: string | null;
+  city: string;
+  state?: string | null;
+  postalCode?: string | null;
+  country: string;
+  phone?: string | null;
+  email?: string | null;
+  mapLink?: string | null;
+  mapEmbedUrl?: string | null;
+  isActive: boolean;
 }
 
 interface Settings {
@@ -51,6 +79,7 @@ interface Settings {
   state: string | null;
   postalCode: string | null;
   country: string | null;
+  officeLocations: OfficeLocation[] | null;
   businessHours: string | null;
   timezone: string | null;
   socialLinks: SocialLinks | null;
@@ -124,6 +153,48 @@ export default function SettingsPage() {
     });
   };
 
+  const addOfficeLocation = () => {
+    if (!settings) return;
+    const newOffice: OfficeLocation = {
+      id: `office_${Date.now()}`,
+      type: "branch",
+      label: "New Office",
+      addressLine1: "",
+      city: "",
+      country: "",
+      isActive: true,
+    };
+    setSettings({
+      ...settings,
+      officeLocations: [...(settings.officeLocations || []), newOffice],
+    });
+  };
+
+  const updateOfficeLocation = (id: string, field: keyof OfficeLocation, value: string | boolean) => {
+    if (!settings) return;
+    setSettings({
+      ...settings,
+      officeLocations: (settings.officeLocations || []).map((office) =>
+        office.id === id ? { ...office, [field]: value } : office
+      ),
+    });
+  };
+
+  const removeOfficeLocation = (id: string) => {
+    if (!settings) return;
+    setSettings({
+      ...settings,
+      officeLocations: (settings.officeLocations || []).filter((office) => office.id !== id),
+    });
+  };
+
+  const officeTypeLabels: Record<OfficeLocation["type"], string> = {
+    headquarters: "Headquarters",
+    regional: "Regional Office",
+    offshore: "Offshore / VC Office",
+    branch: "Branch Office",
+  };
+
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-100">
@@ -164,10 +235,11 @@ export default function SettingsPage() {
       </div>
 
       <Tabs defaultValue="company" className="space-y-6">
-        <TabsList className="grid w-full grid-cols-4">
+        <TabsList className="grid w-full grid-cols-5">
           <TabsTrigger value="company">Company</TabsTrigger>
           <TabsTrigger value="contact">Contact</TabsTrigger>
-          <TabsTrigger value="address">Address</TabsTrigger>
+          <TabsTrigger value="offices">Offices</TabsTrigger>
+          <TabsTrigger value="address">Legacy Address</TabsTrigger>
           <TabsTrigger value="social">Social & Links</TabsTrigger>
         </TabsList>
 
@@ -309,16 +381,223 @@ export default function SettingsPage() {
           </Card>
         </TabsContent>
 
-        {/* Address Tab */}
+        {/* Office Locations Tab */}
+        <TabsContent value="offices">
+          <Card>
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <div>
+                  <CardTitle className="flex items-center gap-2">
+                    <Building2 className="w-5 h-5" />
+                    Office Locations
+                  </CardTitle>
+                  <CardDescription>
+                    Manage multiple office addresses (Headquarters, Regional, Offshore/VC)
+                  </CardDescription>
+                </div>
+                <Button onClick={addOfficeLocation} variant="outline" size="sm">
+                  <Plus className="w-4 h-4 mr-2" />
+                  Add Office
+                </Button>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              {(!settings.officeLocations || settings.officeLocations.length === 0) ? (
+                <div className="text-center py-8 border-2 border-dashed rounded-lg">
+                  <MapPin className="w-12 h-12 mx-auto text-muted-foreground mb-4" />
+                  <p className="text-muted-foreground mb-4">No office locations added yet</p>
+                  <Button onClick={addOfficeLocation} variant="outline">
+                    <Plus className="w-4 h-4 mr-2" />
+                    Add Your First Office
+                  </Button>
+                </div>
+              ) : (
+                <div className="space-y-6">
+                  {settings.officeLocations.map((office, index) => (
+                    <Card key={office.id} className="border-2">
+                      <CardHeader className="pb-4">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-3">
+                            <div className="flex items-center gap-2 text-muted-foreground">
+                              <GripVertical className="w-4 h-4" />
+                              <span className="text-sm font-medium">#{index + 1}</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <Switch
+                                checked={office.isActive}
+                                onCheckedChange={(checked) =>
+                                  updateOfficeLocation(office.id, "isActive", checked)
+                                }
+                              />
+                              <span className="text-sm text-muted-foreground">
+                                {office.isActive ? "Active" : "Inactive"}
+                              </span>
+                            </div>
+                          </div>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => removeOfficeLocation(office.id)}
+                            className="text-destructive hover:text-destructive hover:bg-destructive/10"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      </CardHeader>
+                      <CardContent className="space-y-4">
+                        <div className="grid md:grid-cols-2 gap-4">
+                          <div className="space-y-2">
+                            <Label>Office Type</Label>
+                            <Select
+                              value={office.type}
+                              onValueChange={(value) =>
+                                updateOfficeLocation(office.id, "type", value)
+                              }
+                            >
+                              <SelectTrigger>
+                                <SelectValue />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="headquarters">Headquarters</SelectItem>
+                                <SelectItem value="regional">Regional Office</SelectItem>
+                                <SelectItem value="offshore">Offshore / VC Office</SelectItem>
+                                <SelectItem value="branch">Branch Office</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                          <div className="space-y-2">
+                            <Label>Display Label</Label>
+                            <Input
+                              value={office.label}
+                              onChange={(e) =>
+                                updateOfficeLocation(office.id, "label", e.target.value)
+                              }
+                              placeholder="e.g., Mumbai Headquarters"
+                            />
+                          </div>
+                        </div>
+
+                        <div className="space-y-2">
+                          <Label>Address Line 1 *</Label>
+                          <Input
+                            value={office.addressLine1}
+                            onChange={(e) =>
+                              updateOfficeLocation(office.id, "addressLine1", e.target.value)
+                            }
+                            placeholder="Street address"
+                          />
+                        </div>
+
+                        <div className="space-y-2">
+                          <Label>Address Line 2</Label>
+                          <Input
+                            value={office.addressLine2 || ""}
+                            onChange={(e) =>
+                              updateOfficeLocation(office.id, "addressLine2", e.target.value)
+                            }
+                            placeholder="Suite, Floor, Building (optional)"
+                          />
+                        </div>
+
+                        <div className="grid md:grid-cols-2 gap-4">
+                          <div className="space-y-2">
+                            <Label>City *</Label>
+                            <Input
+                              value={office.city}
+                              onChange={(e) =>
+                                updateOfficeLocation(office.id, "city", e.target.value)
+                              }
+                              placeholder="City"
+                            />
+                          </div>
+                          <div className="space-y-2">
+                            <Label>State / Province</Label>
+                            <Input
+                              value={office.state || ""}
+                              onChange={(e) =>
+                                updateOfficeLocation(office.id, "state", e.target.value)
+                              }
+                              placeholder="State or Province"
+                            />
+                          </div>
+                        </div>
+
+                        <div className="grid md:grid-cols-2 gap-4">
+                          <div className="space-y-2">
+                            <Label>Postal / ZIP Code</Label>
+                            <Input
+                              value={office.postalCode || ""}
+                              onChange={(e) =>
+                                updateOfficeLocation(office.id, "postalCode", e.target.value)
+                              }
+                              placeholder="Postal code"
+                            />
+                          </div>
+                          <div className="space-y-2">
+                            <Label>Country *</Label>
+                            <Input
+                              value={office.country}
+                              onChange={(e) =>
+                                updateOfficeLocation(office.id, "country", e.target.value)
+                              }
+                              placeholder="Country"
+                            />
+                          </div>
+                        </div>
+
+                        <div className="grid md:grid-cols-2 gap-4">
+                          <div className="space-y-2">
+                            <Label>Office Phone</Label>
+                            <Input
+                              value={office.phone || ""}
+                              onChange={(e) =>
+                                updateOfficeLocation(office.id, "phone", e.target.value)
+                              }
+                              placeholder="+1 234 567 890"
+                            />
+                          </div>
+                          <div className="space-y-2">
+                            <Label>Office Email</Label>
+                            <Input
+                              type="email"
+                              value={office.email || ""}
+                              onChange={(e) =>
+                                updateOfficeLocation(office.id, "email", e.target.value)
+                              }
+                              placeholder="office@example.com"
+                            />
+                          </div>
+                        </div>
+
+                        <div className="space-y-2">
+                          <Label>Google Maps Link</Label>
+                          <Input
+                            value={office.mapLink || ""}
+                            onChange={(e) =>
+                              updateOfficeLocation(office.id, "mapLink", e.target.value)
+                            }
+                            placeholder="https://maps.google.com/..."
+                          />
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        {/* Legacy Address Tab */}
         <TabsContent value="address">
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <MapPin className="w-5 h-5" />
-                Address Information
+                Legacy Address (Deprecated)
               </CardTitle>
               <CardDescription>
-                Your company&apos;s physical address
+                Single address for backward compatibility. Use &quot;Offices&quot; tab for multiple locations.
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
