@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, pgEnum } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, pgEnum, boolean } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 import { users } from "./auth";
 
@@ -54,7 +54,20 @@ export const chatMessagesRelations = relations(chatMessages, ({ one }) => ({
   }),
 }));
 
+// Chat Email Verification - for verifying company emails before chat
+export const chatEmailVerifications = pgTable("chat_email_verifications", {
+  id: text("id").primaryKey(),
+  email: text("email").notNull(),
+  name: text("name").notNull(),
+  pin: text("pin").notNull(),
+  verified: boolean("verified").notNull().default(false),
+  expiresAt: timestamp("expires_at").notNull(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
 export type ChatConversation = typeof chatConversations.$inferSelect;
 export type NewChatConversation = typeof chatConversations.$inferInsert;
 export type ChatMessage = typeof chatMessages.$inferSelect;
 export type NewChatMessage = typeof chatMessages.$inferInsert;
+export type ChatEmailVerification = typeof chatEmailVerifications.$inferSelect;
+export type NewChatEmailVerification = typeof chatEmailVerifications.$inferInsert;

@@ -61,6 +61,26 @@ export const rateLimiters = {
         prefix: "ratelimit:chat",
       })
     : null,
+
+  // Chat email verification: 5 requests per minute
+  "chat-verify": redis
+    ? new Ratelimit({
+        redis,
+        limiter: Ratelimit.slidingWindow(5, "1 m"),
+        analytics: true,
+        prefix: "ratelimit:chat-verify",
+      })
+    : null,
+
+  // Chat PIN confirmation: 10 attempts per minute
+  "chat-verify-confirm": redis
+    ? new Ratelimit({
+        redis,
+        limiter: Ratelimit.slidingWindow(10, "1 m"),
+        analytics: true,
+        prefix: "ratelimit:chat-verify-confirm",
+      })
+    : null,
 };
 
 export type RateLimitType = keyof typeof rateLimiters;

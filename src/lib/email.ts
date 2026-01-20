@@ -2,6 +2,7 @@ import { Resend } from "resend";
 import { NewsletterConfirmEmail } from "@/components/emails/newsletter-confirm";
 import { NewsletterWelcomeEmail } from "@/components/emails/newsletter-welcome";
 import { ContactNotificationEmail } from "@/components/emails/contact-notification";
+import { ChatVerificationEmail } from "@/components/emails/chat-verification";
 
 // Lazy initialization to avoid build-time errors
 let _resend: Resend | null = null;
@@ -111,6 +112,35 @@ export async function sendContactNotificationEmail(data: {
     }
 
     return { success: true, id: result?.id };
+  } catch (error) {
+    console.error("Email send error:", error);
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Unknown error",
+    };
+  }
+}
+
+export async function sendChatVerificationEmail(
+  email: string,
+  name: string,
+  pin: string
+): Promise<SendEmailResult> {
+  try {
+    const resend = getResend();
+    const { data, error } = await resend.emails.send({
+      from: FROM_EMAIL,
+      to: email,
+      subject: `Your IT Origin Chat Verification Code: ${pin}`,
+      react: ChatVerificationEmail({ name, pin }),
+    });
+
+    if (error) {
+      console.error("Failed to send chat verification email:", error);
+      return { success: false, error: error.message };
+    }
+
+    return { success: true, id: data?.id };
   } catch (error) {
     console.error("Email send error:", error);
     return {
