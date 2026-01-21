@@ -1,0 +1,1 @@
+ALTER TABLE "site_settings" ADD COLUMN "footer_locations_limit" integer DEFAULT 2;

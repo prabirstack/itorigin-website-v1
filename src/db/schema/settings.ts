@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, jsonb } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, jsonb, integer } from "drizzle-orm/pg-core";
 
 // Office location type for multiple addresses
 export type OfficeLocation = {
@@ -42,6 +42,9 @@ export const siteSettings = pgTable("site_settings", {
 
   // Multiple Office Locations (new)
   officeLocations: jsonb("office_locations").$type<OfficeLocation[]>().default([]),
+
+  // Footer Settings
+  footerLocationsLimit: integer("footer_locations_limit").default(2),
 
   // Business Hours
   businessHours: text("business_hours").default("Mon-Fri 9:00 AM - 6:00 PM"),

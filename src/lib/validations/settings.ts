@@ -60,6 +60,9 @@ export const updateSettingsSchema = z.object({
   // Multiple Office Locations
   officeLocations: officeLocationsSchema,
 
+  // Footer Settings
+  footerLocationsLimit: z.number().int().min(0).max(10).nullable().optional(),
+
   // Business Hours
   businessHours: optionalString,
   timezone: optionalString,

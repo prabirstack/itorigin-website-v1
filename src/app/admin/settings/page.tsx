@@ -402,6 +402,13 @@ export default function SettingsPage() {
               </div>
             </CardHeader>
             <CardContent className="space-y-6">
+              {/* Info about footer visibility */}
+              <div className="p-4 bg-muted/50 rounded-lg">
+                <p className="text-sm text-muted-foreground">
+                  <strong>Tip:</strong> All active offices are shown in the footer. Use the &quot;Active&quot; toggle on each office to control its visibility on the website.
+                </p>
+              </div>
+
               {(!settings.officeLocations || settings.officeLocations.length === 0) ? (
                 <div className="text-center py-8 border-2 border-dashed rounded-lg">
                   <MapPin className="w-12 h-12 mx-auto text-muted-foreground mb-4" />

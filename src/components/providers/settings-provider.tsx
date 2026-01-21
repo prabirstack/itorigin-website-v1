@@ -42,6 +42,7 @@ export interface SiteSettings {
   postalCode: string | null;
   country: string | null;
   officeLocations: OfficeLocation[] | null;
+  footerLocationsLimit: number | null;
   businessHours: string | null;
   timezone: string | null;
   socialLinks: SocialLinks | null;
@@ -56,28 +57,25 @@ interface SettingsContextType {
   isLoading: boolean;
 }
 
-// Default settings for fallback
+// Default settings for fallback (empty defaults - actual data comes from database)
 const defaultSettings: SiteSettings = {
   companyName: "IT Origin",
-  tagline: "Cybersecurity Excellence",
-  description: "Leading cybersecurity solutions provider",
+  tagline: null,
+  description: null,
   email: "info@itorigin.com",
-  phone: "+1 (234) 567-890",
+  phone: "",
   whatsapp: null,
-  addressLine1: "123 Cybersecurity Avenue",
-  addressLine2: "Tech District",
-  city: "Mumbai",
-  state: "Maharashtra",
-  postalCode: "400001",
-  country: "India",
+  addressLine1: null,
+  addressLine2: null,
+  city: null,
+  state: null,
+  postalCode: null,
+  country: null,
   officeLocations: null,
-  businessHours: "Mon-Fri 9:00 AM - 6:00 PM",
-  timezone: "IST",
-  socialLinks: {
-    twitter: "https://twitter.com/itorigin",
-    linkedin: "https://linkedin.com/company/itorigin",
-    github: "https://github.com/itorigin",
-  },
+  footerLocationsLimit: null,
+  businessHours: null,
+  timezone: null,
+  socialLinks: null,
   calendlyUrl: null,
   supportEmail: null,
   salesEmail: null,

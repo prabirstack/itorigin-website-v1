@@ -2,29 +2,45 @@
 
 import React from "react";
 import { motion } from "motion/react";
-import { Phone, Mail, MapPin, Linkedin, Github } from "lucide-react";
+import { Phone, Mail, MapPin, Linkedin } from "lucide-react";
 import { RiTwitterXFill, RiFacebookFill, RiInstagramLine, RiYoutubeLine } from "react-icons/ri";
-import { useSettings, getPhoneLink, getEmailLink } from "@/components/providers/settings-provider";
+import { useSettings, getPhoneLink, getEmailLink, getActiveOffices, type OfficeLocation } from "@/components/providers/settings-provider";
 import { Logo } from "@/components/common/logo";
 
 export function FooterBrand() {
   const { settings } = useSettings();
 
-  const phone = settings?.phone || "+1 (234) 567-890";
-  const email = settings?.email || "info@itorigin.com";
-  const addressLine1 = settings?.addressLine1 || "123 Cybersecurity Avenue";
-  const addressLine2 = settings?.addressLine2 || "Tech District";
-  const city = settings?.city || "Mumbai";
-  const postalCode = settings?.postalCode || "400001";
-  const state = settings?.state || "Maharashtra";
-  const country = settings?.country || "India";
-  const description = settings?.description || "Leading cybersecurity solutions provider offering comprehensive SOC services, offensive security testing, and GRC consulting to protect your digital assets and ensure compliance.";
+  const phone = settings?.phone;
+  const email = settings?.email;
+  const description = settings?.description;
   const socialLinks = settings?.socialLinks || {};
+
+  // Get active office locations from database (shows all active offices)
+  const activeOffices = getActiveOffices(settings);
+
+  // Fallback to legacy address fields if no office locations
+  const legacyAddress: OfficeLocation | null = settings?.addressLine1 ? {
+    id: "legacy",
+    type: "headquarters",
+    label: "Office",
+    addressLine1: settings.addressLine1,
+    addressLine2: settings.addressLine2,
+    city: settings.city || "",
+    state: settings.state,
+    postalCode: settings.postalCode,
+    country: settings.country || "",
+    phone: settings.phone,
+    email: settings.email,
+    isActive: true,
+  } : null;
+
+  // Use office locations if available, otherwise use legacy address
+  // All active offices are shown - use the Active toggle per office in admin to control visibility
+  const offices = activeOffices.length > 0 ? activeOffices : (legacyAddress ? [legacyAddress] : []);
 
   const socialIcons = [
     { name: "Twitter", icon: RiTwitterXFill, href: socialLinks.twitter, color: "hover:bg-[#1DA1F2]" },
     { name: "LinkedIn", icon: Linkedin, href: socialLinks.linkedin, color: "hover:bg-[#0A66C2]" },
-    { name: "GitHub", icon: Github, href: socialLinks.github, color: "hover:bg-[#333]" },
     { name: "Facebook", icon: RiFacebookFill, href: socialLinks.facebook, color: "hover:bg-[#1877F2]" },
     { name: "Instagram", icon: RiInstagramLine, href: socialLinks.instagram, color: "hover:bg-[#E4405F]" },
     { name: "YouTube", icon: RiYoutubeLine, href: socialLinks.youtube, color: "hover:bg-[#FF0000]" },
@@ -45,29 +61,55 @@ export function FooterBrand() {
       <div className="space-y-4">
         <h4 className="font-semibold text-foreground">Get in Touch</h4>
         <div className="space-y-3">
-          <div className="flex items-center space-x-3 text-sm text-muted-foreground hover:text-primary transition-colors">
-            <div className="flex items-center justify-center w-8 h-8 bg-primary/10 rounded-lg">
-              <Phone className="w-4 h-4 text-primary" />
+          {phone && (
+            <div className="flex items-center space-x-3 text-sm text-muted-foreground hover:text-primary transition-colors">
+              <div className="flex items-center justify-center w-8 h-8 bg-primary/10 rounded-lg">
+                <Phone className="w-4 h-4 text-primary" />
+              </div>
+              <a href={getPhoneLink(phone)}>{phone}</a>
             </div>
-            <a href={getPhoneLink(phone)}>{phone}</a>
-          </div>
-          <div className="flex items-center space-x-3 text-sm text-muted-foreground hover:text-primary transition-colors">
-            <div className="flex items-center justify-center w-8 h-8 bg-primary/10 rounded-lg">
-              <Mail className="w-4 h-4 text-primary" />
+          )}
+          {email && (
+            <div className="flex items-center space-x-3 text-sm text-muted-foreground hover:text-primary transition-colors">
+              <div className="flex items-center justify-center w-8 h-8 bg-primary/10 rounded-lg">
+                <Mail className="w-4 h-4 text-primary" />
+              </div>
+              <a href={getEmailLink(email)}>{email}</a>
             </div>
-            <a href={getEmailLink(email)}>{email}</a>
-          </div>
-          <div className="flex items-start space-x-3 text-sm text-muted-foreground">
-            <div className="flex items-center justify-center w-8 h-8 bg-primary/10 rounded-lg mt-0.5">
-              <MapPin className="w-4 h-4 text-primary" />
+          )}
+          {offices.map((office) => (
+            <div key={office.id} className="flex items-start space-x-3 text-sm text-muted-foreground">
+              <div className="flex items-center justify-center w-8 h-8 bg-primary/10 rounded-lg mt-0.5">
+                <MapPin className="w-4 h-4 text-primary" />
+              </div>
+              <div>
+                {offices.length > 1 && (
+                  <p className="font-medium text-foreground text-xs mb-1">{office.label}</p>
+                )}
+                <p>{office.addressLine1}</p>
+                {office.addressLine2 && <p>{office.addressLine2}</p>}
+                <p>{office.city} {office.postalCode}</p>
+                {(office.state || office.country) && (
+                  <p>{[office.state, office.country].filter(Boolean).join(", ")}</p>
+                )}
+                {/* Show office-specific contact info when multiple offices exist */}
+                {offices.length > 1 && (office.phone || office.email) && (
+                  <div className="mt-2 space-y-1 text-xs">
+                    {office.phone && (
+                      <a href={getPhoneLink(office.phone)} className="block hover:text-primary transition-colors">
+                        {office.phone}
+                      </a>
+                    )}
+                    {office.email && (
+                      <a href={getEmailLink(office.email)} className="block hover:text-primary transition-colors">
+                        {office.email}
+                      </a>
+                    )}
+                  </div>
+                )}
+              </div>
             </div>
-            <div>
-              <p>{addressLine1}</p>
-              {addressLine2 && <p>{addressLine2}</p>}
-              <p>{city} {postalCode}</p>
-              <p>{state}, {country}</p>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
 
