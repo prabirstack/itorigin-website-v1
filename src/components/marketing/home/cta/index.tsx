@@ -15,13 +15,13 @@ export function CTASection() {
     <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 w-full max-w-7xl mx-auto relative min-h-screen">
       {/* Background Elements */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden -z-10">
-        <div className="absolute top-1/4 -left-32 sm:-left-64 w-48 sm:w-96 h-48 sm:h-96 bg-gradient-to-r from-primary/8 to-primary/4 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute top-1/4 -left-32 sm:-left-64 w-48 sm:w-96 h-48 sm:h-96 bg-linear-to-r from-primary/8 to-primary/4 rounded-full blur-3xl animate-pulse" />
         <div
-          className="absolute bottom-1/4 -right-32 sm:-right-64 w-48 sm:w-96 h-48 sm:h-96 bg-gradient-to-l from-primary/8 to-primary/4 rounded-full blur-3xl animate-pulse"
+          className="absolute bottom-1/4 -right-32 sm:-right-64 w-48 sm:w-96 h-48 sm:h-96 bg-linear-to-l from-primary/8 to-primary/4 rounded-full blur-3xl animate-pulse"
           style={{ animationDelay: "2s" }}
         />
         <div
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[400px] sm:w-[800px] h-[400px] sm:h-[800px] bg-gradient-to-br from-primary/3 via-transparent to-primary/3 rounded-full blur-3xl animate-pulse"
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-100 sm:w-200 h-100 sm:h-200 bg-linear-to-br from-primary/3 via-transparent to-primary/3 rounded-full blur-3xl animate-pulse"
           style={{ animationDelay: "4s" }}
         />
 
@@ -62,7 +62,7 @@ export function CTASection() {
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground mb-4 sm:mb-6 leading-tight px-2">
             Get Started{" "}
-            <span className="bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
               Today
             </span>
           </h2>
@@ -83,7 +83,7 @@ export function CTASection() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
             {engagementOptions.map((option, index) => (
               <EngagementCard key={option.id} {...option} index={index} />
             ))}
@@ -106,7 +106,7 @@ export function CTASection() {
           <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground border-0 shadow-lg hover:shadow-2xl hover:shadow-primary/30 transition-all duration-300 group px-8 py-4 text-lg rounded-md font-medium"
+              className="inline-flex items-center justify-center bg-linear-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground border-0 shadow-lg hover:shadow-2xl hover:shadow-primary/30 transition-all duration-300 group px-8 py-4 text-lg rounded-md font-medium"
             >
               Start Your Security Journey
               <ArrowRight className="ml-3 w-5 h-5 group-hover:translate-x-1 transition-transform" />

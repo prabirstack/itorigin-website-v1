@@ -19,17 +19,18 @@ export interface ContactInfo {
 }
 
 export const engagementOptions: EngagementOption[] = [
-  {
-    id: "assessment",
-    title: "Free Security Assessment",
-    description: "Discover your security gaps with our comprehensive analysis",
-    iconName: "Search",
-    gradient: "from-blue-500/20 via-blue-500/10 to-blue-600/5",
-    iconBg: "bg-gradient-to-br from-blue-500 to-blue-600",
-    ctaText: "Start Assessment",
-    ctaLink: "/contact?service=assessment",
-    popular: true,
-  },
+  // TODO: Re-enable when free security assessment service is ready
+  // {
+  //   id: "assessment",
+  //   title: "Free Security Assessment",
+  //   description: "Discover your security gaps with our comprehensive analysis",
+  //   iconName: "Search",
+  //   gradient: "from-blue-500/20 via-blue-500/10 to-blue-600/5",
+  //   iconBg: "bg-gradient-to-br from-blue-500 to-blue-600",
+  //   ctaText: "Start Assessment",
+  //   ctaLink: "/contact?service=assessment",
+  //   popular: true,
+  // },
   {
     id: "consultation",
     title: "Expert Consultation",

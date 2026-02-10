@@ -92,7 +92,7 @@ export default function ContactPage() {
 
   const officeTypeLabels: Record<OfficeLocation["type"], string> = {
     headquarters: "HQ",
-    regional: "Regional",
+    regional: "Branch",
     offshore: "VC Office",
     branch: "Branch",
   };
@@ -375,7 +375,7 @@ export default function ContactPage() {
                           <div>
                             <h4 className="font-semibold text-sm">{office.label}</h4>
                             <span className="text-xs text-muted-foreground capitalize">
-                              {office.type === "offshore" ? "Offshore / VC" : office.type}
+                              {office.type === "headquarters" ? "Head Office" : office.country?.toLowerCase() === "india" ? "Branch Office" : "VC Office"}
                             </span>
                           </div>
                         </div>

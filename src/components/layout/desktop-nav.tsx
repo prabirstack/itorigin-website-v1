@@ -8,16 +8,23 @@ import {
   BookOpen,
   Users,
   Heart,
+  ArrowRight,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { NavItem, SubMenuItem, staticNavItems, aboutSubItems } from "@/lib/constant";
 import { useServices, NavService } from "@/components/providers/services-provider";
 import { iconMap } from "@/lib/icon-map";
 
+interface DropdownCTA {
+  label: string;
+  href: string;
+}
+
 interface DropdownMenuProps {
   items: SubMenuItem[];
   isOpen: boolean;
   onClose: () => void;
+  cta?: DropdownCTA;
 }
 
 const getServiceIcon = (iconName: string | null, name: string) => {
@@ -35,7 +42,7 @@ const getServiceIcon = (iconName: string | null, name: string) => {
   return ExternalLink;
 };
 
-const DropdownMenu: React.FC<DropdownMenuProps> = ({ items, isOpen, onClose }) => (
+const DropdownMenu: React.FC<DropdownMenuProps> = ({ items, isOpen, onClose, cta }) => (
   <AnimatePresence>
     {isOpen && (
       <motion.div
@@ -56,7 +63,6 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({ items, isOpen, onClose }) =
                 className="block p-3 rounded-md hover:bg-accent transition-colors duration-200 group"
                 onClick={onClose}
               >
-                {" "}
                 <div className="flex items-start space-x-3">
                   <div className="flex items-center justify-center w-8 h-8 rounded-md bg-primary/10 group-hover:bg-primary/20 transition-colors">
                     <IconComponent className="w-4 h-4 text-primary" />
@@ -74,6 +80,18 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({ items, isOpen, onClose }) =
             );
           })}
         </div>
+        {cta && (
+          <div className="border-t border-border p-2">
+            <Link
+              href={cta.href}
+              className="flex items-center justify-between p-3 rounded-md bg-primary/5 hover:bg-primary/10 transition-colors duration-200 group"
+              onClick={onClose}
+            >
+              <span className="text-sm font-semibold text-primary">{cta.label}</span>
+              <ArrowRight className="w-4 h-4 text-primary group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+        )}
       </motion.div>
     )}
   </AnimatePresence>
@@ -181,6 +199,7 @@ export const DesktopNav: React.FC = () => {
               items={item.subItems}
               isOpen={activeDropdown === item.id}
               onClose={closeDropdown}
+              cta={item.name === "About" ? { label: "About IT Origin", href: "/about" } : undefined}
             />
           )}
         </div>

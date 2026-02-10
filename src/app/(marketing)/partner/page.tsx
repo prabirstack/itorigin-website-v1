@@ -392,7 +392,7 @@ export default function PartnerPage() {
         </div>
       </section>
 
-      {/* Partner Testimonials Section */}
+      {/* TODO: Re-enable when real partner testimonials are available
       <section className="py-20 md:py-32 bg-accent/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
@@ -442,6 +442,7 @@ export default function PartnerPage() {
           </div>
         </div>
       </section>
+      */}
 
       {/* CTA Section */}
       <CTASection
