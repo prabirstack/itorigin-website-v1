@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence, Variants } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -33,6 +33,21 @@ interface SuccessStory {
   title: string;
   metric: string;
   description: string;
+  slug?: string;
+}
+
+interface CaseStudyMetric {
+  label: string;
+  value: string;
+}
+
+interface CaseStudyResponse {
+  id: string;
+  title: string;
+  client: string;
+  slug: string;
+  results: string[];
+  metrics: CaseStudyMetric[];
 }
 
 const industries: Industry[] = [
@@ -80,30 +95,18 @@ const industries: Industry[] = [
   },
 ];
 
-const successStories: SuccessStory[] = [
+const fallbackStories: SuccessStory[] = [
   {
     id: "1",
-    title: "Leading Indian Bank",
-    metric: "75% Reduction",
-    description: "Reduced security incident response time by 75% for leading Indian bank",
+    title: "Enterprise Security",
+    metric: "24/7 SOC",
+    description: "Round-the-clock security operations center monitoring for enterprise clients",
   },
   {
     id: "2",
-    title: "Fintech Startup",
-    metric: "3 Months",
-    description: "Achieved SOC2 Type II certification in record 3 months for fintech startup",
-  },
-  {
-    id: "3",
-    title: "Manufacturing Client",
-    metric: "₹5+ Crores Saved",
-    description: "Prevented ransomware attack saving ₹5+ crores for manufacturing client",
-  },
-  {
-    id: "4",
-    title: "ISO 27001 Implementations",
+    title: "Compliance Achievement",
     metric: "100% Success",
-    description: "100% compliance success rate across 50+ ISO 27001 implementations",
+    description: "Comprehensive compliance and certification support across industry frameworks",
   },
 ];
 
@@ -159,9 +162,40 @@ const slideVariants: Variants = {
   }),
 };
 
+function mapCaseStudiesToStories(data: CaseStudyResponse[]): SuccessStory[] {
+  return data.map((cs) => {
+    const primaryMetric = cs.metrics?.[0];
+    const metric = primaryMetric ? primaryMetric.value : "Success";
+    const description = cs.results?.[0] || cs.title;
+
+    return {
+      id: cs.id,
+      title: cs.client || cs.title,
+      metric,
+      description,
+      slug: cs.slug,
+    };
+  });
+}
+
 export const IndustryExperience = () => {
   const [currentStory, setCurrentStory] = useState<number>(0);
   const [direction, setDirection] = useState<number>(0);
+  const [successStories, setSuccessStories] = useState<SuccessStory[]>(fallbackStories);
+
+  // Fetch case studies from API
+  useEffect(() => {
+    fetch("/api/case-studies?featured=true&limit=10")
+      .then((res) => res.json())
+      .then((data: { caseStudies: CaseStudyResponse[] }) => {
+        if (data.caseStudies && data.caseStudies.length > 0) {
+          setSuccessStories(mapCaseStudiesToStories(data.caseStudies));
+        }
+      })
+      .catch(() => {
+        // Keep fallback stories on error
+      });
+  }, []);
 
   const paginate = (newDirection: number): void => {
     setDirection(newDirection);
@@ -180,19 +214,19 @@ export const IndustryExperience = () => {
     }, 5000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [successStories.length]);
 
   return (
     <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 w-full max-w-7xl mx-auto relative min-h-screen">
       {/* Background Elements */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden -z-10">
-        <div className="absolute top-1/4 -left-32 sm:-left-64 w-48 sm:w-96 h-48 sm:h-96 bg-gradient-to-r from-primary/8 to-primary/4 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute top-1/4 -left-32 sm:-left-64 w-48 sm:w-96 h-48 sm:h-96 bg-linear-to-r from-primary/8 to-primary/4 rounded-full blur-3xl animate-pulse" />
         <div
-          className="absolute bottom-1/4 -right-32 sm:-right-64 w-48 sm:w-96 h-48 sm:h-96 bg-gradient-to-l from-primary/8 to-primary/4 rounded-full blur-3xl animate-pulse"
+          className="absolute bottom-1/4 -right-32 sm:-right-64 w-48 sm:w-96 h-48 sm:h-96 bg-linear-to-l from-primary/8 to-primary/4 rounded-full blur-3xl animate-pulse"
           style={{ animationDelay: "2s" }}
         />
         <div
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] bg-gradient-to-br from-primary/3 via-transparent to-primary/3 rounded-full blur-3xl animate-pulse"
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-75 sm:w-150 h-75 sm:h-150 bg-linear-to-br from-primary/3 via-transparent to-primary/3 rounded-full blur-3xl animate-pulse"
           style={{ animationDelay: "4s" }}
         />
 
@@ -248,7 +282,7 @@ export const IndustryExperience = () => {
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground mb-4 sm:mb-6 leading-tight px-2">
             Proven Track Record{" "}
-            <span className="bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
               Across Industries
             </span>
           </h2>
@@ -276,7 +310,7 @@ export const IndustryExperience = () => {
                   <CardContent className="p-4 sm:p-6 h-full flex flex-col relative z-10">
                     <div className="mb-3 sm:mb-4">
                       <div
-                        className={`w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-gradient-to-br ${industry.gradient} border-2 border-border/30 flex items-center justify-center text-primary mb-3 sm:mb-4 group-hover:scale-110 group-hover:border-primary/40 transition-all duration-500`}
+                        className={`w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-linear-to-br ${industry.gradient} border-2 border-border/30 flex items-center justify-center text-primary mb-3 sm:mb-4 group-hover:scale-110 group-hover:border-primary/40 transition-all duration-500`}
                       >
                         {industry.icon}
                       </div>
@@ -294,7 +328,7 @@ export const IndustryExperience = () => {
                     </Link>
 
                     {/* Card shine effect */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] via-transparent to-black/[0.03] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                    <div className="absolute inset-0 bg-linear-to-br from-white/3 via-transparent to-black/3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                   </CardContent>
                 </Card>
               </motion.div>
@@ -331,7 +365,7 @@ export const IndustryExperience = () => {
                   }}
                   className="absolute inset-0"
                 >
-                  <Card className="h-full bg-gradient-to-br from-primary to-primary/80 border-0 shadow-2xl shadow-primary/20 relative overflow-hidden">
+                  <Card className="h-full bg-linear-to-br from-primary to-primary/80 border-0 shadow-2xl shadow-primary/20 relative overflow-hidden">
                     <CardContent className="p-4 sm:p-6 lg:p-8 h-full flex flex-col justify-center text-center relative z-10">
                       <div className="mb-4 sm:mb-6">
                         <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary-foreground mb-1 sm:mb-2">
@@ -344,10 +378,19 @@ export const IndustryExperience = () => {
                       <p className="text-primary-foreground/80 text-sm sm:text-base lg:text-lg leading-relaxed max-w-2xl mx-auto px-2">
                         {successStories[currentStory].description}
                       </p>
+                      {successStories[currentStory].slug && (
+                        <Link
+                          href={`/case-studies/${successStories[currentStory].slug}`}
+                          className="inline-flex items-center gap-2 text-primary-foreground/90 hover:text-primary-foreground text-sm font-medium mt-4 mx-auto transition-colors"
+                        >
+                          Read Full Case Study
+                          <ArrowRight className="w-4 h-4" />
+                        </Link>
+                      )}
                     </CardContent>
 
                     {/* Card gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-white/[0.05] via-transparent to-black/[0.05] pointer-events-none" />
+                    <div className="absolute inset-0 bg-linear-to-br from-white/5 via-transparent to-black/5 pointer-events-none" />
                   </Card>
                 </motion.div>
               </AnimatePresence>
@@ -399,7 +442,7 @@ export const IndustryExperience = () => {
           <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
             <Link
               href="/case-studies"
-              className="inline-flex items-center justify-center bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground border-0 shadow-lg hover:shadow-xl hover:shadow-primary/25 transition-all duration-300 group px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg rounded-md font-medium"
+              className="inline-flex items-center justify-center bg-linear-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground border-0 shadow-lg hover:shadow-xl hover:shadow-primary/25 transition-all duration-300 group px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg rounded-md font-medium"
             >
               Read Case Studies
               <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />

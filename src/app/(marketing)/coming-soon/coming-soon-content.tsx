@@ -192,11 +192,6 @@ const contextConfigs: Record<string, ContextConfig> = {
         title: "Digital Forensics",
         description: "Root cause & impact investigation",
       },
-      {
-        icon: Shield,
-        title: "Recovery Support",
-        description: "Business continuity & hardening",
-      },
     ],
   },
   training: {
@@ -457,7 +452,14 @@ export function ComingSoonContent({ context }: { context?: string }) {
 
             {/* Feature Preview Cards */}
             {config.features.length > 0 && (
-              <motion.div variants={fadeInUp} className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12">
+              <motion.div
+                variants={fadeInUp}
+                className={`grid grid-cols-1 gap-4 mb-12 mx-auto ${
+                  config.features.length === 2
+                    ? "sm:grid-cols-2 max-w-lg"
+                    : "sm:grid-cols-3 max-w-3xl"
+                }`}
+              >
                 {config.features.map((feature) => {
                   const FeatureIcon = feature.icon;
                   return (
