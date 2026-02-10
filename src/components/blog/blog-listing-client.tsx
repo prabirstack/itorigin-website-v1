@@ -13,7 +13,7 @@ interface BlogListingClientProps {
   categories?: string[];
 }
 
-const POSTS_PER_PAGE = 5;
+const POSTS_PER_PAGE = 10;
 
 const DEFAULT_CATEGORIES = [
   "All Posts",
