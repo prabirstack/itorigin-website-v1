@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion, type Variants } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Zap, Bot, DollarSign, Shield, FileBarChart, Target } from "lucide-react";
@@ -12,6 +13,7 @@ interface Benefit {
   gradient: string;
   iconBg: string;
   accentColor: string;
+  href: string;
 }
 
 const benefits: Benefit[] = [
@@ -22,8 +24,9 @@ const benefits: Benefit[] = [
     description:
       "Lightning-fast incident response with automated threat containment and expert intervention within 15 minutes.",
     gradient: "from-blue-500/10 via-cyan-500/10 to-blue-600/10",
-    iconBg: "bg-gradient-to-br from-blue-500 to-cyan-500",
+    iconBg: "bg-linear-to-br from-blue-500 to-cyan-500",
     accentColor: "border-blue-500/20 hover:border-blue-400/40",
+    href: "/services/managed-soc-services",
   },
   {
     id: 2,
@@ -32,18 +35,20 @@ const benefits: Benefit[] = [
     description:
       "Advanced machine learning algorithms continuously analyze patterns to identify and neutralize emerging threats.",
     gradient: "from-purple-500/10 via-pink-500/10 to-purple-600/10",
-    iconBg: "bg-gradient-to-br from-purple-500 to-pink-500",
+    iconBg: "bg-linear-to-br from-purple-500 to-pink-500",
     accentColor: "border-purple-500/20 hover:border-purple-400/40",
+    href: "/services/managed-soc-services",
   },
   {
     id: 3,
     icon: DollarSign,
-    title: "70% Cost Reduction",
+    title: "Significant Cost Savings",
     description:
-      "Significantly reduce security overhead costs while maintaining enterprise-grade protection and compliance.",
+      "Reduce security overhead costs while maintaining enterprise-grade protection and compliance through managed services.",
     gradient: "from-green-500/10 via-emerald-500/10 to-green-600/10",
-    iconBg: "bg-gradient-to-br from-green-500 to-emerald-500",
+    iconBg: "bg-linear-to-br from-green-500 to-emerald-500",
     accentColor: "border-green-500/20 hover:border-green-400/40",
+    href: "/services",
   },
   {
     id: 4,
@@ -52,8 +57,9 @@ const benefits: Benefit[] = [
     description:
       "Round-the-clock surveillance by certified security professionals ensuring continuous protection.",
     gradient: "from-orange-500/10 via-red-500/10 to-orange-600/10",
-    iconBg: "bg-gradient-to-br from-orange-500 to-red-500",
+    iconBg: "bg-linear-to-br from-orange-500 to-red-500",
     accentColor: "border-orange-500/20 hover:border-orange-400/40",
+    href: "/services/managed-soc-services",
   },
   {
     id: 5,
@@ -62,18 +68,20 @@ const benefits: Benefit[] = [
     description:
       "Comprehensive reporting and documentation that meets industry standards and regulatory requirements.",
     gradient: "from-indigo-500/10 via-blue-500/10 to-indigo-600/10",
-    iconBg: "bg-gradient-to-br from-indigo-500 to-blue-500",
+    iconBg: "bg-linear-to-br from-indigo-500 to-blue-500",
     accentColor: "border-indigo-500/20 hover:border-indigo-400/40",
+    href: "/services/grc-services",
   },
   {
     id: 6,
     icon: Target,
-    title: "Zero False Positive Guarantee",
+    title: "Noise-Free Threat Alerts",
     description:
-      "Precision-tuned detection systems ensure genuine threats are identified without alert fatigue.",
+      "Precision-tuned detection with multi-layer validation cuts through alert fatigue so your team focuses only on what matters.",
     gradient: "from-teal-500/10 via-cyan-500/10 to-teal-600/10",
-    iconBg: "bg-gradient-to-br from-teal-500 to-cyan-500",
+    iconBg: "bg-linear-to-br from-teal-500 to-cyan-500",
     accentColor: "border-teal-500/20 hover:border-teal-400/40",
+    href: "/services/managed-soc-services",
   },
 ];
 
@@ -126,7 +134,7 @@ export const BenifitGrid = () => {
         transition={{ duration: 0.6 }}
         className="text-center mb-16"
       >
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent mb-4">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-linear-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent mb-4">
           Why Choose IT Origin?
         </h2>
         <p className="text-muted-foreground text-lg sm:text-xl max-w-3xl mx-auto leading-relaxed">
@@ -157,7 +165,7 @@ export const BenifitGrid = () => {
             >
               <CardContent className="p-6 sm:p-8 flex flex-col h-full relative z-10">
                 <div
-                  className={`w-20 h-20 rounded-3xl bg-gradient-to-br ${benefit.gradient} border-2 border-border/30 flex items-center justify-center mb-8 relative overflow-hidden group-hover:border-primary/40 transition-all duration-500 group-hover:scale-105`}
+                  className={`w-20 h-20 rounded-3xl bg-linear-to-br ${benefit.gradient} border-2 border-border/30 flex items-center justify-center mb-8 relative overflow-hidden group-hover:border-primary/40 transition-all duration-500 group-hover:scale-105`}
                 >
                   <div
                     className={`w-14 h-14 rounded-2xl ${benefit.iconBg} flex items-center justify-center shadow-2xl relative`}
@@ -171,8 +179,8 @@ export const BenifitGrid = () => {
                     </motion.div>
                     <div className="absolute inset-0 bg-white/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out" />
+                  <div className="absolute inset-0 bg-linear-to-br from-white/5 via-transparent to-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out" />
                 </div>
 
                 <div className="flex-1">
@@ -185,10 +193,9 @@ export const BenifitGrid = () => {
                 </div>
 
                 <div className="mt-8 pt-6 border-t border-border/30 group-hover:border-primary/30 transition-colors duration-300">
-                  <motion.div
-                    className="flex items-center text-primary text-sm font-semibold opacity-0 group-hover:opacity-100 transition-all duration-500 cursor-pointer"
-                    initial={{ x: -10 }}
-                    whileHover={{ x: 0 }}
+                  <Link
+                    href={benefit.href}
+                    className="flex items-center text-primary text-sm font-semibold opacity-0 group-hover:opacity-100 transition-all duration-500"
                   >
                     <span className="mr-3">Explore Feature</span>
                     <motion.svg
@@ -207,15 +214,15 @@ export const BenifitGrid = () => {
                       <path d="M7 17L17 7" />
                       <path d="M7 7h10v10" />
                     </motion.svg>
-                  </motion.div>
+                  </Link>
                 </div>
 
                 {/* Card shine effect */}
-                <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] via-transparent to-black/[0.03] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                <div className="absolute inset-0 bg-linear-to-br from-white/3 via-transparent to-black/3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
                 {/* Animated border gradient */}
                 <div
-                  className="absolute inset-0 rounded-lg bg-gradient-to-r from-transparent via-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                  className="absolute inset-0 rounded-lg bg-linear-to-r from-transparent via-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                   style={{
                     background: `conic-gradient(from 0deg at 50% 50%, transparent 0deg, ${
                       benefit.iconBg.split("from-")[1].split(" ")[0]
@@ -236,13 +243,13 @@ export const BenifitGrid = () => {
 
       {/* Enhanced background decorative elements */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden -z-10">
-        <div className="absolute top-1/4 -left-64 w-96 h-96 bg-gradient-to-r from-primary/8 to-blue-500/8 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute top-1/4 -left-64 w-96 h-96 bg-linear-to-r from-primary/8 to-blue-500/8 rounded-full blur-3xl animate-pulse" />
         <div
-          className="absolute bottom-1/4 -right-64 w-96 h-96 bg-gradient-to-l from-primary/8 to-purple-500/8 rounded-full blur-3xl animate-pulse"
+          className="absolute bottom-1/4 -right-64 w-96 h-96 bg-linear-to-l from-primary/8 to-purple-500/8 rounded-full blur-3xl animate-pulse"
           style={{ animationDelay: "2s" }}
         />
         <div
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-br from-primary/3 via-transparent to-primary/3 rounded-full blur-3xl animate-pulse"
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-150 h-150 bg-linear-to-br from-primary/3 via-transparent to-primary/3 rounded-full blur-3xl animate-pulse"
           style={{ animationDelay: "4s" }}
         />
 

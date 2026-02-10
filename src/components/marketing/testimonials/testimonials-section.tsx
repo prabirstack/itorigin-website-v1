@@ -396,7 +396,7 @@ export function TestimonialsSection({
           <div className="inline-flex items-center gap-8 px-8 py-4 rounded-2xl bg-muted/50 border border-border/50">
             <div className="flex items-center gap-2">
               <Shield className="w-5 h-5 text-primary" />
-              <span className="text-sm font-medium">500+ Clients Protected</span>
+              <span className="text-sm font-medium">300+ Clients Protected</span>
             </div>
             <div className="w-px h-6 bg-border" />
             <div className="flex items-center gap-2">

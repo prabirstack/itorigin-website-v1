@@ -47,7 +47,7 @@ export const heroSlides = [
 export const stats = [
   {
     id: 1,
-    value: "500+",
+    value: "300+",
     label: "Global Clients",
     description: "Trusted by organizations worldwide",
   },
@@ -76,7 +76,7 @@ export const whyChooseUs = [
     id: 1,
     icon: "Shield",
     title: "CERT-IN Empanelled",
-    description: "Government-recognized security operations center with certified expertise",
+    description: "Government-recognized cybersecurity firm with certified expertise in auditing and offensive security",
   },
   {
     id: 2,
@@ -94,7 +94,7 @@ export const whyChooseUs = [
     id: 4,
     icon: "Award",
     title: "Proven Track Record",
-    description: "500+ clients trust us for their cybersecurity needs",
+    description: "300+ clients trust us for their cybersecurity needs",
   },
   {
     id: 5,

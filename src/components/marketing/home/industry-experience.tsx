@@ -287,11 +287,11 @@ export const IndustryExperience = () => {
                     <p className="text-muted-foreground text-sm sm:text-base group-hover:text-muted-foreground/90 transition-colors leading-relaxed flex-grow">
                       {industry.description}
                     </p>
-                    <div className="mt-3 sm:mt-4 flex items-center text-primary opacity-0 group-hover:opacity-100 transition-all duration-500">
+                    <Link href="/services" className="mt-3 sm:mt-4 flex items-center text-primary opacity-0 group-hover:opacity-100 transition-all duration-500">
                       <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
                       <span className="text-xs sm:text-sm font-medium">View Solutions</span>
                       <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                    </div>
+                    </Link>
 
                     {/* Card shine effect */}
                     <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] via-transparent to-black/[0.03] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />

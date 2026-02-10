@@ -113,7 +113,7 @@ export function CTASection() {
             </Link>
           </motion.div>
           <p className="text-muted-foreground text-sm mt-4 max-w-md mx-auto">
-            Join 500+ organizations that trust IT Origin for their cybersecurity needs
+            Join 300+ organizations that trust IT Origin for their cybersecurity needs
           </p>
         </motion.div>
       </motion.div>

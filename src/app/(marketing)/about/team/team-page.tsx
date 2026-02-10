@@ -304,7 +304,7 @@ export function TeamPage() {
               className="flex flex-wrap items-center justify-center gap-4"
             >
               <a
-                href="mailto:careers@itorigin.com"
+                href="/coming-soon?for=careers"
                 className="px-8 py-4 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors"
               >
                 View Open Positions

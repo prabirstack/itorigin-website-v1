@@ -51,8 +51,8 @@ export default function AboutPage() {
   const stats = [
     { label: "Years of Experience", value: "15+", icon: "Award" as const },
     { label: "Security Experts", value: "100+", icon: "Users" as const },
-    { label: "Clients Protected", value: "500+", icon: "Shield" as const },
-    { label: "Countries Served", value: "25+", icon: "Globe" as const },
+    { label: "Clients Protected", value: "300+", icon: "Shield" as const },
+    { label: "Countries Served", value: "12+", icon: "Globe" as const },
   ];
 
   const highlights = [

@@ -45,7 +45,7 @@ export const siteConfig = {
   company: {
     foundedYear: 2018,
     employees: "50+",
-    clients: "500+",
+    clients: "300+",
     certifications: ["CERT-IN Empanelled", "ISO 27001", "STQC Approved"],
   },
 };

@@ -88,7 +88,6 @@ export default function OffensiveSecurityPage() {
         "Advanced persistent threat (APT) simulation",
         "Social engineering and phishing campaigns",
         "Physical security testing",
-        "Purple team exercises",
         "Adversary emulation scenarios",
         "Security awareness training validation"
       ]
@@ -192,7 +191,6 @@ export default function OffensiveSecurityPage() {
         "Physical security testing",
         "Custom attack scenarios",
         "Dedicated red team",
-        "Real-time purple team collaboration",
         "Strategic recommendations",
         "Ongoing support and retesting"
       ]

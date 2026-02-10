@@ -77,39 +77,23 @@ export function FooterBrand() {
               <a href={getEmailLink(email)}>{email}</a>
             </div>
           )}
-          {offices.map((office) => (
-            <div key={office.id} className="flex items-start space-x-3 text-sm text-muted-foreground">
-              <div className="flex items-center justify-center w-8 h-8 bg-primary/10 rounded-lg mt-0.5">
-                <MapPin className="w-4 h-4 text-primary" />
+          {offices.length === 1 && (
+            offices.map((office) => (
+              <div key={office.id} className="flex items-start space-x-3 text-sm text-muted-foreground">
+                <div className="flex items-center justify-center w-8 h-8 bg-primary/10 rounded-lg mt-0.5">
+                  <MapPin className="w-4 h-4 text-primary" />
+                </div>
+                <div>
+                  <p>{office.addressLine1}</p>
+                  {office.addressLine2 && <p>{office.addressLine2}</p>}
+                  <p>{office.city} {office.postalCode}</p>
+                  {(office.state || office.country) && (
+                    <p>{[office.state, office.country].filter(Boolean).join(", ")}</p>
+                  )}
+                </div>
               </div>
-              <div>
-                {offices.length > 1 && (
-                  <p className="font-medium text-foreground text-xs mb-1">{office.label}</p>
-                )}
-                <p>{office.addressLine1}</p>
-                {office.addressLine2 && <p>{office.addressLine2}</p>}
-                <p>{office.city} {office.postalCode}</p>
-                {(office.state || office.country) && (
-                  <p>{[office.state, office.country].filter(Boolean).join(", ")}</p>
-                )}
-                {/* Show office-specific contact info when multiple offices exist */}
-                {offices.length > 1 && (office.phone || office.email) && (
-                  <div className="mt-2 space-y-1 text-xs">
-                    {office.phone && (
-                      <a href={getPhoneLink(office.phone)} className="block hover:text-primary transition-colors">
-                        {office.phone}
-                      </a>
-                    )}
-                    {office.email && (
-                      <a href={getEmailLink(office.email)} className="block hover:text-primary transition-colors">
-                        {office.email}
-                      </a>
-                    )}
-                  </div>
-                )}
-              </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
       </div>
 

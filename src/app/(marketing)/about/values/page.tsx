@@ -198,7 +198,7 @@ export default function ValuesPage() {
         title="Join a Team That Lives These Values"
         description="If these values resonate with you, we'd love to hear from you. Explore career opportunities and become part of our mission."
         buttons={[
-          { text: "View Careers", href: "mailto:careers@itorigin.com" },
+          { text: "View Careers", href: "/coming-soon?for=careers" },
           { text: "Meet Our Team", href: "/about/team", variant: "secondary" },
         ]}
       />

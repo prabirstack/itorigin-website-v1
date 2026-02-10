@@ -105,7 +105,7 @@ const HeroCarousel = () => {
               <source src={slide.videoUrl} type="video/mp4" />
             </video>
             {/* Dark overlay for better text readability */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent" />
+            <div className="absolute inset-0 bg-linear-to-r from-black/80 via-black/60 to-transparent" />
           </div>
         ))}
       </div>
@@ -165,7 +165,7 @@ const HeroCarousel = () => {
                 </Link>
 
                 <Link
-                  href="/contact"
+                  href="/coming-soon?for=watch-demo"
                   className="group flex items-center justify-center px-8 py-4 bg-white/10 hover:bg-white/20 text-white rounded-lg font-semibold backdrop-blur-sm border border-white/20 hover:border-white/40 transition-all duration-300"
                 >
                   <Play className="mr-2 w-5 h-5" />
@@ -228,7 +228,7 @@ const HeroCarousel = () => {
       {/* Scroll Indicator */}
       <div className="absolute bottom-4 right-8 z-20 flex flex-col items-center">
         <span className="text-white/60 text-sm mb-2 rotate-90 origin-center">Scroll</span>
-        <div className="w-px h-16 bg-gradient-to-b from-white/60 to-transparent" />
+        <div className="w-px h-16 bg-linear-to-b from-white/60 to-transparent" />
       </div>
 
       {/* Custom CSS for animations */}

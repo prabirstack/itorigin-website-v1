@@ -39,20 +39,20 @@ export const footerSections: FooterSection[] = [
     links: [
       { name: "About Us", href: "/about" },
       { name: "Our Team", href: "/about/team" },
-      { name: "Careers", href: "/careers" },
+      { name: "Careers", href: "/coming-soon?for=careers" },
       { name: "Case Studies", href: "/case-studies" },
-      { name: "Blog", href: "/blogs" },
-      { name: "News & Events", href: "/news" },
+      { name: "Blog", href: "/coming-soon?for=blog" },
+      { name: "News & Events", href: "/coming-soon?for=news" },
     ],
   },
   {
     title: "Resources",
     links: [
-      { name: "Documentation", href: "/docs" },
-      { name: "Security Center", href: "/security" },
-      { name: "Best Practices", href: "/best-practices" },
-      { name: "Whitepapers", href: "/whitepapers" },
-      { name: "Webinars", href: "/webinars", isNew: true },
+      { name: "Documentation", href: "/coming-soon?for=documentation" },
+      { name: "Security Center", href: "/coming-soon?for=security-center" },
+      { name: "Best Practices", href: "/coming-soon?for=best-practices" },
+      { name: "Whitepapers", href: "/coming-soon?for=whitepapers" },
+      { name: "Webinars", href: "/coming-soon?for=webinars", isNew: true },
       { name: "Contact", href: "/contact" },
     ],
   },
@@ -110,8 +110,8 @@ export const footerSocialLinks: SocialLink[] = [
 
 export const footerStats: FooterStat[] = [
   { iconName: "Shield", label: "Security Incidents Prevented", value: "10,000+" },
-  { iconName: "Users", label: "Enterprise Clients", value: "500+" },
-  { iconName: "Globe", label: "Countries Served", value: "25+" },
+  { iconName: "Users", label: "Customers", value: "300+" },
+  { iconName: "Globe", label: "Countries Served", value: "12+" },
   { iconName: "Award", label: "Security Certifications", value: "50+" },
 ];
 

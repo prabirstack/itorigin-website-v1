@@ -64,7 +64,7 @@ export default function CaseStudiesPage() {
         <Container>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
-              <div className="text-3xl md:text-4xl font-black text-primary">500+</div>
+              <div className="text-3xl md:text-4xl font-black text-primary">300+</div>
               <div className="text-sm text-muted-foreground">Projects Completed</div>
             </div>
             <div>
@@ -72,7 +72,7 @@ export default function CaseStudiesPage() {
               <div className="text-sm text-muted-foreground">Client Retention</div>
             </div>
             <div>
-              <div className="text-3xl md:text-4xl font-black text-primary">25+</div>
+              <div className="text-3xl md:text-4xl font-black text-primary">12+</div>
               <div className="text-sm text-muted-foreground">Industries Served</div>
             </div>
             <div>

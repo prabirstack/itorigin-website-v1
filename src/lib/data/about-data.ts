@@ -38,7 +38,7 @@ export const companyInfo = {
 };
 
 export const companyStats = [
-  { id: 1, value: "500+", label: "Clients Served", icon: "Users" },
+  { id: 1, value: "300+", label: "Clients Served", icon: "Users" },
   { id: 2, value: "50+", label: "Security Experts", icon: "UserCheck" },
   { id: 3, value: "7+", label: "Years Experience", icon: "Calendar" },
   { id: 4, value: "24/7", label: "SOC Operations", icon: "Clock" },
@@ -119,8 +119,8 @@ export const milestones: Milestone[] = [
   },
   {
     year: 2023,
-    title: "500+ Clients",
-    description: "Expanded our client base to 500+ organizations globally.",
+    title: "300+ Clients",
+    description: "Expanded our client base to 300+ organizations globally.",
   },
   {
     year: 2024,
@@ -182,7 +182,7 @@ export const leadershipTeam: TeamMember[] = [
 ];
 
 export const certificationsList = [
-  "CERT-IN Empanelled SOC",
+  "CERT-IN Empanelled",
   "STQC Approved for VAPT",
   "ISO 27001:2022 Certified",
   "ISO 9001:2015 Certified",

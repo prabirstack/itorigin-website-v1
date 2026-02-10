@@ -34,7 +34,7 @@ const services: ServiceItem[] = [
     icon: Shield,
     headline: "24/7 Security Operations Center",
     description:
-      "CERT-IN empanelled SOC with AI-SIEM technology. Real-time threat detection, incident response, and compliance reporting for continuous protection.",
+      "AI-SIEM powered Security Operations Center. Real-time threat detection, incident response, and compliance reporting for continuous protection.",
     services: [
       "24/7 security monitoring and threat detection",
       "Incident response and remediation",
@@ -72,7 +72,7 @@ const services: ServiceItem[] = [
     icon: Bug,
     headline: "Comprehensive Security Testing",
     description:
-      "STQC-approved penetration testing across web, mobile, network, cloud, and API environments. Find vulnerabilities before attackers do.",
+      "CERT-IN empanelled and STQC-approved penetration testing across web, mobile, network, cloud, and API environments. Find vulnerabilities before attackers do.",
     services: [
       "Vulnerability Assessment",
       "Web & Mobile App Testing",
@@ -92,14 +92,14 @@ const services: ServiceItem[] = [
     icon: FileCheck2,
     headline: "Governance, Risk & Compliance",
     description:
-      "End-to-end compliance consulting for ISO 27001, SOC2, GDPR, and Indian regulations. Achieve certification faster.",
+      "End-to-end compliance consulting for ISO 27001, SOC2, GDPR, NCA, StateRamp, GovRamp, and regional regulations. Achieve certification faster.",
     services: [
       "ISO 27001 Implementation",
-      "SOC1/SOC2 Compliance",
-      "GDPR Compliance Support",
+      "SOC2 Compliance",
+      "GDPR & NCA Compliance",
+      "StateRamp & GovRamp Readiness",
       "Risk Assessment & Management",
       "Audit & Gap Analysis",
-      "Regulatory Advisory",
     ],
     ctaText: "Explore GRC Services",
     ctaLink: "/services/grc-services",
@@ -121,7 +121,7 @@ const services: ServiceItem[] = [
       "Security infrastructure monitoring",
     ],
     ctaText: "Learn More",
-    ctaLink: "/services/managed-soc-services",
+    ctaLink: "/coming-soon?for=managed-security",
     primaryColor: "text-indigo-500",
     secondaryColor: "bg-indigo-500/10",
     bgPattern: "from-indigo-500/5 to-blue-500/5",
@@ -140,7 +140,7 @@ const services: ServiceItem[] = [
       "Recovery assistance & hardening",
     ],
     ctaText: "Explore IR Services",
-    ctaLink: "/services/offensive-security",
+    ctaLink: "/coming-soon?for=incident-response",
     primaryColor: "text-orange-500",
     secondaryColor: "bg-orange-500/10",
     bgPattern: "from-orange-500/5 to-yellow-500/5",

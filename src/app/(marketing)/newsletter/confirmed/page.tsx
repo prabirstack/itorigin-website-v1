@@ -15,7 +15,7 @@ export default function NewsletterConfirmedPage() {
           newsletter and will receive the latest cybersecurity insights and updates.
         </p>
         <Button asChild>
-          <Link href="/blogs">Explore Our Blog</Link>
+          <Link href="/">Back to Home</Link>
         </Button>
       </div>
     </div>

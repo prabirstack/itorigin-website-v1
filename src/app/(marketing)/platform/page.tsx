@@ -389,7 +389,7 @@ export default function PlatformPage() {
         description="See SecureOps Platform in action with a personalized demo from our security experts."
         buttons={[
           { text: "Schedule Demo", href: "/contact" },
-          { text: "View Documentation", href: "/docs", variant: "secondary" }
+          { text: "View Documentation", href: "/coming-soon?for=documentation", variant: "secondary" }
         ]}
       />
     </div>

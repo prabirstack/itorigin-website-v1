@@ -31,7 +31,7 @@ export const services: Service[] = [
     description:
       "24/7 security operations center with AI-powered threat detection, incident response, and compliance reporting.",
     longDescription:
-      "Our CERT-IN empanelled Security Operations Center provides round-the-clock monitoring, threat detection, and incident response. Powered by next-gen AI-SIEM technology, we protect your organization from sophisticated cyber threats while ensuring regulatory compliance.",
+      "Our Security Operations Center provides round-the-clock monitoring, threat detection, and incident response. Powered by next-gen AI-SIEM technology, we protect your organization from sophisticated cyber threats while ensuring regulatory compliance.",
     icon: "Shield",
     features: [
       "24/7 security monitoring and threat detection",
@@ -119,18 +119,18 @@ export const services: Service[] = [
     title: "GRC Services",
     shortTitle: "Governance, Risk & Compliance",
     description:
-      "End-to-end compliance consulting for ISO 27001, SOC2, GDPR, and Indian regulations. Achieve certification faster.",
+      "End-to-end compliance consulting for ISO 27001, SOC2, GDPR, NCA, StateRamp, GovRamp, and regional regulations. Achieve certification faster.",
     longDescription:
-      "Navigate the complex landscape of cybersecurity regulations with our comprehensive GRC services. From gap analysis to certification, we guide you through ISO 27001, SOC1/SOC2, GDPR, and industry-specific compliance requirements.",
+      "Navigate the complex landscape of cybersecurity regulations with our comprehensive GRC services. From gap analysis to certification, we guide you through ISO 27001, SOC2, GDPR, NCA, StateRamp, GovRamp, and region-specific compliance requirements.",
     icon: "FileCheck",
     features: [
       "ISO 27001 implementation and certification",
-      "SOC1/SOC2 compliance",
-      "GDPR compliance support",
+      "SOC2 compliance",
+      "GDPR & NCA compliance support",
+      "StateRamp & GovRamp readiness",
       "Risk assessment and management",
       "Security policy development",
       "Audit preparation and support",
-      "Regulatory advisory",
       "Third-party risk management",
     ],
     benefits: [

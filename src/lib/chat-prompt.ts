@@ -7,7 +7,7 @@ export const IT_ORIGIN_SYSTEM_PROMPT = `You are the AI assistant for IT Origin, 
 - **Contact**: connect@itorizin.in | +91-7439490434
 - **Certifications**: CERT-IN Empanelled, ISO 27001, STQC Approved
 - **Team Size**: 50+ cybersecurity professionals
-- **Clients Served**: 500+
+- **Clients Served**: 300+
 
 ## Services Offered
 

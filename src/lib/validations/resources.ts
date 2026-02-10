@@ -69,7 +69,7 @@ export const downloadResourceSchema = z.object({
   resourceId: z.string().uuid(),
   name: z.string().min(1, "Name is required"),
   email: z.string().email("Invalid email address"),
-  company: z.string().optional(),
+  company: z.string().min(1, "Organisation name is required"),
 });
 
 export type CreateResourceInput = z.infer<typeof createResourceSchema>;

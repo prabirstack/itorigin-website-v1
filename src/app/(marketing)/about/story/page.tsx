@@ -91,16 +91,16 @@ export default function StoryPage() {
       year: "2024",
       title: "Industry Recognition",
       description:
-        "Achieved major industry certifications and awards. Now protecting 500+ organizations globally with 24/7 SOC operations and cutting-edge security solutions.",
+        "Achieved major industry certifications and awards. Now protecting 300+ organizations globally with 24/7 SOC operations and cutting-edge security solutions.",
       icon: "Award" as const,
       color: "from-yellow-500 to-orange-500",
     },
   ];
 
   const stats = [
-    { value: "500+", label: "Clients Protected" },
+    { value: "300+", label: "Clients Protected" },
     { value: "100+", label: "Security Experts" },
-    { value: "25+", label: "Countries" },
+    { value: "12+", label: "Countries" },
     { value: "99.9%", label: "Uptime SLA" },
   ];
 

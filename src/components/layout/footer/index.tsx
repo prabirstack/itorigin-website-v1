@@ -5,6 +5,7 @@ import { Container } from "@/components/common/container";
 import { FooterBrand } from "./footer-brand";
 import { FooterLinks } from "./footer-links";
 import { FooterNewsletter } from "./footer-newsletter";
+import { FooterOffices } from "./footer-offices";
 import { FooterStats } from "./footer-stats";
 import { FooterBottom } from "./footer-bottom";
 
@@ -22,6 +23,7 @@ export function SiteFooter() {
             <FooterLinks />
             <FooterNewsletter />
           </div>
+          <FooterOffices />
         </Container>
 
         {/* Stats Section */}

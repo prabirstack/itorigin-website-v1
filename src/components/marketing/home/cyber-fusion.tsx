@@ -84,7 +84,7 @@ const statistics: Statistic[] = [
   },
   {
     id: "4",
-    value: "500+",
+    value: "300+",
     label: "Protected Organizations",
     icon: <Shield className="w-6 h-6 text-primary" />,
   },

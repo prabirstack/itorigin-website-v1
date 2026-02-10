@@ -22,8 +22,8 @@ const sitemapSections: SitemapSection[] = [
       { name: "Home", href: "/" },
       { name: "Platform", href: "/platform" },
       { name: "Partner", href: "/partner" },
-      { name: "Training", href: "/training" },
-      { name: "Blog", href: "/blogs" },
+      { name: "Training", href: "/coming-soon?for=training" },
+      { name: "Blog", href: "/coming-soon?for=blog" },
       { name: "Contact", href: "/contact" }
     ]
   },
@@ -45,19 +45,19 @@ const sitemapSections: SitemapSection[] = [
       { name: "Our Story", href: "/about/story" },
       { name: "Our Team", href: "/about/team" },
       { name: "Our Values", href: "/about/values" },
-      { name: "Careers", href: "/careers" },
+      { name: "Careers", href: "/coming-soon?for=careers" },
       { name: "Case Studies", href: "/case-studies" },
-      { name: "News & Events", href: "/news" }
+      { name: "News & Events", href: "/coming-soon?for=news" }
     ]
   },
   {
     title: "Resources",
     links: [
-      { name: "Documentation", href: "/docs" },
-      { name: "Security Center", href: "/security" },
-      { name: "Best Practices", href: "/best-practices" },
-      { name: "Whitepapers", href: "/whitepapers" },
-      { name: "Webinars", href: "/webinars" }
+      { name: "Documentation", href: "/coming-soon?for=documentation" },
+      { name: "Security Center", href: "/coming-soon?for=security-center" },
+      { name: "Best Practices", href: "/coming-soon?for=best-practices" },
+      { name: "Whitepapers", href: "/coming-soon?for=whitepapers" },
+      { name: "Webinars", href: "/coming-soon?for=webinars" }
     ]
   },
   {

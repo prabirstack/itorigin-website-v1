@@ -5,6 +5,7 @@ import { eq, desc, and, like, sql } from "drizzle-orm";
 import { downloadResourceSchema } from "@/lib/validations/resources";
 import { leads } from "@/db/schema";
 import { nanoid } from "nanoid";
+import { isBlockedEmailDomain, getEmailDomain } from "@/lib/email-validation";
 
 // GET - List published resources
 export async function GET(req: NextRequest) {
@@ -89,6 +90,15 @@ export async function POST(req: NextRequest) {
     }
 
     const { resourceId, name, email, company } = result.data;
+
+    // Validate business email
+    if (isBlockedEmailDomain(email)) {
+      const domain = getEmailDomain(email);
+      return NextResponse.json(
+        { error: `Please use your company email. Free email providers like ${domain} are not accepted.` },
+        { status: 400 }
+      );
+    }
 
     // Get the resource
     const [resource] = await db

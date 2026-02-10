@@ -31,13 +31,13 @@ export const staticNavItems: NavItem[] = [
   {
     id: "menuorigin04",
     name: "Training",
-    href: "/training",
+    href: "/coming-soon?for=training",
     isSubMenu: false,
   },
   {
     id: "menuorigin05",
     name: "Blogs",
-    href: "/blogs",
+    href: "/coming-soon?for=blog",
     isSubMenu: false,
   },
 ];

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import Link from "next/link";
 import { motion } from "motion/react";
 import { BookOpen, Download, TrendingUp, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -8,41 +8,8 @@ import { staggerContainer, fadeInUp } from "@/lib/animations";
 import { downloadResources, blogHighlights } from "@/lib/data/blog-resources-data";
 import { ResourceCard } from "./resource-card";
 import { HighlightCard } from "./highlight-card";
-import { AccessModal } from "./access-modal";
 
 export function BlogSection() {
-  const [email, setEmail] = useState<string>("");
-  const [name, setName] = useState<string>("");
-  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
-  const handleSubmit = async (): Promise<void> => {
-    if (!email || !name) return;
-
-    setIsSubmitting(true);
-    try {
-      const response = await fetch("/api/leads", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name,
-          email,
-          source: "download",
-          message: "Resource access request from homepage",
-        }),
-      });
-
-      if (response.ok) {
-        setIsModalOpen(false);
-        setEmail("");
-        setName("");
-      }
-    } catch (error) {
-      console.error("Failed to submit:", error);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
 
   return (
     <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 w-full max-w-7xl mx-auto relative min-h-screen">
@@ -125,7 +92,6 @@ export function BlogSection() {
                 key={resource.id}
                 {...resource}
                 index={index}
-                onDownloadClick={() => setIsModalOpen(true)}
               />
             ))}
           </div>
@@ -157,27 +123,17 @@ export function BlogSection() {
           <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
             <Button
               size="lg"
-              onClick={() => setIsModalOpen(true)}
+              asChild
               className="bg-linear-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground border-0 shadow-lg hover:shadow-xl hover:shadow-primary/25 transition-all duration-300 group px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg"
             >
-              Access Resources
-              <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
+              <Link href="/coming-soon?for=knowledge-center">
+                Access Resources
+                <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
+              </Link>
             </Button>
           </motion.div>
         </motion.div>
       </motion.div>
-
-      {/* Access Modal */}
-      <AccessModal
-        open={isModalOpen}
-        onOpenChange={setIsModalOpen}
-        name={name}
-        email={email}
-        isSubmitting={isSubmitting}
-        onNameChange={setName}
-        onEmailChange={setEmail}
-        onSubmit={handleSubmit}
-      />
     </section>
   );
 }
