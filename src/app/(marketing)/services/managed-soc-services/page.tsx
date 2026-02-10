@@ -55,8 +55,9 @@ export const metadata: Metadata = {
 export default function ManagedSOCServicesPage() {
   const stats = [
     { label: "Average Detection Time", value: "2min", icon: "Clock" as const },
-    { label: "Monitored Events Daily", value: "10M+", icon: "Eye" as const },
+    { label: "Monitored Events Daily", value: "40M+", icon: "Eye" as const },
     { label: "Threat Response Time", value: "<15min", icon: "Zap" as const },
+    { label: "Daily Incidents Handled", value: "600+", icon: "AlertTriangle" as const },
     { label: "SOC Analysts", value: "30+", icon: "Users" as const },
   ];
 
