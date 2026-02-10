@@ -157,14 +157,18 @@ export async function generateMetadata({ params }: BlogDetailPageProps): Promise
 }
 
 export async function generateStaticParams() {
-  const postsData = await db.query.posts.findMany({
-    where: eq(posts.status, "published"),
-    columns: { slug: true },
-  });
+  try {
+    const postsData = await db.query.posts.findMany({
+      where: eq(posts.status, "published"),
+      columns: { slug: true },
+    });
 
-  return postsData.map((post) => ({
-    slug: post.slug,
-  }));
+    return postsData.map((post) => ({
+      slug: post.slug,
+    }));
+  } catch {
+    return [];
+  }
 }
 
 export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
