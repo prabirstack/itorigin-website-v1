@@ -14,6 +14,7 @@ export interface BlogHighlight {
   description: string;
   iconName: string;
   readTime: string;
+  href?: string;
 }
 
 export const downloadResources: DownloadResource[] = [
@@ -50,10 +51,11 @@ export const downloadResources: DownloadResource[] = [
 export const blogHighlights: BlogHighlight[] = [
   {
     id: "1",
-    title: "Latest cybersecurity trends and analysis",
-    description: "Stay ahead of emerging threats with our expert analysis",
-    iconName: "TrendingUp",
+    title: "A Practical Guide to India's DPDP Act",
+    description: "Understand India's Digital Personal Data Protection Act — its applicability, key obligations, timelines, and a practical 9-phase implementation strategy for compliance.",
+    iconName: "Shield",
     readTime: "5 min read",
+    href: "/blogs/a-practical-guide-to-indias-digital-personal-data-protection-dpdp-act",
   },
   {
     id: "2",

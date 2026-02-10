@@ -41,7 +41,7 @@ export const footerSections: FooterSection[] = [
       { name: "Our Team", href: "/about/team" },
       { name: "Careers", href: "/coming-soon?for=careers" },
       { name: "Case Studies", href: "/case-studies" },
-      { name: "Blog", href: "/coming-soon?for=blog" },
+      { name: "Blog", href: "/blogs" },
       { name: "News & Events", href: "/coming-soon?for=news" },
     ],
   },

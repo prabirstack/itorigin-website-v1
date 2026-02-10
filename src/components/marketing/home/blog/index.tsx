@@ -126,8 +126,8 @@ export function BlogSection() {
               asChild
               className="bg-linear-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground border-0 shadow-lg hover:shadow-xl hover:shadow-primary/25 transition-all duration-300 group px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg"
             >
-              <Link href="/coming-soon?for=knowledge-center">
-                Access Resources
+              <Link href="/blogs">
+                View All Articles
                 <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
             </Button>

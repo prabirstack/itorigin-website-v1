@@ -23,7 +23,7 @@ const sitemapSections: SitemapSection[] = [
       { name: "Platform", href: "/platform" },
       { name: "Partner", href: "/partner" },
       { name: "Training", href: "/coming-soon?for=training" },
-      { name: "Blog", href: "/coming-soon?for=blog" },
+      { name: "Blog", href: "/blogs" },
       { name: "Contact", href: "/contact" }
     ]
   },

@@ -37,7 +37,7 @@ export const staticNavItems: NavItem[] = [
   {
     id: "menuorigin05",
     name: "Blogs",
-    href: "/coming-soon?for=blog",
+    href: "/blogs",
     isSubMenu: false,
   },
 ];
