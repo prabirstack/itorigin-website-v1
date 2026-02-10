@@ -2,7 +2,7 @@
 set -e
 
 echo "Running database migrations..."
-cd /app && bun run db:migrate
+cd /app && ./node_modules/.bin/drizzle-kit migrate
 echo "Migrations complete."
 
 echo "Starting application..."
