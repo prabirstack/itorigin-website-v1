@@ -12,7 +12,8 @@ import { CTASection } from "@/components/about/cta-section";
 
 export const metadata: Metadata = {
   title: "Managed SOC Services | 24/7 Security Operations Center | IT Origin",
-  description: "Protect your organization with IT Origin's managed SOC services. 24/7 threat monitoring, detection, and response by certified security analysts. Advanced threat intelligence and rapid incident response.",
+  description:
+    "Protect your organization with IT Origin's managed SOC services. 24/7 threat monitoring, detection, and response by certified security analysts. Advanced threat intelligence and rapid incident response.",
   keywords: [
     "managed SOC services",
     "security operations center",
@@ -23,11 +24,12 @@ export const metadata: Metadata = {
     "security monitoring",
     "cyber threat detection",
     "SIEM monitoring",
-    "security analysts"
+    "security analysts",
   ],
   openGraph: {
     title: "Managed SOC Services | 24/7 Security Operations Center | IT Origin",
-    description: "24/7 threat monitoring, detection, and response by certified security analysts. Protect your organization with enterprise-grade security operations.",
+    description:
+      "24/7 threat monitoring, detection, and response by certified security analysts. Protect your organization with enterprise-grade security operations.",
     type: "website",
     url: "https://itorigin.com/services/managed-soc-services",
     images: [
@@ -35,27 +37,27 @@ export const metadata: Metadata = {
         url: "/images/og-soc-services.jpg",
         width: 1200,
         height: 630,
-        alt: "IT Origin Managed SOC Services"
-      }
-    ]
+        alt: "IT Origin Managed SOC Services",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Managed SOC Services | 24/7 Security Operations Center",
     description: "24/7 threat monitoring, detection, and response by certified security analysts.",
-    images: ["/images/og-soc-services.jpg"]
+    images: ["/images/og-soc-services.jpg"],
   },
   alternates: {
-    canonical: "https://itorigin.com/services/managed-soc-services"
-  }
+    canonical: "https://itorigin.com/services/managed-soc-services",
+  },
 };
 
 export default function ManagedSOCServicesPage() {
   const stats = [
-    { label: "Average Detection Time", value: "<5min", icon: "Clock" as const },
+    { label: "Average Detection Time", value: "2min", icon: "Clock" as const },
     { label: "Monitored Events Daily", value: "10M+", icon: "Eye" as const },
     { label: "Threat Response Time", value: "<15min", icon: "Zap" as const },
-    { label: "SOC Analysts", value: "25+", icon: "Users" as const },
+    { label: "SOC Analysts", value: "30+", icon: "Users" as const },
   ];
 
   const serviceFeatures = [
@@ -67,8 +69,8 @@ export default function ManagedSOCServicesPage() {
         "Continuous log analysis and correlation",
         "Advanced SIEM platform integration",
         "Multi-layered security event analysis",
-        "Automated threat intelligence feeds"
-      ]
+        "Automated threat intelligence feeds",
+      ],
     },
     {
       title: "Threat Detection & Response",
@@ -78,8 +80,8 @@ export default function ManagedSOCServicesPage() {
         "Automated incident response workflows",
         "Rapid threat containment procedures",
         "Forensic investigation capabilities",
-        "Post-incident analysis and reporting"
-      ]
+        "Post-incident analysis and reporting",
+      ],
     },
     {
       title: "Compliance & Reporting",
@@ -89,65 +91,73 @@ export default function ManagedSOCServicesPage() {
         "Custom compliance dashboards",
         "Audit trail maintenance",
         "Executive summary reports",
-        "Real-time security metrics"
-      ]
-    }
+        "Real-time security metrics",
+      ],
+    },
   ];
 
   const benefits = [
     {
       icon: "Shield" as const,
       title: "Enterprise-Grade Protection",
-      description: "Access to the same advanced security tools and expertise used by Fortune 500 companies."
+      description:
+        "Access to the same advanced security tools and expertise used by Fortune 500 companies.",
     },
     {
       icon: "TrendingUp" as const,
       title: "Cost-Effective Security",
-      description: "Get 24/7 SOC coverage for a fraction of the cost of building an in-house team."
+      description: "Get 24/7 SOC coverage for a fraction of the cost of building an in-house team.",
     },
     {
       icon: "Zap" as const,
       title: "Rapid Response",
-      description: "Fast threat detection and response minimizes potential damage and downtime."
+      description: "Fast threat detection and response minimizes potential damage and downtime.",
     },
     {
       icon: "Users" as const,
       title: "Expert Analysts",
-      description: "Certified security professionals with years of experience protecting critical infrastructure."
+      description:
+        "Certified security professionals with years of experience protecting critical infrastructure.",
     },
     {
       icon: "Eye" as const,
       title: "Complete Visibility",
-      description: "Comprehensive view of your security posture with real-time dashboards and alerts."
+      description:
+        "Comprehensive view of your security posture with real-time dashboards and alerts.",
     },
     {
       icon: "Clock" as const,
       title: "Always Available",
-      description: "Security threats don't sleep, and neither does our SOC team monitoring your systems."
-    }
+      description:
+        "Security threats don't sleep, and neither does our SOC team monitoring your systems.",
+    },
   ];
 
   const process = [
     {
       step: 1,
       title: "Assessment & Onboarding",
-      description: "We analyze your current security infrastructure, identify gaps, and create a tailored monitoring plan. Our team integrates with your existing tools and establishes baseline security metrics."
+      description:
+        "We analyze your current security infrastructure, identify gaps, and create a tailored monitoring plan. Our team integrates with your existing tools and establishes baseline security metrics.",
     },
     {
       step: 2,
       title: "Deployment & Integration",
-      description: "Deploy our SIEM platform and security sensors across your infrastructure. Configure custom detection rules, integrate threat intelligence feeds, and establish monitoring workflows."
+      description:
+        "Deploy our SIEM platform and security sensors across your infrastructure. Configure custom detection rules, integrate threat intelligence feeds, and establish monitoring workflows.",
     },
     {
       step: 3,
       title: "Continuous Monitoring",
-      description: "Our 24/7 SOC team monitors your environment for threats, analyzes security events in real-time, and uses advanced analytics to detect suspicious activities before they become incidents."
+      description:
+        "Our 24/7 SOC team monitors your environment for threats, analyzes security events in real-time, and uses advanced analytics to detect suspicious activities before they become incidents.",
     },
     {
       step: 4,
       title: "Threat Response & Resolution",
-      description: "When threats are detected, our team immediately responds with containment procedures, investigates the root cause, and works with your team to eliminate the threat and prevent recurrence."
-    }
+      description:
+        "When threats are detected, our team immediately responds with containment procedures, investigates the root cause, and works with your team to eliminate the threat and prevent recurrence.",
+    },
   ];
 
   const pricingPlans = [
@@ -161,8 +171,8 @@ export default function ManagedSOCServicesPage() {
         "Monthly reporting",
         "Email & phone support",
         "Basic threat intelligence",
-        "Incident response (8x5)"
-      ]
+        "Incident response (8x5)",
+      ],
     },
     {
       name: "Professional",
@@ -176,9 +186,9 @@ export default function ManagedSOCServicesPage() {
         "Advanced threat intelligence",
         "24/7 incident response",
         "Threat hunting services",
-        "Quarterly security reviews"
+        "Quarterly security reviews",
       ],
-      highlighted: true
+      highlighted: true,
     },
     {
       name: "Enterprise",
@@ -192,9 +202,9 @@ export default function ManagedSOCServicesPage() {
         "Custom integration support",
         "Advanced forensics",
         "Compliance assistance",
-        "On-site support available"
-      ]
-    }
+        "On-site support available",
+      ],
+    },
   ];
 
   return (
@@ -297,10 +307,7 @@ export default function ManagedSOCServicesPage() {
             <p className="text-muted-foreground mb-4">
               All plans include a 30-day money-back guarantee and no long-term contracts.
             </p>
-            <Link
-              href="/contact"
-              className="text-primary hover:underline font-semibold"
-            >
+            <Link href="/contact" className="text-primary hover:underline font-semibold">
               Contact us for custom enterprise pricing
             </Link>
           </div>
@@ -313,7 +320,11 @@ export default function ManagedSOCServicesPage() {
         description="Get started with our managed SOC services today and protect your organization 24/7."
         buttons={[
           { text: "Get Started", href: "/contact" },
-          { text: "View Other Services", href: "/services/offensive-security", variant: "secondary" }
+          {
+            text: "View Other Services",
+            href: "/services/offensive-security",
+            variant: "secondary",
+          },
         ]}
       />
     </div>
