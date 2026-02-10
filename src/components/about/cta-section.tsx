@@ -26,7 +26,7 @@ export function CTASection({ title, description, buttons }: CTASectionProps) {
           whileInView="visible"
           viewport={{ once: true }}
           variants={staggerContainer}
-          className="text-center p-12 rounded-3xl bg-gradient-to-br from-primary/10 via-primary/5 to-transparent border border-primary/20"
+          className="text-center p-12 rounded-3xl bg-linear-to-br from-primary/10 via-primary/5 to-transparent border border-primary/20"
         >
           <motion.h2
             variants={fadeInUp}

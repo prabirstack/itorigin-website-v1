@@ -48,7 +48,7 @@ export function MissionVisionSection({ mission, vision }: MissionVisionSectionPr
             <div className="space-y-3">
               {mission.values.map((value, index) => (
                 <div key={index} className="flex items-center gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0" />
+                  <CheckCircle2 className="w-5 h-5 text-primary shrink-0" />
                   <span className="text-base font-medium">{value}</span>
                 </div>
               ))}
@@ -75,7 +75,7 @@ export function MissionVisionSection({ mission, vision }: MissionVisionSectionPr
             <div className="space-y-3">
               {vision.values.map((value, index) => (
                 <div key={index} className="flex items-center gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0" />
+                  <CheckCircle2 className="w-5 h-5 text-primary shrink-0" />
                   <span className="text-base font-medium">{value}</span>
                 </div>
               ))}
