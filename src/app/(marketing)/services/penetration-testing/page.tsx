@@ -7,7 +7,7 @@ import { StatsSection } from "@/components/about/stats-section";
 import { ServiceFeatureCard } from "@/components/services/service-feature-card";
 import { BenefitCard } from "@/components/services/benefit-card";
 import { ProcessStep } from "@/components/services/process-step";
-import { PricingCard } from "@/components/services/pricing-card";
+import { PricingCTA } from "@/components/services/pricing-cta";
 import { CTASection } from "@/components/about/cta-section";
 
 export const metadata: Metadata = {
@@ -141,54 +141,6 @@ export default function PenetrationTestingPage() {
     }
   ];
 
-  const pricingPlans = [
-    {
-      name: "Essential",
-      description: "Single application or network segment",
-      price: "$3,999",
-      features: [
-        "1 web application or network segment",
-        "OWASP Top 10 coverage",
-        "Automated + manual testing",
-        "Executive summary report",
-        "Technical findings report",
-        "Remediation guidance",
-        "1 free retest"
-      ]
-    },
-    {
-      name: "Professional",
-      description: "Comprehensive security assessment",
-      price: "$8,999",
-      features: [
-        "Up to 3 applications",
-        "Network perimeter testing",
-        "API security testing",
-        "Authentication deep-dive",
-        "Business logic testing",
-        "Detailed remediation plan",
-        "Unlimited retests for 30 days",
-        "Findings presentation"
-      ],
-      highlighted: true
-    },
-    {
-      name: "Enterprise",
-      description: "Full-scope engagement",
-      price: "Custom",
-      features: [
-        "Unlimited applications",
-        "Internal + external testing",
-        "Cloud infrastructure testing",
-        "Mobile application testing",
-        "Social engineering (optional)",
-        "Dedicated security consultant",
-        "Ongoing support",
-        "Quarterly assessments"
-      ]
-    }
-  ];
-
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -204,17 +156,17 @@ export default function PenetrationTestingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link
-              href="#pricing"
+              href="/contact"
               className="px-8 py-4 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors inline-flex items-center gap-2 group"
             >
-              View Pricing
+              Get a Quote
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
               href="/contact"
               className="px-8 py-4 border border-border rounded-lg font-semibold hover:bg-accent transition-colors"
             >
-              Request a Quote
+              Schedule a Test
             </Link>
           </div>
         </div>
@@ -271,33 +223,8 @@ export default function PenetrationTestingPage() {
         </div>
       </section>
 
-      {/* Pricing Section */}
-      <section id="pricing" className="py-20 md:py-32 bg-accent/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            title="Transparent Pricing"
-            description="Choose the package that fits your security needs and budget."
-          />
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {pricingPlans.map((plan, index) => (
-              <PricingCard key={index} {...plan} index={index} />
-            ))}
-          </div>
-
-          <div className="text-center mt-12">
-            <p className="text-muted-foreground mb-4">
-              All packages include detailed reporting and remediation guidance.
-            </p>
-            <Link
-              href="/contact"
-              className="text-primary hover:underline font-semibold"
-            >
-              Need a custom scope? Contact us for a personalized quote
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* Pricing CTA */}
+      <PricingCTA serviceName="penetration testing" />
 
       {/* CTA Section */}
       <CTASection

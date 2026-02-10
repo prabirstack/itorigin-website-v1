@@ -7,7 +7,7 @@ import { StatsSection } from "@/components/about/stats-section";
 import { ServiceFeatureCard } from "@/components/services/service-feature-card";
 import { BenefitCard } from "@/components/services/benefit-card";
 import { ProcessStep } from "@/components/services/process-step";
-import { PricingCard } from "@/components/services/pricing-card";
+import { PricingCTA } from "@/components/services/pricing-cta";
 import { CTASection } from "@/components/about/cta-section";
 
 export const metadata: Metadata = {
@@ -152,54 +152,6 @@ export default function SecurityAuditPage() {
     { name: "CMMC", description: "Defense Contractor Security" }
   ];
 
-  const pricingPlans = [
-    {
-      name: "Gap Assessment",
-      description: "Readiness evaluation for compliance",
-      price: "$7,999",
-      features: [
-        "Single framework assessment",
-        "Documentation review",
-        "Control gap analysis",
-        "Maturity scoring",
-        "Gap report with findings",
-        "Remediation roadmap",
-        "Executive presentation"
-      ]
-    },
-    {
-      name: "Comprehensive Audit",
-      description: "Full compliance audit with certification support",
-      price: "$19,999",
-      features: [
-        "Complete audit program",
-        "Policy & procedure review",
-        "Technical control testing",
-        "Staff interviews",
-        "Evidence collection support",
-        "Detailed audit report",
-        "Certification preparation",
-        "Remediation support"
-      ],
-      highlighted: true
-    },
-    {
-      name: "Enterprise Program",
-      description: "Multi-framework ongoing compliance",
-      price: "Custom",
-      features: [
-        "Multiple frameworks",
-        "Continuous compliance monitoring",
-        "Annual audit cycles",
-        "Policy development support",
-        "Control implementation guidance",
-        "Board-ready reporting",
-        "Dedicated compliance advisor",
-        "Audit defense support"
-      ]
-    }
-  ];
-
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -215,10 +167,10 @@ export default function SecurityAuditPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link
-              href="#pricing"
+              href="/contact"
               className="px-8 py-4 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors inline-flex items-center gap-2 group"
             >
-              View Pricing
+              Get a Quote
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
@@ -308,33 +260,8 @@ export default function SecurityAuditPage() {
         </div>
       </section>
 
-      {/* Pricing Section */}
-      <section id="pricing" className="py-20 md:py-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            title="Audit Packages"
-            description="Choose the audit program that meets your compliance and security objectives."
-          />
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {pricingPlans.map((plan, index) => (
-              <PricingCard key={index} {...plan} index={index} />
-            ))}
-          </div>
-
-          <div className="text-center mt-12">
-            <p className="text-muted-foreground mb-4">
-              All audits include detailed findings and remediation guidance.
-            </p>
-            <Link
-              href="/contact"
-              className="text-primary hover:underline font-semibold"
-            >
-              Need multi-framework or custom audit? Contact us for a quote
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* Pricing CTA */}
+      <PricingCTA serviceName="security audit" />
 
       {/* CTA Section */}
       <CTASection

@@ -7,7 +7,7 @@ import { StatsSection } from "@/components/about/stats-section";
 import { ServiceFeatureCard } from "@/components/services/service-feature-card";
 import { BenefitCard } from "@/components/services/benefit-card";
 import { ProcessStep } from "@/components/services/process-step";
-import { PricingCard } from "@/components/services/pricing-card";
+import { PricingCTA } from "@/components/services/pricing-cta";
 import { CTASection } from "@/components/about/cta-section";
 
 export const metadata: Metadata = {
@@ -160,53 +160,6 @@ export default function ManagedSOCServicesPage() {
     },
   ];
 
-  const pricingPlans = [
-    {
-      name: "Essential",
-      description: "Perfect for small to medium businesses",
-      price: "$2,999",
-      features: [
-        "24/7 security monitoring",
-        "Up to 5,000 events/day",
-        "Monthly reporting",
-        "Email & phone support",
-        "Basic threat intelligence",
-        "Incident response (8x5)",
-      ],
-    },
-    {
-      name: "Professional",
-      description: "Ideal for growing enterprises",
-      price: "$5,999",
-      features: [
-        "Everything in Essential",
-        "Up to 25,000 events/day",
-        "Weekly reporting",
-        "Priority 24/7 support",
-        "Advanced threat intelligence",
-        "24/7 incident response",
-        "Threat hunting services",
-        "Quarterly security reviews",
-      ],
-      highlighted: true,
-    },
-    {
-      name: "Enterprise",
-      description: "For large organizations with complex needs",
-      price: "Custom",
-      features: [
-        "Everything in Professional",
-        "Unlimited events",
-        "Daily reporting",
-        "Dedicated security team",
-        "Custom integration support",
-        "Advanced forensics",
-        "Compliance assistance",
-        "On-site support available",
-      ],
-    },
-  ];
-
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -222,10 +175,10 @@ export default function ManagedSOCServicesPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link
-              href="#pricing"
+              href="/contact"
               className="px-8 py-4 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors inline-flex items-center gap-2 group"
             >
-              View Pricing
+              Get a Quote
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
@@ -289,30 +242,8 @@ export default function ManagedSOCServicesPage() {
         </div>
       </section>
 
-      {/* Pricing Section */}
-      <section id="pricing" className="py-20 md:py-32 bg-accent/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            title="Flexible Pricing Plans"
-            description="Choose the plan that fits your organization's size and security requirements."
-          />
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {pricingPlans.map((plan, index) => (
-              <PricingCard key={index} {...plan} index={index} />
-            ))}
-          </div>
-
-          <div className="text-center mt-12">
-            <p className="text-muted-foreground mb-4">
-              All plans include a 30-day money-back guarantee and no long-term contracts.
-            </p>
-            <Link href="/contact" className="text-primary hover:underline font-semibold">
-              Contact us for custom enterprise pricing
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* Pricing CTA */}
+      <PricingCTA serviceName="managed SOC" />
 
       {/* CTA Section */}
       <CTASection
