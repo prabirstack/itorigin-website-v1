@@ -72,23 +72,7 @@ const contextConfigs: Record<string, ContextConfig> = {
     titleHighlight: "Coming Soon",
     description:
       "We're building an immersive demo experience to showcase our AI-driven cybersecurity platform in action. Stay tuned for a walkthrough of real-time threat detection, automated response, and intelligent SOC operations.",
-    features: [
-      {
-        icon: Eye,
-        title: "Live Threat Detection",
-        description: "Watch AI identify threats in real-time",
-      },
-      {
-        icon: Zap,
-        title: "Automated Response",
-        description: "See instant incident containment",
-      },
-      {
-        icon: Monitor,
-        title: "SOC Dashboard",
-        description: "Explore our unified security view",
-      },
-    ],
+    features: [],
   },
   "knowledge-center": {
     icon: BookOpen,
@@ -409,8 +393,7 @@ export function ComingSoonContent({ context }: { context?: string }) {
       <div
         className="absolute inset-0 -z-10 opacity-[0.02]"
         style={{
-          backgroundImage:
-            "radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)",
+          backgroundImage: "radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)",
           backgroundSize: "48px 48px",
         }}
       />
@@ -429,9 +412,7 @@ export function ComingSoonContent({ context }: { context?: string }) {
               className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full mb-8"
             >
               <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-              <span className="text-sm font-medium text-primary">
-                {config.badge}
-              </span>
+              <span className="text-sm font-medium text-primary">{config.badge}</span>
             </motion.div>
 
             {/* Animated Icon */}
@@ -475,30 +456,27 @@ export function ComingSoonContent({ context }: { context?: string }) {
             </motion.p>
 
             {/* Feature Preview Cards */}
-            <motion.div
-              variants={fadeInUp}
-              className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12"
-            >
-              {config.features.map((feature) => {
-                const FeatureIcon = feature.icon;
-                return (
-                  <div
-                    key={feature.title}
-                    className="p-5 sm:p-6 rounded-xl border border-border/60 bg-card/60 backdrop-blur-sm hover:border-primary/30 hover:bg-card/80 transition-all duration-300 group"
-                  >
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mx-auto mb-3 group-hover:bg-primary/15 transition-colors">
-                      <FeatureIcon className="w-5 h-5 text-primary" />
+            {config.features.length > 0 && (
+              <motion.div variants={fadeInUp} className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12">
+                {config.features.map((feature) => {
+                  const FeatureIcon = feature.icon;
+                  return (
+                    <div
+                      key={feature.title}
+                      className="p-5 sm:p-6 rounded-xl border border-border/60 bg-card/60 backdrop-blur-sm hover:border-primary/30 hover:bg-card/80 transition-all duration-300 group"
+                    >
+                      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mx-auto mb-3 group-hover:bg-primary/15 transition-colors">
+                        <FeatureIcon className="w-5 h-5 text-primary" />
+                      </div>
+                      <h3 className="font-semibold text-sm mb-1">{feature.title}</h3>
+                      <p className="text-xs text-muted-foreground leading-relaxed">
+                        {feature.description}
+                      </p>
                     </div>
-                    <h3 className="font-semibold text-sm mb-1">
-                      {feature.title}
-                    </h3>
-                    <p className="text-xs text-muted-foreground leading-relaxed">
-                      {feature.description}
-                    </p>
-                  </div>
-                );
-              })}
-            </motion.div>
+                  );
+                })}
+              </motion.div>
+            )}
 
             {/* CTA Buttons */}
             <motion.div
