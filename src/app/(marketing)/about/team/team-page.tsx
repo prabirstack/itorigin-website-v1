@@ -9,9 +9,9 @@ import { fadeInUp, staggerContainer, scaleUp } from "@/lib/animations";
 
 export function TeamPage() {
   const stats = [
-    { value: "100+", label: "Team Members", icon: Users },
+    { value: "70+", label: "Team Members", icon: Users },
     { value: "50+", label: "Certifications", icon: Award },
-    { value: "15+", label: "Years Experience", icon: Target },
+    { value: "30+", label: "Years Experience", icon: Target },
     { value: "24/7", label: "Support Coverage", icon: Shield }
   ];
 
