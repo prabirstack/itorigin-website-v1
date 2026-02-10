@@ -24,13 +24,12 @@ WORKDIR /app
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
 
-RUN adduser --system --uid 1001 nextjs
-RUN mkdir .next && chown nextjs:bun .next
+RUN mkdir .next
 
 # Copy standalone build
 COPY --from=builder /app/public ./public
-COPY --from=builder --chown=nextjs:bun /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:bun /app/.next/static ./.next/static
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
 
 # Copy migration files and drizzle config for runtime migrations
 COPY --from=builder /app/src/db/migrations ./src/db/migrations
@@ -44,8 +43,6 @@ COPY --from=builder /app/package.json ./package.json
 # Copy entrypoint
 COPY --from=builder /app/docker-entrypoint.sh ./docker-entrypoint.sh
 RUN chmod +x ./docker-entrypoint.sh
-
-USER nextjs
 
 EXPOSE 3000
 
