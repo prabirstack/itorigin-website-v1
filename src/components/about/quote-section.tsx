@@ -2,15 +2,17 @@
 
 import { motion } from "motion/react";
 import { Quote } from "lucide-react";
+import Image from "next/image";
 import { fadeInUp, scaleUp } from "@/lib/animations";
 
 interface QuoteSectionProps {
   quote: string;
   author: string;
   role: string;
+  image?: string;
 }
 
-export function QuoteSection({ quote, author, role }: QuoteSectionProps) {
+export function QuoteSection({ quote, author, role, image }: QuoteSectionProps) {
   return (
     <section className="py-20 md:py-32">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -38,10 +40,21 @@ export function QuoteSection({ quote, author, role }: QuoteSectionProps) {
 
           <motion.div
             variants={fadeInUp}
-            className="text-center"
+            className="flex flex-col items-center gap-3"
           >
-            <div className="font-bold text-lg">{author}</div>
-            <div className="text-muted-foreground">{role}</div>
+            {image && (
+              <Image
+                src={image}
+                alt={author}
+                width={56}
+                height={56}
+                className="w-14 h-14 rounded-full object-cover"
+              />
+            )}
+            <div className="text-center">
+              <div className="font-bold text-lg">{author}</div>
+              <div className="text-muted-foreground">{role}</div>
+            </div>
           </motion.div>
         </motion.div>
       </div>

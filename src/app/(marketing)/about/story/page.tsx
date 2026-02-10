@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Image from "next/image";
 
 import { PageHero } from "@/components/about/page-hero";
 import { SectionHeader } from "@/components/about/section-header";
@@ -122,6 +123,79 @@ export default function StoryPage() {
             description="Key moments that shaped IT Origin into the trusted security partner we are today."
           />
           <TimelineSection milestones={milestones} />
+        </div>
+      </section>
+
+      {/* MD's Message */}
+      <section className="py-20 md:py-32 bg-accent/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
+                From the Managing Director
+              </span>
+              <h2 className="text-3xl md:text-5xl font-black">
+                A Message from Our{" "}
+                <span className="text-primary">Leadership</span>
+              </h2>
+            </div>
+
+            <div className="relative p-8 md:p-12 rounded-3xl border border-border bg-card">
+              {/* Quote mark */}
+              <div className="absolute -top-5 left-8 md:left-12 text-7xl font-serif text-primary/20 select-none">
+                &ldquo;
+              </div>
+
+              <blockquote className="relative">
+                <p className="text-xl md:text-2xl font-bold text-foreground leading-relaxed mb-8 italic">
+                  &ldquo;Customer trust is our purpose, our people are our
+                  strength, and global excellence is our destination.&rdquo;
+                </p>
+
+                <div className="space-y-4 text-muted-foreground leading-relaxed">
+                  <p>
+                    Our vision is to build a cybersecurity company where trust is
+                    earned every day&mdash;from our customers, our partners, and
+                    our people.
+                  </p>
+                  <p>
+                    We exist to protect our customers&apos; digital futures.
+                    Every solution we design, every service we deliver, and every
+                    decision we make begins with a simple question: does this
+                    genuinely improve our customer&apos;s security, resilience,
+                    and confidence?
+                  </p>
+                  <p>
+                    We aim to be more than a vendor&mdash;we strive to be a
+                    long-term security partner who understands our
+                    customers&apos; risks, business realities and aspirations
+                    where every service aims to add value to customers&apos;
+                    business.
+                  </p>
+                </div>
+
+                <footer className="mt-8 pt-6 border-t border-border/60">
+                  <div className="flex items-center gap-4">
+                    <Image
+                      src="/images/team/basudev-ganguly.jpg"
+                      alt="Basudev Gangopadhyay"
+                      width={48}
+                      height={48}
+                      className="w-12 h-12 rounded-full object-cover"
+                    />
+                    <div>
+                      <p className="font-semibold text-foreground">
+                        Basudev Gangopadhyay
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        Managing Director, IT Origin
+                      </p>
+                    </div>
+                  </div>
+                </footer>
+              </blockquote>
+            </div>
+          </div>
         </div>
       </section>
 

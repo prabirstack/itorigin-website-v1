@@ -136,48 +136,34 @@ export const milestones: Milestone[] = [
 
 export const leadershipTeam: TeamMember[] = [
   {
-    id: "ceo",
-    name: "Founder & CEO",
-    role: "Chief Executive Officer",
-    bio: "Visionary leader with 15+ years of experience in cybersecurity, leading IT Origin's mission to protect organizations worldwide.",
-    image: "/images/team/ceo.jpg",
+    id: "md",
+    name: "Basudev Gangopadhyay",
+    role: "Managing Director",
+    bio: "A highly accomplished technology executive with over 35 years of strategic and operational leadership across IT, data center engineering, and cybersecurity. Former Global Head for End-User services at Cognizant, catering to 280,000+ users worldwide.",
+    image: "/images/team/basudev-ganguly.jpg",
     social: {
       linkedin: "https://linkedin.com/in/",
     },
-    certifications: ["CISSP", "CISM", "CEH"],
   },
   {
-    id: "cto",
-    name: "Chief Technology Officer",
-    role: "CTO",
-    bio: "Technology leader driving innovation in security solutions with expertise in AI/ML and cloud security.",
-    image: "/images/team/cto.jpg",
+    id: "director",
+    name: "Indranil Banerjee",
+    role: "Director",
+    bio: "A seasoned cybersecurity business leader with over 27 years of experience across cybersecurity, information security, and enterprise technology. Drives strategic vision, service innovation, and growth across national and global markets.",
+    image: "/images/team/indranil-banerjee.jpg",
     social: {
       linkedin: "https://linkedin.com/in/",
     },
-    certifications: ["CISSP", "CCSP", "AWS Security"],
   },
   {
-    id: "ciso",
-    name: "Chief Information Security Officer",
-    role: "CISO",
-    bio: "Security expert overseeing all security operations and client engagements with 12+ years of experience.",
-    image: "/images/team/ciso.jpg",
+    id: "svp-na",
+    name: "Vishy Narayan",
+    role: "Sr. Vice President - North America",
+    bio: "Leads ITOrigin's AI Strategy and Cybersecurity Practice across North America. A trusted advisor to C-suite executives specializing in AI and security strategies. Previously built enterprise consulting practices at Cognizant, Infosys, and research networks at NASA.",
+    image: "/images/team/vishy-narayan.jpg",
     social: {
       linkedin: "https://linkedin.com/in/",
     },
-    certifications: ["CISM", "CRISC", "ISO 27001 LA"],
-  },
-  {
-    id: "coo",
-    name: "Chief Operating Officer",
-    role: "COO",
-    bio: "Operations leader ensuring seamless service delivery and client satisfaction across all engagements.",
-    image: "/images/team/coo.jpg",
-    social: {
-      linkedin: "https://linkedin.com/in/",
-    },
-    certifications: ["PMP", "ITIL"],
   },
 ];
 

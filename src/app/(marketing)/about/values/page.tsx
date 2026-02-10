@@ -147,9 +147,10 @@ export default function ValuesPage() {
 
       {/* Quote Section */}
       <QuoteSection
-        quote="Values are not just what we believe—they're what we do when no one is watching. At IT Origin, our values are lived every day in every interaction."
-        author="Sarah Chen"
-        role="Chief Executive Officer"
+        quote="Customer trust is our purpose, our people are our strength, and global excellence is our destination."
+        author="Basudev Gangopadhyay"
+        role="Managing Director"
+        image="/images/team/basudev-ganguly.jpg"
       />
 
       {/* Operating Principles */}

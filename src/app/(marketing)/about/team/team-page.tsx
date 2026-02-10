@@ -17,35 +17,23 @@ export function TeamPage() {
 
   const leadership = [
     {
-      name: "Sarah Chen",
-      role: "Chief Executive Officer",
-      bio: "15+ years leading cybersecurity initiatives for Fortune 500 companies. Passionate about building security-first cultures.",
-      linkedin: "https://linkedin.com",
-      twitter: "https://twitter.com",
-      email: "sarah.chen@itorigin.com"
+      name: "Basudev Gangopadhyay",
+      role: "Managing Director",
+      image: "/images/team/basudev-ganguly.jpg",
+      bio: "A highly accomplished technology executive with over 35 years of strategic and operational leadership across IT, data center engineering, and cybersecurity. He has worked for multinationals like TCS & Cognizant, where he served as Global Head for End-User services catering to IT infrastructure needs for 280,000+ users worldwide. He holds a degree from IISc, Bangalore and a PGDBM from IIM, Calcutta.",
     },
     {
-      name: "Michael Rodriguez",
-      role: "Chief Technology Officer",
-      bio: "Former NSA security researcher with expertise in AI-powered threat detection and zero-trust architectures.",
-      linkedin: "https://linkedin.com",
-      twitter: "https://twitter.com",
-      email: "michael.rodriguez@itorigin.com"
+      name: "Indranil Banerjee",
+      role: "Director",
+      image: "/images/team/indranil-banerjee.jpg",
+      bio: "A seasoned cybersecurity business leader with over 27 years of experience across cybersecurity, information security, and enterprise technology. He drives the organization's strategic vision, service innovation, and growth across national and global markets, with deep expertise in security strategy, risk management, and consulting-led service delivery.",
     },
     {
-      name: "Emily Thompson",
-      role: "Chief Information Security Officer",
-      bio: "CISSP, CISM certified with extensive experience in GRC, compliance, and security program development.",
-      linkedin: "https://linkedin.com",
-      email: "emily.thompson@itorigin.com"
+      name: "Vishy Narayan",
+      role: "Sr. Vice President - North America",
+      image: "/images/team/vishy-narayan.jpg",
+      bio: "Leads ITOrigin's AI Strategy and Cybersecurity Practice across North America. A trusted advisor to C-suite executives, Vishy specializes in translating complex business challenges into actionable AI and security strategies. Prior to ITOrigin, he built and led enterprise consulting practices at Cognizant and Infosys and built wide area research networks at NASA. He holds degrees from IIM Bangalore and Louisiana State University.",
     },
-    {
-      name: "David Kim",
-      role: "VP of Security Operations",
-      bio: "Leads our 24/7 SOC operations with a focus on proactive threat hunting and incident response excellence.",
-      linkedin: "https://linkedin.com",
-      email: "david.kim@itorigin.com"
-    }
   ];
 
   const securityTeam = [
@@ -175,7 +163,7 @@ export function TeamPage() {
             </motion.p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {leadership.map((member, index) => (
               <TeamMemberCard key={index} {...member} index={index} />
             ))}
