@@ -28,7 +28,7 @@ export const siteSettings = pgTable("site_settings", {
   description: text("description"),
 
   // Contact Details
-  email: text("email").notNull().default("info@itorigin.com"),
+  email: text("email").notNull().default("connect@itorigin.com"),
   phone: text("phone").notNull().default("+91-7439490434"),
   whatsapp: text("whatsapp"),
 

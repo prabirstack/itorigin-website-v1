@@ -85,6 +85,13 @@
       "when": 1769013386445,
       "tag": "0011_windy_moira_mactaggert",
       "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1770799810971,
+      "tag": "0012_silent_gunslinger",
+      "breakpoints": true
     }
   ]
 }

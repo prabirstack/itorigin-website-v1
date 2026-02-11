@@ -62,7 +62,7 @@ const defaultSettings: SiteSettings = {
   companyName: "IT Origin",
   tagline: null,
   description: null,
-  email: "info@itorigin.com",
+  email: "connect@itorigin.com",
   phone: "",
   whatsapp: null,
   addressLine1: null,
