@@ -6,8 +6,6 @@ import { SectionHeader } from "@/components/about/section-header";
 import { StatsSection } from "@/components/about/stats-section";
 import { BenefitCard } from "@/components/services/benefit-card";
 import { CTASection } from "@/components/about/cta-section";
-import { PartnerTierCard } from "@/components/partner/partner-tier-card";
-import { PartnerBenefitCard } from "@/components/partner/partner-benefit-card";
 
 export const metadata: Metadata = {
   title: "Partner Program | Join IT Origin's Cybersecurity Partner Network",
@@ -55,117 +53,6 @@ export default function PartnerPage() {
     { label: "Partner Revenue Growth", value: "45%", icon: "TrendingUp" as const },
     { label: "Certified Partner Engineers", value: "500+", icon: "Award" as const },
     { label: "Countries", value: "35+", icon: "Globe" as const },
-  ];
-
-  const partnerTiers = [
-    {
-      name: "Registered Partner",
-      description: "Start your journey with foundational support and resources",
-      icon: "Users" as const,
-      benefits: [
-        "Access to partner portal",
-        "Basic product training",
-        "Standard pricing (15% margin)",
-        "Email support",
-        "Marketing collateral access",
-        "Quarterly partner newsletter"
-      ],
-      requirements: [
-        "Complete partner registration",
-        "Sign partner agreement",
-        "Minimum 1 certified team member"
-      ]
-    },
-    {
-      name: "Silver Partner",
-      description: "Enhanced benefits for growing partnerships",
-      icon: "Award" as const,
-      benefits: [
-        "Everything in Registered",
-        "Advanced training programs",
-        "Preferred pricing (20% margin)",
-        "Priority email & phone support",
-        "Co-marketing opportunities",
-        "Deal registration program",
-        "Quarterly business reviews",
-        "Partner marketing fund (MDF)"
-      ],
-      requirements: [
-        "Minimum 2 certified engineers",
-        "$50K annual revenue commitment",
-        "2+ customer references"
-      ],
-      highlighted: true
-    },
-    {
-      name: "Gold Partner",
-      description: "Premium tier with maximum benefits and support",
-      icon: "Target" as const,
-      benefits: [
-        "Everything in Silver",
-        "Dedicated partner manager",
-        "Premium pricing (25% margin)",
-        "24/7 priority support",
-        "Lead generation support",
-        "Custom training programs",
-        "Executive engagement",
-        "Strategic planning sessions",
-        "Enhanced MDF allocation"
-      ],
-      requirements: [
-        "Minimum 5 certified engineers",
-        "$200K annual revenue commitment",
-        "5+ customer references",
-        "Demonstrated technical expertise"
-      ]
-    }
-  ];
-
-  const partnerTypes = [
-    {
-      title: "Reseller Partners",
-      description: "Sell IT Origin products and services directly to end customers with attractive margins and comprehensive support.",
-      icon: "Target" as const,
-      keyBenefits: [
-        "Competitive partner pricing",
-        "Sales enablement resources",
-        "Deal registration protection",
-        "Revenue sharing opportunities"
-      ]
-    },
-    {
-      title: "MSP / MSSP Partners",
-      description: "Integrate our security solutions into your managed services portfolio to deliver comprehensive protection to your clients.",
-      icon: "Shield" as const,
-      keyBenefits: [
-        "Multi-tenant platform access",
-        "White-label options available",
-        "Recurring revenue model",
-        "Technical integration support"
-      ]
-    },
-    {
-      title: "Technology Partners",
-      description: "Build integrations and joint solutions that combine our security expertise with your technology platform.",
-      icon: "Zap" as const,
-      keyBenefits: [
-        "API and SDK access",
-        "Co-development opportunities",
-        "Joint go-to-market strategy",
-        "Technical partner engineering"
-      ]
-    },
-    {
-      title: "Consulting Partners",
-      description: "Recommend and implement IT Origin solutions as part of your security consulting and professional services.",
-      icon: "Users" as const,
-      keyBenefits: [
-        "Professional services enablement",
-        "Implementation best practices",
-        "Referral fee program",
-        "Joint delivery model"
-      ]
-    }
   ];
 
   const benefits = [
@@ -242,10 +129,10 @@ export default function PartnerPage() {
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
-              href="#tiers"
+              href="/partner-portal"
               className="px-8 py-4 border border-border rounded-lg font-semibold hover:bg-accent transition-colors"
             >
-              View Partner Tiers
+              Partner Login
             </Link>
           </div>
         </div>
@@ -265,38 +152,6 @@ export default function PartnerPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {benefits.map((benefit, index) => (
               <BenefitCard key={index} {...benefit} index={index} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Partner Types Section */}
-      <section className="py-20 md:py-32 bg-accent/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            title="Partner Types"
-            description="We work with different types of partners to deliver value to customers worldwide."
-          />
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {partnerTypes.map((type, index) => (
-              <PartnerBenefitCard key={index} {...type} index={index} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Partner Tiers Section */}
-      <section id="tiers" className="py-20 md:py-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            title="Partner Tiers"
-            description="Choose the partnership level that aligns with your business goals and capabilities."
-          />
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {partnerTiers.map((tier, index) => (
-              <PartnerTierCard key={index} {...tier} index={index} />
             ))}
           </div>
         </div>
@@ -366,7 +221,7 @@ export default function PartnerPage() {
                   key={index}
                   className="flex items-start gap-6 p-6 rounded-2xl border border-border bg-card hover:border-primary/50 transition-all duration-300"
                 >
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-primary/80 text-primary-foreground flex items-center justify-center text-xl font-black flex-shrink-0">
+                  <div className="w-12 h-12 rounded-full bg-linear-to-br from-primary to-primary/80 text-primary-foreground flex items-center justify-center text-xl font-black flex-shrink-0">
                     {item.step}
                   </div>
                   <div className="flex-1 pt-1">
