@@ -49,10 +49,10 @@ export const metadata: Metadata = {
 
 export default function PartnerPage() {
   const stats = [
-    { label: "Active Partners", value: "250+", icon: "Users" as const },
+    { label: "Active Partners", value: "50+", icon: "Users" as const },
     { label: "Partner Revenue Growth", value: "45%", icon: "TrendingUp" as const },
     { label: "Certified Partner Engineers", value: "500+", icon: "Award" as const },
-    { label: "Countries", value: "35+", icon: "Globe" as const },
+    { label: "Countries", value: "12+", icon: "Globe" as const },
   ];
 
   const benefits = [
