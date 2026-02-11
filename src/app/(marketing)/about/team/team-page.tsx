@@ -36,45 +36,6 @@ export function TeamPage() {
     },
   ];
 
-  const securityTeam = [
-    {
-      name: "Alex Johnson",
-      role: "Lead SOC Analyst",
-      bio: "Expert in SIEM platforms and threat intelligence with 10+ years protecting critical infrastructure.",
-      linkedin: "https://linkedin.com"
-    },
-    {
-      name: "Priya Patel",
-      role: "Senior Penetration Tester",
-      bio: "OSCP certified ethical hacker specializing in web application and network security assessments.",
-      linkedin: "https://linkedin.com"
-    },
-    {
-      name: "James Wilson",
-      role: "Incident Response Manager",
-      bio: "Leads rapid response teams handling complex security incidents and digital forensics investigations.",
-      linkedin: "https://linkedin.com"
-    },
-    {
-      name: "Lisa Martinez",
-      role: "Threat Intelligence Analyst",
-      bio: "Specializes in analyzing emerging threats and providing actionable intelligence to clients.",
-      linkedin: "https://linkedin.com"
-    },
-    {
-      name: "Robert Chang",
-      role: "Security Architect",
-      bio: "Designs enterprise-grade security solutions with focus on cloud security and zero-trust models.",
-      linkedin: "https://linkedin.com"
-    },
-    {
-      name: "Nina Kowalski",
-      role: "GRC Consultant",
-      bio: "Helps organizations achieve compliance with GDPR, SOC 2, ISO 27001, and other frameworks.",
-      linkedin: "https://linkedin.com"
-    }
-  ];
-
   const departments = [
     {
       name: "Security Operations Center",
@@ -165,38 +126,6 @@ export function TeamPage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {leadership.map((member, index) => (
-              <TeamMemberCard key={index} {...member} index={index} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Security Team */}
-      <section className="py-20 md:py-32 bg-accent/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={staggerContainer}
-            className="text-center max-w-3xl mx-auto mb-16"
-          >
-            <motion.h2
-              variants={fadeInUp}
-              className="text-3xl md:text-5xl font-black mb-4"
-            >
-              Security Experts
-            </motion.h2>
-            <motion.p
-              variants={fadeInUp}
-              className="text-lg text-muted-foreground"
-            >
-              Meet some of the talented professionals keeping organizations secure around the clock.
-            </motion.p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {securityTeam.map((member, index) => (
               <TeamMemberCard key={index} {...member} index={index} />
             ))}
           </div>
