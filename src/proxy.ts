@@ -8,9 +8,12 @@ export async function proxy(request: NextRequest) {
 
   // Redirect www to non-www
   if (host.startsWith("www.")) {
-    const newUrl = new URL(request.url);
-    newUrl.host = host.replace("www.", "");
-    return NextResponse.redirect(newUrl, 301);
+    const nonWwwHost = host.replace("www.", "");
+    const { pathname, search } = request.nextUrl;
+    return NextResponse.redirect(
+      `https://${nonWwwHost}${pathname}${search}`,
+      301
+    );
   }
 
   const { pathname } = request.nextUrl;
