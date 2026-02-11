@@ -88,15 +88,15 @@ function OfficeCard({ office, index, className = "" }: { office: OfficeLocation;
 export function ContactInfo() {
   const { settings } = useSettings();
 
-  const phone = settings?.phone || "+1 (234) 567-890";
-  const email = settings?.email || "info@itorigin.com";
+  const phone = settings?.phone || "+91-7439490434";
+  const email = settings?.email || "connect@itorigin.com";
   const businessHours = settings?.businessHours || "Mon-Fri 9:00 AM - 6:00 PM";
 
   const activeOffices = getActiveOffices(settings);
 
   const useLegacyAddress = activeOffices.length === 0;
   const legacyAddress = useLegacyAddress
-    ? `${settings?.addressLine1 || "123 Cybersecurity Avenue"}, ${settings?.city || "Mumbai"} - ${settings?.postalCode || "400001"}`
+    ? `${settings?.addressLine1 || "8/14, Sahid Nagar, Wing-A"}, ${settings?.city || "Kolkata"} - ${settings?.postalCode || "700078"}`
     : null;
 
   return (

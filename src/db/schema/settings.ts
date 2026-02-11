@@ -29,7 +29,7 @@ export const siteSettings = pgTable("site_settings", {
 
   // Contact Details
   email: text("email").notNull().default("info@itorigin.com"),
-  phone: text("phone").notNull().default("+1 (234) 567-890"),
+  phone: text("phone").notNull().default("+91-7439490434"),
   whatsapp: text("whatsapp"),
 
   // Legacy Address (kept for backward compatibility)

@@ -42,11 +42,11 @@ export default function ContactPage() {
   const { settings } = useSettings();
 
   // Dynamic contact info from settings
-  const email = settings?.email || "info@itorigin.com";
-  const phone = settings?.phone || "+1 (234) 567-890";
-  const addressLine1 = settings?.addressLine1 || "123 Cybersecurity Avenue";
-  const city = settings?.city || "Mumbai";
-  const postalCode = settings?.postalCode || "400001";
+  const email = settings?.email || "connect@itorigin.com";
+  const phone = settings?.phone || "+91-7439490434";
+  const addressLine1 = settings?.addressLine1 || "8/14, Sahid Nagar, Wing-A";
+  const city = settings?.city || "Kolkata";
+  const postalCode = settings?.postalCode || "700078";
   const country = settings?.country || "India";
   const businessHours = settings?.businessHours || "Mon-Fri 9:00 AM - 6:00 PM";
   const timezone = settings?.timezone || "IST";

@@ -9,10 +9,10 @@ import { useSettings, getPhoneLink, getEmailLink } from "@/components/providers/
 export const Topbar: React.FC = () => {
   const { settings } = useSettings();
 
-  const phone = settings?.phone || "+1 (234) 567-890";
-  const email = settings?.email || "info@itorigin.com";
-  const city = settings?.city || "San Francisco";
-  const state = settings?.state || "CA";
+  const phone = settings?.phone || "+91-7439490434";
+  const email = settings?.email || "connect@itorigin.com";
+  const city = settings?.city || "Kolkata";
+  const state = settings?.state || "West Bengal";
   const location = `${city}, ${state}`;
 
   const socialLinks = settings?.socialLinks || {};

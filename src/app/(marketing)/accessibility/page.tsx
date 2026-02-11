@@ -139,8 +139,8 @@ export default function AccessibilityPage() {
                   </div>
                   <div className="flex items-center gap-3">
                     <Phone className="w-5 h-5 text-primary" />
-                    <a href="tel:+1234567890" className="text-primary hover:underline">
-                      +1 (234) 567-890
+                    <a href="tel:+917439490434" className="text-primary hover:underline">
+                      +91-7439490434
                     </a>
                   </div>
                 </div>

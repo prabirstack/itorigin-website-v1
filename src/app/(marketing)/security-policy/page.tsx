@@ -299,7 +299,7 @@ export default function SecurityPolicyPage() {
                 <p className="font-semibold mb-2">IT Origin Security Team</p>
                 <p className="text-muted-foreground">Email: security@itorigin.com</p>
                 <p className="text-muted-foreground">PGP Key: Available upon request</p>
-                <p className="text-muted-foreground">Emergency: +1 (234) 567-890</p>
+                <p className="text-muted-foreground">Emergency: +91-7439490434</p>
               </div>
             </section>
           </div>

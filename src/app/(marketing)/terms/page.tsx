@@ -195,7 +195,7 @@ export default function TermsOfServicePage() {
               <div className="bg-muted/50 p-6 rounded-lg">
                 <p className="font-semibold mb-2">IT Origin - Legal Team</p>
                 <p className="text-muted-foreground">Email: legal@itorigin.com</p>
-                <p className="text-muted-foreground">Address: 123 Cybersecurity Avenue, Tech District, Mumbai 400001, India</p>
+                <p className="text-muted-foreground">Address: 8/14, Sahid Nagar, Wing-A, Kolkata 700078, India</p>
               </div>
             </section>
           </div>

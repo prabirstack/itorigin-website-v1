@@ -291,7 +291,7 @@ export default function SLAPage() {
               <div className="bg-muted/50 p-6 rounded-lg">
                 <p className="font-semibold mb-2">IT Origin Support</p>
                 <p className="text-muted-foreground">Email: support@itorigin.com</p>
-                <p className="text-muted-foreground">Emergency: +1 (234) 567-890</p>
+                <p className="text-muted-foreground">Emergency: +91-7439490434</p>
                 <p className="text-muted-foreground">Status Page: status.itorigin.com</p>
               </div>
             </section>
