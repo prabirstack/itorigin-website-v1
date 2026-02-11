@@ -39,7 +39,7 @@ export const auth = betterAuth({
   },
   trustedOrigins: [
     process.env.BETTER_AUTH_URL || "http://localhost:3000",
-    "https://itorigin-website-v1-kx3n.vercel.app",
+    "https://www.itorigin.com",
   ],
 });
 
