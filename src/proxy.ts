@@ -4,6 +4,15 @@ const protectedRoutes = ["/admin"];
 const authRoutes = ["/sign-in", "/sign-up"];
 
 export async function proxy(request: NextRequest) {
+  const host = request.headers.get("host") || "";
+
+  // Redirect www to non-www
+  if (host.startsWith("www.")) {
+    const newUrl = new URL(request.url);
+    newUrl.host = host.replace("www.", "");
+    return NextResponse.redirect(newUrl, 301);
+  }
+
   const { pathname } = request.nextUrl;
 
   // Check if the route is protected
@@ -36,9 +45,7 @@ export async function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
-    // Only run middleware on admin and auth routes
-    "/admin/:path*",
-    "/sign-in",
-    "/sign-up",
+    // Match all paths for www redirect, plus admin/auth route protection
+    "/((?!_next/static|_next/image|favicon.ico|images).*)",
   ],
 };
