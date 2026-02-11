@@ -102,8 +102,8 @@ export default function PartnerPage() {
       description: "Pre-sales engineering assistance, proof-of-concept support, and competitive intelligence to help you win deals."
     },
     {
-      title: "Marketing Development Funds",
-      description: "Access marketing funds for qualified partners to support local campaigns, events, and demand generation activities."
+      title: "End-to-End Handholding",
+      description: "From onboarding to deal closure, our dedicated partner success team walks with you at every step — ensuring you never face a challenge alone."
     }
   ];
 
