@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/about/page-hero";
 import { StatsSection } from "@/components/about/stats-section";
 import { CertificationsSection } from "@/components/marketing/certifications-section";
+import { AboutStory } from "@/components/about/about-story";
 import { HighlightsSection } from "@/components/about/highlights-section";
 import { MissionVisionSection } from "@/components/about/mission-vision-section";
 import { CTASection } from "@/components/about/cta-section";
@@ -101,7 +102,7 @@ export default function AboutPage() {
         badge={{ icon: "Shield", text: "Trusted Cybersecurity Partner" }}
         title="Protecting What"
         highlight="Matters Most"
-        description="ITOrigin is a leading cybersecurity firm dedicated to safeguarding organizations against evolving digital threats. With cutting-edge technology and unparalleled expertise, we deliver comprehensive security solutions tailored to your unique needs."
+        description="At ITOrigin, cybersecurity isn't just a shield, it's your competitive edge. We don't just defend against threats; we empower organizations to move faster, think bigger, and grow fearlessly. Across industries and borders, we stand beside our partners to protect what truly drives their success, their people, their processes, and their purpose."
       />
 
       {/* Hero CTAs */}
@@ -127,6 +128,9 @@ export default function AboutPage() {
 
       {/* Stats Section */}
       <StatsSection stats={stats} />
+
+      {/* Who We Are */}
+      <AboutStory />
 
       {/* Certifications & Empanelments */}
       <CertificationsSection />
