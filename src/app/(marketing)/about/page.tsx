@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/about/page-hero";
 import { StatsSection } from "@/components/about/stats-section";
+import { CertificationsSection } from "@/components/marketing/certifications-section";
 import { HighlightsSection } from "@/components/about/highlights-section";
 import { MissionVisionSection } from "@/components/about/mission-vision-section";
 import { CTASection } from "@/components/about/cta-section";
@@ -126,6 +127,9 @@ export default function AboutPage() {
 
       {/* Stats Section */}
       <StatsSection stats={stats} />
+
+      {/* Certifications & Empanelments */}
+      <CertificationsSection />
 
       {/* Highlights Section */}
       <HighlightsSection

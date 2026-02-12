@@ -1,7 +1,7 @@
 import { BenifitGrid } from "@/components/marketing/home/benifit-grid";
 import { BlogSection } from "@/components/marketing/home/blog";
 import { CTASection } from "@/components/marketing/home/cta";
-
+import { CertificationsSection } from "@/components/marketing/certifications-section";
 import { CyberFusion } from "@/components/marketing/home/cyber-fusion";
 import HeroCarousel from "@/components/marketing/home/Hero";
 import { IndustryExperience } from "@/components/marketing/home/industry-experience";
@@ -15,6 +15,7 @@ export default function Home() {
     <>
       <HeroCarousel />
       <LogoTicker />
+      <CertificationsSection />
       <BenifitGrid />
       <ServiceSection />
       <CyberFusion />
