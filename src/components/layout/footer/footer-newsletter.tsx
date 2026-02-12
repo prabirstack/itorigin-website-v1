@@ -133,7 +133,7 @@ export function FooterNewsletter() {
 
       {/* Security Badges */}
       <div className="space-y-4">
-        <h5 className="font-medium text-foreground text-sm">Security & Compliance</h5>
+        <h5 className="font-medium text-foreground text-sm">Certifications</h5>
         <div className="grid grid-cols-2 gap-2">
           {securityBadges.map((badge) => {
             const Icon = iconMap[badge.iconName];

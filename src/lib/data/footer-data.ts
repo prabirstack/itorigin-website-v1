@@ -116,8 +116,8 @@ export const footerStats: FooterStat[] = [
 ];
 
 export const securityBadges = [
-  { iconName: "Shield", label: "ISO 27001" },
-  { iconName: "Award", label: "SOC 2" },
-  { iconName: "FileCheck", label: "GDPR" },
-  { iconName: "Globe", label: "HIPAA" },
+  { iconName: "Shield", label: "ISO 9001:2015" },
+  { iconName: "Award", label: "ISO 27001:2022" },
+  { iconName: "FileCheck", label: "ISO 20000-1:2018" },
+  { iconName: "Globe", label: "ISO 17025" },
 ];
