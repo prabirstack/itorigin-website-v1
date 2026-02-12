@@ -4,8 +4,6 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { motion } from "motion/react";
 import { Send, CheckCircle, AlertCircle } from "lucide-react";
-import { securityBadges } from "@/lib/data/footer-data";
-import { iconMap } from "@/lib/icon-map";
 
 export function FooterNewsletter() {
   const [email, setEmail] = useState("");
@@ -130,25 +128,6 @@ export function FooterNewsletter() {
           and consent to receive updates from ITOrigin.
         </p>
       </form>
-
-      {/* Security Badges */}
-      <div className="space-y-4">
-        <h5 className="font-medium text-foreground text-sm">Certifications</h5>
-        <div className="grid grid-cols-2 gap-2">
-          {securityBadges.map((badge) => {
-            const Icon = iconMap[badge.iconName];
-            return (
-              <div
-                key={badge.label}
-                className="flex items-center space-x-2 p-2 bg-muted/50 rounded-lg"
-              >
-                {Icon && <Icon className="w-4 h-4 text-primary" />}
-                <span className="text-xs font-medium">{badge.label}</span>
-              </div>
-            );
-          })}
-        </div>
-      </div>
     </div>
   );
 }
