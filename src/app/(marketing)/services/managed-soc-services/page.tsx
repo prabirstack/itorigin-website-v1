@@ -11,9 +11,9 @@ import { PricingCTA } from "@/components/services/pricing-cta";
 import { CTASection } from "@/components/about/cta-section";
 
 export const metadata: Metadata = {
-  title: "Managed SOC Services | 24/7 Security Operations Center | IT Origin",
+  title: "Managed SOC Services | 24/7 Security Operations Center | ITOrigin",
   description:
-    "Protect your organization with IT Origin's managed SOC services. 24/7 threat monitoring, detection, and response by certified security analysts. Advanced threat intelligence and rapid incident response.",
+    "Protect your organization with ITOrigin's managed SOC services. 24/7 threat monitoring, detection, and response by certified security analysts. Advanced threat intelligence and rapid incident response.",
   keywords: [
     "managed SOC services",
     "security operations center",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     "security analysts",
   ],
   openGraph: {
-    title: "Managed SOC Services | 24/7 Security Operations Center | IT Origin",
+    title: "Managed SOC Services | 24/7 Security Operations Center | ITOrigin",
     description:
       "24/7 threat monitoring, detection, and response by certified security analysts. Protect your organization with enterprise-grade security operations.",
     type: "website",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
         url: "/images/og-soc-services.jpg",
         width: 1200,
         height: 630,
-        alt: "IT Origin Managed SOC Services",
+        alt: "ITOrigin Managed SOC Services",
       },
     ],
   },

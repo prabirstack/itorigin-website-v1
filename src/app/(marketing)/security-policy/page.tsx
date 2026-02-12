@@ -4,8 +4,8 @@ import { Container } from "@/components/common/container";
 import { Shield, Lock, Eye, Server, Users, AlertTriangle, FileCheck, Zap } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Security Policy | IT Origin",
-  description: "Learn about IT Origin's comprehensive security policies and practices that protect our clients and their data.",
+  title: "Security Policy | ITOrigin",
+  description: "Learn about ITOrigin's comprehensive security policies and practices that protect our clients and their data.",
   alternates: {
     canonical: "https://itorigin.com/security-policy"
   }
@@ -77,7 +77,7 @@ export default function SecurityPolicyPage() {
             <section className="mb-12">
               <h2 className="text-2xl font-bold mb-4">1. Overview</h2>
               <p className="text-muted-foreground mb-4">
-                At IT Origin, security is not just a feature—it&apos;s the foundation of everything we do. As a cybersecurity company, we hold ourselves to the highest standards of security practices and continuously work to protect our clients&apos; data and systems.
+                At ITOrigin, security is not just a feature—it&apos;s the foundation of everything we do. As a cybersecurity company, we hold ourselves to the highest standards of security practices and continuously work to protect our clients&apos; data and systems.
               </p>
               <p className="text-muted-foreground">
                 This Security Policy outlines our commitment to maintaining a secure environment for our services, employees, and customers.
@@ -296,7 +296,7 @@ export default function SecurityPolicyPage() {
                 For security-related inquiries or to report a security concern:
               </p>
               <div className="bg-muted/50 p-6 rounded-lg">
-                <p className="font-semibold mb-2">IT Origin Security Team</p>
+                <p className="font-semibold mb-2">ITOrigin Security Team</p>
                 <p className="text-muted-foreground">Email: security@itorigin.com</p>
                 <p className="text-muted-foreground">PGP Key: Available upon request</p>
                 <p className="text-muted-foreground">Emergency: +91-7439490434</p>

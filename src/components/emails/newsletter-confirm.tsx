@@ -24,11 +24,11 @@ export const NewsletterConfirmEmail = ({
   return (
     <Html>
       <Head />
-      <Preview>Confirm your IT Origin newsletter subscription</Preview>
+      <Preview>Confirm your ITOrigin newsletter subscription</Preview>
       <Body style={main}>
         <Container style={container}>
           <Section style={logoSection}>
-            <Heading style={logo}>IT Origin</Heading>
+            <Heading style={logo}>ITOrigin</Heading>
           </Section>
 
           <Heading style={heading}>
@@ -36,7 +36,7 @@ export const NewsletterConfirmEmail = ({
           </Heading>
 
           <Text style={paragraph}>
-            Thank you for subscribing to the IT Origin newsletter. You&apos;re
+            Thank you for subscribing to the ITOrigin newsletter. You&apos;re
             one step away from receiving expert cybersecurity insights, industry
             updates, and exclusive resources.
           </Text>
@@ -62,7 +62,7 @@ export const NewsletterConfirmEmail = ({
 
           <Section style={footer}>
             <Text style={footerText}>
-              IT Origin - Enterprise Cybersecurity Solutions
+              ITOrigin - Enterprise Cybersecurity Solutions
             </Text>
             <Text style={footerText}>
               <Link href="https://itorigin.in" style={link}>

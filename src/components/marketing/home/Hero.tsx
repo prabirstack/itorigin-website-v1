@@ -123,7 +123,7 @@ const HeroCarousel = () => {
                 </div>
                 <div className="px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20">
                   <span className="text-xs font-medium text-white/90">
-                    IT Origin - Cybersecurity Excellence
+                    ITOrigin - Cybersecurity Excellence
                   </span>
                 </div>
               </div>

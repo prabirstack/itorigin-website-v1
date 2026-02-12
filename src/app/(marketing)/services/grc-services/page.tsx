@@ -11,8 +11,8 @@ import { PricingCTA } from "@/components/services/pricing-cta";
 import { CTASection } from "@/components/about/cta-section";
 
 export const metadata: Metadata = {
-  title: "GRC Services | Governance, Risk & Compliance Consulting | IT Origin",
-  description: "Streamline your compliance journey with IT Origin's GRC services. Expert guidance for GDPR, HIPAA, SOC 2, ISO 27001, PCI-DSS, and more. Comprehensive risk management and policy development by certified consultants.",
+  title: "GRC Services | Governance, Risk & Compliance Consulting | ITOrigin",
+  description: "Streamline your compliance journey with ITOrigin's GRC services. Expert guidance for GDPR, HIPAA, SOC 2, ISO 27001, PCI-DSS, and more. Comprehensive risk management and policy development by certified consultants.",
   keywords: [
     "GRC services",
     "governance risk compliance",
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     "regulatory compliance"
   ],
   openGraph: {
-    title: "GRC Services | Governance, Risk & Compliance Consulting | IT Origin",
+    title: "GRC Services | Governance, Risk & Compliance Consulting | ITOrigin",
     description: "Expert guidance for regulatory compliance, risk management, and security governance. Achieve and maintain compliance with industry standards.",
     type: "website",
     url: "https://itorigin.com/services/grc-services",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
         url: "/images/og-grc-services.jpg",
         width: 1200,
         height: 630,
-        alt: "IT Origin GRC Services"
+        alt: "ITOrigin GRC Services"
       }
     ]
   },

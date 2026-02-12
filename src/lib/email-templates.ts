@@ -59,7 +59,7 @@ export const emailTemplates: EmailTemplate[] = [
 <body>
   <div class="container">
     <div class="header">
-      <h1>IT Origin</h1>
+      <h1>ITOrigin</h1>
       <p>{{month}} {{year}} Newsletter</p>
     </div>
 
@@ -99,14 +99,14 @@ export const emailTemplates: EmailTemplate[] = [
 
       <p>Have questions or need security assistance? Our team is always here to help.</p>
 
-      <p>Stay secure,<br><strong>The IT Origin Team</strong></p>
+      <p>Stay secure,<br><strong>The ITOrigin Team</strong></p>
     </div>
 
     <div class="footer">
       {{social_links}}
       <p>You're receiving this email because you subscribed to our newsletter.</p>
       <p><a href="{{unsubscribe_url}}">Unsubscribe</a> | <a href="https://itorigin.in/privacy">Privacy Policy</a></p>
-      <p>© {{year}} IT Origin. All rights reserved.</p>
+      <p>© {{year}} ITOrigin. All rights reserved.</p>
     </div>
   </div>
 </body>
@@ -158,7 +158,7 @@ export const emailTemplates: EmailTemplate[] = [
         <a href="https://itorigin.in/blogs" class="btn" style="padding: 12px 28px;">Read Full Articles</a>
       </div>
 
-      <p>Stay vigilant,<br><strong>IT Origin Security Team</strong></p>
+      <p>Stay vigilant,<br><strong>ITOrigin Security Team</strong></p>
     </div>
 
     <div class="footer">
@@ -176,7 +176,7 @@ export const emailTemplates: EmailTemplate[] = [
     name: "Welcome New Subscriber",
     description: "Warm welcome email for new newsletter subscribers",
     category: "welcome",
-    subject: "Welcome to IT Origin - Your Cybersecurity Partner",
+    subject: "Welcome to ITOrigin - Your Cybersecurity Partner",
     previewText: "Thank you for subscribing! Here's what to expect",
     htmlContent: `<!DOCTYPE html>
 <html>
@@ -188,7 +188,7 @@ export const emailTemplates: EmailTemplate[] = [
 <body>
   <div class="container">
     <div class="header">
-      <h1>Welcome to IT Origin!</h1>
+      <h1>Welcome to ITOrigin!</h1>
       <p>Your trusted cybersecurity partner</p>
     </div>
 
@@ -230,7 +230,7 @@ export const emailTemplates: EmailTemplate[] = [
 
       <p>Have questions? Feel free to reach out to us anytime at <a href="mailto:info@itorigin.in">info@itorigin.in</a>.</p>
 
-      <p>Welcome aboard!<br><strong>The IT Origin Team</strong></p>
+      <p>Welcome aboard!<br><strong>The ITOrigin Team</strong></p>
     </div>
 
     <div class="footer">
@@ -249,7 +249,7 @@ export const emailTemplates: EmailTemplate[] = [
     name: "Service Promotion",
     description: "Promote your cybersecurity services with a professional layout",
     category: "promotional",
-    subject: "Strengthen Your Security Posture with IT Origin",
+    subject: "Strengthen Your Security Posture with ITOrigin",
     previewText: "Discover our comprehensive cybersecurity solutions",
     htmlContent: `<!DOCTYPE html>
 <html>
@@ -268,7 +268,7 @@ export const emailTemplates: EmailTemplate[] = [
     <div class="content">
       <p>Hello {{name}},</p>
 
-      <p>In today's digital landscape, cybersecurity isn't just an option—it's a necessity. IT Origin offers end-to-end security solutions tailored to your business needs.</p>
+      <p>In today's digital landscape, cybersecurity isn't just an option—it's a necessity. ITOrigin offers end-to-end security solutions tailored to your business needs.</p>
 
       <div class="highlight-box">
         <p><strong>🛡️ Special Offer:</strong> Get a FREE security assessment for your organization. Limited time offer!</p>
@@ -302,7 +302,7 @@ export const emailTemplates: EmailTemplate[] = [
 
       <p>Ready to strengthen your security? Let's talk.</p>
 
-      <p>Best regards,<br><strong>The IT Origin Team</strong></p>
+      <p>Best regards,<br><strong>The ITOrigin Team</strong></p>
     </div>
 
     <div class="footer">
@@ -333,7 +333,7 @@ export const emailTemplates: EmailTemplate[] = [
   <div class="container">
     <div class="header" style="background: linear-gradient(135deg, #7c3aed 0%, #4c1d95 100%);">
       <h1>📺 Webinar Invitation</h1>
-      <p>You're Invited to Learn with IT Origin</p>
+      <p>You're Invited to Learn with ITOrigin</p>
     </div>
 
     <div class="content">
@@ -364,7 +364,7 @@ export const emailTemplates: EmailTemplate[] = [
       </div>
 
       <div class="highlight-box" style="border-left-color: #7c3aed; background-color: #f5f3ff;">
-        <p style="color: #5b21b6;"><strong>👤 Speaker:</strong> [Speaker Name], [Title] at IT Origin</p>
+        <p style="color: #5b21b6;"><strong>👤 Speaker:</strong> [Speaker Name], [Title] at ITOrigin</p>
       </div>
 
       <div style="text-align: center; margin: 30px 0;">
@@ -373,7 +373,7 @@ export const emailTemplates: EmailTemplate[] = [
 
       <p style="text-align: center; color: #64748b; font-size: 14px;">Limited spots available. Reserve yours today!</p>
 
-      <p>See you there!<br><strong>The IT Origin Team</strong></p>
+      <p>See you there!<br><strong>The ITOrigin Team</strong></p>
     </div>
 
     <div class="footer">
@@ -390,7 +390,7 @@ export const emailTemplates: EmailTemplate[] = [
     name: "Product/Service Update",
     description: "Announce new features or service updates",
     category: "announcement",
-    subject: "What's New at IT Origin - Exciting Updates!",
+    subject: "What's New at ITOrigin - Exciting Updates!",
     previewText: "Check out our latest improvements and features",
     htmlContent: `<!DOCTYPE html>
 <html>
@@ -403,7 +403,7 @@ export const emailTemplates: EmailTemplate[] = [
   <div class="container">
     <div class="header" style="background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);">
       <h1>🚀 What's New</h1>
-      <p>Latest Updates from IT Origin</p>
+      <p>Latest Updates from ITOrigin</p>
     </div>
 
     <div class="content">
@@ -438,7 +438,7 @@ export const emailTemplates: EmailTemplate[] = [
 
       <p>We'd love to hear your feedback! Reply to this email with any questions or suggestions.</p>
 
-      <p>Best regards,<br><strong>The IT Origin Team</strong></p>
+      <p>Best regards,<br><strong>The ITOrigin Team</strong></p>
     </div>
 
     <div class="footer">
@@ -512,7 +512,7 @@ export const emailTemplates: EmailTemplate[] = [
         <a href="https://itorigin.in/contact" class="btn" style="background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);">Contact Our Security Team</a>
       </div>
 
-      <p>Stay vigilant,<br><strong>IT Origin Security Team</strong></p>
+      <p>Stay vigilant,<br><strong>ITOrigin Security Team</strong></p>
     </div>
 
     <div class="footer">
@@ -530,7 +530,7 @@ export const emailTemplates: EmailTemplate[] = [
     name: "Simple Text Email",
     description: "Clean, minimal text-focused email template",
     category: "newsletter",
-    subject: "A Quick Update from IT Origin",
+    subject: "A Quick Update from ITOrigin",
     previewText: "A personal message from our team",
     htmlContent: `<!DOCTYPE html>
 <html>
@@ -558,7 +558,7 @@ export const emailTemplates: EmailTemplate[] = [
     <p>[Optional: Include a call to action or next steps for the reader.]</p>
 
     <div class="signature">
-      <p>Best regards,<br><strong>[Your Name]</strong><br>IT Origin</p>
+      <p>Best regards,<br><strong>[Your Name]</strong><br>ITOrigin</p>
     </div>
   </div>
 

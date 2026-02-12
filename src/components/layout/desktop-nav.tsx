@@ -199,7 +199,7 @@ export const DesktopNav: React.FC = () => {
               items={item.subItems}
               isOpen={activeDropdown === item.id}
               onClose={closeDropdown}
-              cta={item.name === "About" ? { label: "About IT Origin", href: "/about" } : undefined}
+              cta={item.name === "About" ? { label: "About ITOrigin", href: "/about" } : undefined}
             />
           )}
         </div>

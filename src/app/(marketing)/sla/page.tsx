@@ -4,8 +4,8 @@ import { Container } from "@/components/common/container";
 import { Clock, Shield, Zap, CheckCircle, AlertTriangle, HeadphonesIcon } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Service Level Agreement (SLA) | IT Origin",
-  description: "IT Origin's Service Level Agreement outlines our commitment to service availability, response times, and support standards.",
+  title: "Service Level Agreement (SLA) | ITOrigin",
+  description: "ITOrigin's Service Level Agreement outlines our commitment to service availability, response times, and support standards.",
   alternates: {
     canonical: "https://itorigin.com/sla"
   }
@@ -90,7 +90,7 @@ export default function SLAPage() {
             <section className="mb-12">
               <h2 className="text-2xl font-bold mb-4">1. Service Availability</h2>
               <p className="text-muted-foreground mb-4">
-                IT Origin guarantees the following uptime commitments for our managed security services:
+                ITOrigin guarantees the following uptime commitments for our managed security services:
               </p>
 
               <div className="overflow-x-auto not-prose">
@@ -279,7 +279,7 @@ export default function SLAPage() {
             <section className="mb-12">
               <h2 className="text-2xl font-bold mb-4">9. SLA Modifications</h2>
               <p className="text-muted-foreground">
-                IT Origin reserves the right to modify this SLA with 30 days&apos; notice. Changes will not apply retroactively and will not affect service credits already earned. Current customers will be notified of any changes via email.
+                ITOrigin reserves the right to modify this SLA with 30 days&apos; notice. Changes will not apply retroactively and will not affect service credits already earned. Current customers will be notified of any changes via email.
               </p>
             </section>
 
@@ -289,7 +289,7 @@ export default function SLAPage() {
                 For SLA-related inquiries or to submit a service credit request:
               </p>
               <div className="bg-muted/50 p-6 rounded-lg">
-                <p className="font-semibold mb-2">IT Origin Support</p>
+                <p className="font-semibold mb-2">ITOrigin Support</p>
                 <p className="text-muted-foreground">Email: support@itorigin.com</p>
                 <p className="text-muted-foreground">Emergency: +91-7439490434</p>
                 <p className="text-muted-foreground">Status Page: status.itorigin.com</p>

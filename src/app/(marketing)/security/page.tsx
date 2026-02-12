@@ -6,10 +6,10 @@ import { PageHero } from "@/components/about/page-hero";
 import { SectionHeader } from "@/components/about/section-header";
 
 export const metadata: Metadata = {
-  title: "Security Center | Trust & Security | IT Origin",
-  description: "Learn about IT Origin's security practices, certifications, and commitment to protecting your data. View our compliance status and security documentation.",
+  title: "Security Center | Trust & Security | ITOrigin",
+  description: "Learn about ITOrigin's security practices, certifications, and commitment to protecting your data. View our compliance status and security documentation.",
   keywords: [
-    "IT Origin security",
+    "ITOrigin security",
     "security certifications",
     "data protection",
     "compliance",

@@ -31,7 +31,7 @@ export const Logo = ({
       {/* Light mode logo */}
       <Image
         src="/images/logo/logo-dark.webp"
-        alt="IT Origin Logo"
+        alt="ITOrigin Logo"
         fill
         className="block dark:hidden object-contain"
         priority
@@ -40,7 +40,7 @@ export const Logo = ({
       {/* Dark mode logo */}
       <Image
         src="/images/logo/logo-light.webp"
-        alt="IT Origin Logo"
+        alt="ITOrigin Logo"
         fill
         className="hidden dark:block object-contain"
         priority

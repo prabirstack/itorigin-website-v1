@@ -8,8 +8,8 @@ import { eq, desc, asc } from "drizzle-orm";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Cybersecurity Blog | Latest Security Insights & Best Practices | IT Origin",
-  description: "Stay informed with IT Origin's cybersecurity blog. Expert insights on threat intelligence, penetration testing, compliance, cloud security, and security operations.",
+  title: "Cybersecurity Blog | Latest Security Insights & Best Practices | ITOrigin",
+  description: "Stay informed with ITOrigin's cybersecurity blog. Expert insights on threat intelligence, penetration testing, compliance, cloud security, and security operations.",
   keywords: [
     "cybersecurity blog",
     "security insights",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     "incident response"
   ],
   openGraph: {
-    title: "Cybersecurity Blog | Latest Security Insights & Best Practices | IT Origin",
+    title: "Cybersecurity Blog | Latest Security Insights & Best Practices | ITOrigin",
     description: "Expert insights on threat intelligence, penetration testing, compliance, and security operations.",
     type: "website",
     url: "https://itorigin.com/blogs",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
         url: "/images/og-blog.jpg",
         width: 1200,
         height: 630,
-        alt: "IT Origin Cybersecurity Blog"
+        alt: "ITOrigin Cybersecurity Blog"
       }
     ]
   },
@@ -69,7 +69,7 @@ async function getBlogPosts() {
     content: post.content,
     category: post.category?.name || "Uncategorized",
     author: {
-      name: post.author?.name || "IT Origin Team",
+      name: post.author?.name || "ITOrigin Team",
       avatar: post.author?.image || "/images/authors/default-avatar.jpg",
       role: post.author?.role === "admin" ? "Security Expert" : "Contributor",
     },

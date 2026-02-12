@@ -3,8 +3,8 @@ import Link from "next/link";
 import { Container } from "@/components/common/container";
 
 export const metadata: Metadata = {
-  title: "Terms of Service | IT Origin",
-  description: "Read IT Origin's Terms of Service governing your use of our cybersecurity services and website.",
+  title: "Terms of Service | ITOrigin",
+  description: "Read ITOrigin's Terms of Service governing your use of our cybersecurity services and website.",
   alternates: {
     canonical: "https://itorigin.com/terms"
   }
@@ -26,7 +26,7 @@ export default function TermsOfServicePage() {
             <section className="mb-12">
               <h2 className="text-2xl font-bold mb-4">1. Agreement to Terms</h2>
               <p className="text-muted-foreground mb-4">
-                By accessing or using IT Origin&apos;s website and services, you agree to be bound by these Terms of Service and all applicable laws and regulations. If you do not agree with any of these terms, you are prohibited from using or accessing our services.
+                By accessing or using ITOrigin&apos;s website and services, you agree to be bound by these Terms of Service and all applicable laws and regulations. If you do not agree with any of these terms, you are prohibited from using or accessing our services.
               </p>
               <p className="text-muted-foreground">
                 These Terms of Service apply to all users of our website and services, including without limitation users who are browsers, vendors, customers, merchants, and contributors of content.
@@ -36,7 +36,7 @@ export default function TermsOfServicePage() {
             <section className="mb-12">
               <h2 className="text-2xl font-bold mb-4">2. Services Description</h2>
               <p className="text-muted-foreground mb-4">
-                IT Origin provides cybersecurity services including but not limited to:
+                ITOrigin provides cybersecurity services including but not limited to:
               </p>
               <ul className="list-disc pl-6 text-muted-foreground space-y-2">
                 <li>Managed Security Operations Center (SOC) services</li>
@@ -86,7 +86,7 @@ export default function TermsOfServicePage() {
             <section className="mb-12">
               <h2 className="text-2xl font-bold mb-4">5. Intellectual Property</h2>
               <p className="text-muted-foreground mb-4">
-                All content, features, and functionality on our website and in our services, including but not limited to text, graphics, logos, icons, images, audio clips, software, and code, are the exclusive property of IT Origin or our licensors and are protected by intellectual property laws.
+                All content, features, and functionality on our website and in our services, including but not limited to text, graphics, logos, icons, images, audio clips, software, and code, are the exclusive property of ITOrigin or our licensors and are protected by intellectual property laws.
               </p>
               <p className="text-muted-foreground">
                 You may not reproduce, distribute, modify, create derivative works of, publicly display, publicly perform, republish, download, store, or transmit any materials from our website without our prior written consent.
@@ -127,7 +127,7 @@ export default function TermsOfServicePage() {
             <section className="mb-12">
               <h2 className="text-2xl font-bold mb-4">8. Limitation of Liability</h2>
               <p className="text-muted-foreground mb-4">
-                To the maximum extent permitted by law, IT Origin shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to:
+                To the maximum extent permitted by law, ITOrigin shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to:
               </p>
               <ul className="list-disc pl-6 text-muted-foreground space-y-2">
                 <li>Loss of profits, revenue, or data</li>
@@ -159,7 +159,7 @@ export default function TermsOfServicePage() {
             <section className="mb-12">
               <h2 className="text-2xl font-bold mb-4">10. Indemnification</h2>
               <p className="text-muted-foreground">
-                You agree to indemnify, defend, and hold harmless IT Origin and its officers, directors, employees, agents, and affiliates from and against any claims, liabilities, damages, losses, costs, or expenses arising out of or relating to your use of our services, your violation of these terms, or your violation of any rights of a third party.
+                You agree to indemnify, defend, and hold harmless ITOrigin and its officers, directors, employees, agents, and affiliates from and against any claims, liabilities, damages, losses, costs, or expenses arising out of or relating to your use of our services, your violation of these terms, or your violation of any rights of a third party.
               </p>
             </section>
 
@@ -193,7 +193,7 @@ export default function TermsOfServicePage() {
                 If you have any questions about these Terms of Service, please contact us:
               </p>
               <div className="bg-muted/50 p-6 rounded-lg">
-                <p className="font-semibold mb-2">IT Origin - Legal Team</p>
+                <p className="font-semibold mb-2">ITOrigin - Legal Team</p>
                 <p className="text-muted-foreground">Email: legal@itorigin.com</p>
                 <p className="text-muted-foreground">Address: 8/14, Sahid Nagar, Wing-A, Kolkata 700078, India</p>
               </div>

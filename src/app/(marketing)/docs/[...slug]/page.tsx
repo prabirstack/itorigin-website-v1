@@ -4,7 +4,7 @@ import { ArrowLeft, BookOpen, Construction, ArrowRight } from "lucide-react";
 import { Container } from "@/components/common/container";
 
 export const metadata: Metadata = {
-  title: "Documentation | Coming Soon | IT Origin",
+  title: "Documentation | Coming Soon | ITOrigin",
   description: "This documentation page is coming soon. Check back later for comprehensive guides and tutorials.",
 };
 

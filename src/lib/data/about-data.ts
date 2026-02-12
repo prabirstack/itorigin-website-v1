@@ -25,7 +25,7 @@ export interface Milestone {
 }
 
 export const companyInfo = {
-  name: "IT Origin",
+  name: "ITOrigin",
   tagline: "Cybersecurity Excellence and Innovation",
   founded: 2018,
   headquarters: "Kolkata, India",
@@ -34,7 +34,7 @@ export const companyInfo = {
   vision:
     "To be the most trusted cybersecurity partner for organizations across the globe, enabling them to operate securely in the digital age.",
   description:
-    "IT Origin is a CERT-IN empanelled cybersecurity company providing comprehensive security services including SOC as a Service, Penetration Testing, and GRC consulting. We combine cutting-edge technology with expert knowledge to protect organizations from evolving cyber threats.",
+    "ITOrigin is a CERT-IN empanelled cybersecurity company providing comprehensive security services including SOC as a Service, Penetration Testing, and GRC consulting. We combine cutting-edge technology with expert knowledge to protect organizations from evolving cyber threats.",
 };
 
 export const companyStats = [
@@ -95,7 +95,7 @@ export const milestones: Milestone[] = [
   {
     year: 2018,
     title: "Company Founded",
-    description: "IT Origin established with a mission to provide world-class cybersecurity services.",
+    description: "ITOrigin established with a mission to provide world-class cybersecurity services.",
   },
   {
     year: 2019,

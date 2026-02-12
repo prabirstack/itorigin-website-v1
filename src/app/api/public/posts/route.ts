@@ -71,7 +71,7 @@ export async function GET(request: NextRequest) {
       content: post.content,
       category: post.category?.name || "Uncategorized",
       author: {
-        name: post.author?.name || "IT Origin Team",
+        name: post.author?.name || "ITOrigin Team",
         avatar: post.author?.image || "/images/authors/default-avatar.jpg",
         role: post.author?.role === "admin" ? "Security Expert" : "Contributor",
       },

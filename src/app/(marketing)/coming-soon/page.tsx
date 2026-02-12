@@ -2,9 +2,9 @@ import { Metadata } from "next";
 import { ComingSoonContent } from "./coming-soon-content";
 
 export const metadata: Metadata = {
-  title: "Coming Soon | IT Origin",
+  title: "Coming Soon | ITOrigin",
   description:
-    "This page is coming soon. Stay tuned for exciting new content and features from IT Origin.",
+    "This page is coming soon. Stay tuned for exciting new content and features from ITOrigin.",
 };
 
 export default async function ComingSoonPage({

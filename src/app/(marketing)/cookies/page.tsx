@@ -3,8 +3,8 @@ import Link from "next/link";
 import { Container } from "@/components/common/container";
 
 export const metadata: Metadata = {
-  title: "Cookie Policy | IT Origin",
-  description: "Learn about how IT Origin uses cookies and similar technologies on our website.",
+  title: "Cookie Policy | ITOrigin",
+  description: "Learn about how ITOrigin uses cookies and similar technologies on our website.",
   alternates: {
     canonical: "https://itorigin.com/cookies"
   }
@@ -200,7 +200,7 @@ export default function CookiePolicyPage() {
                 If you have any questions about our use of cookies, please contact us:
               </p>
               <div className="bg-muted/50 p-6 rounded-lg">
-                <p className="font-semibold mb-2">IT Origin - Privacy Team</p>
+                <p className="font-semibold mb-2">ITOrigin - Privacy Team</p>
                 <p className="text-muted-foreground">Email: privacy@itorigin.com</p>
                 <p className="text-muted-foreground">Address: 8/14, Sahid Nagar, Wing-A, Kolkata 700078, India</p>
               </div>

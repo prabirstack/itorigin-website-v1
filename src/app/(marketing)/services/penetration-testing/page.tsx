@@ -11,7 +11,7 @@ import { PricingCTA } from "@/components/services/pricing-cta";
 import { CTASection } from "@/components/about/cta-section";
 
 export const metadata: Metadata = {
-  title: "Penetration Testing Services | Ethical Hacking | IT Origin",
+  title: "Penetration Testing Services | Ethical Hacking | ITOrigin",
   description: "Professional penetration testing services to identify vulnerabilities in your web applications, networks, APIs, and cloud infrastructure. OSCP-certified ethical hackers.",
   keywords: [
     "penetration testing",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     "security assessment"
   ],
   openGraph: {
-    title: "Penetration Testing Services | Ethical Hacking | IT Origin",
+    title: "Penetration Testing Services | Ethical Hacking | ITOrigin",
     description: "Professional penetration testing by OSCP-certified ethical hackers. Identify vulnerabilities before attackers do.",
     type: "website",
     url: "https://itorigin.com/services/penetration-testing",
@@ -195,7 +195,7 @@ export default function PenetrationTestingPage() {
       <section className="py-20 md:py-32 bg-accent/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
-            title="Why Choose IT Origin for Pen Testing"
+            title="Why Choose ITOrigin for Pen Testing"
             description="Partner with experienced security professionals who deliver real value."
           />
 

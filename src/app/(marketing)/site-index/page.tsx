@@ -3,8 +3,8 @@ import Link from "next/link";
 import { Container } from "@/components/common/container";
 
 export const metadata: Metadata = {
-  title: "Site Index | IT Origin",
-  description: "Navigate IT Origin's website with our comprehensive site index. Find all pages, services, and resources easily.",
+  title: "Site Index | ITOrigin",
+  description: "Navigate ITOrigin's website with our comprehensive site index. Find all pages, services, and resources easily.",
   alternates: {
     canonical: "https://itorigin.com/site-index"
   }
@@ -89,7 +89,7 @@ export default function SiteIndexPage() {
           <div className="mb-12 text-center">
             <h1 className="text-4xl md:text-5xl font-black mb-4">Site Index</h1>
             <p className="text-muted-foreground text-lg">
-              Find all pages on the IT Origin website organized by category.
+              Find all pages on the ITOrigin website organized by category.
             </p>
           </div>
 

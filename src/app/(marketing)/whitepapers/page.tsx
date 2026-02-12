@@ -10,8 +10,8 @@ import { resources } from "@/db/schema";
 import { eq, desc, and } from "drizzle-orm";
 
 export const metadata: Metadata = {
-  title: "Whitepapers & Research | IT Origin",
-  description: "Download free cybersecurity whitepapers, research reports, and industry guides from IT Origin's security experts.",
+  title: "Whitepapers & Research | ITOrigin",
+  description: "Download free cybersecurity whitepapers, research reports, and industry guides from ITOrigin's security experts.",
   keywords: [
     "cybersecurity whitepapers",
     "security research",

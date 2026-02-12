@@ -9,7 +9,7 @@ const CASE_STUDIES_DATA = [
     client: "Fortune 500 Financial Services Company",
     industry: "Financial Services",
     challenge: "The client faced increasing cyber threats targeting their trading platforms and customer data. Their internal team was overwhelmed with alerts, resulting in slow detection and response times. They needed round-the-clock monitoring but lacked the resources to build an in-house 24/7 SOC.",
-    solution: "IT Origin deployed a comprehensive Managed SOC solution with dedicated security analysts, advanced SIEM integration, and custom threat detection rules tailored to financial sector threats. We implemented automated response playbooks for common attack patterns and established direct communication channels with their internal IT team.",
+    solution: "ITOrigin deployed a comprehensive Managed SOC solution with dedicated security analysts, advanced SIEM integration, and custom threat detection rules tailored to financial sector threats. We implemented automated response playbooks for common attack patterns and established direct communication channels with their internal IT team.",
     results: [
       "Reduced mean time to detect (MTTD) from 48 hours to under 15 minutes",
       "Achieved 99.9% uptime for security monitoring coverage",
@@ -81,7 +81,7 @@ const CASE_STUDIES_DATA = [
     client: "Enterprise SaaS Provider",
     industry: "Technology",
     challenge: "A rapidly growing SaaS company with 500+ enterprise clients needed to achieve SOC 2 Type II certification while maintaining development velocity. Their AWS infrastructure lacked proper security controls, and they had no formal security program.",
-    solution: "IT Origin implemented a DevSecOps program integrating security into their CI/CD pipeline, deployed cloud-native security tools, established security governance frameworks, and provided hands-on support throughout the SOC 2 audit process.",
+    solution: "ITOrigin implemented a DevSecOps program integrating security into their CI/CD pipeline, deployed cloud-native security tools, established security governance frameworks, and provided hands-on support throughout the SOC 2 audit process.",
     results: [
       "Achieved SOC 2 Type II certification in 9 months",
       "Reduced cloud misconfigurations by 85%",
@@ -129,7 +129,7 @@ const CASE_STUDIES_DATA = [
     client: "Federal Government Agency",
     industry: "Government",
     challenge: "Mandated to implement zero trust architecture per executive order, the agency struggled with legacy systems, siloed security tools, and complex compliance requirements. They needed a phased approach that wouldn't disrupt critical operations.",
-    solution: "IT Origin designed a multi-year zero trust roadmap starting with identity-centric security, then progressing to micro-segmentation and continuous verification. We integrated with existing FedRAMP-authorized tools and ensured FISMA compliance throughout.",
+    solution: "ITOrigin designed a multi-year zero trust roadmap starting with identity-centric security, then progressing to micro-segmentation and continuous verification. We integrated with existing FedRAMP-authorized tools and ensured FISMA compliance throughout.",
     results: [
       "Successfully implemented zero trust for 8,000+ federal employees",
       "Reduced lateral movement risk by 90%",
@@ -177,7 +177,7 @@ const CASE_STUDIES_DATA = [
     client: "State University System",
     industry: "Education",
     challenge: "A university system with 50,000 students and staff faced unique challenges: open network policies for academic freedom, limited security budget, and diverse user population including international researchers. Recent phishing attacks compromised faculty accounts.",
-    solution: "IT Origin developed a layered security program balancing security with academic needs. We implemented risk-based authentication, security awareness training tailored to academia, and established a student security ambassador program to extend security culture.",
+    solution: "ITOrigin developed a layered security program balancing security with academic needs. We implemented risk-based authentication, security awareness training tailored to academia, and established a student security ambassador program to extend security culture.",
     results: [
       "Reduced successful phishing attacks by 90%",
       "Implemented MFA for 50,000+ users with 95% adoption",
@@ -225,7 +225,7 @@ const CASE_STUDIES_DATA = [
     client: "Major Telecommunications Company",
     industry: "Telecommunications",
     challenge: "As critical infrastructure, the telecom provider faced nation-state level threats targeting their network infrastructure and customer data. They needed proactive threat intelligence to stay ahead of sophisticated adversaries.",
-    solution: "IT Origin established a threat intelligence program integrating multiple intelligence feeds, implemented threat hunting capabilities, developed custom indicators of compromise for telecom-specific threats, and created executive threat briefings for leadership.",
+    solution: "ITOrigin established a threat intelligence program integrating multiple intelligence feeds, implemented threat hunting capabilities, developed custom indicators of compromise for telecom-specific threats, and created executive threat briefings for leadership.",
     results: [
       "Identified 3 APT groups specifically targeting their infrastructure",
       "Proactively blocked attacks based on threat intelligence 200+ times",
@@ -273,7 +273,7 @@ const CASE_STUDIES_DATA = [
     client: "International Humanitarian Organization",
     industry: "Non-Profit",
     challenge: "Operating in 40+ countries including conflict zones, the non-profit faced unique threats including state-sponsored surveillance targeting their beneficiary data. With limited budget, they needed enterprise-grade security on a non-profit budget.",
-    solution: "IT Origin provided pro-bono and reduced-cost services, implementing cloud-based security controls, secure communications for field workers, and donor data protection. We trained local staff to maintain security practices independently.",
+    solution: "ITOrigin provided pro-bono and reduced-cost services, implementing cloud-based security controls, secure communications for field workers, and donor data protection. We trained local staff to maintain security practices independently.",
     results: [
       "Protected sensitive data for 2M+ beneficiaries",
       "Implemented secure communications in 40+ countries",

@@ -7,8 +7,8 @@ import { SectionHeader } from "@/components/about/section-header";
 import { BenefitCard } from "@/components/services/benefit-card";
 
 export const metadata: Metadata = {
-  title: "Careers at IT Origin | Join Our Cybersecurity Team",
-  description: "Join IT Origin's team of cybersecurity experts. Explore exciting career opportunities in security operations, penetration testing, GRC, and more.",
+  title: "Careers at ITOrigin | Join Our Cybersecurity Team",
+  description: "Join ITOrigin's team of cybersecurity experts. Explore exciting career opportunities in security operations, penetration testing, GRC, and more.",
   keywords: [
     "cybersecurity jobs",
     "security analyst jobs",
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     "infosec careers"
   ],
   openGraph: {
-    title: "Careers at IT Origin | Join Our Cybersecurity Team",
+    title: "Careers at ITOrigin | Join Our Cybersecurity Team",
     description: "Build your career in cybersecurity. Join our team of experts protecting organizations worldwide.",
     type: "website",
     url: "https://itorigin.com/careers",
@@ -247,7 +247,7 @@ export default function CareersPage() {
       <section className="py-20 md:py-32">
         <Container>
           <SectionHeader
-            title="Why Work at IT Origin"
+            title="Why Work at ITOrigin"
             description="We invest in our team's growth, well-being, and success."
           />
 

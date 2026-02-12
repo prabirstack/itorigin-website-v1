@@ -17,7 +17,7 @@ export interface PartnerTier {
 }
 
 export const partnerInfo = {
-  title: "IT Origin Partner Program",
+  title: "ITOrigin Partner Program",
   subtitle: "Grow Your Business with Cybersecurity",
   description:
     "Join our partner ecosystem and help organizations strengthen their security posture. Whether you're a reseller, MSSP, or technology partner, we have a program tailored for your business.",
@@ -70,7 +70,7 @@ export const partnerPrograms: PartnerProgram[] = [
   {
     id: "reseller",
     name: "Reseller Partner",
-    description: "Sell IT Origin solutions to your customers with competitive margins",
+    description: "Sell ITOrigin solutions to your customers with competitive margins",
     benefits: [
       "Competitive partner pricing",
       "Sales and technical training",
@@ -89,7 +89,7 @@ export const partnerPrograms: PartnerProgram[] = [
   {
     id: "mssp",
     name: "MSSP Partner",
-    description: "Deliver managed security services powered by IT Origin platform",
+    description: "Deliver managed security services powered by ITOrigin platform",
     benefits: [
       "White-label SOC platform",
       "Multi-tenant management",
@@ -108,7 +108,7 @@ export const partnerPrograms: PartnerProgram[] = [
   {
     id: "technology",
     name: "Technology Partner",
-    description: "Integrate your solutions with IT Origin platform",
+    description: "Integrate your solutions with ITOrigin platform",
     benefits: [
       "API access and documentation",
       "Joint solution development",
@@ -127,7 +127,7 @@ export const partnerPrograms: PartnerProgram[] = [
   {
     id: "consulting",
     name: "Consulting Partner",
-    description: "Deliver GRC and advisory services with IT Origin backing",
+    description: "Deliver GRC and advisory services with ITOrigin backing",
     benefits: [
       "Methodology and frameworks",
       "GRC training and certification",
@@ -223,7 +223,7 @@ export const partnerTiers: PartnerTier[] = [
 export const partnerTestimonials = [
   {
     id: 1,
-    quote: "Partnering with IT Origin has transformed our security practice. Their platform and support are exceptional.",
+    quote: "Partnering with ITOrigin has transformed our security practice. Their platform and support are exceptional.",
     author: "Partner CEO",
     company: "Leading MSSP",
     image: "/images/partners/partner-1.jpg",

@@ -137,7 +137,7 @@ export async function POST(
             html: string;
             attachments?: { filename: string; path: string }[];
           } = {
-            from: process.env.FROM_EMAIL || "IT Origin <noreply@itorigin.in>",
+            from: process.env.FROM_EMAIL || "ITOrigin <noreply@itorigin.in>",
             to: subscriber.email,
             subject: campaign.subject,
             html: htmlWithUnsubscribe,

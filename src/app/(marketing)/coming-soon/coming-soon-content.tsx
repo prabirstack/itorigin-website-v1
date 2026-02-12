@@ -130,7 +130,7 @@ const contextConfigs: Record<string, ContextConfig> = {
     titleLine1: "Research Library",
     titleHighlight: "Coming Soon",
     description:
-      "Downloadable whitepapers, research reports, and technical guides from IT Origin's cybersecurity experts. We're preparing valuable resources for you.",
+      "Downloadable whitepapers, research reports, and technical guides from ITOrigin's cybersecurity experts. We're preparing valuable resources for you.",
     features: [
       {
         icon: FileText,
@@ -225,7 +225,7 @@ const contextConfigs: Record<string, ContextConfig> = {
     titleLine1: "Documentation Hub",
     titleHighlight: "Coming Soon",
     description:
-      "Comprehensive documentation for IT Origin's security platform, APIs, and services. Detailed guides and reference materials are being prepared.",
+      "Comprehensive documentation for ITOrigin's security platform, APIs, and services. Detailed guides and reference materials are being prepared.",
     features: [
       {
         icon: FileText,
@@ -300,7 +300,7 @@ const contextConfigs: Record<string, ContextConfig> = {
     titleLine1: "Live Webinars",
     titleHighlight: "Coming Soon",
     description:
-      "Join live cybersecurity webinars, workshops, and on-demand sessions from IT Origin's security experts. Upcoming events are being scheduled.",
+      "Join live cybersecurity webinars, workshops, and on-demand sessions from ITOrigin's security experts. Upcoming events are being scheduled.",
     features: [
       {
         icon: Play,
@@ -350,7 +350,7 @@ const contextConfigs: Record<string, ContextConfig> = {
     titleLine1: "News & Updates",
     titleHighlight: "Coming Soon",
     description:
-      "Stay up to date with IT Origin's latest announcements, industry news, partnerships, and event highlights.",
+      "Stay up to date with ITOrigin's latest announcements, industry news, partnerships, and event highlights.",
     features: [
       {
         icon: Newspaper,

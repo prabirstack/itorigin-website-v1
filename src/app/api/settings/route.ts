@@ -6,7 +6,7 @@ import { eq } from "drizzle-orm";
 // Default settings for initial setup
 const defaultSettings = {
   id: "site_settings",
-  companyName: "IT Origin",
+  companyName: "ITOrigin",
   tagline: "Cybersecurity Excellence",
   description: "Leading cybersecurity solutions provider",
   email: "connect@itorigin.com",

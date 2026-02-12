@@ -114,7 +114,7 @@ export const testimonials = [
   {
     id: 1,
     quote:
-      "IT Origin's SOC services have transformed our security posture. Their 24/7 monitoring gives us peace of mind.",
+      "ITOrigin's SOC services have transformed our security posture. Their 24/7 monitoring gives us peace of mind.",
     author: "Rajesh Kumar",
     role: "CTO",
     company: "FinTech Solutions Ltd",

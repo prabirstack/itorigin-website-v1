@@ -302,7 +302,7 @@ export const MobileNav: React.FC = () => {
                 {/* Footer */}
                 <div className="p-4 border-t border-border shrink-0">
                   <div className="text-sm text-muted-foreground text-center">
-                    IT Origin - Cybersecurity Excellence
+                    ITOrigin - Cybersecurity Excellence
                   </div>
                 </div>
               </div>

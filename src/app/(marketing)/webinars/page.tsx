@@ -6,8 +6,8 @@ import { PageHero } from "@/components/about/page-hero";
 import { SectionHeader } from "@/components/about/section-header";
 
 export const metadata: Metadata = {
-  title: "Webinars & Training | IT Origin",
-  description: "Join live cybersecurity webinars and access on-demand training from IT Origin's security experts. Learn threat detection, incident response, and more.",
+  title: "Webinars & Training | ITOrigin",
+  description: "Join live cybersecurity webinars and access on-demand training from ITOrigin's security experts. Learn threat detection, incident response, and more.",
   keywords: [
     "cybersecurity webinars",
     "security training",

@@ -1,6 +1,6 @@
 export const siteConfig = {
   name: "IT-Origin",
-  title: "IT Origin - Cybersecurity Excellence and Innovation",
+  title: "ITOrigin - Cybersecurity Excellence and Innovation",
   description:
     "Professional cybersecurity services including SOC, offensive security, and GRC solutions. Secure your digital landscape with IT-Origin's expert team.",
   url: "https://itorigin.com",

@@ -4,8 +4,8 @@ import { Container } from "@/components/common/container";
 import { Shield, CheckCircle, Users, Lock, FileText, Globe } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "GDPR Compliance | IT Origin",
-  description: "Learn about IT Origin's commitment to GDPR compliance and how we protect the personal data of EU residents.",
+  title: "GDPR Compliance | ITOrigin",
+  description: "Learn about ITOrigin's commitment to GDPR compliance and how we protect the personal data of EU residents.",
   alternates: {
     canonical: "https://itorigin.com/gdpr"
   }
@@ -66,7 +66,7 @@ export default function GDPRCompliancePage() {
             <section className="mb-12">
               <h2 className="text-2xl font-bold mb-4">Our Commitment to GDPR</h2>
               <p className="text-muted-foreground mb-4">
-                IT Origin is committed to ensuring the security and protection of the personal information that we process. We provide a compliant and consistent approach to data protection that is aligned with the General Data Protection Regulation (GDPR).
+                ITOrigin is committed to ensuring the security and protection of the personal information that we process. We provide a compliant and consistent approach to data protection that is aligned with the General Data Protection Regulation (GDPR).
               </p>
               <p className="text-muted-foreground">
                 The GDPR is a regulation in EU law on data protection and privacy that applies to all organizations operating within the EU, as well as organizations outside the EU that offer goods or services to EU residents.

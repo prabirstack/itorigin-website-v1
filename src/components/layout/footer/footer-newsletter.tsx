@@ -127,7 +127,7 @@ export function FooterNewsletter() {
           <Link href="/privacy" className="text-primary hover:underline">
             Privacy Policy
           </Link>{" "}
-          and consent to receive updates from IT Origin.
+          and consent to receive updates from ITOrigin.
         </p>
       </form>
 

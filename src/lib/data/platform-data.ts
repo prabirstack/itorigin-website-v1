@@ -15,7 +15,7 @@ export interface Integration {
 }
 
 export const platformInfo = {
-  name: "IT Origin Cyber Fusion Center",
+  name: "ITOrigin Cyber Fusion Center",
   tagline: "AI-Powered Security Operations Platform",
   description:
     "Our Cyber Fusion Center combines AI-driven threat detection, automated response, and expert analysis to provide comprehensive security operations. Built on next-generation SIEM technology, it offers real-time visibility and protection against sophisticated cyber threats.",

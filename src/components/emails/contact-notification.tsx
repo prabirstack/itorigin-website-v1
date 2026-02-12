@@ -34,7 +34,7 @@ export const ContactNotificationEmail = ({
       <Body style={main}>
         <Container style={container}>
           <Section style={headerSection}>
-            <Heading style={logo}>IT Origin</Heading>
+            <Heading style={logo}>ITOrigin</Heading>
             <Text style={headerText}>New Lead Notification</Text>
           </Section>
 
@@ -76,7 +76,7 @@ export const ContactNotificationEmail = ({
               Submitted on {submittedAt}
             </Text>
             <Text style={footerText}>
-              This is an automated notification from IT Origin website.
+              This is an automated notification from ITOrigin website.
             </Text>
           </Section>
         </Container>

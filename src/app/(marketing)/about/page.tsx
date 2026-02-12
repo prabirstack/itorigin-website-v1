@@ -8,11 +8,11 @@ import { MissionVisionSection } from "@/components/about/mission-vision-section"
 import { CTASection } from "@/components/about/cta-section";
 
 export const metadata: Metadata = {
-  title: "About IT Origin | Leading Cybersecurity Services Provider",
+  title: "About ITOrigin | Leading Cybersecurity Services Provider",
   description:
-    "Learn about IT Origin, a trusted cybersecurity firm with 15+ years of experience protecting organizations worldwide. Discover our mission, values, and expert team.",
+    "Learn about ITOrigin, a trusted cybersecurity firm with 15+ years of experience protecting organizations worldwide. Discover our mission, values, and expert team.",
   keywords: [
-    "IT Origin",
+    "ITOrigin",
     "cybersecurity company",
     "security services provider",
     "about us",
@@ -21,9 +21,9 @@ export const metadata: Metadata = {
     "security solutions",
   ],
   openGraph: {
-    title: "About IT Origin | Leading Cybersecurity Services Provider",
+    title: "About ITOrigin | Leading Cybersecurity Services Provider",
     description:
-      "Learn about IT Origin, a trusted cybersecurity firm with 15+ years of experience protecting organizations worldwide.",
+      "Learn about ITOrigin, a trusted cybersecurity firm with 15+ years of experience protecting organizations worldwide.",
     type: "website",
     url: "https://itorigin.com/about",
     images: [
@@ -31,15 +31,15 @@ export const metadata: Metadata = {
         url: "/images/og-about.jpg",
         width: 1200,
         height: 630,
-        alt: "IT Origin - About Us",
+        alt: "ITOrigin - About Us",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "About IT Origin | Leading Cybersecurity Services Provider",
+    title: "About ITOrigin | Leading Cybersecurity Services Provider",
     description:
-      "Learn about IT Origin, a trusted cybersecurity firm with 15+ years of experience.",
+      "Learn about ITOrigin, a trusted cybersecurity firm with 15+ years of experience.",
     images: ["/images/og-about.jpg"],
   },
   alternates: {
@@ -100,7 +100,7 @@ export default function AboutPage() {
         badge={{ icon: "Shield", text: "Trusted Cybersecurity Partner" }}
         title="Protecting What"
         highlight="Matters Most"
-        description="IT Origin is a leading cybersecurity firm dedicated to safeguarding organizations against evolving digital threats. With cutting-edge technology and unparalleled expertise, we deliver comprehensive security solutions tailored to your unique needs."
+        description="ITOrigin is a leading cybersecurity firm dedicated to safeguarding organizations against evolving digital threats. With cutting-edge technology and unparalleled expertise, we deliver comprehensive security solutions tailored to your unique needs."
       />
 
       {/* Hero CTAs */}
@@ -129,7 +129,7 @@ export default function AboutPage() {
 
       {/* Highlights Section */}
       <HighlightsSection
-        title="Why Choose IT Origin"
+        title="Why Choose ITOrigin"
         description="We combine technical excellence with business understanding to deliver security solutions that drive real value."
         highlights={highlights}
       />

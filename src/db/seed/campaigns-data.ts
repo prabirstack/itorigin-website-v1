@@ -5,12 +5,12 @@ import { nanoid } from "nanoid";
 const sampleCampaigns = [
   {
     id: nanoid(),
-    name: "Welcome to IT Origin Newsletter",
-    subject: "Welcome to IT Origin - Your Cybersecurity Partner",
+    name: "Welcome to ITOrigin Newsletter",
+    subject: "Welcome to ITOrigin - Your Cybersecurity Partner",
     previewText: "Thank you for subscribing to our newsletter",
     htmlContent: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-        <h1 style="color: #2563eb;">Welcome to IT Origin!</h1>
+        <h1 style="color: #2563eb;">Welcome to ITOrigin!</h1>
         <p>Thank you for subscribing to our newsletter. You'll receive the latest cybersecurity insights, tips, and updates directly in your inbox.</p>
         <h2>What to Expect:</h2>
         <ul>
@@ -19,7 +19,7 @@ const sampleCampaigns = [
           <li>Exclusive content and resources</li>
           <li>Early access to whitepapers and guides</li>
         </ul>
-        <p>Stay secure,<br>The IT Origin Team</p>
+        <p>Stay secure,<br>The ITOrigin Team</p>
       </div>
     `,
     status: "sent" as const,

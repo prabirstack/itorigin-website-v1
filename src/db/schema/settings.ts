@@ -23,7 +23,7 @@ export const siteSettings = pgTable("site_settings", {
   id: text("id").primaryKey().default("site_settings"),
 
   // Company Info
-  companyName: text("company_name").notNull().default("IT Origin"),
+  companyName: text("company_name").notNull().default("ITOrigin"),
   tagline: text("tagline"),
   description: text("description"),
 

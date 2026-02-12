@@ -8,21 +8,21 @@ import { ValuesPreviewSection } from "@/components/about/values-preview-section"
 import { CTASection } from "@/components/about/cta-section";
 
 export const metadata: Metadata = {
-  title: "Our Story | IT Origin - 15 Years of Cybersecurity Excellence",
+  title: "Our Story | ITOrigin - 15 Years of Cybersecurity Excellence",
   description:
-    "Discover IT Origin's journey from a small startup to a global cybersecurity leader. Learn about our milestones, achievements, and 15 years of protecting organizations worldwide.",
+    "Discover ITOrigin's journey from a small startup to a global cybersecurity leader. Learn about our milestones, achievements, and 15 years of protecting organizations worldwide.",
   keywords: [
-    "IT Origin story",
+    "ITOrigin story",
     "company history",
     "cybersecurity journey",
     "security milestones",
     "company timeline",
-    "about IT Origin",
+    "about ITOrigin",
   ],
   openGraph: {
-    title: "Our Story | IT Origin - 15 Years of Cybersecurity Excellence",
+    title: "Our Story | ITOrigin - 15 Years of Cybersecurity Excellence",
     description:
-      "Discover IT Origin's journey from a small startup to a global cybersecurity leader.",
+      "Discover ITOrigin's journey from a small startup to a global cybersecurity leader.",
     type: "website",
     url: "https://itorigin.com/about/story",
     images: [
@@ -30,15 +30,15 @@ export const metadata: Metadata = {
         url: "/images/og-story.jpg",
         width: 1200,
         height: 630,
-        alt: "IT Origin Story",
+        alt: "ITOrigin Story",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Our Story | IT Origin - 15 Years of Cybersecurity Excellence",
+    title: "Our Story | ITOrigin - 15 Years of Cybersecurity Excellence",
     description:
-      "Discover IT Origin's journey from a small startup to a global cybersecurity leader.",
+      "Discover ITOrigin's journey from a small startup to a global cybersecurity leader.",
     images: ["/images/og-story.jpg"],
   },
   alternates: {
@@ -52,7 +52,7 @@ export default function StoryPage() {
       year: "2009",
       title: "The Foundation",
       description:
-        "IT Origin was founded by a group of security experts who saw the growing need for comprehensive cybersecurity solutions. Starting with just 5 people in a small office, we set out to change the industry.",
+        "ITOrigin was founded by a group of security experts who saw the growing need for comprehensive cybersecurity solutions. Starting with just 5 people in a small office, we set out to change the industry.",
       icon: "Rocket" as const,
       color: "from-blue-500 to-cyan-500",
     },
@@ -120,7 +120,7 @@ export default function StoryPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             title="Our Milestones"
-            description="Key moments that shaped IT Origin into the trusted security partner we are today."
+            description="Key moments that shaped ITOrigin into the trusted security partner we are today."
           />
           <TimelineSection milestones={milestones} />
         </div>
@@ -188,7 +188,7 @@ export default function StoryPage() {
                         Basudev Gangopadhyay
                       </p>
                       <p className="text-sm text-muted-foreground">
-                        Managing Director, IT Origin
+                        Managing Director, ITOrigin
                       </p>
                     </div>
                   </div>
@@ -211,7 +211,7 @@ export default function StoryPage() {
       {/* CTA Section */}
       <CTASection
         title="Be Part of Our Story"
-        description="Join hundreds of organizations that trust IT Origin to protect their digital future."
+        description="Join hundreds of organizations that trust ITOrigin to protect their digital future."
         buttons={[
           { text: "Meet Our Team", href: "/about/team" },
           {

@@ -311,7 +311,7 @@ export const ChatSupport = () => {
                 >
                   <Bot className="h-5 w-5 text-green-500" />
                 </motion.div>
-                IT Origin AI Assistant
+                ITOrigin AI Assistant
               </DialogTitle>
               <p className="text-sm text-muted-foreground">
                 {phase === "form"
@@ -591,7 +591,7 @@ export const ChatSupport = () => {
                           </div>
                           <div className="bg-muted rounded-lg rounded-tl-none p-3 max-w-[85%]">
                             <p className="text-sm">
-                              Hello {name}! I&apos;m IT Origin&apos;s AI assistant. How
+                              Hello {name}! I&apos;m ITOrigin&apos;s AI assistant. How
                               can I help you with your cybersecurity needs today?
                             </p>
                           </div>

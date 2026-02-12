@@ -6,10 +6,10 @@ import { PageHero } from "@/components/about/page-hero";
 import { SectionHeader } from "@/components/about/section-header";
 
 export const metadata: Metadata = {
-  title: "Documentation | IT Origin",
-  description: "Comprehensive documentation for IT Origin's security platform, APIs, and services. Get started guides, integration tutorials, and reference documentation.",
+  title: "Documentation | ITOrigin",
+  description: "Comprehensive documentation for ITOrigin's security platform, APIs, and services. Get started guides, integration tutorials, and reference documentation.",
   keywords: [
-    "IT Origin documentation",
+    "ITOrigin documentation",
     "security platform docs",
     "API documentation",
     "integration guides",
@@ -30,7 +30,7 @@ interface DocCategory {
 const docCategories: DocCategory[] = [
   {
     title: "Getting Started",
-    description: "New to IT Origin? Start here to set up your account and learn the basics.",
+    description: "New to ITOrigin? Start here to set up your account and learn the basics.",
     icon: BookOpen,
     links: [
       { title: "Quick Start Guide", href: "/docs/quickstart", description: "Get up and running in 15 minutes" },
@@ -52,7 +52,7 @@ const docCategories: DocCategory[] = [
   },
   {
     title: "Integrations",
-    description: "Connect IT Origin with your existing security tools and infrastructure.",
+    description: "Connect ITOrigin with your existing security tools and infrastructure.",
     icon: Settings,
     links: [
       { title: "SIEM Integration", href: "/docs/integrations/siem", description: "Connect with Splunk, Elastic, and more" },
@@ -104,7 +104,7 @@ export default function DocsPage() {
         badge={{ icon: "BookOpen", text: "Documentation" }}
         title="Learn, Build,"
         highlight="Integrate"
-        description="Everything you need to get the most out of IT Origin's security platform. From quick start guides to advanced API documentation."
+        description="Everything you need to get the most out of ITOrigin's security platform. From quick start guides to advanced API documentation."
       />
 
       {/* Search Section */}

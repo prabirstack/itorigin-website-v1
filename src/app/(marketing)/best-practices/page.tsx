@@ -6,7 +6,7 @@ import { PageHero } from "@/components/about/page-hero";
 import { SectionHeader } from "@/components/about/section-header";
 
 export const metadata: Metadata = {
-  title: "Cybersecurity Best Practices | IT Origin",
+  title: "Cybersecurity Best Practices | ITOrigin",
   description: "Expert cybersecurity best practices and guidelines to help protect your organization. Security tips, frameworks, and implementation guides.",
   keywords: [
     "cybersecurity best practices",

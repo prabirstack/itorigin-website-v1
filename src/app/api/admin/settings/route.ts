@@ -8,7 +8,7 @@ import { updateSettingsSchema } from "@/lib/validations/settings";
 // Default settings
 const defaultSettings = {
   id: "site_settings",
-  companyName: "IT Origin",
+  companyName: "ITOrigin",
   tagline: "Cybersecurity Excellence",
   description: "Leading cybersecurity solutions provider",
   email: "connect@itorigin.com",

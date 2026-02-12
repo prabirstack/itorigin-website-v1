@@ -76,7 +76,7 @@ export default function SignUpPage() {
       <div className="text-center mb-8">
         <h1 className="text-2xl font-bold mb-2">Create an account</h1>
         <p className="text-muted-foreground">
-          Join IT Origin to manage your security platform
+          Join ITOrigin to manage your security platform
         </p>
       </div>
 

@@ -159,7 +159,7 @@ export async function GET(request: NextRequest) {
               html: string;
               attachments?: { filename: string; path: string }[];
             } = {
-              from: process.env.FROM_EMAIL || "IT Origin <noreply@itorigin.in>",
+              from: process.env.FROM_EMAIL || "ITOrigin <noreply@itorigin.in>",
               to: subscriber.email,
               subject: campaign.subject
                 .replace(/{{month}}/g, today.toLocaleString("default", { month: "long" }))

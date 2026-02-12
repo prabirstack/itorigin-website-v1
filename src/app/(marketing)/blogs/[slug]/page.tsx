@@ -67,7 +67,7 @@ async function getPost(slug: string) {
     category: post.category?.name || "Uncategorized",
     categoryId: post.categoryId,
     author: {
-      name: post.author?.name || "IT Origin Team",
+      name: post.author?.name || "ITOrigin Team",
       avatar: post.author?.image || "/images/authors/default-avatar.jpg",
       role: post.author?.role === "admin" ? "Security Expert" : "Contributor",
     },
@@ -102,7 +102,7 @@ async function getAllPosts() {
     content: post.content,
     category: post.category?.name || "Uncategorized",
     author: {
-      name: post.author?.name || "IT Origin Team",
+      name: post.author?.name || "ITOrigin Team",
       avatar: post.author?.image || "/images/authors/default-avatar.jpg",
       role: post.author?.role === "admin" ? "Security Expert" : "Contributor",
     },
@@ -120,14 +120,14 @@ export async function generateMetadata({ params }: BlogDetailPageProps): Promise
 
   if (!post) {
     return {
-      title: "Blog Post Not Found | IT Origin"
+      title: "Blog Post Not Found | ITOrigin"
     };
   }
 
   return {
-    title: `${post.title} | IT Origin Blog`,
+    title: `${post.title} | ITOrigin Blog`,
     description: post.excerpt,
-    keywords: [...post.tags, post.category, "cybersecurity", "IT Origin"],
+    keywords: [...post.tags, post.category, "cybersecurity", "ITOrigin"],
     openGraph: {
       title: post.title,
       description: post.excerpt,

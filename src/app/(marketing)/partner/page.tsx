@@ -8,8 +8,8 @@ import { BenefitCard } from "@/components/services/benefit-card";
 import { CTASection } from "@/components/about/cta-section";
 
 export const metadata: Metadata = {
-  title: "Partner Program | Join IT Origin's Cybersecurity Partner Network",
-  description: "Grow your business with IT Origin's partner program. Access training, technical support, marketing resources, and competitive margins. Join our network of trusted cybersecurity partners.",
+  title: "Partner Program | Join ITOrigin's Cybersecurity Partner Network",
+  description: "Grow your business with ITOrigin's partner program. Access training, technical support, marketing resources, and competitive margins. Join our network of trusted cybersecurity partners.",
   keywords: [
     "partner program",
     "cybersecurity partners",
@@ -23,8 +23,8 @@ export const metadata: Metadata = {
     "partner portal"
   ],
   openGraph: {
-    title: "Partner Program | Join IT Origin's Cybersecurity Partner Network",
-    description: "Grow your business with IT Origin's partner program. Access training, support, and competitive margins.",
+    title: "Partner Program | Join ITOrigin's Cybersecurity Partner Network",
+    description: "Grow your business with ITOrigin's partner program. Access training, support, and competitive margins.",
     type: "website",
     url: "https://itorigin.com/partner",
     images: [
@@ -32,14 +32,14 @@ export const metadata: Metadata = {
         url: "/images/og-partner.jpg",
         width: 1200,
         height: 630,
-        alt: "IT Origin Partner Program"
+        alt: "ITOrigin Partner Program"
       }
     ]
   },
   twitter: {
     card: "summary_large_image",
-    title: "Partner Program | Join IT Origin's Cybersecurity Partner Network",
-    description: "Grow your business with IT Origin's partner program. Access training, support, and competitive margins.",
+    title: "Partner Program | Join ITOrigin's Cybersecurity Partner Network",
+    description: "Grow your business with ITOrigin's partner program. Access training, support, and competitive margins.",
     images: ["/images/og-partner.jpg"]
   },
   alternates: {
@@ -114,7 +114,7 @@ export default function PartnerPage() {
         badge={{ icon: "Users", text: "Partner Program" }}
         title="Grow Together"
         highlight="Succeed Together"
-        description="Join IT Origin's partner network and accelerate your cybersecurity business. Access world-class training, technical support, marketing resources, and competitive margins to help your customers stay secure."
+        description="Join ITOrigin's partner network and accelerate your cybersecurity business. Access world-class training, technical support, marketing resources, and competitive margins to help your customers stay secure."
       />
 
       {/* Hero CTA */}
@@ -146,7 +146,7 @@ export default function PartnerPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             title="Partner Program Benefits"
-            description="Everything you need to build a successful cybersecurity practice with IT Origin."
+            description="Everything you need to build a successful cybersecurity practice with ITOrigin."
           />
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -214,7 +214,7 @@ export default function PartnerPage() {
                 {
                   step: 4,
                   title: "Start Selling",
-                  description: "Begin selling IT Origin solutions with full access to sales tools, technical support, and marketing resources."
+                  description: "Begin selling ITOrigin solutions with full access to sales tools, technical support, and marketing resources."
                 }
               ].map((item, index) => (
                 <div
@@ -259,7 +259,7 @@ export default function PartnerPage() {
           <div className="grid md:grid-cols-2 gap-8">
             {[
               {
-                quote: "IT Origin's partner program has been instrumental in growing our cybersecurity practice. The training, support, and margins are excellent.",
+                quote: "ITOrigin's partner program has been instrumental in growing our cybersecurity practice. The training, support, and margins are excellent.",
                 author: "Sarah Johnson",
                 role: "CEO, SecureNet Solutions",
                 company: "Silver Partner"
@@ -301,7 +301,7 @@ export default function PartnerPage() {
 
       {/* CTA Section */}
       <CTASection
-        title="Ready to Partner with IT Origin?"
+        title="Ready to Partner with ITOrigin?"
         description="Join our growing network of cybersecurity partners and unlock new revenue opportunities."
         buttons={[
           { text: "Apply to Partner Program", href: "/contact" },

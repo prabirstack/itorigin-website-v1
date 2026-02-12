@@ -21,7 +21,7 @@ export interface Certification {
 }
 
 export const trainingInfo = {
-  title: "IT Origin Training Academy",
+  title: "ITOrigin Training Academy",
   subtitle: "Build Your Cybersecurity Expertise",
   description:
     "Comprehensive training programs designed to develop cybersecurity skills at all levels. From foundational courses to advanced certifications, we help you build the expertise needed to protect organizations.",
@@ -58,7 +58,7 @@ export const courses: Course[] = [
       "Security event correlation",
       "Reporting and documentation",
     ],
-    certification: "IT Origin Certified SOC Analyst",
+    certification: "ITOrigin Certified SOC Analyst",
     icon: "Monitor",
   },
   {
@@ -77,7 +77,7 @@ export const courses: Course[] = [
       "Advanced persistence detection",
       "Creating hunting playbooks",
     ],
-    certification: "IT Origin Certified Threat Hunter",
+    certification: "ITOrigin Certified Threat Hunter",
     icon: "Search",
   },
   {
@@ -98,7 +98,7 @@ export const courses: Course[] = [
       "Post-exploitation",
       "Report writing",
     ],
-    certification: "IT Origin Certified Penetration Tester",
+    certification: "ITOrigin Certified Penetration Tester",
     icon: "Target",
   },
   {
@@ -118,7 +118,7 @@ export const courses: Course[] = [
       "Evidence handling",
       "Incident documentation",
     ],
-    certification: "IT Origin Certified Incident Responder",
+    certification: "ITOrigin Certified Incident Responder",
     icon: "AlertTriangle",
   },
   {
@@ -137,7 +137,7 @@ export const courses: Course[] = [
       "Container security",
       "Cloud compliance",
     ],
-    certification: "IT Origin Cloud Security Associate",
+    certification: "ITOrigin Cloud Security Associate",
     icon: "Cloud",
   },
   {
@@ -156,7 +156,7 @@ export const courses: Course[] = [
       "Audit preparation",
       "Third-party risk management",
     ],
-    certification: "IT Origin GRC Associate",
+    certification: "ITOrigin GRC Associate",
     icon: "FileCheck",
   },
   {
@@ -176,7 +176,7 @@ export const courses: Course[] = [
       "Defense evasion",
       "Operation planning",
     ],
-    certification: "IT Origin Certified Red Team Operator",
+    certification: "ITOrigin Certified Red Team Operator",
     icon: "Swords",
   },
   {
@@ -202,7 +202,7 @@ export const courses: Course[] = [
 export const trainingCertifications: Certification[] = [
   {
     id: "csa",
-    name: "IT Origin Certified SOC Analyst (CSA)",
+    name: "ITOrigin Certified SOC Analyst (CSA)",
     description: "Validates skills in security operations center operations and threat detection.",
     duration: "Valid for 3 years",
     prerequisites: ["SOC Analyst Fundamentals course", "1 year SOC experience recommended"],
@@ -210,7 +210,7 @@ export const trainingCertifications: Certification[] = [
   },
   {
     id: "cth",
-    name: "IT Origin Certified Threat Hunter (CTH)",
+    name: "ITOrigin Certified Threat Hunter (CTH)",
     description: "Demonstrates expertise in proactive threat hunting methodologies.",
     duration: "Valid for 3 years",
     prerequisites: ["CSA certification", "Advanced Threat Hunting course"],
@@ -218,7 +218,7 @@ export const trainingCertifications: Certification[] = [
   },
   {
     id: "cpt",
-    name: "IT Origin Certified Penetration Tester (CPT)",
+    name: "ITOrigin Certified Penetration Tester (CPT)",
     description: "Validates comprehensive penetration testing skills across platforms.",
     duration: "Valid for 3 years",
     prerequisites: ["Penetration Testing Professional course"],
@@ -226,7 +226,7 @@ export const trainingCertifications: Certification[] = [
   },
   {
     id: "cir",
-    name: "IT Origin Certified Incident Responder (CIR)",
+    name: "ITOrigin Certified Incident Responder (CIR)",
     description: "Demonstrates skills in incident response and digital forensics.",
     duration: "Valid for 3 years",
     prerequisites: ["Incident Response & Forensics course"],

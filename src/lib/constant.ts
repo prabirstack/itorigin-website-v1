@@ -55,7 +55,7 @@ export const aboutSubItems: SubMenuItem[] = [
     id: "menuorigin062",
     name: "Team",
     href: "/about/team",
-    description: "Meet the cybersecurity experts and professionals behind IT Origin's success",
+    description: "Meet the cybersecurity experts and professionals behind ITOrigin's success",
     iconName: "Users",
   },
   {

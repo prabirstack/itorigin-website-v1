@@ -11,8 +11,8 @@ import { FeatureShowcase } from "@/components/platform/feature-showcase";
 import { IntegrationCard } from "@/components/platform/integration-card";
 
 export const metadata: Metadata = {
-  title: "SecureOps Platform | Unified Security Operations & Threat Management | IT Origin",
-  description: "Transform your security operations with IT Origin's SecureOps Platform. Unified SIEM, automated threat detection, compliance monitoring, and AI-powered security analytics in one comprehensive solution.",
+  title: "SecureOps Platform | Unified Security Operations & Threat Management | ITOrigin",
+  description: "Transform your security operations with ITOrigin's SecureOps Platform. Unified SIEM, automated threat detection, compliance monitoring, and AI-powered security analytics in one comprehensive solution.",
   keywords: [
     "security platform",
     "SIEM platform",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     "security automation"
   ],
   openGraph: {
-    title: "SecureOps Platform | Unified Security Operations & Threat Management | IT Origin",
+    title: "SecureOps Platform | Unified Security Operations & Threat Management | ITOrigin",
     description: "Transform your security operations with unified SIEM, automated threat detection, and AI-powered analytics.",
     type: "website",
     url: "https://itorigin.com/platform",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
         url: "/images/og-platform.jpg",
         width: 1200,
         height: 630,
-        alt: "IT Origin SecureOps Platform"
+        alt: "ITOrigin SecureOps Platform"
       }
     ]
   },

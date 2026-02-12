@@ -10,9 +10,9 @@ import { CourseCard } from "@/components/training/course-card";
 import { TrainingPathCard } from "@/components/training/training-path-card";
 
 export const metadata: Metadata = {
-  title: "Cybersecurity Training & Certification Courses | IT Origin",
+  title: "Cybersecurity Training & Certification Courses | ITOrigin",
   description:
-    "Advance your cybersecurity career with IT Origin's expert-led training programs. OSCP, CEH, CISSP, security awareness training, and custom corporate programs. Hands-on labs and real-world scenarios.",
+    "Advance your cybersecurity career with ITOrigin's expert-led training programs. OSCP, CEH, CISSP, security awareness training, and custom corporate programs. Hands-on labs and real-world scenarios.",
   keywords: [
     "cybersecurity training",
     "security certification",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     "security bootcamp",
   ],
   openGraph: {
-    title: "Cybersecurity Training & Certification Courses | IT Origin",
+    title: "Cybersecurity Training & Certification Courses | ITOrigin",
     description:
       "Expert-led cybersecurity training programs with hands-on labs. OSCP, CEH, CISSP, and custom corporate training.",
     type: "website",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
         url: "/images/og-training.jpg",
         width: 1200,
         height: 630,
-        alt: "IT Origin Cybersecurity Training",
+        alt: "ITOrigin Cybersecurity Training",
       },
     ],
   },

@@ -17,7 +17,7 @@ function getResend(): Resend {
   return _resend;
 }
 
-const FROM_EMAIL = process.env.FROM_EMAIL || "IT Origin <noreply@itorigin.in>";
+const FROM_EMAIL = process.env.FROM_EMAIL || "ITOrigin <noreply@itorigin.in>";
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "info@itorigin.in";
 
 export interface SendEmailResult {
@@ -36,7 +36,7 @@ export async function sendNewsletterConfirmEmail(
     const { data, error } = await resend.emails.send({
       from: FROM_EMAIL,
       to: email,
-      subject: "Confirm your IT Origin newsletter subscription",
+      subject: "Confirm your ITOrigin newsletter subscription",
       react: NewsletterConfirmEmail({ confirmUrl, name }),
     });
 
@@ -65,7 +65,7 @@ export async function sendNewsletterWelcomeEmail(
     const { data, error } = await resend.emails.send({
       from: FROM_EMAIL,
       to: email,
-      subject: "Welcome to IT Origin - Your cybersecurity partner",
+      subject: "Welcome to ITOrigin - Your cybersecurity partner",
       react: NewsletterWelcomeEmail({ name, unsubscribeUrl }),
     });
 
@@ -131,7 +131,7 @@ export async function sendChatVerificationEmail(
     const { data, error } = await resend.emails.send({
       from: FROM_EMAIL,
       to: email,
-      subject: `Your IT Origin Chat Verification Code: ${pin}`,
+      subject: `Your ITOrigin Chat Verification Code: ${pin}`,
       react: ChatVerificationEmail({ name, pin }),
     });
 

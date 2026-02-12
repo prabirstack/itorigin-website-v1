@@ -3,8 +3,8 @@ import Link from "next/link";
 import { Container } from "@/components/common/container";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | IT Origin",
-  description: "Learn how IT Origin collects, uses, and protects your personal information. Our commitment to your privacy and data security.",
+  title: "Privacy Policy | ITOrigin",
+  description: "Learn how ITOrigin collects, uses, and protects your personal information. Our commitment to your privacy and data security.",
   alternates: {
     canonical: "https://itorigin.com/privacy"
   }
@@ -26,7 +26,7 @@ export default function PrivacyPolicyPage() {
             <section className="mb-12">
               <h2 className="text-2xl font-bold mb-4">1. Introduction</h2>
               <p className="text-muted-foreground mb-4">
-                IT Origin (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our cybersecurity services.
+                ITOrigin (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our cybersecurity services.
               </p>
               <p className="text-muted-foreground">
                 Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, please do not access the site or use our services.
@@ -168,7 +168,7 @@ export default function PrivacyPolicyPage() {
                 If you have any questions or concerns about this Privacy Policy or our data practices, please contact us at:
               </p>
               <div className="bg-muted/50 p-6 rounded-lg">
-                <p className="font-semibold mb-2">IT Origin - Privacy Team</p>
+                <p className="font-semibold mb-2">ITOrigin - Privacy Team</p>
                 <p className="text-muted-foreground">Email: privacy@itorigin.com</p>
                 <p className="text-muted-foreground">Address: 8/14, Sahid Nagar, Wing-A, Kolkata 700078, India</p>
               </div>

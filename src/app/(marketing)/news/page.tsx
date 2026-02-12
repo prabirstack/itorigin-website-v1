@@ -7,19 +7,19 @@ import { PageHero } from "@/components/about/page-hero";
 import { SectionHeader } from "@/components/about/section-header";
 
 export const metadata: Metadata = {
-  title: "News & Events | IT Origin",
-  description: "Stay updated with the latest news, announcements, and events from IT Origin. Industry insights, company updates, and upcoming conferences.",
+  title: "News & Events | ITOrigin",
+  description: "Stay updated with the latest news, announcements, and events from ITOrigin. Industry insights, company updates, and upcoming conferences.",
   keywords: [
     "cybersecurity news",
     "security events",
-    "IT Origin news",
+    "ITOrigin news",
     "security conferences",
     "company announcements",
     "industry updates"
   ],
   openGraph: {
-    title: "News & Events | IT Origin",
-    description: "Latest news, announcements, and events from IT Origin.",
+    title: "News & Events | ITOrigin",
+    description: "Latest news, announcements, and events from ITOrigin.",
     type: "website",
     url: "https://itorigin.com/news",
   },
@@ -52,7 +52,7 @@ interface Event {
 const newsItems: NewsItem[] = [
   {
     id: "series-a",
-    title: "IT Origin Announces $15M Series A Funding",
+    title: "ITOrigin Announces $15M Series A Funding",
     excerpt: "Funding will accelerate product development and expansion into new markets. Led by Accel Partners with participation from existing investors.",
     date: "January 15, 2025",
     category: "announcement",
@@ -60,7 +60,7 @@ const newsItems: NewsItem[] = [
   },
   {
     id: "iso-certification",
-    title: "IT Origin Achieves ISO 27001:2022 Certification",
+    title: "ITOrigin Achieves ISO 27001:2022 Certification",
     excerpt: "Demonstrates our commitment to maintaining the highest standards of information security management.",
     date: "January 10, 2025",
     category: "award",
@@ -68,7 +68,7 @@ const newsItems: NewsItem[] = [
   },
   {
     id: "aws-partnership",
-    title: "IT Origin Becomes AWS Security Competency Partner",
+    title: "ITOrigin Becomes AWS Security Competency Partner",
     excerpt: "Partnership enables enhanced cloud security services for AWS customers with specialized tools and expertise.",
     date: "December 20, 2024",
     category: "partnership",
@@ -77,14 +77,14 @@ const newsItems: NewsItem[] = [
   {
     id: "gartner-recognition",
     title: "Recognized in Gartner's Market Guide for MDR Services",
-    excerpt: "IT Origin listed as a representative vendor in Gartner's latest Market Guide for Managed Detection and Response.",
+    excerpt: "ITOrigin listed as a representative vendor in Gartner's latest Market Guide for Managed Detection and Response.",
     date: "December 15, 2024",
     category: "press",
     featured: true
   },
   {
     id: "new-office",
-    title: "IT Origin Opens New Security Operations Center in Singapore",
+    title: "ITOrigin Opens New Security Operations Center in Singapore",
     excerpt: "Expansion strengthens our 24/7 coverage and provides better service to Asia-Pacific customers.",
     date: "December 1, 2024",
     category: "announcement",
@@ -92,7 +92,7 @@ const newsItems: NewsItem[] = [
   },
   {
     id: "cto-hire",
-    title: "Industry Veteran Joins IT Origin as Chief Technology Officer",
+    title: "Industry Veteran Joins ITOrigin as Chief Technology Officer",
     excerpt: "Former Microsoft security leader brings 20+ years of experience to drive innovation and product development.",
     date: "November 20, 2024",
     category: "announcement",
@@ -179,7 +179,7 @@ export default function NewsPage() {
         badge={{ icon: "Newspaper", text: "News & Events" }}
         title="Stay Informed"
         highlight="Stay Secure"
-        description="The latest news, announcements, and events from IT Origin. Stay updated on industry trends, company milestones, and upcoming opportunities to connect."
+        description="The latest news, announcements, and events from ITOrigin. Stay updated on industry trends, company milestones, and upcoming opportunities to connect."
       />
 
       {/* Featured News */}
@@ -187,7 +187,7 @@ export default function NewsPage() {
         <Container>
           <SectionHeader
             title="Featured News"
-            description="Major announcements and highlights from IT Origin."
+            description="Major announcements and highlights from ITOrigin."
           />
 
           <div className="grid md:grid-cols-3 gap-8">

@@ -135,7 +135,7 @@ export const BenifitGrid = () => {
         className="text-center mb-16"
       >
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-linear-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent mb-4">
-          Why Choose IT Origin?
+          Why Choose ITOrigin?
         </h2>
         <p className="text-muted-foreground text-lg sm:text-xl max-w-3xl mx-auto leading-relaxed">
           Experience unparalleled cybersecurity protection with our comprehensive suite of advanced

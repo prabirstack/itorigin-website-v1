@@ -11,7 +11,7 @@ import { PricingCTA } from "@/components/services/pricing-cta";
 import { CTASection } from "@/components/about/cta-section";
 
 export const metadata: Metadata = {
-  title: "Security Audit Services | Compliance & Risk Assessment | IT Origin",
+  title: "Security Audit Services | Compliance & Risk Assessment | ITOrigin",
   description: "Comprehensive security auditing services for regulatory compliance, risk assessment, and security program evaluation. ISO 27001, SOC 2, PCI-DSS, HIPAA audit support.",
   keywords: [
     "security audit",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     "gap analysis"
   ],
   openGraph: {
-    title: "Security Audit Services | Compliance & Risk Assessment | IT Origin",
+    title: "Security Audit Services | Compliance & Risk Assessment | ITOrigin",
     description: "Professional security auditing services for regulatory compliance and risk assessment. Expert guidance for ISO 27001, SOC 2, PCI-DSS, and more.",
     type: "website",
     url: "https://itorigin.com/services/security-audit",

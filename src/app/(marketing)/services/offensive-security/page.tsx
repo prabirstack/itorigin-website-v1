@@ -11,8 +11,8 @@ import { PricingCTA } from "@/components/services/pricing-cta";
 import { CTASection } from "@/components/about/cta-section";
 
 export const metadata: Metadata = {
-  title: "Offensive Security Services | Penetration Testing & Red Team | IT Origin",
-  description: "Identify vulnerabilities before attackers do with IT Origin's offensive security services. Expert penetration testing, vulnerability assessments, and red team operations by certified ethical hackers.",
+  title: "Offensive Security Services | Penetration Testing & Red Team | ITOrigin",
+  description: "Identify vulnerabilities before attackers do with ITOrigin's offensive security services. Expert penetration testing, vulnerability assessments, and red team operations by certified ethical hackers.",
   keywords: [
     "offensive security",
     "penetration testing",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     "OSCP certified"
   ],
   openGraph: {
-    title: "Offensive Security Services | Penetration Testing & Red Team | IT Origin",
+    title: "Offensive Security Services | Penetration Testing & Red Team | ITOrigin",
     description: "Identify vulnerabilities before attackers do. Expert penetration testing and red team operations by certified ethical hackers.",
     type: "website",
     url: "https://itorigin.com/services/offensive-security",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
         url: "/images/og-offensive-security.jpg",
         width: 1200,
         height: 630,
-        alt: "IT Origin Offensive Security Services"
+        alt: "ITOrigin Offensive Security Services"
       }
     ]
   },

@@ -66,7 +66,7 @@ export async function GET(
       content: p.content,
       category: p.category?.name || "Uncategorized",
       author: {
-        name: p.author?.name || "IT Origin Team",
+        name: p.author?.name || "ITOrigin Team",
         avatar: p.author?.image || "/images/authors/default-avatar.jpg",
         role: p.author?.role === "admin" ? "Security Expert" : "Contributor",
       },

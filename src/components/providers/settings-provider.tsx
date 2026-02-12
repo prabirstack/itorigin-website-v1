@@ -59,7 +59,7 @@ interface SettingsContextType {
 
 // Default settings for fallback (empty defaults - actual data comes from database)
 const defaultSettings: SiteSettings = {
-  companyName: "IT Origin",
+  companyName: "ITOrigin",
   tagline: null,
   description: null,
   email: "connect@itorigin.com",

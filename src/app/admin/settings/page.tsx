@@ -262,7 +262,7 @@ export default function SettingsPage() {
                   <Input
                     value={settings.companyName}
                     onChange={(e) => updateField("companyName", e.target.value)}
-                    placeholder="IT Origin"
+                    placeholder="ITOrigin"
                   />
                 </div>
                 <div className="space-y-2">

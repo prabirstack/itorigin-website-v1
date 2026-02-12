@@ -6,7 +6,7 @@ import { PageHero } from "@/components/about/page-hero";
 import { SectionHeader } from "@/components/about/section-header";
 
 export const metadata: Metadata = {
-  title: "Cybersecurity Services | IT Origin",
+  title: "Cybersecurity Services | ITOrigin",
   description: "Comprehensive cybersecurity services including Managed SOC, Offensive Security, Penetration Testing, Vulnerability Assessment, GRC Services, and Security Auditing.",
   keywords: [
     "cybersecurity services",
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     "GRC services",
     "security audit",
     "offensive security",
-    "IT Origin services"
+    "ITOrigin services"
   ],
   alternates: {
     canonical: "https://itorigin.com/services"
@@ -141,7 +141,7 @@ export default function ServicesPage() {
       <section className="py-20 md:py-32 bg-accent/30">
         <Container>
           <SectionHeader
-            title="Why Choose IT Origin"
+            title="Why Choose ITOrigin"
             description="Partner with a trusted cybersecurity provider that delivers measurable results."
           />
 

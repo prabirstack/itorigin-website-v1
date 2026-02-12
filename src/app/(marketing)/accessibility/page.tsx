@@ -4,8 +4,8 @@ import { Container } from "@/components/common/container";
 import { CheckCircle, Mail, Phone } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Accessibility Statement | IT Origin",
-  description: "IT Origin's commitment to digital accessibility. Learn about our efforts to make our website accessible to everyone.",
+  title: "Accessibility Statement | ITOrigin",
+  description: "ITOrigin's commitment to digital accessibility. Learn about our efforts to make our website accessible to everyone.",
   alternates: {
     canonical: "https://itorigin.com/accessibility"
   }
@@ -35,7 +35,7 @@ export default function AccessibilityPage() {
           <div className="mb-12">
             <h1 className="text-4xl md:text-5xl font-black mb-4">Accessibility Statement</h1>
             <p className="text-xl text-muted-foreground">
-              Our commitment to making IT Origin accessible to everyone.
+              Our commitment to making ITOrigin accessible to everyone.
             </p>
             <p className="text-muted-foreground mt-4">Last Updated: January 1, 2025</p>
           </div>
@@ -45,7 +45,7 @@ export default function AccessibilityPage() {
             <section className="mb-12">
               <h2 className="text-2xl font-bold mb-4">Our Commitment</h2>
               <p className="text-muted-foreground mb-4">
-                IT Origin is committed to ensuring digital accessibility for people with disabilities. We are continually improving the user experience for everyone and applying the relevant accessibility standards to guarantee we provide equal access to all users.
+                ITOrigin is committed to ensuring digital accessibility for people with disabilities. We are continually improving the user experience for everyone and applying the relevant accessibility standards to guarantee we provide equal access to all users.
               </p>
               <p className="text-muted-foreground">
                 We strive to adhere to the Web Content Accessibility Guidelines (WCAG) 2.1 Level AA standards. These guidelines explain how to make web content more accessible for people with disabilities and more user-friendly for everyone.
@@ -126,7 +126,7 @@ export default function AccessibilityPage() {
             <section className="mb-12">
               <h2 className="text-2xl font-bold mb-4">Feedback and Contact</h2>
               <p className="text-muted-foreground mb-4">
-                We welcome your feedback on the accessibility of IT Origin&apos;s website. If you encounter accessibility barriers or have suggestions for improvement, please let us know:
+                We welcome your feedback on the accessibility of ITOrigin&apos;s website. If you encounter accessibility barriers or have suggestions for improvement, please let us know:
               </p>
               <div className="bg-muted/50 p-6 rounded-lg not-prose">
                 <h3 className="font-semibold mb-4">Contact Information</h3>

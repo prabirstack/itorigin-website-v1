@@ -8,11 +8,11 @@ import { QuoteSection } from "@/components/about/quote-section";
 import { CTASection } from "@/components/about/cta-section";
 
 export const metadata: Metadata = {
-  title: "Our Values | IT Origin - Principles That Guide Us",
+  title: "Our Values | ITOrigin - Principles That Guide Us",
   description:
-    "Discover the core values and principles that drive IT Origin. Learn about our commitment to excellence, innovation, integrity, and client-centric cybersecurity solutions.",
+    "Discover the core values and principles that drive ITOrigin. Learn about our commitment to excellence, innovation, integrity, and client-centric cybersecurity solutions.",
   keywords: [
-    "IT Origin values",
+    "ITOrigin values",
     "company values",
     "cybersecurity principles",
     "business ethics",
@@ -20,9 +20,9 @@ export const metadata: Metadata = {
     "company culture",
   ],
   openGraph: {
-    title: "Our Values | IT Origin - Principles That Guide Us",
+    title: "Our Values | ITOrigin - Principles That Guide Us",
     description:
-      "Discover the core values and principles that drive IT Origin's commitment to excellence in cybersecurity.",
+      "Discover the core values and principles that drive ITOrigin's commitment to excellence in cybersecurity.",
     type: "website",
     url: "https://itorigin.com/about/values",
     images: [
@@ -30,15 +30,15 @@ export const metadata: Metadata = {
         url: "/images/og-values.jpg",
         width: 1200,
         height: 630,
-        alt: "IT Origin Values",
+        alt: "ITOrigin Values",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Our Values | IT Origin - Principles That Guide Us",
+    title: "Our Values | ITOrigin - Principles That Guide Us",
     description:
-      "Discover the core values and principles that drive IT Origin's commitment to excellence.",
+      "Discover the core values and principles that drive ITOrigin's commitment to excellence.",
     images: ["/images/og-values.jpg"],
   },
   alternates: {

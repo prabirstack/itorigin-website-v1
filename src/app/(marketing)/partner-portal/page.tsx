@@ -4,8 +4,8 @@ import { Lock, ArrowRight, Users, Shield, BarChart, FileText } from "lucide-reac
 import { Container } from "@/components/common/container";
 
 export const metadata: Metadata = {
-  title: "Partner Portal | IT Origin",
-  description: "Access the IT Origin Partner Portal for resources, deal registration, training materials, and partner support.",
+  title: "Partner Portal | ITOrigin",
+  description: "Access the ITOrigin Partner Portal for resources, deal registration, training materials, and partner support.",
   alternates: {
     canonical: "https://itorigin.com/partner-portal"
   }
@@ -48,7 +48,7 @@ export default function PartnerPortalPage() {
               Partner Portal
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Access exclusive resources, training materials, and tools designed to help you succeed as an IT Origin partner.
+              Access exclusive resources, training materials, and tools designed to help you succeed as an ITOrigin partner.
             </p>
           </div>
 

@@ -9,7 +9,7 @@ export function FooterBottom() {
         <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6">
             <p className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} IT Origin. All rights reserved.
+              © {new Date().getFullYear()} ITOrigin. All rights reserved.
             </p>
             <div className="flex items-center space-x-1 text-xs text-muted-foreground">
               <Clock className="w-3 h-3" />

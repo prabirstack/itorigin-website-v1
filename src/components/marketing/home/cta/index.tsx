@@ -67,7 +67,7 @@ export function CTASection() {
             </span>
           </h2>
           <p className="text-muted-foreground text-base sm:text-lg lg:text-xl max-w-4xl mx-auto leading-relaxed px-2">
-            Choose your preferred way to begin your cybersecurity journey with IT Origin. Our
+            Choose your preferred way to begin your cybersecurity journey with ITOrigin. Our
             experts are ready to help you strengthen your security posture.
           </p>
         </motion.div>
@@ -113,7 +113,7 @@ export function CTASection() {
             </Link>
           </motion.div>
           <p className="text-muted-foreground text-sm mt-4 max-w-md mx-auto">
-            Join 300+ organizations that trust IT Origin for their cybersecurity needs
+            Join 300+ organizations that trust ITOrigin for their cybersecurity needs
           </p>
         </motion.div>
       </motion.div>

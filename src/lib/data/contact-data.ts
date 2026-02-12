@@ -30,7 +30,7 @@ export const contactInfo = {
 export const offices: Office[] = [
   {
     id: "hq",
-    name: "IT Origin Headquarters",
+    name: "ITOrigin Headquarters",
     type: "Headquarters",
     address: "8/14, Sahid Nagar, Wing-A",
     city: "Kolkata",

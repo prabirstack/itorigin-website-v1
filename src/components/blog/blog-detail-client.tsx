@@ -164,7 +164,7 @@ export function BlogDetailClient({ post, allPosts }: BlogDetailClientProps) {
                   <div>
                     <h3 className="text-xl font-black mb-2">About {post.author.name}</h3>
                     <p className="text-muted-foreground mb-4">
-                      {post.author.role} at IT Origin with extensive experience in cybersecurity,
+                      {post.author.role} at ITOrigin with extensive experience in cybersecurity,
                       threat detection, and security operations. Passionate about sharing knowledge
                       and helping organizations improve their security posture.
                     </p>

@@ -22,11 +22,11 @@ export const ChatVerificationEmail = ({
   return (
     <Html>
       <Head />
-      <Preview>Your IT Origin chat verification code: {pin}</Preview>
+      <Preview>Your ITOrigin chat verification code: {pin}</Preview>
       <Body style={main}>
         <Container style={container}>
           <Section style={logoSection}>
-            <Heading style={logo}>IT Origin</Heading>
+            <Heading style={logo}>ITOrigin</Heading>
           </Section>
 
           <Heading style={heading}>
@@ -38,7 +38,7 @@ export const ChatVerificationEmail = ({
           </Text>
 
           <Text style={paragraph}>
-            You requested to start a chat with IT Origin AI Assistant.
+            You requested to start a chat with ITOrigin AI Assistant.
             Please use the verification code below to confirm your email address:
           </Text>
 
@@ -57,7 +57,7 @@ export const ChatVerificationEmail = ({
 
           <Section style={footer}>
             <Text style={footerText}>
-              IT Origin - Enterprise Cybersecurity Solutions
+              ITOrigin - Enterprise Cybersecurity Solutions
             </Text>
             <Text style={footerText}>
               <Link href="https://itorigin.in" style={link}>
