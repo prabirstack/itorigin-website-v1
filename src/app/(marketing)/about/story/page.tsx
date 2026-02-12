@@ -8,9 +8,9 @@ import { ValuesPreviewSection } from "@/components/about/values-preview-section"
 import { CTASection } from "@/components/about/cta-section";
 
 export const metadata: Metadata = {
-  title: "Our Story | ITOrigin - 15 Years of Cybersecurity Excellence",
+  title: "Our Story | ITOrigin - 8 Years of Cybersecurity Excellence",
   description:
-    "Discover ITOrigin's journey from a small startup to a global cybersecurity leader. Learn about our milestones, achievements, and 15 years of protecting organizations worldwide.",
+    "Discover ITOrigin's journey from a small startup to a global cybersecurity leader. Learn about our milestones, achievements, and 8 years of protecting organizations worldwide.",
   keywords: [
     "ITOrigin story",
     "company history",
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     "about ITOrigin",
   ],
   openGraph: {
-    title: "Our Story | ITOrigin - 15 Years of Cybersecurity Excellence",
+    title: "Our Story | ITOrigin - 8 Years of Cybersecurity Excellence",
     description:
       "Discover ITOrigin's journey from a small startup to a global cybersecurity leader.",
     type: "website",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Our Story | ITOrigin - 15 Years of Cybersecurity Excellence",
+    title: "Our Story | ITOrigin - 8 Years of Cybersecurity Excellence",
     description:
       "Discover ITOrigin's journey from a small startup to a global cybersecurity leader.",
     images: ["/images/og-story.jpg"],

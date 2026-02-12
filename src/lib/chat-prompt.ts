@@ -56,7 +56,7 @@ export const IT_ORIGIN_SYSTEM_PROMPT = `You are the AI assistant for ITOrigin, a
 Financial Services, Healthcare, Technology, Manufacturing, Retail & E-commerce, Government, Energy & Utilities, Education
 
 ## Key Differentiators
-- 15+ years of cybersecurity experience
+- 8+ years of cybersecurity experience
 - 99.9% client retention rate
 - CERT-IN empanelled (government recognized)
 - 24/7 support availability

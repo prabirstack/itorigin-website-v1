@@ -10,7 +10,7 @@ import { CTASection } from "@/components/about/cta-section";
 export const metadata: Metadata = {
   title: "About ITOrigin | Leading Cybersecurity Services Provider",
   description:
-    "Learn about ITOrigin, a trusted cybersecurity firm with 15+ years of experience protecting organizations worldwide. Discover our mission, values, and expert team.",
+    "Learn about ITOrigin, a trusted cybersecurity firm with 8+ years of experience protecting organizations worldwide. Discover our mission, values, and expert team.",
   keywords: [
     "ITOrigin",
     "cybersecurity company",
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "About ITOrigin | Leading Cybersecurity Services Provider",
     description:
-      "Learn about ITOrigin, a trusted cybersecurity firm with 15+ years of experience protecting organizations worldwide.",
+      "Learn about ITOrigin, a trusted cybersecurity firm with 8+ years of experience protecting organizations worldwide.",
     type: "website",
     url: "https://itorigin.com/about",
     images: [
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "About ITOrigin | Leading Cybersecurity Services Provider",
     description:
-      "Learn about ITOrigin, a trusted cybersecurity firm with 15+ years of experience.",
+      "Learn about ITOrigin, a trusted cybersecurity firm with 8+ years of experience.",
     images: ["/images/og-about.jpg"],
   },
   alternates: {
@@ -49,8 +49,8 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   const stats = [
-    { label: "Years of Experience", value: "15+", icon: "Award" as const },
-    { label: "Security Experts", value: "100+", icon: "Users" as const },
+    { label: "Years of Experience", value: "8+", icon: "Award" as const },
+    { label: "Security Experts", value: "70+", icon: "Users" as const },
     { label: "Clients Protected", value: "300+", icon: "Shield" as const },
     { label: "Countries Served", value: "12+", icon: "Globe" as const },
   ];
