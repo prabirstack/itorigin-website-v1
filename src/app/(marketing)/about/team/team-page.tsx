@@ -26,13 +26,13 @@ export function TeamPage() {
       name: "Indranil Banerjee",
       role: "Director",
       image: "/images/team/indranil-banerjee.jpeg",
-      bio: "A seasoned cybersecurity business leader with over 27 years of experience across cybersecurity, information security, and enterprise technology. He drives the organization's strategic vision, service innovation, and growth across national and global markets, with deep expertise in security strategy, risk management, and consulting-led service delivery.",
+      bio: "A seasoned cybersecurity business leader and entrepreneur with over 27 years of experience across cybersecurity, information security, and enterprise technology. He drives the organization\u2019s strategic vision, service innovation, and growth across national and global markets, with deep expertise in security strategy, risk management, security architecture, and consulting-led service delivery. His experience spans consulting, systems integration, and advisory-led engagements across BFSI, telecom, government, and public sector organizations.",
     },
     {
       name: "Vishy Narayan",
       role: "Sr. Vice President - North America",
       image: "/images/team/vishy-narayan.jpg",
-      bio: "Leads ITOrigin's AI Strategy and Cybersecurity Practice across North America. A trusted advisor to C-suite executives, Vishy specializes in translating complex business challenges into actionable AI and security strategies. Prior to ITOrigin, he built and led enterprise consulting practices at Cognizant and Infosys and built wide area research networks at NASA. He holds degrees from IIM Bangalore and Louisiana State University.",
+      bio: "Leads ITOrigin\u2019s AI Strategy and Cybersecurity Practice across North America. A trusted advisor to C-suite executives, Vishy specializes in translating complex business challenges into actionable AI and security strategies. His expertise spans enterprise transformation, responsible AI governance, cloud modernization, and comprehensive cybersecurity frameworks. Prior to ITOrigin, he built and led enterprise consulting practices at Cognizant and Infosys and built wide area research networks at NASA. He holds degrees from IIM Bangalore and Louisiana State University, and has been awarded patents for technology innovation.",
     },
   ];
 

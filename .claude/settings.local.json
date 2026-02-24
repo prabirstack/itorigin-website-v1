@@ -63,7 +63,12 @@
       "Bash(grep:*)",
       "Bash(npx next:*)",
       "Bash(npx tsc:*)",
-      "Bash(git:*)"
+      "Bash(git:*)",
+      "Bash(wc:*)",
+      "Bash(echo === Checking $page ===:*)",
+      "Bash(bun dev:*)",
+      "WebFetch(domain:itorigin.in)",
+      "WebFetch(domain:www.itorizin.com)"
     ]
   },
   "enabledMcpjsonServers": [

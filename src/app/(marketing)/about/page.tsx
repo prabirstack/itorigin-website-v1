@@ -18,22 +18,23 @@ import {
 } from "@/utils/data/about";
 
 export const metadata: Metadata = {
-  title: "About ITOrigin | Leading Cybersecurity Services Provider",
+  title: "About ITOrigin | CERT-In Empanelled Cybersecurity Firm",
   description:
-    "Learn about ITOrigin, a trusted cybersecurity firm with 8+ years of experience protecting organizations worldwide. Discover our mission, values, and expert team.",
+    "ITOrigin is a CERT-In empanelled and STQC approved cybersecurity firm delivering Managed SOC, Offensive Security, and GRC services to 300+ organizations across 12+ countries since 2017.",
   keywords: [
     "ITOrigin",
     "cybersecurity company",
-    "security services provider",
+    "CERT-In empanelled",
+    "STQC approved",
     "about us",
     "cybersecurity experts",
-    "SOC services",
-    "security solutions",
+    "managed SOC",
+    "GRC consulting",
   ],
   openGraph: {
-    title: "About ITOrigin | Leading Cybersecurity Services Provider",
+    title: "About ITOrigin | CERT-In Empanelled Cybersecurity Firm",
     description:
-      "Learn about ITOrigin, a trusted cybersecurity firm with 8+ years of experience protecting organizations worldwide.",
+      "ITOrigin is a CERT-In empanelled and STQC approved cybersecurity firm serving 300+ organizations across 12+ countries since 2017.",
     type: "website",
     url: "https://itorigin.com/about",
     images: [
@@ -47,9 +48,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "About ITOrigin | Leading Cybersecurity Services Provider",
+    title: "About ITOrigin | CERT-In Empanelled Cybersecurity Firm",
     description:
-      "Learn about ITOrigin, a trusted cybersecurity firm with 8+ years of experience.",
+      "CERT-In empanelled and STQC approved cybersecurity firm serving 300+ organizations since 2017.",
     images: ["/images/og-about.jpg"],
   },
   alternates: {

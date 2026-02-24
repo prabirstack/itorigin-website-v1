@@ -27,14 +27,14 @@ export interface Milestone {
 export const companyInfo = {
   name: "ITOrigin",
   tagline: "Cybersecurity Excellence and Innovation",
-  founded: 2018,
+  founded: 2017,
   headquarters: "Kolkata, India",
   mission:
     "To protect organizations worldwide from cyber threats through innovative security solutions and expert guidance.",
   vision:
     "To be the most trusted cybersecurity partner for organizations across the globe, enabling them to operate securely in the digital age.",
   description:
-    "ITOrigin is a CERT-IN empanelled cybersecurity company providing comprehensive security services including SOC as a Service, Penetration Testing, and GRC consulting. We combine cutting-edge technology with expert knowledge to protect organizations from evolving cyber threats.",
+    "ITOrigin Technology Solutions Pvt. Ltd. is an ISO 27001, ISO 9001, ISO 20000-1, and ISO 17025 certified organization and CERT-In empanelled security auditor and STQC approved IT Test Lab, specializing in providing end-to-end cybersecurity consulting and managed security services across Managed SOC, Offensive Security, and GRC & Compliance.",
 };
 
 export const companyStats = [
@@ -93,44 +93,49 @@ export const companyValues: CompanyValue[] = [
 
 export const milestones: Milestone[] = [
   {
-    year: 2018,
+    year: 2017,
     title: "Company Founded",
-    description: "ITOrigin established with a mission to provide world-class cybersecurity services.",
+    description: "ITOrigin established in Kolkata by seasoned IT industry veterans with a mission to deliver world-class cybersecurity services.",
+  },
+  {
+    year: 2018,
+    title: "CERT-In Empanelment",
+    description: "Achieved CERT-In empanelment, formally authorized by the Government of India to conduct cybersecurity assessments.",
   },
   {
     year: 2019,
-    title: "CERT-IN Empanelment",
-    description: "Achieved CERT-IN empanelment, recognizing our expertise in security operations.",
+    title: "SOC Launch & STQC Approval",
+    description: "Launched 24/7 Security Operations Center and received STQC approval for vulnerability assessment and penetration testing.",
   },
   {
     year: 2020,
-    title: "SOC Launch",
-    description: "Launched our 24/7 Security Operations Center with AI-powered threat detection.",
+    title: "ISO Certifications",
+    description: "Achieved ISO 27001:2022 and ISO 9001:2015 certifications, ensuring secure and quality-driven service delivery.",
   },
   {
     year: 2021,
-    title: "100+ Clients",
-    description: "Crossed 100 clients milestone, serving organizations across multiple industries.",
+    title: "Middle East Expansion",
+    description: "Extended cybersecurity services to the Middle East, serving defence, oil & gas, and public sector organizations.",
   },
   {
     year: 2022,
-    title: "STQC Approval",
-    description: "Received STQC approval for penetration testing services.",
+    title: "100+ Clients",
+    description: "Crossed 100 clients milestone with multi-industry coverage across BFSI, telecom, government, and critical infrastructure.",
   },
   {
     year: 2023,
-    title: "300+ Clients",
-    description: "Expanded our client base to 300+ organizations globally.",
+    title: "North America Practice",
+    description: "Established North America practice focused on AI Strategy and Cybersecurity, expanding global delivery footprint.",
   },
   {
     year: 2024,
-    title: "AI-Powered SOC",
-    description: "Introduced Agentic AI-powered SOC platform for advanced threat detection.",
+    title: "AI-Powered SOC & Advanced Certifications",
+    description: "Introduced Agentic AI-powered SOC platform and achieved ISO 20000-1:2018 and ISO 17025 certifications.",
   },
   {
     year: 2025,
-    title: "Global Expansion",
-    description: "Expanding services to international markets with new partnerships.",
+    title: "300+ Global Clients",
+    description: "Serving 300+ organizations across India, Middle East, North America, Far East, and Australia with comprehensive cybersecurity solutions.",
   },
 ];
 
@@ -139,7 +144,7 @@ export const leadershipTeam: TeamMember[] = [
     id: "md",
     name: "Basudev Gangopadhyay",
     role: "Managing Director",
-    bio: "A highly accomplished technology executive with over 35 years of strategic and operational leadership across IT, data center engineering, and cybersecurity. Former Global Head for End-User services at Cognizant, catering to 280,000+ users worldwide.",
+    bio: "A highly accomplished technology executive with over 35 years of strategic and operational leadership across information technology, data center engineering, and cybersecurity. He has worked for multinationals like TCS & Cognizant, where he served as Global Head for End-User services catering to IT infrastructure needs for 280,000+ users worldwide. He has championed cybersecurity practice implementation, maturity improvements, establishing frameworks, governance models, and cybersecurity audits aligned with global best practices. He holds a degree from IISc, Bangalore and a PGDBM from IIM, Calcutta.",
     image: "/images/team/basudev-ganguly.jpg",
     social: {
       linkedin: "https://linkedin.com/in/",
@@ -149,7 +154,7 @@ export const leadershipTeam: TeamMember[] = [
     id: "director",
     name: "Indranil Banerjee",
     role: "Director",
-    bio: "A seasoned cybersecurity business leader with over 27 years of experience across cybersecurity, information security, and enterprise technology. Drives strategic vision, service innovation, and growth across national and global markets.",
+    bio: "A seasoned cybersecurity business leader and entrepreneur with over 27 years of experience across cybersecurity, information security, and enterprise technology. He drives the organization\u2019s strategic vision, service innovation, and growth across national and global markets, with deep expertise in security strategy, risk management, security architecture, and consulting-led service delivery. His experience spans consulting, systems integration, and advisory-led engagements across BFSI, telecom, government, and public sector organizations. He holds an MBA, PGD-IRPM, PGDCA, and is certified in BS 10012:2017 (GDPR).",
     image: "/images/team/indranil-banerjee.jpeg",
     social: {
       linkedin: "https://linkedin.com/in/",
@@ -159,7 +164,7 @@ export const leadershipTeam: TeamMember[] = [
     id: "svp-na",
     name: "Vishy Narayan",
     role: "Sr. Vice President - North America",
-    bio: "Leads ITOrigin's AI Strategy and Cybersecurity Practice across North America. A trusted advisor to C-suite executives specializing in AI and security strategies. Previously built enterprise consulting practices at Cognizant, Infosys, and research networks at NASA.",
+    bio: "Leads ITOrigin\u2019s AI Strategy and Cybersecurity Practice across North America. A trusted advisor to C-suite executives, Vishy specializes in translating complex business challenges into actionable AI and security strategies. His expertise spans enterprise transformation, responsible AI governance, cloud modernization, and comprehensive cybersecurity frameworks. Prior to ITOrigin, he built and led enterprise consulting practices at Cognizant and Infosys and built wide area research networks at NASA. He holds degrees from IIM Bangalore and Louisiana State University, and has been awarded patents for technology innovation.",
     image: "/images/team/vishy-narayan.jpg",
     social: {
       linkedin: "https://linkedin.com/in/",
@@ -309,25 +314,25 @@ export const aboutPageStats = [
 export const aboutPageHighlights = {
   title: "Why Choose ITOrigin",
   description:
-    "We combine technical excellence with business understanding to deliver security solutions that drive real value.",
+    "Government-accredited, globally certified, and backed by a team of industry veterans delivering cybersecurity across three core verticals.",
   items: [
     {
       icon: "Shield",
-      title: "Industry-Leading Expertise",
+      title: "Government-Accredited & Trusted",
       description:
-        "Our team of certified security professionals brings decades of combined experience in protecting critical infrastructure.",
+        "Empanelled with CERT-In and STQC, we are formally authorized to conduct cybersecurity assessments for government entities and national critical infrastructure in India.",
     },
     {
-      icon: "Target",
-      title: "Proactive Security Approach",
+      icon: "Globe",
+      title: "Proven Global Delivery",
       description:
-        "We don\u2019t just respond to threats\u2014we anticipate them, using advanced threat intelligence and AI-powered analytics.",
+        "Since 2017, we have been securing organizations across India, the Middle East, USA, APAC, and Australia \u2014 navigating complex threat landscapes and regulatory environments.",
     },
     {
-      icon: "TrendingUp",
-      title: "Proven Track Record",
+      icon: "Award",
+      title: "Quality & Assurance Driven",
       description:
-        "With 99.9% uptime and zero major breaches across our client portfolio, we deliver results that matter.",
+        "Backed by ISO 27001, ISO 9001, ISO 20000-1, and ISO 17025 certifications, we ensure secure, reliable, and audit-ready service delivery.",
     },
   ],
 };
@@ -335,17 +340,17 @@ export const aboutPageHighlights = {
 export const aboutPageMissionVision = {
   mission: {
     badge: { icon: "Target", text: "Our Mission" },
-    title: "Empowering Secure Digital Transformation",
+    title: "Protecting Digital Futures with Precision",
     description:
-      "Our mission is to empower organizations to embrace digital transformation with confidence by providing world-class cybersecurity solutions. We strive to be the trusted partner that enables businesses to innovate fearlessly while staying protected against evolving cyber threats.",
-    values: ["Excellence in Execution", "Client-Centric Approach", "Continuous Innovation"],
+      "To provide maximum business value to our clients by delivering end-to-end cybersecurity solutions that enable them to grow their businesses, manage risk and compliance, and strengthen their competitive position \u2014 powered by certified expertise and proven global delivery frameworks.",
+    values: ["Governance & Compliance Alignment", "Client-First Approach", "Measurable Outcomes"],
   },
   vision: {
     badge: { icon: "TrendingUp", text: "Our Vision" },
-    title: "A Secure Digital Future for All",
+    title: "A Trusted Global Cybersecurity Partner",
     description:
-      "We envision a world where every organization, regardless of size or industry, has access to enterprise-grade cybersecurity. Through innovation, education, and relentless dedication, we aim to set new standards for security excellence and make the digital world a safer place for everyone.",
-    values: ["Transparency & Trust", "Ethical Security Practices", "24/7 Commitment"],
+      "To be the most trusted cybersecurity partner for enterprises and government organizations worldwide \u2014 combining governance, technology, and operational excellence to protect business continuity, reputation, and digital trust across industries and geographies.",
+    values: ["Transparency & Trust", "Global Delivery Excellence", "24/7 Commitment"],
   },
 };
 
@@ -366,57 +371,57 @@ export const aboutPageCTA = {
 export const storyPageHero = {
   badge: { icon: "Calendar", text: "Our Journey" },
   title: "Our Story",
-  highlight: "15 Years of Excellence",
+  highlight: "Built on Trust & Expertise",
   description:
-    "From a small startup to a global cybersecurity leader, our journey has been defined by innovation, dedication, and an unwavering commitment to protecting what matters most.",
+    "Since 2017, ITOrigin has grown from a Kolkata-based cybersecurity consultancy into a globally recognized managed security and consulting firm \u2014 empanelled by CERT-In and STQC, and trusted by enterprises and government organizations across India, the Middle East, North America, and Asia-Pacific.",
 };
 
 export const storyPageMilestones = [
   {
-    year: "2009",
-    title: "The Foundation",
+    year: "2017",
+    title: "Founded in Kolkata",
     description:
-      "ITOrigin was founded by a group of security experts who saw the growing need for comprehensive cybersecurity solutions. Starting with just 5 people in a small office, we set out to change the industry.",
+      "ITOrigin was established by seasoned IT industry veterans with extensive leadership experience in global IT services organizations, with a mission to deliver end-to-end cybersecurity solutions.",
     icon: "Rocket",
     color: "from-blue-500 to-cyan-500",
   },
   {
-    year: "2012",
-    title: "First Major Client",
+    year: "2018",
+    title: "CERT-In Empanelment",
     description:
-      "Secured our first Fortune 500 client, marking a turning point in our growth. This partnership validated our approach and opened doors to enterprise-level opportunities.",
-    icon: "Award",
+      "Formally empanelled by CERT-In (Indian Computer Emergency Response Team), authorized by the Government of India to conduct cybersecurity assessments for government and critical infrastructure.",
+    icon: "Shield",
     color: "from-purple-500 to-pink-500",
   },
   {
-    year: "2015",
-    title: "Global Expansion",
+    year: "2019",
+    title: "SOC Launch & STQC Approval",
     description:
-      "Expanded operations internationally, opening offices in Europe and Asia. Our team grew to 50+ security professionals serving clients across 15 countries.",
-    icon: "Users",
+      "Launched 24/7 Security Operations Centre with integrated threat detection, and received STQC approval as an IT Test Lab for vulnerability assessment and penetration testing.",
+    icon: "Eye",
     color: "from-orange-500 to-red-500",
   },
   {
-    year: "2018",
-    title: "Innovation Leader",
+    year: "2021",
+    title: "Middle East & Global Delivery",
     description:
-      "Launched our proprietary AI-powered threat detection platform, setting new industry standards. Received recognition as one of the top cybersecurity innovators.",
-    icon: "Target",
+      "Expanded cybersecurity delivery to the Middle East, Far East, and Australia \u2014 serving defence, oil & gas, utilities, telecom, and public sector organizations across geographies.",
+    icon: "Globe",
     color: "from-green-500 to-emerald-500",
   },
   {
-    year: "2021",
-    title: "100+ Expert Team",
+    year: "2023",
+    title: "North America Practice",
     description:
-      "Grew to over 100 certified security professionals. Expanded our service offerings to include comprehensive GRC consulting and advanced penetration testing.",
+      "Established dedicated North America practice focused on AI Strategy and Cybersecurity, with trusted advisory services for C-suite executives across enterprise sectors.",
     icon: "TrendingUp",
     color: "from-indigo-500 to-blue-500",
   },
   {
-    year: "2024",
-    title: "Industry Recognition",
+    year: "2025",
+    title: "300+ Clients Globally",
     description:
-      "Achieved major industry certifications and awards. Now protecting 300+ organizations globally with 24/7 SOC operations and cutting-edge security solutions.",
+      "Now protecting 300+ organizations across 12+ countries with comprehensive managed security, offensive security, and GRC services \u2014 backed by ISO 27001, ISO 9001, ISO 20000-1, and ISO 17025 certifications.",
     icon: "Award",
     color: "from-yellow-500 to-orange-500",
   },
@@ -425,7 +430,7 @@ export const storyPageMilestones = [
 export const storyPageSectionHeader = {
   title: "Our Milestones",
   description:
-    "Key moments that shaped ITOrigin into the trusted security partner we are today.",
+    "Key moments that shaped ITOrigin from a Kolkata-based consultancy into a globally trusted cybersecurity partner.",
 };
 
 export const storyPageMDMessage = {
@@ -433,11 +438,12 @@ export const storyPageMDMessage = {
   title: "A Message from Our",
   titleHighlight: "Leadership",
   quote:
-    "Customer trust is our purpose, our people are our strength, and global excellence is our destination.",
+    "Secure with Confidence. Scale with Trust.",
   paragraphs: [
-    "Our vision is to build a cybersecurity company where trust is earned every day\u2014from our customers, our partners, and our people.",
+    "Our vision is to build a cybersecurity company where trust is earned every day \u2014 from our customers, our partners, and our people.",
     "We exist to protect our customers\u2019 digital futures. Every solution we design, every service we deliver, and every decision we make begins with a simple question: does this genuinely improve our customer\u2019s security, resilience, and confidence?",
-    "We aim to be more than a vendor\u2014we strive to be a long-term security partner who understands our customers\u2019 risks, business realities and aspirations where every service aims to add value to customers\u2019 business.",
+    "We aim to be more than a vendor \u2014 we strive to be a long-term security partner who understands our customers\u2019 risks, business realities, and aspirations. ITOrigin combines governance, technology, and operational excellence to protect what matters most \u2014 your business continuity and reputation.",
+    "Our focus is to provide maximum business value to our clients, enabling them to grow their businesses, manage their risk and compliance, and strengthen their competitive position by delivering measurable security outcomes.",
   ],
   author: {
     name: "Basudev Gangopadhyay",
@@ -454,9 +460,9 @@ export const storyPageValuesPreview = {
   values: ["Innovation", "Integrity", "Excellence", "Client Focus"],
   stats: [
     { value: "300+", label: "Clients Protected" },
-    { value: "100+", label: "Security Experts" },
+    { value: "70+", label: "Security Experts" },
     { value: "12+", label: "Countries" },
-    { value: "99.9%", label: "Uptime SLA" },
+    { value: "24/7", label: "SOC Operations" },
   ],
 };
 
@@ -569,7 +575,7 @@ export const valuesPageOperatingPrinciples = [
 
 export const valuesPageQuote = {
   quote:
-    "Customer trust is our purpose, our people are our strength, and global excellence is our destination.",
+    "Our focus is to provide maximum business value to our clients, enabling them to grow their businesses, manage their risk and compliance, and strengthen their competitive position by delivering measurable security outcomes.",
   author: "Basudev Gangopadhyay",
   role: "Managing Director",
   image: "/images/team/basudev-ganguly.jpg",

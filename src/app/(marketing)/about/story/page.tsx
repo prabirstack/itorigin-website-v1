@@ -16,9 +16,9 @@ import {
 } from "@/utils/data/about";
 
 export const metadata: Metadata = {
-  title: "Our Story | ITOrigin - 8 Years of Cybersecurity Excellence",
+  title: "Our Story | ITOrigin - Cybersecurity Excellence Since 2017",
   description:
-    "Discover ITOrigin's journey from a small startup to a global cybersecurity leader. Learn about our milestones, achievements, and 8 years of protecting organizations worldwide.",
+    "Discover ITOrigin's journey from a Kolkata-based consultancy to a globally recognized cybersecurity firm. CERT-In empanelled, STQC approved, serving 300+ clients across 12+ countries.",
   keywords: [
     "ITOrigin story",
     "company history",
@@ -26,11 +26,12 @@ export const metadata: Metadata = {
     "security milestones",
     "company timeline",
     "about ITOrigin",
+    "CERT-In empanelled",
   ],
   openGraph: {
-    title: "Our Story | ITOrigin - 8 Years of Cybersecurity Excellence",
+    title: "Our Story | ITOrigin - Cybersecurity Excellence Since 2017",
     description:
-      "Discover ITOrigin's journey from a small startup to a global cybersecurity leader.",
+      "Discover ITOrigin's journey from a Kolkata-based consultancy to a globally recognized cybersecurity firm.",
     type: "website",
     url: "https://itorigin.com/about/story",
     images: [
@@ -44,9 +45,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Our Story | ITOrigin - 8 Years of Cybersecurity Excellence",
+    title: "Our Story | ITOrigin - Cybersecurity Excellence Since 2017",
     description:
-      "Discover ITOrigin's journey from a small startup to a global cybersecurity leader.",
+      "Discover ITOrigin's journey from a Kolkata-based consultancy to a globally recognized cybersecurity firm.",
     images: ["/images/og-story.jpg"],
   },
   alternates: {
