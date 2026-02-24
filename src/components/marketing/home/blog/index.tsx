@@ -5,7 +5,13 @@ import { motion } from "motion/react";
 import { BookOpen, Download, TrendingUp, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { staggerContainer, fadeInUp } from "@/lib/animations";
-import { downloadResources, blogHighlights } from "@/lib/data/blog-resources-data";
+import {
+  blogSectionHeader,
+  downloadResourcesHeader,
+  blogHighlightsHeader,
+  downloadResources,
+  blogHighlights,
+} from "@/utils/data/home/blog-section-data";
 import { ResourceCard } from "./resource-card";
 import { HighlightCard } from "./highlight-card";
 
@@ -58,17 +64,16 @@ export function BlogSection() {
         <motion.div variants={fadeInUp} className="text-center mb-12 sm:mb-16">
           <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-primary/10 rounded-full text-primary text-xs sm:text-sm font-medium mb-4 sm:mb-6">
             <BookOpen className="w-3 h-3 sm:w-4 sm:h-4" />
-            <span>Knowledge Center</span>
+            <span>{blogSectionHeader.badge}</span>
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground mb-4 sm:mb-6 leading-tight px-2">
-            Security Intelligence{" "}
+            {blogSectionHeader.title}{" "}
             <span className="bg-linear-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
-              Resources
+              {blogSectionHeader.titleHighlight}
             </span>
           </h2>
           <p className="text-muted-foreground text-base sm:text-lg lg:text-xl max-w-4xl mx-auto leading-relaxed px-2">
-            Access comprehensive cybersecurity resources, industry insights, and expert analysis to
-            strengthen your security posture and stay ahead of evolving threats.
+            {blogSectionHeader.description}
           </p>
         </motion.div>
 
@@ -79,10 +84,10 @@ export function BlogSection() {
               <div className="w-6 h-6 sm:w-8 sm:h-8 bg-linear-to-br from-primary to-primary/80 rounded-lg flex items-center justify-center">
                 <Download className="w-3 h-3 sm:w-4 sm:h-4 text-primary-foreground" />
               </div>
-              Download Resources
+              {downloadResourcesHeader.title}
             </h3>
             <p className="text-muted-foreground text-sm sm:text-base">
-              Essential tools and guides to enhance your cybersecurity strategy
+              {downloadResourcesHeader.subtitle}
             </p>
           </div>
 
@@ -104,10 +109,10 @@ export function BlogSection() {
               <div className="w-6 h-6 sm:w-8 sm:h-8 bg-linear-to-br from-primary to-primary/80 rounded-lg flex items-center justify-center">
                 <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4 text-primary-foreground" />
               </div>
-              Blog Highlights
+              {blogHighlightsHeader.title}
             </h3>
             <p className="text-muted-foreground text-sm sm:text-base">
-              Stay informed with our latest security insights and expert analysis
+              {blogHighlightsHeader.subtitle}
             </p>
           </div>
 
@@ -126,8 +131,8 @@ export function BlogSection() {
               asChild
               className="bg-linear-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground border-0 shadow-lg hover:shadow-xl hover:shadow-primary/25 transition-all duration-300 group px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg"
             >
-              <Link href="/blogs">
-                View All Articles
+              <Link href={blogSectionHeader.ctaHref}>
+                {blogSectionHeader.ctaText}
                 <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
             </Button>

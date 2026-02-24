@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { footerSections } from "@/lib/data/footer-data";
+import { footerSections } from "@/utils/data/common/footer-data";
 
 export function FooterLinks() {
   return (

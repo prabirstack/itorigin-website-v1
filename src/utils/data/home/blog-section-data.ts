@@ -1,4 +1,22 @@
-import { LucideIcon } from "lucide-react";
+export const blogSectionHeader = {
+  badge: "Knowledge Center",
+  title: "Security Intelligence",
+  titleHighlight: "Resources",
+  description:
+    "Access comprehensive cybersecurity resources, industry insights, and expert analysis to strengthen your security posture and stay ahead of evolving threats.",
+  ctaText: "View All Articles",
+  ctaHref: "/blogs",
+};
+
+export const downloadResourcesHeader = {
+  title: "Download Resources",
+  subtitle: "Essential tools and guides to enhance your cybersecurity strategy",
+};
+
+export const blogHighlightsHeader = {
+  title: "Blog Highlights",
+  subtitle: "Stay informed with our latest security insights and expert analysis",
+};
 
 export interface DownloadResource {
   id: string;
@@ -52,7 +70,8 @@ export const blogHighlights: BlogHighlight[] = [
   {
     id: "1",
     title: "A Practical Guide to India's DPDP Act",
-    description: "Understand India's Digital Personal Data Protection Act — its applicability, key obligations, timelines, and a practical 9-phase implementation strategy for compliance.",
+    description:
+      "Understand India's Digital Personal Data Protection Act — its applicability, key obligations, timelines, and a practical 9-phase implementation strategy for compliance.",
     iconName: "Shield",
     readTime: "5 min read",
     href: "/blogs/a-practical-guide-to-indias-digital-personal-data-protection-dpdp-act",

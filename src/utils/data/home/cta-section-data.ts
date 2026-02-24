@@ -1,3 +1,22 @@
+export const ctaSectionHeader = {
+  badge: "Ready to Secure Your Business?",
+  title: "Get Started",
+  titleHighlight: "Today",
+  description:
+    "Choose your preferred way to begin your cybersecurity journey with ITOrigin. Our experts are ready to help you strengthen your security posture.",
+};
+
+export const engagementHeader = {
+  title: "Multiple Engagement Options",
+  subtitle: "Select the option that best fits your immediate security needs",
+};
+
+export const finalCta = {
+  text: "Start Your Security Journey",
+  href: "/contact",
+  subtext: "Join 300+ organizations that trust ITOrigin for their cybersecurity needs",
+};
+
 export interface EngagementOption {
   id: string;
   title: string;
@@ -10,7 +29,7 @@ export interface EngagementOption {
   popular?: boolean;
 }
 
-export interface ContactInfo {
+export interface ContactInfoItem {
   id: string;
   type: string;
   value: string;
@@ -19,25 +38,13 @@ export interface ContactInfo {
 }
 
 export const engagementOptions: EngagementOption[] = [
-  // TODO: Re-enable when free security assessment service is ready
-  // {
-  //   id: "assessment",
-  //   title: "Free Security Assessment",
-  //   description: "Discover your security gaps with our comprehensive analysis",
-  //   iconName: "Search",
-  //   gradient: "from-blue-500/20 via-blue-500/10 to-blue-600/5",
-  //   iconBg: "bg-gradient-to-br from-blue-500 to-blue-600",
-  //   ctaText: "Start Assessment",
-  //   ctaLink: "/contact?service=assessment",
-  //   popular: true,
-  // },
   {
     id: "consultation",
     title: "Expert Consultation",
     description: "Speak with our certified security experts for personalized guidance",
     iconName: "Phone",
     gradient: "from-green-500/20 via-green-500/10 to-emerald-600/5",
-    iconBg: "bg-gradient-to-br from-green-500 to-emerald-600",
+    iconBg: "bg-linear-to-br from-green-500 to-emerald-600",
     ctaText: "Book Call",
     ctaLink: "/contact?service=consultation",
   },
@@ -47,7 +54,7 @@ export const engagementOptions: EngagementOption[] = [
     description: "Get our comprehensive security guides and best practices",
     iconName: "Download",
     gradient: "from-purple-500/20 via-purple-500/10 to-pink-600/5",
-    iconBg: "bg-gradient-to-br from-purple-500 to-pink-600",
+    iconBg: "bg-linear-to-br from-purple-500 to-pink-600",
     ctaText: "Download Now",
     ctaLink: "/coming-soon?for=whitepapers",
   },
@@ -57,13 +64,13 @@ export const engagementOptions: EngagementOption[] = [
     description: "Explore certification programs and security training options",
     iconName: "GraduationCap",
     gradient: "from-orange-500/20 via-orange-500/10 to-red-600/5",
-    iconBg: "bg-gradient-to-br from-orange-500 to-red-600",
+    iconBg: "bg-linear-to-br from-orange-500 to-red-600",
     ctaText: "Learn More",
     ctaLink: "/coming-soon?for=training",
   },
 ];
 
-export const ctaContactInfo: ContactInfo[] = [
+export const ctaContactInfo: ContactInfoItem[] = [
   {
     id: "address",
     type: "Headquarters",
@@ -80,16 +87,16 @@ export const ctaContactInfo: ContactInfo[] = [
   {
     id: "email",
     type: "Email",
-    value: "connect@itorizin.in",
+    value: "connect@itorigin.in",
     iconName: "Mail",
-    link: "mailto:connect@itorizin.in",
+    link: "mailto:connect@itorigin.in",
   },
   {
     id: "website",
     type: "Website",
-    value: "www.itorizin.com",
+    value: "www.itorigin.com",
     iconName: "Globe",
-    link: "https://www.itorizin.com",
+    link: "https://www.itorigin.com",
   },
 ];
 

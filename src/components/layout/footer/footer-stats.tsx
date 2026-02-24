@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "motion/react";
-import { footerStats } from "@/lib/data/footer-data";
+import { footerStats } from "@/utils/data/common/footer-data";
 import { iconMap } from "@/lib/icon-map";
 
 export function FooterStats() {

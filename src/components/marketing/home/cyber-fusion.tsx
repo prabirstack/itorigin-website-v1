@@ -3,7 +3,6 @@
 import React from "react";
 import Link from "next/link";
 import { motion, Variants } from "motion/react";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
 import {
@@ -17,78 +16,20 @@ import {
   CheckCircle2,
 } from "lucide-react";
 
-interface PlatformFeature {
-  id: string;
-  text: string;
-  icon: React.ReactNode;
-}
+import {
+  cyberFusionHeader,
+  cyberFusionFeatures,
+  cyberFusionStats,
+} from "@/utils/data/home/cyber-fusion-data";
 
-interface Statistic {
-  id: string;
-  value: string;
-  label: string;
-  icon: React.ReactNode;
-}
-
-const platformFeatures: PlatformFeature[] = [
-  {
-    id: "1",
-    text: "Unified threat intelligence aggregation from 100+ sources",
-    icon: <Shield className="w-5 h-5 text-primary" />,
-  },
-  {
-    id: "2",
-    text: "AI-powered correlation engine with MITRE ATT&CK mapping",
-    icon: <Target className="w-5 h-5 text-primary" />,
-  },
-  {
-    id: "3",
-    text: "Automated incident response with custom playbooks",
-    icon: <Zap className="w-5 h-5 text-primary" />,
-  },
-  {
-    id: "4",
-    text: "Real-time compliance monitoring and reporting",
-    icon: <Eye className="w-5 h-5 text-primary" />,
-  },
-  {
-    id: "5",
-    text: "Multi-cloud and hybrid environment support",
-    icon: <TrendingUp className="w-5 h-5 text-primary" />,
-  },
-  {
-    id: "6",
-    text: "Advanced threat hunting with behavioral analytics",
-    icon: <Shield className="w-5 h-5 text-primary" />,
-  },
-];
-
-const statistics: Statistic[] = [
-  {
-    id: "1",
-    value: "99.8%",
-    label: "Threat Detection Accuracy",
-    icon: <Target className="w-6 h-6 text-primary" />,
-  },
-  {
-    id: "2",
-    value: "<15 Minutes",
-    label: "Average Response Time",
-    icon: <Clock className="w-6 h-6 text-primary" />,
-  },
-  {
-    id: "3",
-    value: "24/7/365",
-    label: "Continuous Monitoring",
-    icon: <Eye className="w-6 h-6 text-primary" />,
-  },
-  {
-    id: "4",
-    value: "300+",
-    label: "Protected Organizations",
-    icon: <Shield className="w-6 h-6 text-primary" />,
-  },
-];
+const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+  Shield,
+  Target,
+  Zap,
+  Eye,
+  TrendingUp,
+  Clock,
+};
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -173,18 +114,17 @@ export const CyberFusion = () => {
         <motion.div variants={itemVariants} className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary text-sm font-medium mb-6">
             <Zap className="w-4 h-4" />
-            <span>IT-Origin Cyber Fusion Centre</span>
+            <span>{cyberFusionHeader.badge}</span>
           </div>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
-            Engineering a Single{" "}
+            {cyberFusionHeader.title}{" "}
             <span className="bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
-              Seamless AI SOC Platform
+              {cyberFusionHeader.titleHighlight}
             </span>{" "}
-            with Automation
+            {cyberFusionHeader.titleSuffix}
           </h2>
           <p className="text-muted-foreground text-lg sm:text-xl max-w-4xl mx-auto leading-relaxed">
-            Advanced cybersecurity operations powered by artificial intelligence and machine
-            learning for comprehensive threat detection and response.
+            {cyberFusionHeader.description}
           </p>
         </motion.div>
 
@@ -202,30 +142,33 @@ export const CyberFusion = () => {
             </div>
 
             <div className="space-y-4">
-              {platformFeatures.map((feature, index) => (
-                <motion.div
-                  key={feature.id}
-                  variants={featureVariants}
-                  custom={index}
-                  className="group"
-                >
-                  <Card className="bg-card/60 backdrop-blur-sm border-2 border-border/40 hover:border-primary/30 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-1">
-                    <CardContent className="p-4">
-                      <div className="flex items-start gap-4">
-                        <div className="flex-shrink-0 mt-0.5">
-                          <CheckCircle2 className="w-5 h-5 text-primary" />
+              {cyberFusionFeatures.map((feature, index) => {
+                const FeatureIcon = iconMap[feature.iconName] || Shield;
+                return (
+                  <motion.div
+                    key={feature.id}
+                    variants={featureVariants}
+                    custom={index}
+                    className="group"
+                  >
+                    <Card className="bg-card/60 backdrop-blur-sm border-2 border-border/40 hover:border-primary/30 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-1">
+                      <CardContent className="p-4">
+                        <div className="flex items-start gap-4">
+                          <div className="flex-shrink-0 mt-0.5">
+                            <CheckCircle2 className="w-5 h-5 text-primary" />
+                          </div>
+                          <div className="flex items-start gap-3 flex-1">
+                            <FeatureIcon className="w-5 h-5 text-primary" />
+                            <p className="text-muted-foreground group-hover:text-foreground transition-colors leading-relaxed">
+                              {feature.text}
+                            </p>
+                          </div>
                         </div>
-                        <div className="flex items-start gap-3 flex-1">
-                          {feature.icon}
-                          <p className="text-muted-foreground group-hover:text-foreground transition-colors leading-relaxed">
-                            {feature.text}
-                          </p>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                );
+              })}
             </div>
           </motion.div>
 
@@ -241,40 +184,43 @@ export const CyberFusion = () => {
             </div>
 
             <div className="grid sm:grid-cols-2 gap-4">
-              {statistics.map((stat, index) => (
-                <motion.div
-                  key={stat.id}
-                  variants={statVariants}
-                  custom={index}
-                  whileHover={{ scale: 1.02 }}
-                  className="group"
-                >
-                  <Card className="bg-card/60 backdrop-blur-sm border-2 border-border/40 hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10">
-                    <CardContent className="p-6">
-                      <div className="flex items-center gap-4 mb-3">
-                        {stat.icon}
-                        <div className="w-2 h-2 bg-primary/60 rounded-full group-hover:bg-primary transition-colors"></div>
-                      </div>
-                      <div className="text-3xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
-                        {stat.value}
-                      </div>
-                      <div className="text-muted-foreground group-hover:text-muted-foreground/90 transition-colors text-sm leading-relaxed">
-                        {stat.label}
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
+              {cyberFusionStats.map((stat, index) => {
+                const StatIcon = iconMap[stat.iconName] || Shield;
+                return (
+                  <motion.div
+                    key={stat.id}
+                    variants={statVariants}
+                    custom={index}
+                    whileHover={{ scale: 1.02 }}
+                    className="group"
+                  >
+                    <Card className="bg-card/60 backdrop-blur-sm border-2 border-border/40 hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10">
+                      <CardContent className="p-6">
+                        <div className="flex items-center gap-4 mb-3">
+                          <StatIcon className="w-6 h-6 text-primary" />
+                          <div className="w-2 h-2 bg-primary/60 rounded-full group-hover:bg-primary transition-colors"></div>
+                        </div>
+                        <div className="text-3xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+                          {stat.value}
+                        </div>
+                        <div className="text-muted-foreground group-hover:text-muted-foreground/90 transition-colors text-sm leading-relaxed">
+                          {stat.label}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                );
+              })}
             </div>
 
             {/* CTA Button */}
             <motion.div variants={itemVariants} className="pt-8">
               <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                 <Link
-                  href="/platform"
+                  href={cyberFusionHeader.ctaHref}
                   className="inline-flex items-center justify-center w-full sm:w-auto bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground border-0 shadow-lg hover:shadow-xl hover:shadow-primary/25 transition-all duration-300 group px-8 py-4 text-lg rounded-md font-medium"
                 >
-                  Experience the Fusion Center
+                  {cyberFusionHeader.ctaText}
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </motion.div>

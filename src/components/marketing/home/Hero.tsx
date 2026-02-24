@@ -11,84 +11,47 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { Container } from "@/components/common/container";
+import { heroSlides, heroBadgeText, heroDemoButtonText, heroDemoHref } from "@/utils/data/home/hero-data";
+
+const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+  Shield,
+  Target,
+  FileCheck,
+};
 
 const HeroCarousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
 
-  const slides = [
-    {
-      id: 1,
-      title: "Agentic AI powered SOC as a Service",
-      subtitle: "Trusted by our Global Customers",
-      description:
-        "Advanced threat detection and response with our state-of-the-art AI-driven SOC platform. Monitor, analyze, and respond to security incidents around the clock",
-      videoUrl: "/videos/it-origin-vid-1.mp4",
-      icon: Shield,
-      features: ["24/7 Monitoring", "Real-time Alerts", "Expert Analysis", "Instant Response"],
-      buttonText: "Explore SOC Services",
-      buttonHref: "/services/managed-soc-services",
-    },
-    {
-      id: 2,
-      title: "Offensive Security",
-      subtitle: "Penetration Testing & Red Team Operations",
-      description:
-        "Identify vulnerabilities before attackers do. Our ethical hacking services simulate real-world attacks to strengthen your security posture.",
-      videoUrl: "/videos/it-origin-vid-2.mp4",
-      icon: Target,
-      features: [
-        "Penetration Testing",
-        "Red Team Exercises",
-        "Vulnerability Assessment",
-        "Security Auditing",
-      ],
-      buttonText: "Start Security Testing",
-      buttonHref: "/services/offensive-security",
-    },
-    {
-      id: 3,
-      title: "Governance, Risk & Compliance",
-      subtitle: "Strategic Security Framework",
-      description:
-        "Comprehensive GRC solutions to align your security strategy with business objectives and regulatory requirements.",
-      videoUrl: "/videos/it-origin-vid-3.mp4",
-      icon: FileCheck,
-      features: ["Compliance Management", "Risk Assessment", "Policy Development", "Audit Support"],
-      buttonText: "View GRC Solutions",
-      buttonHref: "/services/grc-services",
-    },
-  ];
-
   useEffect(() => {
     if (isPlaying) {
       const interval = setInterval(() => {
-        setCurrentSlide((prev) => (prev + 1) % slides.length);
+        setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
       }, 6000);
       return () => clearInterval(interval);
     }
-  }, [isPlaying, slides.length]);
+  }, [isPlaying]);
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
+    setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
   };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+    setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
   };
 
   const goToSlide = (index: number) => {
     setCurrentSlide(index);
   };
 
-  const currentSlideData = slides[currentSlide];
-  const IconComponent = currentSlideData.icon;
+  const currentSlideData = heroSlides[currentSlide];
+  const IconComponent = iconMap[currentSlideData.iconName] || Shield;
 
   return (
     <div className="relative w-full h-screen overflow-hidden bg-black">
       {/* Video Background */}
       <div className="absolute inset-0 w-full h-full">
-        {slides.map((slide, index) => (
+        {heroSlides.map((slide, index) => (
           <div
             key={slide.id}
             className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ${
@@ -123,7 +86,7 @@ const HeroCarousel = () => {
                 </div>
                 <div className="px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20">
                   <span className="text-xs font-medium text-white/90">
-                    ITOrigin - Cybersecurity Excellence
+                    {heroBadgeText}
                   </span>
                 </div>
               </div>
@@ -165,11 +128,11 @@ const HeroCarousel = () => {
                 </Link>
 
                 <Link
-                  href="/coming-soon?for=watch-demo"
+                  href={heroDemoHref}
                   className="group flex items-center justify-center px-8 py-4 bg-white/10 hover:bg-white/20 text-white rounded-lg font-semibold backdrop-blur-sm border border-white/20 hover:border-white/40 transition-all duration-300"
                 >
                   <Play className="mr-2 w-5 h-5" />
-                  <span>Watch Demo</span>
+                  <span>{heroDemoButtonText}</span>
                 </Link>
               </div>
             </div>
@@ -182,7 +145,7 @@ const HeroCarousel = () => {
         <div className="flex items-center space-x-4">
           {/* Slide Indicators */}
           <div className="flex space-x-2">
-            {slides.map((_, index) => (
+            {heroSlides.map((_, index) => (
               <button
                 key={index}
                 onClick={() => goToSlide(index)}

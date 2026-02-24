@@ -9,6 +9,17 @@ import { BenefitCard } from "@/components/services/benefit-card";
 import { ProcessStep } from "@/components/services/process-step";
 import { PricingCTA } from "@/components/services/pricing-cta";
 import { CTASection } from "@/components/about/cta-section";
+import {
+  grcPageHero,
+  grcPageCTAs,
+  grcPageStats,
+  grcPageSectionHeaders,
+  grcPageFeatures,
+  grcPageBenefits,
+  grcPageProcess,
+  grcPageFrameworks,
+  grcPageCTA,
+} from "@/utils/data/services/grc-services-data";
 
 export const metadata: Metadata = {
   title: "GRC Services | Governance, Risk & Compliance Consulting | ITOrigin",
@@ -54,149 +65,47 @@ export const metadata: Metadata = {
 };
 
 export default function GRCServicesPage() {
-  const stats = [
-    { label: "Compliance Frameworks", value: "15+", icon: "CheckCircle2" as const },
-    { label: "Successful Audits", value: "200+", icon: "FileText" as const },
-    { label: "Risk Assessments", value: "350+", icon: "BarChart" as const },
-    { label: "Certified Consultants", value: "20+", icon: "Users" as const },
-  ];
-
-  const serviceFeatures = [
-    {
-      title: "Compliance Management",
-      features: [
-        "GDPR, CCPA, and data privacy compliance",
-        "HIPAA healthcare compliance programs",
-        "SOC 2 Type I & Type II certification",
-        "ISO 27001 implementation and certification",
-        "PCI-DSS compliance for payment systems",
-        "NIST Cybersecurity Framework alignment"
-      ]
-    },
-    {
-      title: "Risk Management",
-      features: [
-        "Comprehensive risk assessments and analysis",
-        "Third-party vendor risk management",
-        "Business impact analysis (BIA)",
-        "Threat modeling and risk quantification",
-        "Risk treatment and mitigation strategies",
-        "Continuous risk monitoring programs"
-      ]
-    },
-    {
-      title: "Governance & Policy",
-      features: [
-        "Security policy development and review",
-        "Information security governance frameworks",
-        "Compliance program design and implementation",
-        "Security awareness training programs",
-        "Incident response plan development",
-        "Business continuity and disaster recovery planning"
-      ]
-    }
-  ];
-
-  const benefits = [
-    {
-      icon: "Shield" as const,
-      title: "Regulatory Expertise",
-      description: "Deep knowledge of global compliance frameworks and regulatory requirements across industries."
-    },
-    {
-      icon: "CheckCircle2" as const,
-      title: "Audit Readiness",
-      description: "Prepare your organization for audits with comprehensive documentation and evidence collection."
-    },
-    {
-      icon: "BarChart" as const,
-      title: "Risk Reduction",
-      description: "Identify and mitigate risks before they impact your business operations or reputation."
-    },
-    {
-      icon: "Users" as const,
-      title: "Certified Professionals",
-      description: "Work with CISA, CRISC, CISSP, and ISO 27001 Lead Auditor certified consultants."
-    },
-    {
-      icon: "FileText" as const,
-      title: "Documentation Support",
-      description: "Comprehensive policies, procedures, and documentation that meet compliance requirements."
-    },
-    {
-      icon: "Settings" as const,
-      title: "Tailored Solutions",
-      description: "Customized compliance programs that align with your business objectives and risk appetite."
-    }
-  ];
-
-  const process = [
-    {
-      step: 1,
-      title: "Gap Assessment",
-      description: "Evaluate your current security and compliance posture against target frameworks. Identify gaps, prioritize remediation efforts, and create a roadmap to achieve compliance with regulatory requirements and industry standards."
-    },
-    {
-      step: 2,
-      title: "Program Design",
-      description: "Develop comprehensive compliance programs tailored to your organization. Create policies, procedures, and controls that address regulatory requirements while aligning with your business processes and objectives."
-    },
-    {
-      step: 3,
-      title: "Implementation & Training",
-      description: "Deploy compliance controls and security measures across your organization. Provide staff training, document procedures, and establish governance structures to ensure ongoing compliance and risk management."
-    },
-    {
-      step: 4,
-      title: "Audit & Maintenance",
-      description: "Prepare for and support external audits with comprehensive evidence collection. Maintain compliance through continuous monitoring, periodic reviews, and updates to policies and controls as regulations evolve."
-    }
-  ];
-
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
       <PageHero
-        badge={{ icon: "Shield", text: "GRC Services" }}
-        title="Navigate Compliance"
-        highlight="With Confidence"
-        description="Achieve and maintain regulatory compliance with expert guidance. Our comprehensive GRC services help you build robust governance frameworks, manage risks effectively, and meet compliance requirements across GDPR, HIPAA, SOC 2, ISO 27001, and more."
+        badge={grcPageHero.badge}
+        title={grcPageHero.title}
+        highlight={grcPageHero.highlight}
+        description={grcPageHero.description}
       />
 
       {/* Hero CTA */}
       <section className="py-8 -mt-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <Link
-              href="/contact"
-              className="px-8 py-4 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors inline-flex items-center gap-2 group"
-            >
-              Get a Quote
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link
-              href="/contact"
-              className="px-8 py-4 border border-border rounded-lg font-semibold hover:bg-accent transition-colors"
-            >
-              Schedule Consultation
-            </Link>
+            {grcPageCTAs.map((cta) => (
+              <Link
+                key={cta.text}
+                href={cta.href}
+                className={cta.primary ? "px-8 py-4 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors inline-flex items-center gap-2 group" : "px-8 py-4 border border-border rounded-lg font-semibold hover:bg-accent transition-colors"}
+              >
+                {cta.text}
+                {cta.primary && <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />}
+              </Link>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Stats Section */}
-      <StatsSection stats={stats} />
+      <StatsSection stats={grcPageStats} />
 
       {/* Service Features */}
       <section className="py-20 md:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
-            title="Comprehensive GRC Solutions"
-            description="Our services cover all aspects of governance, risk management, and compliance to protect your organization."
+            title={grcPageSectionHeaders.features.title}
+            description={grcPageSectionHeaders.features.description}
           />
 
           <div className="grid md:grid-cols-3 gap-8">
-            {serviceFeatures.map((feature, index) => (
+            {grcPageFeatures.map((feature, index) => (
               <ServiceFeatureCard key={index} {...feature} index={index} />
             ))}
           </div>
@@ -207,12 +116,12 @@ export default function GRCServicesPage() {
       <section className="py-20 md:py-32 bg-accent/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
-            title="Why Choose Our GRC Services"
-            description="Partner with experienced compliance professionals who understand regulatory requirements and business needs."
+            title={grcPageSectionHeaders.benefits.title}
+            description={grcPageSectionHeaders.benefits.description}
           />
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {benefits.map((benefit, index) => (
+            {grcPageBenefits.map((benefit, index) => (
               <BenefitCard key={index} {...benefit} index={index} />
             ))}
           </div>
@@ -223,12 +132,12 @@ export default function GRCServicesPage() {
       <section className="py-20 md:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
-            title="Our GRC Methodology"
-            description="A proven approach to achieving and maintaining compliance with regulatory requirements."
+            title={grcPageSectionHeaders.process.title}
+            description={grcPageSectionHeaders.process.description}
           />
 
           <div className="max-w-4xl mx-auto space-y-8">
-            {process.map((item, index) => (
+            {grcPageProcess.map((item, index) => (
               <ProcessStep key={index} {...item} index={index} />
             ))}
           </div>
@@ -240,22 +149,15 @@ export default function GRCServicesPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-12">
             <h2 className="text-3xl md:text-5xl font-black mb-6">
-              Compliance Frameworks We Support
+              {grcPageSectionHeaders.frameworks.title}
             </h2>
             <p className="text-lg text-muted-foreground">
-              Expert guidance across major regulatory and industry standards.
+              {grcPageSectionHeaders.frameworks.description}
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { name: "ISO 27001", description: "Information security management certification" },
-              { name: "SOC 2", description: "Service organization controls for SaaS" },
-              { name: "GDPR", description: "EU data protection and privacy regulation" },
-              { name: "HIPAA", description: "Healthcare information privacy compliance" },
-              { name: "PCI-DSS", description: "Payment card data security standards" },
-              { name: "NIST CSF", description: "Cybersecurity framework and controls" }
-            ].map((framework, index) => (
+            {grcPageFrameworks.map((framework, index) => (
               <div
                 key={index}
                 className="p-6 rounded-2xl border border-border bg-card hover:border-primary/50 transition-all duration-300"
@@ -284,12 +186,9 @@ export default function GRCServicesPage() {
 
       {/* CTA Section */}
       <CTASection
-        title="Ready to Achieve Compliance?"
-        description="Start your compliance journey today with expert GRC consulting and support."
-        buttons={[
-          { text: "Get Started", href: "/contact" },
-          { text: "View Security Services", href: "/services/managed-soc-services", variant: "secondary" }
-        ]}
+        title={grcPageCTA.title}
+        description={grcPageCTA.description}
+        buttons={grcPageCTA.buttons}
       />
     </div>
   );

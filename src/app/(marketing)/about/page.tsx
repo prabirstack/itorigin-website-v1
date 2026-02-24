@@ -8,6 +8,14 @@ import { AboutStory } from "@/components/about/about-story";
 import { HighlightsSection } from "@/components/about/highlights-section";
 import { MissionVisionSection } from "@/components/about/mission-vision-section";
 import { CTASection } from "@/components/about/cta-section";
+import {
+  aboutPageHero,
+  aboutPageCTAs,
+  aboutPageStats,
+  aboutPageHighlights,
+  aboutPageMissionVision,
+  aboutPageCTA,
+} from "@/utils/data/about";
 
 export const metadata: Metadata = {
   title: "About ITOrigin | Leading Cybersecurity Services Provider",
@@ -50,84 +58,46 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
-  const stats = [
-    { label: "Years of Experience", value: "8+", icon: "Award" as const },
-    { label: "Security Experts", value: "70+", icon: "Users" as const },
-    { label: "Clients Protected", value: "300+", icon: "Shield" as const },
-    { label: "Countries Served", value: "12+", icon: "Globe" as const },
-  ];
-
-  const highlights = [
-    {
-      icon: "Shield" as const,
-      title: "Industry-Leading Expertise",
-      description:
-        "Our team of certified security professionals brings decades of combined experience in protecting critical infrastructure.",
-    },
-    {
-      icon: "Target" as const,
-      title: "Proactive Security Approach",
-      description:
-        "We don't just respond to threats—we anticipate them, using advanced threat intelligence and AI-powered analytics.",
-    },
-    {
-      icon: "TrendingUp" as const,
-      title: "Proven Track Record",
-      description:
-        "With 99.9% uptime and zero major breaches across our client portfolio, we deliver results that matter.",
-    },
-  ];
-
-  const missionVision = {
-    mission: {
-      badge: { icon: "Target" as const, text: "Our Mission" },
-      title: "Empowering Secure Digital Transformation",
-      description:
-        "Our mission is to empower organizations to embrace digital transformation with confidence by providing world-class cybersecurity solutions. We strive to be the trusted partner that enables businesses to innovate fearlessly while staying protected against evolving cyber threats.",
-      values: ["Excellence in Execution", "Client-Centric Approach", "Continuous Innovation"],
-    },
-    vision: {
-      badge: { icon: "TrendingUp" as const, text: "Our Vision" },
-      title: "A Secure Digital Future for All",
-      description:
-        "We envision a world where every organization, regardless of size or industry, has access to enterprise-grade cybersecurity. Through innovation, education, and relentless dedication, we aim to set new standards for security excellence and make the digital world a safer place for everyone.",
-      values: ["Transparency & Trust", "Ethical Security Practices", "24/7 Commitment"],
-    },
-  };
-
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
       <PageHero
-        badge={{ icon: "Shield", text: "Trusted Cybersecurity Partner" }}
-        title="Protecting What"
-        highlight="Matters Most"
-        description="At ITOrigin, cybersecurity isn't just a shield, it's your competitive edge. We don't just defend against threats; we empower organizations to move faster, think bigger, and grow fearlessly. Across industries and borders, we stand beside our partners to protect what truly drives their success, their people, their processes, and their purpose."
+        badge={aboutPageHero.badge}
+        title={aboutPageHero.title}
+        highlight={aboutPageHero.highlight}
+        description={aboutPageHero.description}
       />
 
       {/* Hero CTAs */}
       <section className="py-8 -mt-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <Link
-              href="/services/managed-soc-services"
-              className="px-8 py-4 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors inline-flex items-center gap-2 group"
-            >
-              Our Services
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link
-              href="/about/team"
-              className="px-8 py-4 border border-border rounded-lg font-semibold hover:bg-accent transition-colors"
-            >
-              Meet Our Team
-            </Link>
+            {aboutPageCTAs.map((cta) =>
+              cta.primary ? (
+                <Link
+                  key={cta.href}
+                  href={cta.href}
+                  className="px-8 py-4 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors inline-flex items-center gap-2 group"
+                >
+                  {cta.text}
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              ) : (
+                <Link
+                  key={cta.href}
+                  href={cta.href}
+                  className="px-8 py-4 border border-border rounded-lg font-semibold hover:bg-accent transition-colors"
+                >
+                  {cta.text}
+                </Link>
+              )
+            )}
           </div>
         </div>
       </section>
 
       {/* Stats Section */}
-      <StatsSection stats={stats} />
+      <StatsSection stats={aboutPageStats} />
 
       {/* Who We Are */}
       <AboutStory />
@@ -137,22 +107,22 @@ export default function AboutPage() {
 
       {/* Highlights Section */}
       <HighlightsSection
-        title="Why Choose ITOrigin"
-        description="We combine technical excellence with business understanding to deliver security solutions that drive real value."
-        highlights={highlights}
+        title={aboutPageHighlights.title}
+        description={aboutPageHighlights.description}
+        highlights={aboutPageHighlights.items}
       />
 
       {/* Mission & Vision Section */}
-      <MissionVisionSection mission={missionVision.mission} vision={missionVision.vision} />
+      <MissionVisionSection
+        mission={aboutPageMissionVision.mission}
+        vision={aboutPageMissionVision.vision}
+      />
 
       {/* CTA Section */}
       <CTASection
-        title="Ready to Secure Your Future?"
-        description="Learn more about our story, meet our team, and discover the values that drive us forward."
-        buttons={[
-          { text: "Our Story", href: "/about/story" },
-          { text: "Our Values", href: "/about/values", variant: "secondary" },
-        ]}
+        title={aboutPageCTA.title}
+        description={aboutPageCTA.description}
+        buttons={aboutPageCTA.buttons}
       />
     </div>
   );

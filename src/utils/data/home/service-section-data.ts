@@ -1,4 +1,12 @@
-export interface ServiceItem {
+export const serviceSectionHeader = {
+  badge: "Enterprise Security Services",
+  title: "Comprehensive",
+  titleHighlight: "Cybersecurity Solutions",
+  description:
+    "From 24/7 monitoring to incident response, our full-spectrum security services protect your digital assets with enterprise-grade solutions tailored for modern threats.",
+};
+
+export interface ServiceCardItem {
   id: number;
   iconName: string;
   headline: string;
@@ -11,7 +19,7 @@ export interface ServiceItem {
   bgPattern: string;
 }
 
-export const homeServices: ServiceItem[] = [
+export const homeServiceCards: ServiceCardItem[] = [
   {
     id: 1,
     iconName: "Shield",

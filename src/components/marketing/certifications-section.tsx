@@ -3,19 +3,19 @@
 import { motion } from "motion/react";
 import { fadeInUp, staggerContainer, scaleUp } from "@/lib/animations";
 import { Shield, Award, FileCheck2, CheckCircle2, BadgeCheck } from "lucide-react";
+import {
+  certificationsSectionHeader,
+  certifications,
+  empanelments,
+} from "@/utils/data/common/certifications-data";
 
-const certifications = [
-  { icon: Shield, label: "ISO 9001:2015", description: "Quality Management" },
-  { icon: Award, label: "ISO 27001:2022", description: "Information Security" },
-  { icon: FileCheck2, label: "ISO 20000-1:2018", description: "IT Service Management" },
-  { icon: CheckCircle2, label: "ISO 17025", description: "Testing & Calibration" },
-];
-
-const empanelments = [
-  { icon: Shield, label: "CERT-In", description: "Indian Computer Emergency Response Team" },
-  { icon: BadgeCheck, label: "STQC", description: "Standardisation Testing & Quality Certification" },
-  { icon: Award, label: "NICSI", description: "National Informatics Centre Services Inc." },
-];
+const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+  Shield,
+  Award,
+  FileCheck2,
+  CheckCircle2,
+  BadgeCheck,
+};
 
 export function CertificationsSection() {
   return (
@@ -33,19 +33,19 @@ export function CertificationsSection() {
         >
           <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
             <Shield className="w-4 h-4" />
-            Trusted & Certified
+            {certificationsSectionHeader.badge}
           </motion.div>
           <motion.h2
             variants={fadeInUp}
             className="text-3xl md:text-5xl font-black mb-4"
           >
-            Certifications & Empanelments
+            {certificationsSectionHeader.title}
           </motion.h2>
           <motion.p
             variants={fadeInUp}
             className="text-lg text-muted-foreground"
           >
-            Recognized by leading standards bodies and government agencies for our commitment to quality, security, and excellence.
+            {certificationsSectionHeader.description}
           </motion.p>
         </motion.div>
 
@@ -61,27 +61,30 @@ export function CertificationsSection() {
             Certifications
           </motion.h3>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-            {certifications.map((cert, index) => (
-              <motion.div
-                key={cert.label}
-                variants={scaleUp}
-                custom={index * 0.1}
-                className="group relative text-center p-6 sm:p-8 rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm hover:border-primary/30 hover:bg-card/80 transition-all duration-300"
-              >
-                <div className="absolute inset-0 rounded-2xl bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="relative">
-                  <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-primary/10 text-primary mb-4 group-hover:bg-primary/15 group-hover:scale-110 transition-all duration-300">
-                    <cert.icon className="w-6 h-6 sm:w-7 sm:h-7" />
+            {certifications.map((cert, index) => {
+              const Icon = iconMap[cert.iconName] || Shield;
+              return (
+                <motion.div
+                  key={cert.label}
+                  variants={scaleUp}
+                  custom={index * 0.1}
+                  className="group relative text-center p-6 sm:p-8 rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm hover:border-primary/30 hover:bg-card/80 transition-all duration-300"
+                >
+                  <div className="absolute inset-0 rounded-2xl bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="relative">
+                    <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-primary/10 text-primary mb-4 group-hover:bg-primary/15 group-hover:scale-110 transition-all duration-300">
+                      <Icon className="w-6 h-6 sm:w-7 sm:h-7" />
+                    </div>
+                    <div className="text-base sm:text-lg font-black mb-1">
+                      {cert.label}
+                    </div>
+                    <div className="text-xs sm:text-sm text-muted-foreground font-medium">
+                      {cert.description}
+                    </div>
                   </div>
-                  <div className="text-base sm:text-lg font-black mb-1">
-                    {cert.label}
-                  </div>
-                  <div className="text-xs sm:text-sm text-muted-foreground font-medium">
-                    {cert.description}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </div>
         </motion.div>
 
@@ -96,27 +99,30 @@ export function CertificationsSection() {
             Empanelments
           </motion.h3>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 max-w-4xl mx-auto">
-            {empanelments.map((emp, index) => (
-              <motion.div
-                key={emp.label}
-                variants={scaleUp}
-                custom={index * 0.1}
-                className="group relative text-center p-6 sm:p-8 rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm hover:border-primary/30 hover:bg-card/80 transition-all duration-300"
-              >
-                <div className="absolute inset-0 rounded-2xl bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="relative">
-                  <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-primary/10 text-primary mb-4 group-hover:bg-primary/15 group-hover:scale-110 transition-all duration-300">
-                    <emp.icon className="w-6 h-6 sm:w-7 sm:h-7" />
+            {empanelments.map((emp, index) => {
+              const Icon = iconMap[emp.iconName] || Shield;
+              return (
+                <motion.div
+                  key={emp.label}
+                  variants={scaleUp}
+                  custom={index * 0.1}
+                  className="group relative text-center p-6 sm:p-8 rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm hover:border-primary/30 hover:bg-card/80 transition-all duration-300"
+                >
+                  <div className="absolute inset-0 rounded-2xl bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="relative">
+                    <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-primary/10 text-primary mb-4 group-hover:bg-primary/15 group-hover:scale-110 transition-all duration-300">
+                      <Icon className="w-6 h-6 sm:w-7 sm:h-7" />
+                    </div>
+                    <div className="text-base sm:text-lg font-black mb-1">
+                      {emp.label}
+                    </div>
+                    <div className="text-xs sm:text-sm text-muted-foreground font-medium">
+                      {emp.description}
+                    </div>
                   </div>
-                  <div className="text-base sm:text-lg font-black mb-1">
-                    {emp.label}
-                  </div>
-                  <div className="text-xs sm:text-sm text-muted-foreground font-medium">
-                    {emp.description}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </div>
         </motion.div>
       </div>

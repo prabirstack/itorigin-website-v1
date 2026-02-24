@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
+import { motion, type Variants } from "motion/react";
 import Link from "next/link";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import {
@@ -14,138 +14,20 @@ import {
   ChevronDown,
 } from "lucide-react";
 import { useState } from "react";
+import {
+  serviceSectionHeader,
+  homeServiceCards,
+  type ServiceCardItem,
+} from "@/utils/data/home/service-section-data";
 
-interface ServiceItem {
-  id: number;
-  icon: React.ComponentType<{ className?: string }>;
-  headline: string;
-  description: string;
-  services: string[];
-  ctaText: string;
-  ctaLink: string;
-  primaryColor: string;
-  secondaryColor: string;
-  bgPattern: string;
-}
-
-const services: ServiceItem[] = [
-  {
-    id: 1,
-    icon: Shield,
-    headline: "24/7 Security Operations Center",
-    description:
-      "AI-SIEM powered Security Operations Center. Real-time threat detection, incident response, and compliance reporting for continuous protection.",
-    services: [
-      "24/7 security monitoring and threat detection",
-      "Incident response and remediation",
-      "Next-gen SIEM management",
-      "Managed XDR and EDR",
-      "Threat hunting and intelligence",
-    ],
-    ctaText: "Explore SOCaaS",
-    ctaLink: "/services/managed-soc-services",
-    primaryColor: "text-blue-500",
-    secondaryColor: "bg-blue-500/10",
-    bgPattern: "from-blue-500/5 to-cyan-500/5",
-  },
-  {
-    id: 2,
-    icon: SearchCheck,
-    headline: "Advanced Threat Hunting & Response",
-    description:
-      "Multi-vendor EDR support with elite threat hunters. Proactive detection and hands-on remediation to neutralize sophisticated attacks.",
-    services: [
-      "Advanced behavioral analytics",
-      "Real-time threat containment",
-      "Forensic investigation",
-      "Guided remediation support",
-      "Threat advisory services",
-    ],
-    ctaText: "Discover MDR",
-    ctaLink: "/services/managed-soc-services",
-    primaryColor: "text-purple-500",
-    secondaryColor: "bg-purple-500/10",
-    bgPattern: "from-purple-500/5 to-pink-500/5",
-  },
-  {
-    id: 3,
-    icon: Bug,
-    headline: "Comprehensive Security Testing",
-    description:
-      "CERT-IN empanelled and STQC-approved penetration testing across web, mobile, network, cloud, and API environments. Find vulnerabilities before attackers do.",
-    services: [
-      "Vulnerability Assessment",
-      "Web & Mobile App Testing",
-      "Network Penetration Testing",
-      "Cloud Security Assessment",
-      "API Security Testing (SAST/DAST)",
-      "Red Team Operations",
-    ],
-    ctaText: "View Offensive Security",
-    ctaLink: "/services/offensive-security",
-    primaryColor: "text-red-500",
-    secondaryColor: "bg-red-500/10",
-    bgPattern: "from-red-500/5 to-orange-500/5",
-  },
-  {
-    id: 4,
-    icon: FileCheck2,
-    headline: "Governance, Risk & Compliance",
-    description:
-      "End-to-end compliance consulting for ISO 27001, SOC2, GDPR, NCA, StateRamp, GovRamp, and regional regulations. Achieve certification faster.",
-    services: [
-      "ISO 27001 Implementation",
-      "SOC2 Compliance",
-      "GDPR & NCA Compliance",
-      "StateRamp & GovRamp Readiness",
-      "Risk Assessment & Management",
-      "Audit & Gap Analysis",
-    ],
-    ctaText: "Explore GRC Services",
-    ctaLink: "/services/grc-services",
-    primaryColor: "text-green-500",
-    secondaryColor: "bg-green-500/10",
-    bgPattern: "from-green-500/5 to-emerald-500/5",
-  },
-  {
-    id: 5,
-    icon: Server,
-    headline: "Managed Security Infrastructure",
-    description:
-      "Complete management of firewalls, IDS/IPS, WAF, and security patches. Maintain strong perimeter defenses.",
-    services: [
-      "Firewall configuration & management",
-      "IDS/IPS deployment & monitoring",
-      "WAF management & optimization",
-      "Patch management services",
-      "Security infrastructure monitoring",
-    ],
-    ctaText: "Learn More",
-    ctaLink: "/coming-soon?for=managed-security",
-    primaryColor: "text-indigo-500",
-    secondaryColor: "bg-indigo-500/10",
-    bgPattern: "from-indigo-500/5 to-blue-500/5",
-  },
-  {
-    id: 6,
-    icon: FileSearch,
-    headline: "Incident Response & Forensics",
-    description:
-      "Rapid incident response, digital forensics investigation, and breach containment. Minimize damage and ensure business continuity.",
-    services: [
-      "Incident response planning",
-      "Digital forensics analysis",
-      "Breach containment & eradication",
-      "Post-incident analysis & reporting",
-      "Recovery assistance & hardening",
-    ],
-    ctaText: "Explore IR Services",
-    ctaLink: "/coming-soon?for=incident-response",
-    primaryColor: "text-orange-500",
-    secondaryColor: "bg-orange-500/10",
-    bgPattern: "from-orange-500/5 to-yellow-500/5",
-  },
-];
+const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+  Shield,
+  SearchCheck,
+  Bug,
+  FileCheck2,
+  Server,
+  FileSearch,
+};
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -200,17 +82,16 @@ export const ServiceSection = () => {
       >
         <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary text-sm font-medium mb-6">
           <Shield className="w-4 h-4" />
-          <span>Enterprise Security Services</span>
+          <span>{serviceSectionHeader.badge}</span>
         </div>
         <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
-          Comprehensive
-          <span className="block bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
-            Cybersecurity Solutions
+          {serviceSectionHeader.title}
+          <span className="block bg-linear-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
+            {serviceSectionHeader.titleHighlight}
           </span>
         </h2>
         <p className="text-muted-foreground text-lg sm:text-xl max-w-4xl mx-auto leading-relaxed">
-          From 24/7 monitoring to incident response, our full-spectrum security services protect
-          your digital assets with enterprise-grade solutions tailored for modern threats.
+          {serviceSectionHeader.description}
         </p>
       </motion.div>
 
@@ -221,16 +102,16 @@ export const ServiceSection = () => {
         viewport={{ once: true, amount: 0.1 }}
         className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10"
       >
-        {services.map((service) => {
+        {homeServiceCards.map((service) => {
           const isExpanded = expandedCards.has(service.id);
-          const IconComponent = service.icon;
+          const IconComponent = iconMap[service.iconName];
 
           return (
             <motion.div key={service.id} variants={cardVariants} className="group">
               <Card className="h-full border border-border/40 bg-card/80 backdrop-blur-sm hover:border-border/60 transition-all duration-500 hover:shadow-xl overflow-hidden relative">
                 {/* Background pattern */}
                 <div
-                  className={`absolute inset-0 bg-gradient-to-br ${service.bgPattern} opacity-30`}
+                  className={`absolute inset-0 bg-linear-to-br ${service.bgPattern} opacity-30`}
                 />
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(120,119,198,0.1),transparent_50%)] opacity-50" />
 
@@ -240,7 +121,9 @@ export const ServiceSection = () => {
                       <div
                         className={`p-3 rounded-xl ${service.secondaryColor} border border-border/30 group-hover:scale-105 transition-transform duration-300`}
                       >
-                        <IconComponent className={`w-6 h-6 ${service.primaryColor}`} />
+                        {IconComponent && (
+                          <IconComponent className={`w-6 h-6 ${service.primaryColor}`} />
+                        )}
                       </div>
                       <div className="flex-1 min-w-0">
                         <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-3 leading-tight group-hover:text-primary transition-colors duration-300">
@@ -308,7 +191,7 @@ export const ServiceSection = () => {
                   <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                     <Link
                       href={service.ctaLink}
-                      className={`w-full flex items-center justify-center gap-3 px-6 py-4 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground rounded-xl font-semibold text-sm transition-all duration-300 shadow-lg hover:shadow-xl group/cta relative overflow-hidden`}
+                      className={`w-full flex items-center justify-center gap-3 px-6 py-4 bg-linear-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground rounded-xl font-semibold text-sm transition-all duration-300 shadow-lg hover:shadow-xl group/cta relative overflow-hidden`}
                     >
                       <span className="relative z-10">{service.ctaText}</span>
                       <motion.div
@@ -320,7 +203,7 @@ export const ServiceSection = () => {
                       </motion.div>
 
                       {/* Button shine effect */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/cta:translate-x-full transition-transform duration-700" />
+                      <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/cta:translate-x-full transition-transform duration-700" />
                     </Link>
                   </motion.div>
                 </CardContent>
@@ -360,8 +243,8 @@ export const ServiceSection = () => {
         />
 
         {/* Gradient orbs */}
-        <div className="absolute top-1/3 -right-48 w-80 h-80 bg-gradient-to-l from-primary/5 to-transparent rounded-full blur-2xl" />
-        <div className="absolute bottom-1/3 -left-48 w-80 h-80 bg-gradient-to-r from-primary/5 to-transparent rounded-full blur-2xl" />
+        <div className="absolute top-1/3 -right-48 w-80 h-80 bg-linear-to-l from-primary/5 to-transparent rounded-full blur-2xl" />
+        <div className="absolute bottom-1/3 -left-48 w-80 h-80 bg-linear-to-r from-primary/5 to-transparent rounded-full blur-2xl" />
       </div>
     </section>
   );

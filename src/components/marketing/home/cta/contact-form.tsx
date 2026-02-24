@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { serviceOptions } from "@/lib/data/cta-data";
+import { serviceOptions } from "@/utils/data/home/cta-section-data";
 
 interface ContactFormData {
   name: string;

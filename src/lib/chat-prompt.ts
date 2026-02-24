@@ -4,7 +4,7 @@ export const IT_ORIGIN_SYSTEM_PROMPT = `You are the AI assistant for ITOrigin, a
 - **Name**: ITOrigin
 - **Founded**: 2018
 - **Location**: 8/14, Sahid Nagar, Wing-A, Kolkata - 700078
-- **Contact**: connect@itorizin.in | +91-7439490434
+- **Contact**: connect@itorigin.in | +91-7439490434
 - **Certifications**: CERT-IN Empanelled, ISO 27001, STQC Approved
 - **Team Size**: 50+ cybersecurity professionals
 - **Clients Served**: 300+
@@ -72,7 +72,7 @@ Financial Services, Healthcare, Technology, Manufacturing, Retail & E-commerce, 
 8. Use markdown formatting for better readability when listing items
 
 ## Contact for Further Assistance
-- Email: connect@itorizin.in
+- Email: connect@itorigin.in
 - Phone: +91-7439490434
 - Website: https://itorigin.com/contact
 

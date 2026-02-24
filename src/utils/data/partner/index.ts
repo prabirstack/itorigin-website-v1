@@ -245,3 +245,107 @@ export const partnerPortalFeatures = [
   "Support ticket management",
   "Revenue and commission reports",
 ];
+
+export const partnerPageHero = {
+  badge: { icon: "Users", text: "Partner Program" },
+  title: "Grow Together",
+  highlight: "Succeed Together",
+  description: "Join ITOrigin's partner network and accelerate your cybersecurity business. Access world-class training, technical support, marketing resources, and competitive margins to help your customers stay secure.",
+};
+
+export const partnerPageCTAs = [
+  { text: "Become a Partner", href: "/contact", primary: true },
+  { text: "Partner Login", href: "/partner-portal", primary: false },
+];
+
+export const partnerPageStats = [
+  { label: "Active Partners", value: "50+", icon: "Users" },
+  { label: "Partner Revenue Growth", value: "45%", icon: "TrendingUp" },
+  { label: "Certified Partner Engineers", value: "500+", icon: "Award" },
+  { label: "Countries", value: "12+", icon: "Globe" },
+];
+
+export const partnerPageSectionHeaders = {
+  whyPartner: {
+    title: "Why Partner with ITOrigin",
+    subtitle: "Scale Globally. Deliver Confidently. Grow Together.",
+    description:
+      "Whether you are a regional reseller, MSSP, or a consulting firm, partnering with ITOrigin gives you instant access to world-class cybersecurity capabilities and a proven global delivery engine.",
+  },
+  highlights: {
+    title: "Program Highlights",
+    description: "Comprehensive resources and support to help you succeed.",
+  },
+};
+
+export const partnerPageWhyPartner = [
+  {
+    icon: "Globe",
+    title: "Global Cybersecurity Delivery Expertise",
+    description:
+      "Proven service delivery experience across India, Far East, Middle East, North America, and Australia \u2014 enabling high-quality, regulator-aligned cybersecurity services seamlessly across global markets.",
+  },
+  {
+    icon: "Rocket",
+    title: "Expand Your Service Portfolio Instantly",
+    description:
+      "Offer advanced services such as Security Architecture, Managed SOC, GRC, ERM, VAPT, Patch Management, and Compliance Framework Implementation \u2014 without building deep internal benches.",
+  },
+  {
+    icon: "TrendingUp",
+    title: "Low Overhead, High Strategic Impact",
+    description:
+      "We handle specialized cybersecurity delivery while you lead customer engagement, contracts, and procurement \u2014 ensuring a scalable and efficient partnership model.",
+  },
+  {
+    icon: "FileCheck",
+    title: "Proven Frameworks & Compliance Alignment",
+    description:
+      "Leverage structured methodologies aligned with ISO 27001, NIST, ERM, PDPL/GDPR, and other international standards to deliver audit-ready, compliance-driven outcomes.",
+  },
+  {
+    icon: "BarChart",
+    title: "Recurring Revenue & Premium Engagements",
+    description:
+      "Unlock predictable managed service revenue (SOC, GRC, Vulnerability Management) alongside high-value project-based cybersecurity engagements.",
+  },
+  {
+    icon: "Shield",
+    title: "Trusted Critical Infrastructure Experience",
+    description:
+      "Proven delivery across defence, oil & gas, utilities, telecom, financial services, and public sector organizations \u2014 strengthening your credibility in strategic sectors.",
+  },
+  {
+    icon: "Users",
+    title: "End-to-End Collaboration Model",
+    description:
+      "From technical pre-sales and RFP support to service delivery and reporting \u2014 we operate as an extension of your team to jointly win and execute complex engagements.",
+  },
+];
+
+export const partnerPageHighlights = [
+  { title: "Partner Portal", description: "Access sales tools, technical documentation, training materials, and marketing resources through our comprehensive partner portal." },
+  { title: "Technical Enablement", description: "Product training, hands-on labs, technical workshops, and certification programs to build your team's expertise." },
+  { title: "Sales Support", description: "Pre-sales engineering assistance, proof-of-concept support, and competitive intelligence to help you win deals." },
+  { title: "End-to-End Handholding", description: "From onboarding to deal closure, our dedicated partner success team walks with you at every step \u2014 ensuring you never face a challenge alone." },
+];
+
+export const partnerPageProcess = {
+  title: "How to Become a Partner",
+  description: "Join our partner program in four simple steps.",
+  steps: [
+    { step: 1, title: "Submit Application", description: "Complete the partner application form with details about your business, technical capabilities, and target markets." },
+    { step: 2, title: "Review & Approval", description: "Our partner team reviews your application and schedules a discussion to understand your business goals and partnership objectives." },
+    { step: 3, title: "Onboarding & Training", description: "Sign the partner agreement, access the partner portal, and complete initial training to get your team certified." },
+    { step: 4, title: "Start Selling", description: "Begin selling ITOrigin solutions with full access to sales tools, technical support, and marketing resources." },
+  ],
+};
+
+export const partnerPageCTA = {
+  title: "Ready to Partner with ITOrigin?",
+  description: "Join our growing network of cybersecurity partners and unlock new revenue opportunities.",
+  buttons: [
+    { text: "Apply to Partner Program", href: "/contact" },
+    { text: "Partner Login", href: "/partner-portal", variant: "secondary" as const },
+  ],
+};

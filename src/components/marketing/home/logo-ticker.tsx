@@ -19,6 +19,7 @@ import veedol from "../../../assets/brand/veedol.png";
 import { Container } from "@/components/common/container";
 import Image from "next/image";
 import React, { useState } from "react";
+import { logoTickerHeading } from "@/utils/data/home/logo-ticker-data";
 
 const images = [
   { src: alrahibank, alt: "Alrahi Bank" },
@@ -46,7 +47,7 @@ export const LogoTicker = () => {
       <div className="absolute inset-0 bg-grid-pattern opacity-5 dark:opacity-10" />
       <Container>
         <h2 className=" text-2xlmd:text-3xl lg:text-4xl font-primary text-center text-foreground font-medium">
-          Trusted by the world&apos;s most Leading Companies
+          {logoTickerHeading}
         </h2>
         <div
           className="flex overflow-hidden mt-12 mask-[linear-gradient(to_left,transparent,white_10%,black_90%,transparent)] dark:mask-[linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]"

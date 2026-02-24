@@ -7,6 +7,7 @@ import { Mail, Phone, MapPin, Clock, Send, CheckCircle, MessageSquare, Calendar,
 import { Container } from "@/components/common/container";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
 import { useSettings, getPhoneLink, getEmailLink, getActiveOffices, getOfficeAddress, type OfficeLocation } from "@/components/providers/settings-provider";
+import { contactPageServices } from "@/utils/data/contact";
 
 interface FormData {
   firstName: string;
@@ -28,15 +29,7 @@ const initialFormData: FormData = {
   message: ""
 };
 
-const services = [
-  "Managed SOC Services",
-  "Penetration Testing",
-  "Vulnerability Assessment",
-  "Security Audit",
-  "GRC Consulting",
-  "Training & Workshops",
-  "Other"
-];
+const services = contactPageServices;
 
 export default function ContactPage() {
   const { settings } = useSettings();

@@ -20,13 +20,24 @@ import {
   Award,
 } from "lucide-react";
 
-interface Industry {
-  id: string;
-  name: string;
-  icon: React.ReactNode;
-  description: string;
-  gradient: string;
-}
+import {
+  industrySectionHeader,
+  successStoriesHeader,
+  industryCta,
+  industries,
+  fallbackStories,
+  type IndustryItem,
+  type FallbackStory,
+} from "@/utils/data/home/industry-data";
+
+const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+  Building2,
+  Heart,
+  Factory,
+  ShoppingCart,
+  GraduationCap,
+  Landmark,
+};
 
 interface SuccessStory {
   id: string;
@@ -49,66 +60,6 @@ interface CaseStudyResponse {
   results: string[];
   metrics: CaseStudyMetric[];
 }
-
-const industries: Industry[] = [
-  {
-    id: "1",
-    name: "Banking & Financial Services",
-    icon: <Building2 className="w-8 h-8" />,
-    description: "Securing financial transactions and customer data",
-    gradient: "from-primary/20 via-primary/10 to-primary/5",
-  },
-  {
-    id: "2",
-    name: "Healthcare & Pharma",
-    icon: <Heart className="w-8 h-8" />,
-    description: "Protecting sensitive medical records and research",
-    gradient: "from-primary/20 via-primary/10 to-primary/5",
-  },
-  {
-    id: "3",
-    name: "Manufacturing & Industrial",
-    icon: <Factory className="w-8 h-8" />,
-    description: "Safeguarding operational technology and IP",
-    gradient: "from-primary/20 via-primary/10 to-primary/5",
-  },
-  {
-    id: "4",
-    name: "E-commerce & Retail",
-    icon: <ShoppingCart className="w-8 h-8" />,
-    description: "Securing customer transactions and data",
-    gradient: "from-primary/20 via-primary/10 to-primary/5",
-  },
-  {
-    id: "5",
-    name: "Education & Research",
-    icon: <GraduationCap className="w-8 h-8" />,
-    description: "Protecting academic data and research assets",
-    gradient: "from-primary/20 via-primary/10 to-primary/5",
-  },
-  {
-    id: "6",
-    name: "Government & Public Sector",
-    icon: <Landmark className="w-8 h-8" />,
-    description: "Ensuring citizen data security and privacy",
-    gradient: "from-primary/20 via-primary/10 to-primary/5",
-  },
-];
-
-const fallbackStories: SuccessStory[] = [
-  {
-    id: "1",
-    title: "Enterprise Security",
-    metric: "24/7 SOC",
-    description: "Round-the-clock security operations center monitoring for enterprise clients",
-  },
-  {
-    id: "2",
-    title: "Compliance Achievement",
-    metric: "100% Success",
-    description: "Comprehensive compliance and certification support across industry frameworks",
-  },
-];
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -278,63 +229,65 @@ export const IndustryExperience = () => {
         <motion.div variants={itemVariants} className="text-center mb-12 sm:mb-16">
           <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-primary/10 rounded-full text-primary text-xs sm:text-sm font-medium mb-4 sm:mb-6">
             <Award className="w-3 h-3 sm:w-4 sm:h-4" />
-            <span>Industry Leadership</span>
+            <span>{industrySectionHeader.badge}</span>
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground mb-4 sm:mb-6 leading-tight px-2">
-            Proven Track Record{" "}
+            {industrySectionHeader.title}{" "}
             <span className="bg-linear-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
-              Across Industries
+              {industrySectionHeader.titleHighlight}
             </span>
           </h2>
           <p className="text-muted-foreground text-base sm:text-lg lg:text-xl max-w-4xl mx-auto leading-relaxed px-2">
-            Delivering world-class cybersecurity solutions to organizations across diverse industry
-            sectors with measurable results and proven success.
+            {industrySectionHeader.description}
           </p>
         </motion.div>
 
         {/* Industries Grid */}
         <motion.div variants={itemVariants} className="mb-16 sm:mb-20">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-            {industries.map((industry, index) => (
-              <motion.div
-                key={industry.id}
-                variants={industryVariants}
-                custom={index}
-                whileHover={{
-                  scale: 1.02,
-                  transition: { duration: 0.2 },
-                }}
-                className="group w-full"
-              >
-                <Card className="h-full bg-card/60 backdrop-blur-sm border-2 border-border/40 hover:border-primary/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-1 relative overflow-hidden">
-                  <CardContent className="p-4 sm:p-6 h-full flex flex-col relative z-10">
-                    <div className="mb-3 sm:mb-4">
-                      <div
-                        className={`w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-linear-to-br ${industry.gradient} border-2 border-border/30 flex items-center justify-center text-primary mb-3 sm:mb-4 group-hover:scale-110 group-hover:border-primary/40 transition-all duration-500`}
-                      >
-                        {industry.icon}
+            {industries.map((industry, index) => {
+              const IconComponent = iconMap[industry.iconName];
+              return (
+                <motion.div
+                  key={industry.id}
+                  variants={industryVariants}
+                  custom={index}
+                  whileHover={{
+                    scale: 1.02,
+                    transition: { duration: 0.2 },
+                  }}
+                  className="group w-full"
+                >
+                  <Card className="h-full bg-card/60 backdrop-blur-sm border-2 border-border/40 hover:border-primary/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-1 relative overflow-hidden">
+                    <CardContent className="p-4 sm:p-6 h-full flex flex-col relative z-10">
+                      <div className="mb-3 sm:mb-4">
+                        <div
+                          className={`w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-linear-to-br ${industry.gradient} border-2 border-border/30 flex items-center justify-center text-primary mb-3 sm:mb-4 group-hover:scale-110 group-hover:border-primary/40 transition-all duration-500`}
+                        >
+                          {IconComponent && <IconComponent className="w-8 h-8" />}
+                        </div>
                       </div>
-                    </div>
-                    <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-2 sm:mb-3 group-hover:text-primary transition-colors leading-tight">
-                      {industry.name}
-                    </h3>
-                    <p className="text-muted-foreground text-sm sm:text-base group-hover:text-muted-foreground/90 transition-colors leading-relaxed flex-grow">
-                      {industry.description}
-                    </p>
-                    {/* TODO: Re-enable when industry-specific pages are ready
-                    <Link href="/services" className="mt-3 sm:mt-4 flex items-center text-primary opacity-0 group-hover:opacity-100 transition-all duration-500">
-                      <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
-                      <span className="text-xs sm:text-sm font-medium">View Solutions</span>
-                      <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                    </Link>
-                    */}
+                      <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-2 sm:mb-3 group-hover:text-primary transition-colors leading-tight">
+                        {industry.name}
+                      </h3>
+                      <p className="text-muted-foreground text-sm sm:text-base group-hover:text-muted-foreground/90 transition-colors leading-relaxed flex-grow">
+                        {industry.description}
+                      </p>
+                      {/* TODO: Re-enable when industry-specific pages are ready
+                      <Link href="/services" className="mt-3 sm:mt-4 flex items-center text-primary opacity-0 group-hover:opacity-100 transition-all duration-500">
+                        <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
+                        <span className="text-xs sm:text-sm font-medium">View Solutions</span>
+                        <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                      </Link>
+                      */}
 
-                    {/* Card shine effect */}
-                    <div className="absolute inset-0 bg-linear-to-br from-white/3 via-transparent to-black/3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
+                      {/* Card shine effect */}
+                      <div className="absolute inset-0 bg-linear-to-br from-white/3 via-transparent to-black/3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              );
+            })}
           </div>
         </motion.div>
 
@@ -343,10 +296,10 @@ export const IndustryExperience = () => {
           <div className="text-center mb-8 sm:mb-12">
             <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-3 sm:mb-4 flex items-center justify-center gap-2 sm:gap-3">
               <Award className="w-6 h-6 sm:w-8 sm:h-8 text-primary" />
-              Success Stories
+              {successStoriesHeader.title}
             </h3>
             <p className="text-muted-foreground text-sm sm:text-base max-w-2xl mx-auto px-4">
-              Real results for real businesses across diverse industry sectors
+              {successStoriesHeader.subtitle}
             </p>
           </div>
 
@@ -443,10 +396,10 @@ export const IndustryExperience = () => {
         <motion.div variants={itemVariants} className="text-center">
           <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
             <Link
-              href="/case-studies"
+              href={industryCta.href}
               className="inline-flex items-center justify-center bg-linear-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground border-0 shadow-lg hover:shadow-xl hover:shadow-primary/25 transition-all duration-300 group px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg rounded-md font-medium"
             >
-              Read Case Studies
+              {industryCta.text}
               <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
           </motion.div>

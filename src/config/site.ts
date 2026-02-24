@@ -26,7 +26,7 @@ export const siteConfig = {
     "India cybersecurity",
   ],
   contact: {
-    email: "connect@itorizin.in",
+    email: "connect@itorigin.in",
     phone: "+91-7439490434",
     address: "8/14, Sahid Nagar, Wing-A, Kolkata - 700078",
   },

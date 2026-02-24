@@ -288,3 +288,296 @@ export const upcomingBatches = [
     seatsAvailable: 20,
   },
 ];
+
+export const trainingPageHero = {
+  badge: { icon: "Award", text: "Training & Certification" },
+  title: "Master Cybersecurity",
+  highlight: "Advance Your Career",
+  description:
+    "Transform your cybersecurity skills with expert-led training programs. From ethical hacking to cloud security, our hands-on courses prepare you for industry certifications and real-world challenges.",
+};
+
+export const trainingPageCTAs = [
+  { text: "Browse Courses", href: "#courses", primary: true },
+  { text: "Corporate Training Inquiry", href: "/contact", primary: false },
+];
+
+export const trainingPageStats = [
+  { label: "Students Trained", value: "5,000+", icon: "Users" },
+  { label: "Certification Pass Rate", value: "95%", icon: "Award" },
+  { label: "Training Hours Delivered", value: "50,000+", icon: "Clock" },
+  { label: "Corporate Clients", value: "150+", icon: "Target" },
+];
+
+export const trainingPageSectionHeaders = {
+  benefits: {
+    title: "Why Choose Our Training Programs",
+    description:
+      "Industry-leading cybersecurity education designed for real-world success.",
+  },
+  courses: {
+    title: "Our Training Courses",
+    description:
+      "Comprehensive programs designed to build expertise and earn industry certifications.",
+  },
+  paths: {
+    title: "Structured Learning Paths",
+    description:
+      "Follow a proven curriculum designed to take you from beginner to expert in your chosen specialty.",
+  },
+};
+
+export const trainingPageCourses = [
+  {
+    title: "Offensive Security (OSCP Prep)",
+    description:
+      "Master penetration testing and ethical hacking with our comprehensive OSCP preparation course.",
+    duration: "8 weeks",
+    level: "Advanced",
+    format: "Live Online + Labs",
+    price: "$2,499",
+    features: [
+      "80+ hours of live instruction",
+      "Real-world penetration testing labs",
+      "OSCP exam preparation",
+      "Buffer overflow exploitation",
+      "Active Directory attacks",
+      "Web application testing",
+      "Custom exploit development",
+      "24/7 lab access for 90 days",
+    ],
+    icon: "Target",
+    popular: true,
+  },
+  {
+    title: "Certified Ethical Hacker (CEH)",
+    description:
+      "Learn the fundamentals of ethical hacking and prepare for the CEH certification exam.",
+    duration: "5 weeks",
+    level: "Intermediate",
+    format: "Live Online",
+    price: "$1,799",
+    features: [
+      "40 hours of live training",
+      "EC-Council official curriculum",
+      "Hands-on hacking labs",
+      "Network scanning & enumeration",
+      "System hacking techniques",
+      "Social engineering tactics",
+      "CEH exam voucher included",
+      "Study materials & practice tests",
+    ],
+    icon: "Shield",
+    popular: false,
+  },
+  {
+    title: "Web Application Security",
+    description:
+      "Deep dive into web application vulnerabilities and secure coding practices.",
+    duration: "4 weeks",
+    level: "Intermediate",
+    format: "Self-Paced + Mentoring",
+    price: "$1,299",
+    features: [
+      "OWASP Top 10 coverage",
+      "SQL injection & XSS attacks",
+      "Authentication bypass techniques",
+      "API security testing",
+      "Secure code review",
+      "Bug bounty preparation",
+      "Real vulnerable applications",
+      "Weekly mentor sessions",
+    ],
+    icon: "Code",
+    popular: false,
+  },
+  {
+    title: "Security Operations & Incident Response",
+    description:
+      "Build expertise in SOC operations, threat hunting, and incident response procedures.",
+    duration: "6 weeks",
+    level: "Intermediate",
+    format: "Live Online",
+    price: "$1,899",
+    features: [
+      "50 hours of instruction",
+      "SIEM configuration & tuning",
+      "Log analysis & correlation",
+      "Threat hunting techniques",
+      "Incident response playbooks",
+      "Digital forensics basics",
+      "Malware analysis introduction",
+      "Hands-on IR simulations",
+    ],
+    icon: "Eye",
+    popular: false,
+  },
+  {
+    title: "Cloud Security (AWS/Azure/GCP)",
+    description:
+      "Secure cloud infrastructure and learn cloud-native security controls.",
+    duration: "5 weeks",
+    level: "Intermediate",
+    format: "Live Online + Labs",
+    price: "$1,699",
+    features: [
+      "Multi-cloud security coverage",
+      "IAM & access management",
+      "Cloud network security",
+      "Container & Kubernetes security",
+      "Cloud compliance frameworks",
+      "Security automation",
+      "Cloud-native tools (GuardDuty, Security Hub)",
+      "Real cloud environment labs",
+    ],
+    icon: "Shield",
+    popular: false,
+  },
+  {
+    title: "Security Awareness for Teams",
+    description:
+      "Empower your employees to be the first line of defense against cyber threats.",
+    duration: "Custom",
+    level: "Beginner",
+    format: "On-Site or Virtual",
+    price: "Custom",
+    features: [
+      "Phishing awareness training",
+      "Social engineering defense",
+      "Password security best practices",
+      "Safe browsing habits",
+      "Data protection & privacy",
+      "Incident reporting procedures",
+      "Interactive simulations",
+      "Quarterly refresher sessions",
+    ],
+    icon: "Users",
+    popular: false,
+  },
+];
+
+export const trainingPagePaths = [
+  {
+    title: "Penetration Tester Path",
+    description:
+      "Complete learning path from beginner to advanced penetration testing professional",
+    courses: [
+      "Web Application Security",
+      "Offensive Security (OSCP Prep)",
+      "Advanced Red Teaming",
+    ],
+    duration: "6 months",
+    icon: "Target",
+  },
+  {
+    title: "Security Analyst Path",
+    description:
+      "Build expertise in defensive security operations and threat detection",
+    courses: [
+      "Security Fundamentals",
+      "Security Operations & Incident Response",
+      "Threat Intelligence",
+    ],
+    duration: "4 months",
+    icon: "Shield",
+  },
+  {
+    title: "Cloud Security Path",
+    description:
+      "Master cloud security across major platforms and earn cloud certifications",
+    courses: [
+      "Cloud Security Fundamentals",
+      "Cloud Security (AWS/Azure/GCP)",
+      "Cloud Compliance",
+    ],
+    duration: "5 months",
+    icon: "Zap",
+  },
+];
+
+export const trainingPageBenefits = [
+  {
+    icon: "Award",
+    title: "Industry Certifications",
+    description:
+      "Prepare for top cybersecurity certifications including OSCP, CEH, CISSP, and more.",
+  },
+  {
+    icon: "Users",
+    title: "Expert Instructors",
+    description:
+      "Learn from certified professionals with real-world experience in offensive and defensive security.",
+  },
+  {
+    icon: "Code",
+    title: "Hands-On Labs",
+    description:
+      "Practice on real vulnerable systems and environments, not just theory and slides.",
+  },
+  {
+    icon: "Clock",
+    title: "Flexible Learning",
+    description:
+      "Live online sessions, self-paced courses, and on-site training options to fit your schedule.",
+  },
+  {
+    icon: "CheckCircle2",
+    title: "Career Support",
+    description:
+      "Resume reviews, interview preparation, and job placement assistance for graduates.",
+  },
+  {
+    icon: "TrendingUp",
+    title: "Continuous Updates",
+    description:
+      "Course content regularly updated to reflect the latest threats, tools, and techniques.",
+  },
+];
+
+export const trainingPageCorporate = {
+  title: "Corporate Training Solutions",
+  description:
+    "Upskill your team with customized training programs tailored to your organization's needs.",
+  programs: [
+    {
+      icon: "Users",
+      title: "Team Training",
+      description:
+        "Train your security team on the latest tools, techniques, and best practices. Custom curriculum designed for your tech stack and security challenges.",
+      features: [
+        "Customized course content",
+        "On-site or virtual delivery",
+        "Hands-on labs with your infrastructure",
+        "Post-training assessments",
+      ],
+    },
+    {
+      icon: "Shield",
+      title: "Security Awareness",
+      description:
+        "Empower all employees with security awareness training. Reduce human risk with engaging, interactive programs that stick.",
+      features: [
+        "Phishing simulation campaigns",
+        "Interactive training modules",
+        "Compliance reporting dashboards",
+        "Quarterly refresher training",
+      ],
+    },
+  ],
+  ctaText: "Request Corporate Training Quote",
+  ctaHref: "/contact",
+};
+
+export const trainingPageCTA = {
+  title: "Ready to Start Your Training Journey?",
+  description:
+    "Join thousands of cybersecurity professionals who have advanced their careers with our training programs.",
+  buttons: [
+    { text: "Enroll Now", href: "/contact" },
+    {
+      text: "Download Course Catalog",
+      href: "/courses-catalog.pdf",
+      variant: "secondary" as const,
+    },
+  ],
+};

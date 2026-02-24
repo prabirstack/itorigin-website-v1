@@ -25,7 +25,7 @@ export function TeamPage() {
     {
       name: "Indranil Banerjee",
       role: "Director",
-      image: "/images/team/indranil-banerjee.jpg",
+      image: "/images/team/indranil-banerjee.jpeg",
       bio: "A seasoned cybersecurity business leader with over 27 years of experience across cybersecurity, information security, and enterprise technology. He drives the organization's strategic vision, service innovation, and growth across national and global markets, with deep expertise in security strategy, risk management, and consulting-led service delivery.",
     },
     {
