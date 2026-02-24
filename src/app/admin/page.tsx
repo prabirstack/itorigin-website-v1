@@ -71,7 +71,7 @@ interface RecentDownload {
   name: string;
   email: string;
   downloadedAt: string;
-  resource: { title: string };
+  resourceTitle: string | null;
 }
 
 interface TopResource {
@@ -802,7 +802,7 @@ export default function AdminDashboard() {
                     <div className="min-w-0 flex-1">
                       <p className="text-sm font-medium">{download.name || "Anonymous"}</p>
                       <p className="text-xs text-muted-foreground truncate">
-                        {download.resource?.title || "Unknown resource"}
+                        {download.resourceTitle || "Unknown resource"}
                       </p>
                     </div>
                     <div className="text-right ml-4">
