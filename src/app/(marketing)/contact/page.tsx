@@ -243,7 +243,7 @@ export default function ContactPage() {
                         value={formData.phone}
                         onChange={handleChange}
                         className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary"
-                        placeholder="+1 (234) 567-890"
+                        placeholder="+91 98765 43210"
                       />
                     </div>
                   </div>

@@ -321,7 +321,7 @@ export default function SettingsPage() {
                   <Input
                     value={settings.phone}
                     onChange={(e) => updateField("phone", e.target.value)}
-                    placeholder="+1 (234) 567-890"
+                    placeholder="+91 98765 43210"
                   />
                 </div>
               </div>

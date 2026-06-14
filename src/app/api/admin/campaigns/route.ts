@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
-import { emailCampaigns } from "@/db/schema";
+import { emailCampaigns, campaignStatusEnum, campaignTypeEnum } from "@/db/schema";
 import { desc, sql, eq, ilike, and } from "drizzle-orm";
 import { requireAdmin, handleAuthError } from "@/lib/auth-utils";
 import { createCampaignSchema } from "@/lib/validations/campaign";
@@ -26,11 +26,13 @@ export async function GET(request: NextRequest) {
     }
 
     if (status && status !== "all") {
-      conditions.push(eq(emailCampaigns.status, status as any));
+      const validStatus = campaignStatusEnum.enumValues.find((v) => v === status);
+      if (validStatus) conditions.push(eq(emailCampaigns.status, validStatus));
     }
 
     if (campaignType && campaignType !== "all") {
-      conditions.push(eq(emailCampaigns.campaignType, campaignType as any));
+      const validType = campaignTypeEnum.enumValues.find((v) => v === campaignType);
+      if (validType) conditions.push(eq(emailCampaigns.campaignType, validType));
     }
 
     const whereClause = conditions.length > 0 ? and(...conditions) : undefined;

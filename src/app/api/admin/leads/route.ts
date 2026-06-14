@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
-import { leads } from "@/db/schema";
+import { leads, leadStatusEnum, leadSourceEnum } from "@/db/schema";
 import { eq, desc, ilike, or, and, sql } from "drizzle-orm";
 import { requireAuthorOrAdmin, handleAuthError } from "@/lib/auth-utils";
 
@@ -29,11 +29,13 @@ export async function GET(request: NextRequest) {
     }
 
     if (status && status !== "all") {
-      conditions.push(eq(leads.status, status as any));
+      const validStatus = leadStatusEnum.enumValues.find((v) => v === status);
+      if (validStatus) conditions.push(eq(leads.status, validStatus));
     }
 
     if (source && source !== "all") {
-      conditions.push(eq(leads.source, source as any));
+      const validSource = leadSourceEnum.enumValues.find((v) => v === source);
+      if (validSource) conditions.push(eq(leads.source, validSource));
     }
 
     const whereClause = conditions.length > 0 ? and(...conditions) : undefined;
