@@ -3,7 +3,7 @@
 import { motion } from "motion/react";
 import { Check, ChevronRight } from "lucide-react";
 import { fadeInUp } from "@/lib/animations";
-import { getIcon, type IconName } from "@/lib/icon-map";
+import { DynamicIcon, type IconName } from "@/lib/icon-map";
 
 interface PartnerTierCardProps {
   name: string;
@@ -24,8 +24,6 @@ export function PartnerTierCard({
   highlighted = false,
   index = 0
 }: PartnerTierCardProps) {
-  const Icon = getIcon(icon);
-
   return (
     <motion.div
       initial="hidden"
@@ -49,7 +47,7 @@ export function PartnerTierCard({
       )}
 
       <div className="w-14 h-14 rounded-lg bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center mb-6">
-        <Icon className="w-7 h-7 text-primary-foreground" />
+        <DynamicIcon name={icon} className="w-7 h-7 text-primary-foreground" />
       </div>
 
       <h3 className="text-2xl font-black mb-2">{name}</h3>

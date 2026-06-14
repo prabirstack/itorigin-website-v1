@@ -3,7 +3,7 @@
 import { motion } from "motion/react";
 import { Check, Clock, Target } from "lucide-react";
 import { fadeInUp } from "@/lib/animations";
-import { getIcon, type IconName } from "@/lib/icon-map";
+import { DynamicIcon, type IconName } from "@/lib/icon-map";
 
 interface CourseCardProps {
   title: string;
@@ -30,8 +30,6 @@ export function CourseCard({
   popular = false,
   index = 0
 }: CourseCardProps) {
-  const Icon = getIcon(icon);
-
   return (
     <motion.div
       initial="hidden"
@@ -56,7 +54,7 @@ export function CourseCard({
 
       <div className="flex items-start justify-between mb-6">
         <div className="w-14 h-14 rounded-lg bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center">
-          <Icon className="w-7 h-7 text-primary-foreground" />
+          <DynamicIcon name={icon} className="w-7 h-7 text-primary-foreground" />
         </div>
         <div className="text-right">
           <div className="text-3xl font-black text-primary">{price}</div>

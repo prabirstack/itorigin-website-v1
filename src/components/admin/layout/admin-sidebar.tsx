@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useSyncExternalStore } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
@@ -116,23 +116,43 @@ const sidebarItems = [
   },
 ];
 
+// localStorage-backed store for the sidebar collapsed state. Reading via
+// useSyncExternalStore (instead of seeding state from an effect) keeps it
+// SSR-safe and avoids a setState-in-effect on mount.
+const SIDEBAR_STORAGE_KEY = "sidebar-collapsed";
+const sidebarListeners = new Set<() => void>();
+
+function subscribeSidebar(callback: () => void) {
+  sidebarListeners.add(callback);
+  window.addEventListener("storage", callback);
+  return () => {
+    sidebarListeners.delete(callback);
+    window.removeEventListener("storage", callback);
+  };
+}
+
+function getSidebarSnapshot() {
+  return localStorage.getItem(SIDEBAR_STORAGE_KEY) === "true";
+}
+
+function getSidebarServerSnapshot() {
+  return false;
+}
+
+function setSidebarCollapsed(value: boolean) {
+  localStorage.setItem(SIDEBAR_STORAGE_KEY, JSON.stringify(value));
+  sidebarListeners.forEach((listener) => listener());
+}
+
 export function AdminSidebar() {
   const pathname = usePathname();
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const isCollapsed = useSyncExternalStore(
+    subscribeSidebar,
+    getSidebarSnapshot,
+    getSidebarServerSnapshot
+  );
 
-  // Persist sidebar state in localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem("sidebar-collapsed");
-    if (saved !== null) {
-      setIsCollapsed(JSON.parse(saved));
-    }
-  }, []);
-
-  const toggleSidebar = () => {
-    const newState = !isCollapsed;
-    setIsCollapsed(newState);
-    localStorage.setItem("sidebar-collapsed", JSON.stringify(newState));
-  };
+  const toggleSidebar = () => setSidebarCollapsed(!isCollapsed);
 
   return (
     <TooltipProvider delayDuration={0}>

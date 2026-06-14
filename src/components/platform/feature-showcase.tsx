@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import { fadeInUp } from "@/lib/animations";
-import { getIcon, type IconName } from "@/lib/icon-map";
+import { DynamicIcon, type IconName } from "@/lib/icon-map";
 
 interface FeatureShowcaseProps {
   title: string;
@@ -19,8 +19,6 @@ export function FeatureShowcase({
   metrics,
   index = 0
 }: FeatureShowcaseProps) {
-  const Icon = getIcon(icon);
-
   return (
     <motion.div
       initial="hidden"
@@ -33,7 +31,7 @@ export function FeatureShowcase({
     >
       <div className="flex items-start gap-6">
         <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center flex-shrink-0">
-          <Icon className="w-6 h-6 text-primary-foreground" />
+          <DynamicIcon name={icon} className="w-6 h-6 text-primary-foreground" />
         </div>
 
         <div className="flex-1">

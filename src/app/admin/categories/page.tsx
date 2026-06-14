@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -97,14 +97,17 @@ export default function CategoriesPage() {
     }
   }, [name, setValue, editCategory]);
 
-  const fetchCategories = async (page = 1) => {
+  const searchRef = useRef(search);
+  searchRef.current = search;
+
+  const fetchCategories = useCallback(async (page = 1) => {
     setIsLoading(true);
     try {
       const params = new URLSearchParams({
         page: page.toString(),
         limit: "20",
       });
-      if (search) params.set("search", search);
+      if (searchRef.current) params.set("search", searchRef.current);
 
       const res = await fetch(`/api/admin/categories?${params}`);
       const data = await res.json();
@@ -116,11 +119,11 @@ export default function CategoriesPage() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchCategories();
-  }, []);
+  }, [fetchCategories]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();

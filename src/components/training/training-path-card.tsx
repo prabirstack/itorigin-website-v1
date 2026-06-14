@@ -3,7 +3,7 @@
 import { motion } from "motion/react";
 import { ArrowRight, Clock } from "lucide-react";
 import { fadeInUp } from "@/lib/animations";
-import { getIcon, type IconName } from "@/lib/icon-map";
+import { DynamicIcon, type IconName } from "@/lib/icon-map";
 
 interface TrainingPathCardProps {
   title: string;
@@ -22,8 +22,6 @@ export function TrainingPathCard({
   icon,
   index = 0
 }: TrainingPathCardProps) {
-  const Icon = getIcon(icon);
-
   return (
     <motion.div
       initial="hidden"
@@ -35,7 +33,7 @@ export function TrainingPathCard({
       className="p-8 rounded-2xl border border-border bg-card hover:border-primary/50 transition-all duration-300"
     >
       <div className="w-14 h-14 rounded-lg bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center mb-6">
-        <Icon className="w-7 h-7 text-primary-foreground" />
+        <DynamicIcon name={icon} className="w-7 h-7 text-primary-foreground" />
       </div>
 
       <h3 className="text-2xl font-black mb-3">{title}</h3>

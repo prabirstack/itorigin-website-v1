@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -82,14 +82,17 @@ export default function PostsPage() {
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const fetchPosts = async (page = 1) => {
+  const searchRef = useRef(search);
+  searchRef.current = search;
+
+  const fetchPosts = useCallback(async (page = 1) => {
     setIsLoading(true);
     try {
       const params = new URLSearchParams({
         page: page.toString(),
         limit: "10",
       });
-      if (search) params.set("search", search);
+      if (searchRef.current) params.set("search", searchRef.current);
       if (statusFilter && statusFilter !== "all")
         params.set("status", statusFilter);
 
@@ -102,11 +105,11 @@ export default function PostsPage() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [statusFilter]);
 
   useEffect(() => {
     fetchPosts();
-  }, [statusFilter]);
+  }, [fetchPosts]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();

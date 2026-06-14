@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, use } from "react";
+import { useState, useEffect, use, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -104,11 +104,7 @@ export default function LeadDetailPage({ params }: { params: Promise<{ id: strin
     phone: "",
   });
 
-  useEffect(() => {
-    fetchLead();
-  }, [id]);
-
-  const fetchLead = async () => {
+  const fetchLead = useCallback(async () => {
     setIsLoading(true);
     try {
       const res = await fetch(`/api/admin/leads/${id}`);
@@ -128,7 +124,11 @@ export default function LeadDetailPage({ params }: { params: Promise<{ id: strin
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [id]);
+
+  useEffect(() => {
+    fetchLead();
+  }, [fetchLead]);
 
   const handleSave = async () => {
     setIsSaving(true);

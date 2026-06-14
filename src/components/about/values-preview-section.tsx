@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import { fadeInLeft, fadeInRight, scaleUp, staggerContainer } from "@/lib/animations";
-import { getIcon, type IconName } from "@/lib/icon-map";
+import { DynamicIcon, type IconName } from "@/lib/icon-map";
 
 interface Stat {
   value: string;
@@ -27,7 +27,6 @@ export function ValuesPreviewSection({
   values,
   stats
 }: ValuesPreviewSectionProps) {
-  const Icon = getIcon(badge.icon);
   return (
     <section className="py-20 md:py-32 bg-accent/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -40,7 +39,7 @@ export function ValuesPreviewSection({
         >
           <motion.div variants={fadeInLeft} className="space-y-6">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium">
-              <Icon className="w-4 h-4" />
+              <DynamicIcon name={badge.icon} className="w-4 h-4" />
               <span>{badge.text}</span>
             </div>
             <h2 className="text-3xl md:text-5xl font-black">

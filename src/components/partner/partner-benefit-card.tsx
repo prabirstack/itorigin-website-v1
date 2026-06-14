@@ -3,7 +3,7 @@
 import { motion } from "motion/react";
 import { Check } from "lucide-react";
 import { fadeInUp } from "@/lib/animations";
-import { getIcon, type IconName } from "@/lib/icon-map";
+import { DynamicIcon, type IconName } from "@/lib/icon-map";
 
 interface PartnerBenefitCardProps {
   title: string;
@@ -20,8 +20,6 @@ export function PartnerBenefitCard({
   keyBenefits,
   index = 0
 }: PartnerBenefitCardProps) {
-  const Icon = getIcon(icon);
-
   return (
     <motion.div
       initial="hidden"
@@ -33,7 +31,7 @@ export function PartnerBenefitCard({
       className="p-8 rounded-2xl border border-border bg-card hover:border-primary/50 transition-all duration-300"
     >
       <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center mb-6">
-        <Icon className="w-6 h-6 text-primary-foreground" />
+        <DynamicIcon name={icon} className="w-6 h-6 text-primary-foreground" />
       </div>
 
       <h3 className="text-xl font-black mb-3">{title}</h3>

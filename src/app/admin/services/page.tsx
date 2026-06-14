@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -148,11 +148,14 @@ export default function ServicesPage() {
   const [newBenefit, setNewBenefit] = useState("");
   const [isSaving, setIsSaving] = useState(false);
 
-  const fetchServices = async (page = 1) => {
+  const searchRef = useRef(search);
+  searchRef.current = search;
+
+  const fetchServices = useCallback(async (page = 1) => {
     setIsLoading(true);
     try {
       const params = new URLSearchParams({ page: page.toString(), limit: "20" });
-      if (search) params.set("search", search);
+      if (searchRef.current) params.set("search", searchRef.current);
       if (statusFilter !== "all") params.set("status", statusFilter);
 
       const res = await fetch(`/api/admin/services?${params}`);
@@ -165,11 +168,11 @@ export default function ServicesPage() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [statusFilter]);
 
   useEffect(() => {
     fetchServices();
-  }, [statusFilter]);
+  }, [fetchServices]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();

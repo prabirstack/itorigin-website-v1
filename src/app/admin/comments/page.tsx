@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -69,7 +69,7 @@ export default function CommentsPage() {
   const [isDeleting, setIsDeleting] = useState(false);
   const [updatingId, setUpdatingId] = useState<string | null>(null);
 
-  const fetchComments = async (page = 1) => {
+  const fetchComments = useCallback(async (page = 1) => {
     setIsLoading(true);
     try {
       const params = new URLSearchParams({
@@ -89,11 +89,11 @@ export default function CommentsPage() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [statusFilter]);
 
   useEffect(() => {
     fetchComments();
-  }, [statusFilter]);
+  }, [fetchComments]);
 
   const handleApprove = async (id: string, approved: boolean) => {
     setUpdatingId(id);

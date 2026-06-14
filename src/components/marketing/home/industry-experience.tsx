@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence, Variants } from "motion/react";
 import { Button } from "@/components/ui/button";
@@ -148,7 +148,7 @@ export const IndustryExperience = () => {
       });
   }, []);
 
-  const paginate = (newDirection: number): void => {
+  const paginate = useCallback((newDirection: number): void => {
     setDirection(newDirection);
     setCurrentStory((prevStory) => {
       if (newDirection === 1) {
@@ -156,7 +156,7 @@ export const IndustryExperience = () => {
       }
       return prevStory === 0 ? successStories.length - 1 : prevStory - 1;
     });
-  };
+  }, [successStories.length]);
 
   // Auto-advance slides
   useEffect(() => {
@@ -165,7 +165,7 @@ export const IndustryExperience = () => {
     }, 5000);
 
     return () => clearInterval(timer);
-  }, [successStories.length]);
+  }, [paginate]);
 
   return (
     <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 w-full max-w-7xl mx-auto relative min-h-screen">

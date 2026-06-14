@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -96,14 +96,17 @@ export default function ChatPage() {
   } | null>(null);
   const [isLoadingMessages, setIsLoadingMessages] = useState(false);
 
-  const fetchConversations = async (page = 1) => {
+  const searchRef = useRef(search);
+  searchRef.current = search;
+
+  const fetchConversations = useCallback(async (page = 1) => {
     setIsLoading(true);
     try {
       const params = new URLSearchParams({
         page: page.toString(),
         limit: "20",
       });
-      if (search) params.set("search", search);
+      if (searchRef.current) params.set("search", searchRef.current);
       if (statusFilter !== "all") params.set("status", statusFilter);
 
       const res = await fetch(`/api/admin/chat?${params}`);
@@ -115,11 +118,11 @@ export default function ChatPage() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [statusFilter]);
 
   useEffect(() => {
     fetchConversations();
-  }, [statusFilter]);
+  }, [fetchConversations]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -192,11 +192,14 @@ export default function CampaignsPage() {
   const [isUploading, setIsUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const fetchCampaigns = async (page = 1) => {
+  const searchRef = useRef(search);
+  searchRef.current = search;
+
+  const fetchCampaigns = useCallback(async (page = 1) => {
     setIsLoading(true);
     try {
       const params = new URLSearchParams({ page: page.toString(), limit: "20" });
-      if (search) params.set("search", search);
+      if (searchRef.current) params.set("search", searchRef.current);
       if (statusFilter !== "all") params.set("status", statusFilter);
       if (typeFilter !== "all") params.set("type", typeFilter);
 
@@ -210,11 +213,11 @@ export default function CampaignsPage() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [statusFilter, typeFilter]);
 
   useEffect(() => {
     fetchCampaigns();
-  }, [statusFilter, typeFilter]);
+  }, [fetchCampaigns]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();

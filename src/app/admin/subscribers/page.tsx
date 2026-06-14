@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -67,14 +67,17 @@ export default function SubscribersPage() {
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const fetchSubscribers = async (page = 1) => {
+  const searchRef = useRef(search);
+  searchRef.current = search;
+
+  const fetchSubscribers = useCallback(async (page = 1) => {
     setIsLoading(true);
     try {
       const params = new URLSearchParams({
         page: page.toString(),
         limit: "20",
       });
-      if (search) params.set("search", search);
+      if (searchRef.current) params.set("search", searchRef.current);
       if (confirmedFilter !== "all") params.set("confirmed", confirmedFilter);
 
       const res = await fetch(`/api/admin/subscribers?${params}`);
@@ -86,11 +89,11 @@ export default function SubscribersPage() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [confirmedFilter]);
 
   useEffect(() => {
     fetchSubscribers();
-  }, [confirmedFilter]);
+  }, [fetchSubscribers]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();

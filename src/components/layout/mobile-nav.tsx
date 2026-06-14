@@ -11,7 +11,7 @@ import {
   Users,
   Heart,
 } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { NavItem, SubMenuItem, staticNavItems, aboutSubItems } from "@/lib/constant";
 import { useServices, NavService } from "@/components/providers/services-provider";
 import { iconMap } from "@/lib/icon-map";

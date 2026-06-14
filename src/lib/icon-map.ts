@@ -60,6 +60,7 @@ import {
 } from "lucide-react";
 import { RiTwitterXFill } from "react-icons/ri";
 import type { IconType } from "react-icons";
+import { createElement, type SVGProps } from "react";
 
 export const iconMap: Record<string, LucideIcon | IconType> = {
   Shield,
@@ -123,4 +124,19 @@ export type IconName = keyof typeof iconMap;
 
 export function getIcon(name: IconName): LucideIcon | IconType {
   return iconMap[name];
+}
+
+type DynamicIconProps = SVGProps<SVGSVGElement> & {
+  name: IconName;
+  size?: number | string;
+};
+
+// Stable, module-scope component for rendering an icon by name. Using
+// createElement (instead of aliasing the looked-up component to a capitalized
+// local variable and rendering it as JSX) keeps this from being treated as a
+// component "created during render" by react-hooks/static-components.
+export function DynamicIcon({ name, ...props }: DynamicIconProps) {
+  const Icon = iconMap[name];
+  if (!Icon) return null;
+  return createElement(Icon, props);
 }

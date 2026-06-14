@@ -1,30 +1,43 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useSyncExternalStore } from 'react';
 import { Moon, Sun } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'motion/react';
+
+// The resolved theme lives on the <html> `dark` class (applied by next-themes
+// before hydration). Reading it via useSyncExternalStore keeps this SSR-safe and
+// avoids seeding state from an effect (react-hooks/set-state-in-effect).
+function subscribeTheme(callback: () => void) {
+  const observer = new MutationObserver(callback);
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['class'],
+  });
+  window.addEventListener('storage', callback);
+  return () => {
+    observer.disconnect();
+    window.removeEventListener('storage', callback);
+  };
+}
+
+function getThemeSnapshot(): boolean {
+  return document.documentElement.classList.contains('dark');
+}
+
+function getThemeServerSnapshot(): boolean {
+  return false;
+}
 
 export const ThemeToggle: React.FC = () => {
-  const [isDark, setIsDark] = useState<boolean>(false);
-
-  useEffect(() => {
-    // Check if user has a theme preference in localStorage
-    const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-      setIsDark(true);
-      document.documentElement.classList.add('dark');
-    } else {
-      setIsDark(false);
-      document.documentElement.classList.remove('dark');
-    }
-  }, []);
+  const isDark = useSyncExternalStore(
+    subscribeTheme,
+    getThemeSnapshot,
+    getThemeServerSnapshot
+  );
 
   const toggleTheme = (): void => {
     const newTheme = !isDark;
-    setIsDark(newTheme);
-    
+
     if (newTheme) {
       document.documentElement.classList.add('dark');
       localStorage.setItem('theme', 'dark');

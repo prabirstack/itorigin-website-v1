@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, use } from "react";
+import { useState, useEffect, use, useCallback } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -79,7 +79,7 @@ export default function ReaderDetailPage({
   const [pagination, setPagination] = useState<PaginationData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  const fetchReader = async (page = 1) => {
+  const fetchReader = useCallback(async (page = 1) => {
     setIsLoading(true);
     try {
       const params = new URLSearchParams({
@@ -102,11 +102,11 @@ export default function ReaderDetailPage({
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [id, router]);
 
   useEffect(() => {
     fetchReader();
-  }, [id]);
+  }, [fetchReader]);
 
   const getInitials = (name: string) => {
     return name

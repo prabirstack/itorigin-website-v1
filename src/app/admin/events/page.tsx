@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -169,11 +169,14 @@ export default function EventsPage() {
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [isSaving, setIsSaving] = useState(false);
 
-  const fetchEvents = async (page = 1) => {
+  const searchRef = useRef(searchQuery);
+  searchRef.current = searchQuery;
+
+  const fetchEvents = useCallback(async (page = 1) => {
     setIsLoading(true);
     try {
       const params = new URLSearchParams({ page: page.toString(), limit: "10" });
-      if (searchQuery) params.set("search", searchQuery);
+      if (searchRef.current) params.set("search", searchRef.current);
       if (statusFilter !== "all") params.set("status", statusFilter);
       if (typeFilter !== "all") params.set("type", typeFilter);
 
@@ -188,11 +191,11 @@ export default function EventsPage() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [statusFilter, typeFilter]);
 
   useEffect(() => {
     fetchEvents();
-  }, [statusFilter, typeFilter]);
+  }, [fetchEvents]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();

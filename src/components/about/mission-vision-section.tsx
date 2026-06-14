@@ -3,7 +3,7 @@
 import { motion } from "motion/react";
 import { CheckCircle2 } from "lucide-react";
 import { fadeInLeft, fadeInRight } from "@/lib/animations";
-import { getIcon, type IconName } from "@/lib/icon-map";
+import { DynamicIcon, type IconName } from "@/lib/icon-map";
 
 interface MissionVisionContent {
   badge: {
@@ -21,9 +21,6 @@ interface MissionVisionSectionProps {
 }
 
 export function MissionVisionSection({ mission, vision }: MissionVisionSectionProps) {
-  const MissionIcon = getIcon(mission.badge.icon);
-  const VisionIcon = getIcon(vision.badge.icon);
-
   return (
     <section className="py-20 md:py-32 bg-accent/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -36,7 +33,7 @@ export function MissionVisionSection({ mission, vision }: MissionVisionSectionPr
             className="space-y-6"
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium">
-              <MissionIcon className="w-4 h-4" />
+              <DynamicIcon name={mission.badge.icon} className="w-4 h-4" />
               <span>{mission.badge.text}</span>
             </div>
             <h2 className="text-3xl md:text-4xl font-black">
@@ -63,7 +60,7 @@ export function MissionVisionSection({ mission, vision }: MissionVisionSectionPr
             className="space-y-6"
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium">
-              <VisionIcon className="w-4 h-4" />
+              <DynamicIcon name={vision.badge.icon} className="w-4 h-4" />
               <span>{vision.badge.text}</span>
             </div>
             <h2 className="text-3xl md:text-4xl font-black">

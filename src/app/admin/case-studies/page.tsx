@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -162,11 +162,14 @@ export default function CaseStudiesPage() {
   const [newMetricValue, setNewMetricValue] = useState("");
   const [isSaving, setIsSaving] = useState(false);
 
-  const fetchCaseStudies = async (page = 1) => {
+  const searchRef = useRef(searchQuery);
+  searchRef.current = searchQuery;
+
+  const fetchCaseStudies = useCallback(async (page = 1) => {
     setIsLoading(true);
     try {
       const params = new URLSearchParams({ page: page.toString(), limit: "10" });
-      if (searchQuery) params.set("search", searchQuery);
+      if (searchRef.current) params.set("search", searchRef.current);
       if (statusFilter !== "all") params.set("status", statusFilter);
       if (industryFilter !== "all") params.set("industry", industryFilter);
 
@@ -180,11 +183,11 @@ export default function CaseStudiesPage() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [statusFilter, industryFilter]);
 
   useEffect(() => {
     fetchCaseStudies();
-  }, [statusFilter, industryFilter]);
+  }, [fetchCaseStudies]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();

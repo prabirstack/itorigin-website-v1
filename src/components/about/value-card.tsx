@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import { fadeInUp } from "@/lib/animations";
-import { getIcon, type IconName } from "@/lib/icon-map";
+import { DynamicIcon, type IconName } from "@/lib/icon-map";
 
 interface ValueCardProps {
   icon: IconName;
@@ -19,7 +19,6 @@ export function ValueCard({
   index = 0,
   color = "from-primary to-primary/80"
 }: ValueCardProps) {
-  const Icon = getIcon(icon);
   return (
     <motion.div
       initial="hidden"
@@ -37,7 +36,7 @@ export function ValueCard({
         <div className="relative space-y-4">
           {/* Icon */}
           <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${color} text-white flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
-            <Icon className="w-8 h-8" />
+            <DynamicIcon name={icon} className="w-8 h-8" />
           </div>
 
           {/* Content */}

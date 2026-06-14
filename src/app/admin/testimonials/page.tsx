@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -196,11 +196,14 @@ export default function TestimonialsPage() {
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [isSaving, setIsSaving] = useState(false);
 
-  const fetchTestimonials = async (page = 1) => {
+  const searchRef = useRef(searchQuery);
+  searchRef.current = searchQuery;
+
+  const fetchTestimonials = useCallback(async (page = 1) => {
     setIsLoading(true);
     try {
       const params = new URLSearchParams({ page: page.toString(), limit: "10" });
-      if (searchQuery) params.set("search", searchQuery);
+      if (searchRef.current) params.set("search", searchRef.current);
       if (statusFilter !== "all") params.set("status", statusFilter);
       if (industryFilter !== "all") params.set("industry", industryFilter);
 
@@ -215,11 +218,11 @@ export default function TestimonialsPage() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [statusFilter, industryFilter]);
 
   useEffect(() => {
     fetchTestimonials();
-  }, [statusFilter, industryFilter]);
+  }, [fetchTestimonials]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();

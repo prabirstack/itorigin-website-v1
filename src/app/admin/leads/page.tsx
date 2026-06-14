@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -88,14 +88,17 @@ export default function LeadsPage() {
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const fetchLeads = async (page = 1) => {
+  const searchRef = useRef(search);
+  searchRef.current = search;
+
+  const fetchLeads = useCallback(async (page = 1) => {
     setIsLoading(true);
     try {
       const params = new URLSearchParams({
         page: page.toString(),
         limit: "20",
       });
-      if (search) params.set("search", search);
+      if (searchRef.current) params.set("search", searchRef.current);
       if (statusFilter !== "all") params.set("status", statusFilter);
       if (sourceFilter !== "all") params.set("source", sourceFilter);
 
@@ -108,11 +111,11 @@ export default function LeadsPage() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [statusFilter, sourceFilter]);
 
   useEffect(() => {
     fetchLeads();
-  }, [statusFilter, sourceFilter]);
+  }, [fetchLeads]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
