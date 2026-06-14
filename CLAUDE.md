@@ -67,7 +67,12 @@ bun run db:seed:campaigns    # Seed campaigns data
 
 # UI Components
 bunx shadcn@latest add [component]  # Add shadcn/ui component
+
+# Local infrastructure (Postgres 16 + Redis 7 for development)
+docker compose -f docker-compose.dev.yml up -d
 ```
+
+> No automated test runner is configured (no `test` script, no Jest/Vitest/Playwright). Verify changes via `bun run build` and `bun run lint`.
 
 ## Environment Variables
 
@@ -85,13 +90,21 @@ Copy `.env.example` to `.env.local` and configure:
 ### Route Groups & Layouts
 - `src/app/(marketing)/` - Public pages with Topbar, SiteHeader, ChatSupport, SiteFooter
 - `src/app/(auth)/` - Sign-in/sign-up with centered card layout
-- `src/app/admin/` - Protected dashboard with AdminSidebar + AdminHeader (redirects to `/sign-in` if unauthenticated, to `/` if not admin role)
-- `src/app/api/` - API routes (auth, admin CRUD, public endpoints, newsletter)
+- `src/app/admin/` - Protected dashboard with AdminSidebar + AdminHeader (admin pages additionally re-check `role` server-side and redirect to `/` if not admin)
+- `src/app/api/` - API routes (auth, admin CRUD, public endpoints, newsletter, cron)
 
 Root layout wraps app in: ThemeProvider > SettingsProvider > ServicesProvider. Includes CookieConsent and Sonner toast notifications.
 
+### Request Proxy (Next.js 16)
+`src/proxy.ts` is the edge middleware (Next.js 16 renamed `middleware.ts` → `proxy.ts`; same shape — exported function + `config.matcher`). It runs before every matched request and:
+- Redirects `www.` → non-`www` (301)
+- Gates `/admin` on session-cookie **presence** → redirects to `/sign-in?callbackUrl=...` if missing
+- Redirects signed-in users away from `/sign-in` and `/sign-up` → `/admin`
+
+The proxy only checks that a session token exists; it does **not** verify the `admin` role. Authorization (`role === "admin"`) is still enforced in each admin API route and admin page — keep both layers.
+
 ### API Route Pattern
-All admin routes under `/api/admin/*` are protected with session checks (no middleware file). Follow this consistent pattern:
+All admin routes under `/api/admin/*` are protected with an in-route session + role check (see Admin API Auth Pattern below). Follow this consistent pattern:
 - `/api/admin/{resource}` - GET (list) and POST (create)
 - `/api/admin/{resource}/[id]` - GET, PUT, DELETE for individual items
 - Special endpoints: `/api/admin/{resource}/export` (CSV), `/api/admin/campaigns/[id]/send`
@@ -99,6 +112,8 @@ All admin routes under `/api/admin/*` are protected with session checks (no midd
 Resources: posts, categories, tags, comments, leads, subscribers, campaigns, services, case-studies, testimonials, events, appointments, resources, readers, chat, settings, stats, upload, profile
 
 Public endpoints: `/api/public/posts`, `/api/public/posts/[slug]`, `/api/public/categories`, `/api/services`, `/api/settings`, `/api/resources`, `/api/leads`, `/api/contact`, `/api/chat`, `/api/newsletter/*`, `/api/auth/[...all]`
+
+Cron: `/api/cron/monthly-newsletter` is triggered by Vercel Cron (`vercel.json`, schedule `0 9 * * *`) to send the monthly newsletter campaign.
 
 ### Database (Drizzle + PostgreSQL)
 - Schema: `src/db/schema/` - Exports from index.ts (auth, blog, leads, services, chat, email, settings, resources, case-studies, testimonials, events, appointments)
@@ -116,7 +131,7 @@ Schema workflow: Edit schema files → `bun run db:generate` → `bun run db:mig
 - Client: `src/lib/auth-client.ts` - React hooks (`useSession`, `signIn`, `signOut`)
 - Users have a `role` field (defaults to "user", admin role for dashboard access)
 - Type exports: `import type { Session, User } from "@/lib/auth";`
-- Admin routes are protected via session check in each API route (no middleware file)
+- Two-layer protection: `src/proxy.ts` gates `/admin` on session-cookie presence at the edge, then each admin API route / page re-checks `session.user.role === "admin"`
 
 ### Component Organization
 - `components/ui/` - shadcn/ui primitives (new-york style)
@@ -126,6 +141,12 @@ Schema workflow: Edit schema files → `bun run db:generate` → `bun run db:mig
 - `components/blog/` - Blog listing, detail, sidebar, comments (requires sign-in)
 - `components/common/` - Container, Logo (with dark/light mode support)
 - `components/providers/` - ThemeProvider, SettingsProvider (fetches `/api/settings`), ServicesProvider (fetches `/api/services?nav=true`)
+- Per-page section folders: `components/{about,services,platform,partner,training}/` mirror their marketing routes
+- `components/emails/` - React Email templates (chat-verification, contact-notification, newsletter-confirm, newsletter-welcome)
+- `components/seo/` - Structured-data / metadata helpers
+
+### Static Content Data Layer
+Page copy and other hardcoded content are extracted out of components into `src/utils/data/`, re-exported from `src/utils/data/index.ts` and organized per page (`home`, `about`, `services`, `contact`, `platform`, `partner`, `training`) plus `common`. When editing marketing-page text, prefer changing the data module over hardcoding strings in JSX.
 
 ### Dynamic Navigation
 Services in the navigation are populated from the database via `src/lib/constant.ts`. The `getServicesNavigation()` function fetches active services and maps them to nav items with icons from `src/lib/icon-map.ts`. Falls back to 3 default services if API fails.
@@ -180,7 +201,7 @@ Use `sonner` for toast messages: `import { toast } from 'sonner'`
 
 ### Key Libraries
 - **Rich Text Editor:** Tiptap with extensions (images, links, code blocks, text alignment)
-- **Email:** React Email templates in `src/emails/`, sent via Resend
+- **Email:** React Email templates in `src/components/emails/` (HTML builders in `src/lib/email-templates.ts`), sent via Resend
 - **File Uploads:** Vercel Blob storage via `/api/admin/upload`
 - **AI Chat:** Google AI SDK (`@ai-sdk/google`), conversations stored in `chat` schema
 - **Rate Limiting:** Upstash Redis (`@upstash/ratelimit`)
@@ -194,6 +215,14 @@ Use `sonner` for toast messages: `import { toast } from 'sonner'`
 - `src/config/site.ts` - Site metadata and social links
 - `src/lib/validations/` - Zod schemas for all content types
 - `next.config.ts` - Standalone output, security headers, image remote patterns (Unsplash, Google)
+- `vercel.json` - Cron schedule for the monthly newsletter
+- `next-sitemap.config.js` - Sitemap/robots generation (excludes `/admin`, `/api`, auth, `/newsletter`; per-path priority overrides)
+
+## Deployment
+
+- **Output:** `output: "standalone"` in `next.config.ts` — the build emits `.next/standalone` for a self-contained server.
+- **Docker:** Multi-stage `Dockerfile` (Bun base) builds the standalone server. `docker-entrypoint.sh` runs `drizzle-kit migrate` on container startup before `bun server.js`, so migrations apply automatically at deploy time.
+- **Local infra:** `docker-compose.dev.yml` provides Postgres 16 + Redis 7 for development (the app itself is run with `bun dev`, not in compose).
 
 ## Path Aliases
 
