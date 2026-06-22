@@ -77,7 +77,7 @@ docker compose -f docker-compose.dev.yml up -d
 ## Environment Variables
 
 Copy `.env.example` to `.env.local` and configure:
-- `DATABASE_URL` - PostgreSQL connection string (Neon)
+- `DATABASE_URL` - PostgreSQL connection string. **Local dev:** the Docker Postgres from `docker-compose.dev.yml` (this is the default in `.env.example`). **Production:** the Coolify-managed `itorigin-postgres` database, configured in Coolify's env (never committed). _Neon is retired — do not use it._
 - `BETTER_AUTH_SECRET` - Auth secret (min 32 chars)
 - `BETTER_AUTH_URL` - App URL for auth redirects
 - `REDIS_URL` - Redis for rate limiting (Upstash)
@@ -124,7 +124,12 @@ Cron: `/api/cron/monthly-newsletter` is triggered by Vercel Cron (`vercel.json`,
 
 Schema workflow: Edit schema files → `bun run db:generate` → `bun run db:migrate`
 
-**Neon Pooler Compatibility:** When writing raw SQL in API routes, use parameterized queries (`$1`, `$2`) instead of SQL template literals. The Neon connection pooler requires standard parameterized queries.
+**Database environments (single source of truth):**
+- **Production** runs on the **Coolify-managed `itorigin-postgres`** (standard `postgres:16` on the Hostinger VPS, internal-only — `is_public: false`). This is the authoritative database for the live site; the running app's `DATABASE_URL` is the only thing that defines "the production database." Apply production data fixes here (e.g. via Coolify → `itorigin-postgres` → Terminal → `psql`).
+- **Local dev** runs on the **Docker Postgres** from `docker-compose.dev.yml` (`bun dev` against `localhost:5432`). Note: the local container is *also* named `itorigin-postgres` / `itorigin_db` — same names as production but a different server and different data. Don't conflate them.
+- **Neon is retired.** Older docs/code referenced a Neon database; production no longer uses it.
+
+**Raw SQL in API routes:** prefer parameterized queries (`$1`, `$2`) over SQL template literals — defensive good practice for pooled connections.
 
 ### Authentication (Better Auth)
 - Config: `src/lib/auth.ts` - Server-side auth with email/password, session expiry 7 days
