@@ -1,7 +1,7 @@
 # Region-Aware Contact Banner — Design
 
 **Date:** 2026-06-23
-**Status:** Approved (pending spec review)
+**Status:** Implemented
 
 ## Goal
 
@@ -34,6 +34,13 @@ convenience only — it gates nothing and changes no access control.
    no migration, same record the footer uses). Falls back to Kolkata if absent.
 3. **Missing US phone:** fall back **field-by-field** to the Kolkata phone so the
    phone slot is never empty.
+
+**As-built refinement (from runtime verification):** the live US office is
+`San Jose, California` (country "United States Of America", with both phone and
+email). `city`/`state` are treated as a **coupled location** — when the US office
+is matched, its `state` is used as-is (empty if absent) and never borrowed from
+the company-level state, so a US city can never render with an Indian state
+(e.g. "San Jose, West Bengal"). The topbar omits the state segment when empty.
 
 ## Architecture
 
