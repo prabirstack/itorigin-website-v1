@@ -142,10 +142,13 @@ export function resolveTopbarContact(
   const office = getNorthAmericaOffice(settings);
   if (!office) return base;
 
+  // phone/email fall back to the company default when the US office omits them.
+  // city/state are a coupled location, so they come from the office as a unit —
+  // never borrow the company state for a US city (e.g. "San Jose, West Bengal").
   return {
     phone: office.phone || base.phone,
     email: office.email || base.email,
     city: office.city || base.city,
-    state: office.state || base.state,
+    state: office.state || "",
   };
 }

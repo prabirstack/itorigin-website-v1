@@ -1,19 +1,35 @@
 "use client";
 
-import React from "react";
+import React, { useSyncExternalStore } from "react";
 import { Phone, Mail, Linkedin, Github, MapPin } from "lucide-react";
 import { RiTwitterXFill } from "react-icons/ri";
 import { motion } from "motion/react";
 import { useSettings, getPhoneLink, getEmailLink } from "@/components/providers/settings-provider";
+import { detectRegion, resolveTopbarContact, type Region } from "@/lib/region";
+
+// Region is a browser-only signal (derived from the visitor's timezone) and
+// does not change after load. Reading it via useSyncExternalStore keeps this
+// SSR-safe — the server/initial-hydration render uses the "ROW" snapshot, then
+// React upgrades to the detected region — and avoids seeding state from an
+// effect (react-hooks/set-state-in-effect).
+function subscribeRegion() {
+  return () => {};
+}
+
+function getRegionServerSnapshot(): Region {
+  return "ROW";
+}
 
 export const Topbar: React.FC = () => {
   const { settings } = useSettings();
+  const region = useSyncExternalStore(
+    subscribeRegion,
+    detectRegion,
+    getRegionServerSnapshot
+  );
 
-  const phone = settings?.phone || "+91-7439490434";
-  const email = settings?.email || "connect@itorigin.com";
-  const city = settings?.city || "Kolkata";
-  const state = settings?.state || "West Bengal";
-  const location = `${city}, ${state}`;
+  const { phone, email, city, state } = resolveTopbarContact(region, settings);
+  const location = state ? `${city}, ${state}` : city;
 
   const socialLinks = settings?.socialLinks || {};
 
