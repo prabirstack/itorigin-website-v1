@@ -57,6 +57,18 @@ import { Pagination } from "@/components/admin/shared/pagination";
 import { PostEditor } from "@/components/admin/posts/post-editor";
 import { toast } from "sonner";
 
+type ResourceType =
+  | "whitepaper"
+  | "ebook"
+  | "guide"
+  | "report"
+  | "template"
+  | "checklist"
+  | "case-study"
+  | "infographic"
+  | "toolkit"
+  | "other";
+
 interface Resource {
   id: string;
   title: string;
@@ -64,7 +76,7 @@ interface Resource {
   description: string;
   shortDescription: string | null;
   content: string | null;
-  type: string;
+  type: ResourceType;
   category: string;
   status: "draft" | "published" | "archived";
   fileUrl: string | null;
@@ -118,7 +130,7 @@ const defaultForm = {
   description: "",
   shortDescription: "",
   content: "",
-  type: "whitepaper" as "whitepaper",
+  type: "whitepaper" as ResourceType,
   category: "Uncategorized",
   status: "draft" as const,
   fileUrl: "",
