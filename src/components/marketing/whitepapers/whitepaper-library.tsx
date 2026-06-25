@@ -21,17 +21,19 @@ export function WhitepaperLibrary({ whitepapers, categories }: WhitepaperLibrary
   const [searchQuery, setSearchQuery] = useState("");
   const chips = [ALL, ...categories];
 
-  // ── CONTRIBUTION POINT (reserved for repo owner) ─────────────────────
-  // Decide the listing UX:
-  //  - "All" should return every whitepaper; any other chip filters by category.
-  //  - Search should be case-insensitive. Decide which fields it matches —
-  //    at minimum title; consider description/shortDescription and topics[].
-  // Return the filtered Resource[].
+  // "All" passes everything through; any other chip filters by category.
+  // Search is case-insensitive and matches the title, both descriptions, and topics.
   const filtered = useMemo<Resource[]>(() => {
-    // TODO(owner): implement filtering by activeCategory + searchQuery
-    return whitepapers;
+    const q = searchQuery.trim().toLowerCase();
+    return whitepapers.filter((wp) => {
+      const inCategory = activeCategory === ALL || wp.category === activeCategory;
+      const haystack = [wp.title, wp.shortDescription, wp.description, ...(wp.topics ?? [])]
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase();
+      return inCategory && (q === "" || haystack.includes(q));
+    });
   }, [whitepapers, activeCategory, searchQuery]);
-  // ─────────────────────────────────────────────────────────────────────
 
   return (
     <div>
