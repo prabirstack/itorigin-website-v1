@@ -7,7 +7,7 @@ import { type BlogPost } from "@/lib/blog-data";
 import { BlogDetailSidebar } from "@/components/blog/blog-detail-sidebar";
 import { BlogComments } from "@/components/blog/blog-comments";
 import { RelatedPosts } from "@/components/blog/related-posts";
-import { TableOfContents } from "@/components/blog/table-of-contents";
+import { TableOfContents } from "@/components/common/table-of-contents";
 import { NewsletterForm } from "@/components/blog/newsletter-form";
 
 interface BlogDetailClientProps {
