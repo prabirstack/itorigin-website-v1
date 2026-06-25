@@ -26,7 +26,7 @@ export function ResourceCard({
   iconName,
   type,
   index,
-  downloadHref = "/coming-soon?for=whitepapers",
+  downloadHref = "/whitepapers",
 }: ResourceCardProps) {
   const Icon = iconMap[iconName];
 

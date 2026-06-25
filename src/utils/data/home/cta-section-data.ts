@@ -56,7 +56,7 @@ export const engagementOptions: EngagementOption[] = [
     gradient: "from-purple-500/20 via-purple-500/10 to-pink-600/5",
     iconBg: "bg-linear-to-br from-purple-500 to-pink-600",
     ctaText: "Download Now",
-    ctaLink: "/coming-soon?for=whitepapers",
+    ctaLink: "/whitepapers",
   },
   {
     id: "training",

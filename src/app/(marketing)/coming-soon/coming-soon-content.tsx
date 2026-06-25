@@ -17,7 +17,6 @@ import {
   Eye,
   Monitor,
   TrendingUp,
-  BarChart3,
   Newspaper,
   Clock,
 } from "lucide-react";
@@ -121,31 +120,6 @@ const contextConfigs: Record<string, ContextConfig> = {
         icon: FileText,
         title: "Case Studies",
         description: "Real-world security success stories",
-      },
-    ],
-  },
-  whitepapers: {
-    icon: FileText,
-    badge: "Whitepapers & Research",
-    titleLine1: "Research Library",
-    titleHighlight: "Coming Soon",
-    description:
-      "Downloadable whitepapers, research reports, and technical guides from ITOrigin's cybersecurity experts. We're preparing valuable resources for you.",
-    features: [
-      {
-        icon: FileText,
-        title: "Technical Reports",
-        description: "Deep-dive security research papers",
-      },
-      {
-        icon: Shield,
-        title: "Compliance Guides",
-        description: "Regulatory framework breakdowns",
-      },
-      {
-        icon: BarChart3,
-        title: "Industry Analysis",
-        description: "Market trends & threat landscape",
       },
     ],
   },

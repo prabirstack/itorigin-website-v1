@@ -56,7 +56,7 @@ const sitemapSections: SitemapSection[] = [
       { name: "Documentation", href: "/coming-soon?for=documentation" },
       { name: "Security Center", href: "/coming-soon?for=security-center" },
       { name: "Best Practices", href: "/coming-soon?for=best-practices" },
-      { name: "Whitepapers", href: "/coming-soon?for=whitepapers" },
+      { name: "Whitepapers", href: "/whitepapers" },
       { name: "Webinars", href: "/coming-soon?for=webinars" }
     ]
   },
