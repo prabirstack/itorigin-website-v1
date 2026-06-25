@@ -105,6 +105,11 @@ const sidebarItems = [
     icon: Mail,
   },
   {
+    title: "Whitepapers",
+    href: "/admin/whitepapers",
+    icon: FileText,
+  },
+  {
     title: "Resources",
     href: "/admin/resources",
     icon: FolderDown,
