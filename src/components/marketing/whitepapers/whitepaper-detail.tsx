@@ -3,7 +3,8 @@ import { ArrowLeft, FileStack, Clock, Calendar, Download } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { ContentProse } from "@/components/common/content-prose";
-import { TableOfContents } from "@/components/common/table-of-contents";
+import { WhitepaperToc } from "./whitepaper-toc";
+import { addHeadingIds } from "@/lib/whitepaper-toc";
 import { DownloadDialog } from "@/components/marketing/download-dialog";
 import { WhitepaperCard } from "./whitepaper-card";
 import { type Resource } from "@/db/schema";
@@ -23,6 +24,9 @@ export function WhitepaperDetail({ whitepaper, related }: WhitepaperDetailProps)
       })
     : null;
   const topics = (whitepaper.topics ?? []) as string[];
+  const { html: contentHtml, headings } = whitepaper.content
+    ? addHeadingIds(whitepaper.content)
+    : { html: "", headings: [] };
 
   return (
     <div className="min-h-screen">
@@ -39,13 +43,15 @@ export function WhitepaperDetail({ whitepaper, related }: WhitepaperDetailProps)
 
       <article className="py-12 md:py-16">
         <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-12 lg:px-8">
-          {/* Left: TOC */}
-          <div className="hidden lg:col-span-3 lg:block">
-            <TableOfContents />
-          </div>
+          {/* Left: TOC (derived from content) */}
+          {headings.length > 0 && (
+            <div className="hidden lg:col-span-3 lg:block">
+              <WhitepaperToc headings={headings} />
+            </div>
+          )}
 
           {/* Center: article */}
-          <div className="lg:col-span-6">
+          <div className={headings.length > 0 ? "lg:col-span-6" : "lg:col-span-9"}>
             <Badge variant="secondary" className="mb-5">{whitepaper.category}</Badge>
             <h1 className="text-4xl font-black leading-tight md:text-5xl">{whitepaper.title}</h1>
 
@@ -80,7 +86,7 @@ export function WhitepaperDetail({ whitepaper, related }: WhitepaperDetailProps)
 
             {whitepaper.content ? (
               <div className="mt-8">
-                <ContentProse html={whitepaper.content} />
+                <ContentProse html={contentHtml} />
               </div>
             ) : null}
 
