@@ -25,6 +25,7 @@ export const createResourceSchema = z.object({
     .regex(/^[a-z0-9-]+$/, "Slug must be lowercase letters, numbers, and hyphens only"),
   description: z.string().min(1, "Description is required").max(2000, "Description is too long"),
   shortDescription: z.string().max(500).optional(),
+  content: z.string().optional(),
   type: resourceTypeSchema.default("whitepaper"),
   category: z.string().min(1, "Category is required").default("Uncategorized"),
   status: resourceStatusSchema.default("draft"),

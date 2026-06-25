@@ -118,6 +118,7 @@ export async function PATCH(req: NextRequest, context: RouteContext) {
         ...(data.slug && { slug: data.slug }),
         ...(data.description && { description: data.description }),
         ...(data.shortDescription !== undefined && { shortDescription: data.shortDescription }),
+        ...(data.content !== undefined && { content: data.content }),
         ...(data.type && { type: data.type }),
         ...(data.category && { category: data.category }),
         ...(data.status && { status: data.status }),

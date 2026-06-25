@@ -92,6 +92,13 @@
       "when": 1770799810971,
       "tag": "0012_silent_gunslinger",
       "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1782351702483,
+      "tag": "0013_nifty_fat_cobra",
+      "breakpoints": true
     }
   ]
 }

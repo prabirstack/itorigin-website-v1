@@ -29,6 +29,7 @@ export const resources = pgTable("resources", {
   slug: text("slug").notNull().unique(),
   description: text("description").notNull(),
   shortDescription: text("short_description"),
+  content: text("content"), // rich-text HTML article body (nullable)
   type: resourceTypeEnum("type").notNull().default("whitepaper"),
   category: text("category").notNull().default("Uncategorized"),
   status: resourceStatusEnum("status").notNull().default("draft"),

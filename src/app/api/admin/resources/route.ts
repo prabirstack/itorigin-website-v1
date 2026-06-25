@@ -140,6 +140,7 @@ export async function POST(req: NextRequest) {
       slug: data.slug,
       description: data.description,
       shortDescription: data.shortDescription,
+      content: data.content ?? null,
       type: data.type,
       category: data.category,
       status: data.status,
