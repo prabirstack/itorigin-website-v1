@@ -14,6 +14,24 @@ export interface NavItem {
   subItems?: SubMenuItem[];
 }
 
+// Resources dropdown sub-items (static)
+export const resourcesSubItems: SubMenuItem[] = [
+  {
+    id: "SubMenuResources01",
+    name: "Blog",
+    href: "/blogs",
+    description: "Insights, analysis, and best practices from our security team",
+    iconName: "Newspaper",
+  },
+  {
+    id: "SubMenuResources02",
+    name: "Whitepapers",
+    href: "/whitepapers",
+    description: "In-depth research, reports, and technical guides to download",
+    iconName: "FileText",
+  },
+];
+
 // Static navigation items (non-services, non-about)
 export const staticNavItems: NavItem[] = [
   {
@@ -36,9 +54,10 @@ export const staticNavItems: NavItem[] = [
   },
   {
     id: "menuorigin05",
-    name: "Blogs",
-    href: "/blogs",
-    isSubMenu: false,
+    name: "Resources",
+    href: "/whitepapers",
+    isSubMenu: true,
+    subItems: resourcesSubItems,
   },
 ];
 
