@@ -11,7 +11,7 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-async function getWhitepaper(slug: string) {
+async function fetchWhitepaper(slug: string) {
   const [wp] = await db
     .select()
     .from(resources)
@@ -24,14 +24,14 @@ async function getWhitepaper(slug: string) {
     )
     .limit(1);
 
-  if (!wp) return null;
+  return wp ?? null;
+}
 
+async function incrementViewCount(id: string, current: number) {
   await db
     .update(resources)
-    .set({ viewCount: (wp.viewCount ?? 0) + 1 })
-    .where(eq(resources.id, wp.id));
-
-  return wp;
+    .set({ viewCount: current + 1 })
+    .where(eq(resources.id, id));
 }
 
 async function getRelated(category: string, excludeId: string) {
@@ -52,7 +52,7 @@ async function getRelated(category: string, excludeId: string) {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const wp = await getWhitepaper(slug);
+  const wp = await fetchWhitepaper(slug);
   if (!wp) return { title: "Whitepaper Not Found | ITOrigin" };
 
   const description = wp.metaDescription || wp.shortDescription || wp.description;
@@ -70,22 +70,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export async function generateStaticParams() {
-  try {
-    const rows = await db
-      .select({ slug: resources.slug })
-      .from(resources)
-      .where(and(eq(resources.type, "whitepaper"), eq(resources.status, "published")));
-    return rows.map((r) => ({ slug: r.slug }));
-  } catch {
-    return [];
-  }
-}
-
 export default async function WhitepaperDetailPage({ params }: PageProps) {
   const { slug } = await params;
-  const whitepaper = await getWhitepaper(slug);
+  const whitepaper = await fetchWhitepaper(slug);
   if (!whitepaper) notFound();
+
+  await incrementViewCount(whitepaper.id, whitepaper.viewCount ?? 0);
 
   const related = await getRelated(whitepaper.category, whitepaper.id);
   return <WhitepaperDetail whitepaper={whitepaper} related={related} />;
